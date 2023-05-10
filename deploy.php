@@ -5,7 +5,7 @@ namespace Deployer;
 require 'recipe/laravel.php';
 
 // Set SSH Multiplexing
-set('ssh_multiplexing', false);
+set('ssh_multiplexing', true);
 
 // Set default branch
 set('branch', 'production');
@@ -40,7 +40,7 @@ host('production')
     ->set('forward_agent',false)
     ->set('remote_user', 'root')
     ->set('port', 22)
-    ->set('deploy_path', '/var/www/current/public')
+    ->set('deploy_path', '/var/www/')
     ->setLabels([
         'type' => 'app',
         'env' => 'production',
