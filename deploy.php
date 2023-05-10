@@ -38,7 +38,7 @@ host('production')
     ->set('forward_agent',false)
     ->set('remote_user', 'root')
     ->set('port', 22)
-    ->set('deploy_path', '/var/www/')
+    ->set('deploy_path', '/var/www/current/public')
     ->setLabels([
         'type' => 'app',
         'env' => 'production',
