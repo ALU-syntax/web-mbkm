@@ -5,10 +5,12 @@ namespace Deployer;
 require 'recipe/laravel.php';
 
 // Set SSH Multiplexing
-set('ssh_multiplexing', true);
+set('ssh_multiplexing', false);
 
 // Set default branch
 set('branch', 'production');
+
+set('use_relative_symlinks', false);
 
 // Set git_tty
 set('git_tty', false);
