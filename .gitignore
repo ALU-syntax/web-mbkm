@@ -5,7 +5,7 @@
 /public/storage
 /storage/*.key
 /vendor
-# .env
+.env
 .env.backup
 .env.production
 .phpunit.result.cache
@@ -14,6 +14,8 @@ Homestead.yaml
 auth.json
 npm-debug.log
 yarn-error.log
+deploy_.php
+deploy_.yml
 /.fleet
 /.idea
 /.vscode

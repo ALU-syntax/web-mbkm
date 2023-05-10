@@ -1,79 +1,86 @@
 <?php
+
 namespace Deployer;
 
-// Include the Laravel & rsync recipes
 require 'recipe/laravel.php';
-require 'recipe/rsync.php';
 
-// Config
+// Set SSH Multiplexing
+set('ssh_multiplexing', true);
 
+// Set default branch
+set('branch', 'production');
+
+// Set git_tty
+set('git_tty', false);
+
+// Set php binary file path
+set('bin/php', '/usr/bin/php8.0');
+
+// Project name
+set('application', 'simbkm');
+
+// Project repository
 set('repository', 'https://github.com/ALU-syntax/web-mbkm.git');
 
-add('shared_files', []);
-add('shared_dirs', []);
+// Shared files/dirs between deploys
+add('shared_files', ['.env']);
+add('shared_dirs', ['public/files', 'storage']);
+add('shared_dirs', ['public/images', 'storage']);
+
+// Writable dirs by web server
 add('writable_dirs', []);
 
-set('application', 'simbkm');
-set('ssh_multiplexing', true); // Speed up deployment
-
-set('rsync_src', function () {
-    return __DIR__; // If your project isn't in the root, you'll need to change this.
-});
-
-// Configuring the rsync exclusions. 
-// You'll want to exclude anything that you don't want on the production server.  
-add('rsync', [
-    'exclude' => [
-        '.git',
-        '/.env',
-        '/storage/',
-        '/vendor/',
-        '/node_modules/',
-        '.github',
-        'deploy.php',
-    ],
-]);
-
-// Set up a deployer task to copy secrets to the server. 
-// Grabs the dotenv file from the github secret
-task('deploy:secrets', function () {
-    file_put_contents(__DIR__ . '/.env', getenv('DOT_ENV'));
-    upload('.env', get('deploy_path') . '/shared');
-});
-
+// set('keep_releases', 2);
 
 // Hosts
+host('production')
+    ->setHostname('41.216.185.194') 
+    ->set('forward_agent',false)
+    ->set('remote_user', 'root')
+    ->set('port', 22)
+    ->set('deploy_path', '/var/www/{{application}}')
+    ->setLabels([
+        'type' => 'app',
+        'env' => 'production',
+    ]);
+    
+task('deploy:vendors', function () {
+    run('cd {{release_path}} && {{bin/php}} /usr/bin/composer update --verbose --prefer-dist --no-progress --no-interaction --optimize-autoloader');
+});
 
-host('production.app.com') // Name of the server
-    ->hostname('41.216.185.194') // Hostname or IP address
-    ->stage('production') // Deployment stage (production, staging, etc)
-    ->user('deploy') // SSH user
-    ->set('deploy_path', '/var/www/public'); // Deploy path
+task('artisan:clear-compiled', function () {
+    run('{{bin/php}} {{release_path}}/artisan clear-compiled');
+});
 
-// host('neidra.online')
-//     ->set('remote_user', 'deployer')
-//     ->set('deploy_path', '~/web-mbkm');
+task('restart:web', function () {
+    run('sudo service php8.0-fpm restart');
+    run('sudo service nginx restart');
+})->select('type=app');
 
-// Hooks
+task('restart:workers', function () {
+    run('{{bin/php}} {{release_path}}/artisan queue:restart');
+})->select('type=app');
 
-after('deploy:failed', 'deploy:unlock'); // Unlock after failed deploy
-desc('Deploy the application');
-task('deploy', [
-    'deploy:info',
-    'deploy:prepare',
-    'deploy:lock',
-    'deploy:release',
-    'rsync', // Deploy code & built assets
-    'deploy:secrets', // Deploy secrets
-    'deploy:shared',
-    'deploy:vendors',
-    'deploy:writable',
-    'artisan:storage:link', // |
-    'artisan:view:cache',   // |
-    'artisan:config:cache', // | Laravel specific steps 
-    'artisan:optimize',     // |
-    'artisan:migrate',      // |
-    'deploy:symlink',
-    'deploy:unlock',
-    'cleanup',
-]);
+task('restart:services', ['restart:web', 'restart:workers']);
+
+// [Optional] if deploy fails automatically unlock.
+after('deploy:failed', 'deploy:unlock');
+
+/**
+ * Default main deploy task from recipe
+ * desc('Deploys your project');
+ * task('deploy', [
+ *     'deploy:prepare',
+ *     'deploy:vendors',
+ *     'artisan:storage:link',
+ *     'artisan:config:cache',
+ *     'artisan:route:cache',
+ *     'artisan:view:cache',
+ *     'artisan:event:cache',
+ *     'artisan:migrate',
+ *     'deploy:publish',
+ * ]);
+ */
+
+before('artisan:config:cache', 'artisan:clear-compiled');
+before('deploy:success', 'restart:services');
