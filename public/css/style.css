@@ -1,0 +1,9 @@
+.card-body {
+  display: flex !important;
+  flex-direction: column !important;
+  }
+  
+  .card .btn {
+  margin-top: auto !important;
+  }
+  

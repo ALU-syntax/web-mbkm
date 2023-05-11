@@ -19,3 +19,6 @@ deploy_.yml
 /.fleet
 /.idea
 /.vscode
+
+.github/workflows
+deploy.php
