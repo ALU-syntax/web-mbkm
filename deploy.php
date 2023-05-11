@@ -39,9 +39,9 @@ add('writable_dirs', []);
 host('production')
     ->setHostname('41.216.185.194') 
     ->set('forward_agent',false)
-    // ->set('remote_user', 'knaqipgw')
-    ->user('knaqipgw')
-    ->set('port', 22)
+    ->set('remote_user', 'knaqipgw')
+    // ->user('knaqipgw')
+    ->set('port', 21)
     ->set('deploy_path', '/var/www/')
     ->setLabels([
         'type' => 'app',
