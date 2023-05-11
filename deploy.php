@@ -3,6 +3,7 @@
 namespace Deployer;
 
 require 'recipe/laravel.php';
+require 'recipe/rsync.php';
 
 // Set SSH Multiplexing
 set('ssh_multiplexing', true);
@@ -38,7 +39,8 @@ add('writable_dirs', []);
 host('production')
     ->setHostname('41.216.185.194') 
     ->set('forward_agent',false)
-    ->set('remote_user', 'knaqipgw')
+    // ->set('remote_user', 'knaqipgw')
+    ->user('knaqipgw')
     ->set('port', 22)
     ->set('deploy_path', '/var/www/')
     ->setLabels([
