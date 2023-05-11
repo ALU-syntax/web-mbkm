@@ -1,24 +1,36 @@
-<header class="p-2 bg-light">
+<style>
+.nav-link {color: grey}
+.nav-link:hover {color: black}
+.navbar-nav .nav-link.active{color: black}
+</style>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-light ">
   <div class="container">
-    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-      <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-        <img src="img/logopnj.png" alt="logo" width="75" height="75">
-      </a>
-
-      <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 ms-4 justify-content-center mb-md-0">
-        <li><a href="#" class="nav-link px-2 text-black">Home</a></li>
-        <li><a href="#" class="nav-link px-2 text-black">About</a></li>
-        {{-- <li><a href="#" class="nav-link px-2 text-black">Pricing</a></li>
-        <li><a href="#" class="nav-link px-2 text-black">FAQs</a></li>
-        <li><a href="#" class="nav-link px-2 text-black">About</a></li> --}}
+    <a href="/" class="d-flex align-items-center me-3 mb-2 mb-lg-0 text-white text-decoration-none">
+      <img src="img/logopnj.png" alt="logo" width="75" height="75">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link {{ $active === 'home' ? 'active' : '' }}"  href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {{ $active === 'about' ? 'active' : '' }}" href="/about">About</a>
+        </li>
+        {{-- <li class="nav-item">
+          <a class="nav-link {{ $active === 'posts' ? 'active' : '' }}" href="/posts">Blog</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {{ $active === 'categories' ? 'active' : '' }}" href="/categories">Categories</a>
+        </li> --}}
       </ul>
-
-      
-
-      <div class="text-end">
-        <button type="button" class="btn btn-outline-primary me-2">Login</button>
-        <button type="button" class="btn btn-warning">Sign-up</button>
-      </div>
+    </div>
+    <div class="text-end">
+      <button type="button" class="btn btn-outline-primary me-2">Login</button>
+      <button type="button" class="btn btn-warning">Sign-up</button>
     </div>
   </div>
-</header>
+</nav>
