@@ -3,7 +3,7 @@
 namespace Deployer;
 
 require 'recipe/laravel.php';
-require 'recipe/rsync.php';
+// require 'recipe/rsync.php';
 
 // Set SSH Multiplexing
 set('ssh_multiplexing', true);
