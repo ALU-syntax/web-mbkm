@@ -41,7 +41,7 @@ host('production')
     ->set('forward_agent',false)
     ->set('remote_user', 'knaqipgw')
     // ->user('knaqipgw')
-    ->set('port', 22)
+    ->set('port', 21)
     ->set('deploy_path', '/var/www/')
     ->setLabels([
         'type' => 'app',
