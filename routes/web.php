@@ -22,5 +22,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/about', [AboutController::class, 'index']);
 
-Route::get('/dashboard/forum', [DashboardController::class, 'index']);
+Route::get('/dashboard/forum', [DashboardController::class, 'forum']);
+Route::get('/dashboard/pendaftaran-mbkm', [DashboardController::class, 'pendaftaranMBKM']);
+Route::get('/dashboard/upload-kurikulum', [DashboardController::class, 'uploadKurikulum']);
+Route::get('/dashboard/hasil-konversi', [DashboardController::class, 'hasilKonversi']);
+Route::get('/dashboard/loogbook', [DashboardController::class, 'loogbook']);
+Route::get('/dashboard/laporan', [DashboardController::class, 'laporan']);
 

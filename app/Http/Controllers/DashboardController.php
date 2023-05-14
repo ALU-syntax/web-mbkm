@@ -13,8 +13,40 @@ class DashboardController extends Controller
     //     ]);
     // }
 
-    public function index(){
-        return view('dashboard.forum');
+    public function forum(){
+        return view('dashboard.forum', [
+            'title' => 'Forum'
+        ]);
+    }
+
+    public function pendaftaranMBKM(){
+        return view('dashboard.pendaftaran-mbkm', [
+            'title' => 'Pendaftaran MBKM'
+        ]);
+    }
+
+    public function uploadKurikulum(){
+        return view('dashboard.upload-kurikulum', [
+            'title' => 'Upload Kurikulum'
+        ]);
+    }
+
+    public function hasilKonversi(){
+        return view('dashboard.hasil-konversi', [
+            'title' => 'Hasil Konversi'
+        ]);
+    }
+
+    public function loogbook(){
+        return view('dashboard.loogbook', [
+            'title' => 'Loogbook'
+        ]);
+    }
+
+    public function laporan(){
+        return view('dashboard.laporan', [
+            'title' => 'laporan'
+        ]);
     }
 
 }
