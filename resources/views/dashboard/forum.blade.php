@@ -16,7 +16,10 @@
             </div>
             <div class="card-body">
               <div class="row">
-                <h4 class="mb-0">Author</h4>
+                <div class="d-flex align-items-center">
+                  <h4>Author</h4>
+                  <small class="ms-2 m-0">role</small>
+                </div>
                 <small class="mt-0">time 12/03/2023</small>
               </div>
               <div class="row mt-3">
@@ -30,7 +33,10 @@
               <hr class="horizontal dark mt-0">
 
               <div class="row">
-                <h4 class="mb-0">Author</h4>
+                <div class="d-flex align-items-center">
+                  <h4>Author</h4>
+                  <small class="ms-2 m-0">role</small>
+                </div>
                 <small class="mt-0">time 12/03/2023</small>
               </div>
               <div class="row mt-3">
@@ -44,7 +50,10 @@
               <hr class="horizontal dark mt-0">
 
               <div class="row">
-                <h4 class="mb-0">Author</h4>
+                <div class="d-flex align-items-center">
+                  <h4>Author</h4>
+                  <small class="ms-2 m-0">role</small>
+                </div>
                 <small class="mt-0">time 12/03/2023</small>
               </div>
               <div class="row mt-3">
