@@ -16,30 +16,46 @@
             </div>
             <div class="card-body">
               <div class="row">
-                <h2>postingan</h2>
+                <h4 class="mb-0">Author</h4>
+                <small class="mt-0">time 12/03/2023</small>
+              </div>
+              <div class="row mt-3">
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto, totam. 
+                  Asperiores quaerat ipsa nihil iusto corrupti eaque quos voluptatibus commodi?</p>
               <div class="d-flex">
                 <div class="btn">Share</div>
                 <div class="btn">Comment</div>
               </div>
               </div>
               <hr class="horizontal dark mt-0">
+
               <div class="row">
-                <h2>postingan</h2>
+                <h4 class="mb-0">Author</h4>
+                <small class="mt-0">time 12/03/2023</small>
+              </div>
+              <div class="row mt-3">
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto, totam. 
+                  Asperiores quaerat ipsa nihil iusto corrupti eaque quos voluptatibus commodi?</p>
               <div class="d-flex">
                 <div class="btn">Share</div>
                 <div class="btn">Comment</div>
               </div>
               </div>
               <hr class="horizontal dark mt-0">
+
               <div class="row">
-                <h2>postingan</h2>
+                <h4 class="mb-0">Author</h4>
+                <small class="mt-0">time 12/03/2023</small>
+              </div>
+              <div class="row mt-3">
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto, totam. 
+                  Asperiores quaerat ipsa nihil iusto corrupti eaque quos voluptatibus commodi?</p>
               <div class="d-flex">
                 <div class="btn">Share</div>
                 <div class="btn">Comment</div>
               </div>
               </div>
               <hr class="horizontal dark mt-0">
-            </div>
           </div>
         </div>
       </div>
