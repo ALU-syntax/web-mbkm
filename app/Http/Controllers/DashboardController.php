@@ -6,10 +6,15 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
+    // public function index(){
+    //     return view('dashboard.forum', [
+    //         'title' => 'Dashboard',
+    //         'active' => 'dashboard'
+    //     ]);
+    // }
+
     public function index(){
-        return view('dashboard', [
-            'title' => 'Dashboard',
-            'active' => 'dashboard'
-        ]);
+        return view('dashboard.forum');
     }
+
 }

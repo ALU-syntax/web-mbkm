@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 class AboutController extends Controller
 {
     public function index(){
-        return view('about', [
+        return view('landing_page.about', [
             'active' => 'about',
             'title' => 'About'
         ]);
