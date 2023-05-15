@@ -6,10 +6,11 @@
             <div class="card-header pb-0">
               <div class="d-flex align-items-center">
                 <button class="btn ">Sort By</button>  
-                <div class="ms-md-auto">
+                <div class="ms-md-auto d-flex">
+                  <Button class="btn btn-outline-primary align-items-center d-flex m-0 me-5 w-50"><i class="fas fa-plus me-2" aria-hidden="true"></i>New Post</Button>
                   <div class="input-group ms-md-auto d-flex">
                     <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-                    <input type="text" class="form-control" placeholder="Type here..." onfocus="focused(this)" onfocusout="defocused(this)">
+                    <input type="text" class="form-control me-3" placeholder="Search here..." onfocus="focused(this)" onfocusout="defocused(this)">
                   </div>
                 </div>
               </div>
