@@ -29,8 +29,7 @@
       </ul>
     </div>
     <div class="text-end">
-      <button type="button" class="btn btn-outline-primary me-2">Login</button>
-      <button type="button" class="btn btn-warning">Sign-up</button>
+      <a href="/login" class="btn btn-outline-primary px-4">Login</a>
     </div>
   </div>
 </nav>

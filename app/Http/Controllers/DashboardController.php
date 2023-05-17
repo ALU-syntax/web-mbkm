@@ -49,4 +49,10 @@ class DashboardController extends Controller
         ]);
     }
 
+    public function welcome(){
+        return view('dashboard.welcome', [
+            'title' => 'welcome'
+        ]);
+    }
+
 }

@@ -14,12 +14,12 @@
           <li class="nav-item d-flex align-items-center">
             <a href="javascript:;" class="nav-link text-white font-weight-bold px-0">
               <i class="fa fa-user me-sm-1"></i>
-              <span class="d-sm-inline d-none">Account</span>
+              <span class="d-sm-inline d-none">Akun</span>
             </a>
           </li>
           <li class="nav-item d-flex align-items-center">
             <a href="javascript:;" class="nav-link text-white font-weight-bold px-0">
-              <span class=" btn d-sm-inline ms-4">Logout</span>
+              <span class=" btn d-sm-inline ms-4">Keluar</span>
             </a>
           </li>
         </ul>

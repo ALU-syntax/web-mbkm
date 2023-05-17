@@ -1,6 +1,7 @@
 @extends('layout.dashboard')
 @section('container')
 <form >
+    @csrf
     <div class="row">
         <div class="col-12">
             <div class="card mb-4">
@@ -21,114 +22,40 @@
                             <input class="form-control" type="email">
                         </div>
                         </div>
-                        <div class="col-md-6">
-                            <label for="dropdown">Fakultas</label>
-                            <div class="dropdown">
-                                <a href="#" class="btn dropdown-toggle w-100 " data-bs-toggle="dropdown" id="navbarDropdownMenuLink2">
-                                    {{-- <img src="https://demos.creative-tim.com/argon-dashboard-pro-bs4/assets/img/icons/flags/US.png" /> Pilih Fakultas --}}
-                                    <i class="ni ni-ruler-pencil"></i> Pilih Fakultas
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
-                                    <li>
-                                        <a class="dropdown-item" href="#">
-                                        <img src="https://demos.creative-tim.com/argon-dashboard-pro-bs4/assets/img/icons/flags/DE.png" /> Deutsch
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="#">
-                                        <img src="https://demos.creative-tim.com/argon-dashboard-pro-bs4/assets/img/icons/flags/GB.png" /> English(UK)
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="#">
-                                        <img src="https://demos.creative-tim.com/argon-dashboard-pro-bs4/assets/img/icons/flags/FR.png" /> Français
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="fakultas" class="form-label">Fakultas</label>
+                            <select class="form-select" name="fakultas">
+                                <option value="" disabled selected>Pilih Fakultas</option>
+                                <option value="Teknik">Fakultas Teknik</option>
+                                <option value="Teknik">Fakultas Ilmu Budaya</option>
+                            </select>
                         </div>
-                        <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="dropdown">Jurusan</label>
-                            <div class="dropdown">
-                                <a href="#" class="btn dropdown-toggle w-100 " data-bs-toggle="dropdown" id="navbarDropdownMenuLink2">
-                                    <i class="ni ni-ruler-pencil"></i> Pilih Jurusan
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
-                                    <li>
-                                        <a class="dropdown-item" href="#">
-                                        <img src="https://demos.creative-tim.com/argon-dashboard-pro-bs4/assets/img/icons/flags/DE.png" /> Deutsch
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="#">
-                                        <img src="https://demos.creative-tim.com/argon-dashboard-pro-bs4/assets/img/icons/flags/GB.png" /> English(UK)
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="#">
-                                        <img src="https://demos.creative-tim.com/argon-dashboard-pro-bs4/assets/img/icons/flags/FR.png" /> Français
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="jurusan" class="form-label">Jurusan</label>
+                            <select class="form-select" name="jurusan">
+                                <option value="" disabled selected>Pilih Jurusan</option>
+                                <option value="">Teknik Elektro</jurusann>
+                                <option value="">Teknik Komputer</jurusann>
+                                <option value="">Teknik Bimodik</jurusann>
+                            </select>
                         </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="semester" class="form-label">Semester</label>
+                            <select class="form-select" name="semester">
+                                <option value="" disabled selected>Pilih Semester</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                            </select>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="dropdown">Semester</label>
-                                <div class="dropdown">
-                                    <a href="#" class="btn dropdown-toggle w-100 " data-bs-toggle="dropdown" id="navbarDropdownMenuLink2">
-                                        {{-- <img src="https://demos.creative-tim.com/argon-dashboard-pro-bs4/assets/img/icons/flags/US.png" /> Pilih Fakultas --}}
-                                        <i class="ni ni-ruler-pencil"></i> Pilih Semester
-                                    </a>
-                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
-                                        <li>
-                                            <a class="dropdown-item" href="#">
-                                            <img src="https://demos.creative-tim.com/argon-dashboard-pro-bs4/assets/img/icons/flags/DE.png" /> Deutsch
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="#">
-                                            <img src="https://demos.creative-tim.com/argon-dashboard-pro-bs4/assets/img/icons/flags/GB.png" /> English(UK)
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="#">
-                                            <img src="https://demos.creative-tim.com/argon-dashboard-pro-bs4/assets/img/icons/flags/FR.png" /> Français
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="dropdown">Program</label>
-                                <div class="dropdown">
-                                    <a href="#" class="btn dropdown-toggle w-100 " data-bs-toggle="dropdown" id="navbarDropdownMenuLink2">
-                                        {{-- <img src="https://demos.creative-tim.com/argon-dashboard-pro-bs4/assets/img/icons/flags/US.png" /> Pilih Fakultas --}}
-                                        <i class="ni ni-ruler-pencil"></i> Pilih Program
-                                    </a>
-                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
-                                        <li>
-                                            <a class="dropdown-item" href="#">
-                                            <img src="https://demos.creative-tim.com/argon-dashboard-pro-bs4/assets/img/icons/flags/DE.png" /> Deutsch
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="#">
-                                            <img src="https://demos.creative-tim.com/argon-dashboard-pro-bs4/assets/img/icons/flags/GB.png" /> English(UK)
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="#">
-                                            <img src="https://demos.creative-tim.com/argon-dashboard-pro-bs4/assets/img/icons/flags/FR.png" /> Français
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="program" class="form-label">Program</label>
+                            <select class="form-select" name="program">
+                                <option value="" disabled selected>Pilih Program</option>
+                                <option value="">Kampus Merdeka</option>
+                                <option value="">Bangkit</option>
+                            </select>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
