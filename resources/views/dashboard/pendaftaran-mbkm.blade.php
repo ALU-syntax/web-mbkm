@@ -12,14 +12,14 @@
                     <div class="row">
                         <div class="col-md-6">
                         <div class="form-group">
-                            <label for="example-text-input" class="form-control-label">Nama</label>
-                            <input class="form-control" type="text" >
+                            <label for="nama" class="form-control-label">Nama</label>
+                            <input class="form-control" type="text" name="nama" >
                         </div>
                         </div>
                         <div class="col-md-6">
                         <div class="form-group">
-                            <label for="example-text-input" class="form-control-label">NIM</label>
-                            <input class="form-control" type="email">
+                            <label for="nim" class="form-control-label">NIM</label>
+                            <input class="form-control" type="text" name="nim">
                         </div>
                         </div>
                         <div class="col-md-6 mb-3">
@@ -59,32 +59,32 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                            <label for="example-text-input" class="form-control-label">Input Tanggal Mulai</label>
-                            <input class="form-control" type="datetime-local" >
+                            <label for="tanggalmulai" class="form-control-label">Input Tanggal Mulai</label>
+                            <input class="form-control" type="datetime-local" name="tanggalmulai">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                            <label for="example-text-input" class="form-control-label">Input Tanggal Selesai</label>
-                            <input class="form-control" type="datetime-local" >
+                            <label for="tanggalselesai" class="form-control-label">Input Tanggal Selesai</label>
+                            <input class="form-control" type="datetime-local" name="tanggalselesai" >
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                            <label for="example-text-input" class="form-control-label">Tempat Program(Perusahaan)</label>
-                            <input class="form-control" type="text" >
+                            <label for="tempatprogram" class="form-control-label">Tempat Program(Perusahaan)</label>
+                            <input class="form-control" type="text" name="tempatprogram">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                            <label for="example-text-input" class="form-control-label">Lokasi Program</label>
-                            <input class="form-control" type="text" >
+                            <label for="lokasiprogram" class="form-control-label">Lokasi Program</label>
+                            <input class="form-control" type="text" name="lokasiprogram" >
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                            <label for="example-text-input" class="form-control-label">Pengambilan Program Ke-Berapa</label>
-                            <input class="form-control" type="text" >
+                            <label for="programberapa" class="form-control-label">Pengambilan Program Ke-Berapa</label>
+                            <input class="form-control" type="text" name="programberapa">
                             </div>
                         </div>
                         

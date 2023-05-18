@@ -59,7 +59,8 @@
                       <input type="email" class="form-control form-control-lg" placeholder="Password" aria-label="Password">
                     </div>
                     <div class="text-center">
-                      <button type="button" class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">Sign in</button>
+                      <a href="/dashboard/" class="btn btn-lg btn-primary w-100 mt-4 mb-0">Sign in</a>
+                      {{-- <button type="button" class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">Sign in</button> --}}
                     </div>
                   </form>
                   <div class="text-center align-items-center">
