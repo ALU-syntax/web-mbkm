@@ -27,22 +27,24 @@ Route::get('/about', [AboutController::class, 'index']);
 
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate']);
+Route::post('/logout', [LoginController::class, 'logout']);
 Route::get('/auth/pnj', [LoginController::class, 'redirectToSSOPNJ']);
 Route::get('/cb', [LoginController::class, 'callback']);
 
-// Route::get('/dashboard/', [DashboardController::class, 'welcome']);
+Route::get('/dashboard/index', [DashboardController::class, 'welcome']);
+
 Route::get('/dashboard/', [LoginController::class, 'callback']);
 
-Route::resource('/dashboard/forum', ForumController::class);
+Route::resource('/dashboard/forum', ForumController::class)->middleware('auth');
 
-Route::get('/dashboard/pendaftaran-mbkm', [DashboardController::class, 'pendaftaranMBKM']);
-Route::get('/dashboard/upload-kurikulum', [DashboardController::class, 'uploadKurikulum']);
-Route::get('/dashboard/hasil-konversi', [DashboardController::class, 'hasilKonversi']);
+Route::get('/dashboard/pendaftaran-mbkm', [DashboardController::class, 'pendaftaranMBKM'])->middleware('auth');
+Route::get('/dashboard/upload-kurikulum', [DashboardController::class, 'uploadKurikulum'])->middleware('auth');
+Route::get('/dashboard/hasil-konversi', [DashboardController::class, 'hasilKonversi'])->middleware('auth');
 
 // Route::get('/dashboard/logbook', [DashboardController::class, 'loogbook']);
-Route::resource('/dashboard/logbook', LogbookController::class);
+Route::resource('/dashboard/logbook', LogbookController::class)->middleware('auth');
 // Route::get('/dashboard/logbook/create', [DashboardController::class, 'createLogbook']);
 
-Route::get('/dashboard/laporan', [DashboardController::class, 'laporan']);
+Route::get('/dashboard/laporan', [DashboardController::class, 'laporan'])->middleware('auth');
 
 

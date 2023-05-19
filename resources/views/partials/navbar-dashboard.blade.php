@@ -14,15 +14,25 @@
           <li class="nav-item d-flex align-items-center">
             <a href="javascript:;" class="nav-link text-white font-weight-bold px-0">
               <i class="fa fa-user me-sm-1"></i>
-              <span class="d-sm-inline d-none">Akun</span>
+              <span class="d-sm-inline d-none">{{ $name }}</span>
             </a>
           </li>
           <li class="nav-item d-flex align-items-center">
-            <a href="javascript:;" class="nav-link text-white font-weight-bold px-0">
-              <span class=" btn d-sm-inline ms-4">Keluar</span>
-            </a>
+            <form action="/logout" method="post">
+              @csrf
+              <button type="submit" class="btn nav-link text-white font-weight-bold px-4 d-sm-inline ms-4 me-4 mt-2 align-text-bottom">
+                <i class="ni ni-button-power mt-1 text-sm opacity-10 "></i>    Keluar
+                 
+              </button>
+            </form> 
           </li>
         </ul>
       </div>
     </div>
   </nav>
+
+  
+
+  {{-- <a href="javascript:;" class="nav-link text-white font-weight-bold px-0">
+    <span class=" btn d-sm-inline ms-4">Keluar</span>
+  </a> --}}

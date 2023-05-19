@@ -16,39 +16,45 @@ class DashboardController extends Controller
 
     public function pendaftaranMBKM(){
         return view('dashboard.pendaftaran-mbkm', [
-            'title' => 'Pendaftaran MBKM'
+            'title' => 'Pendaftaran MBKM',
+            'name' => auth()->user()->name
         ]);
     }
 
     public function uploadKurikulum(){
         return view('dashboard.upload-kurikulum', [
-            'title' => 'Upload Kurikulum'
+            'title' => 'Upload Kurikulum',
+            'name' => auth()->user()->name
         ]);
     }
 
     public function hasilKonversi(){
         return view('dashboard.hasil-konversi', [
-            'title' => 'Hasil Konversi'
+            'title' => 'Hasil Konversi',
+            'name' => auth()->user()->name
         ]);
     }
 
 
     public function createLogbook(){
         return view('dashboard.create-logbook',[
-            'title' => 'Logbook'
+            'title' => 'Logbook',
+            'name' => auth()->user()->name
         ]);
     }
 
     public function laporan(){
         return view('dashboard.laporan', [
-            'title' => 'laporan'
+            'title' => 'laporan',
+            'name' => auth()->user()->name
         ]);
     }
 
     public function welcome(){
 
         return view('dashboard.welcome', [
-            'title' => 'welcome'
+            'title' => 'welcome',
+            'name' => auth()->user()->name
         ]);
     }
 

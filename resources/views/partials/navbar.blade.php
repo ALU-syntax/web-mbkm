@@ -28,8 +28,29 @@
         </li> --}}
       </ul>
     </div>
+    
+    @auth
+    <div class="text-end dropdown">
+      <a href="#" class="dropdown-toggle px-4" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Welcome back, {{ auth()->user()->name }}
+      </a>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="/dashboard/index"><i class="bi bi-layout-text-sidebar-reverse"></i> My Dashboard</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li>
+          <form action="/logout" method="post">
+            @csrf
+            <button type="submit" class="dropdown-item">
+              <i class="bi bi-box-arrow-right"></i> Logout
+            </button>
+          </form>
+      </ul>
+    </div>
+    @else
     <div class="text-end">
       <a href="/login" class="btn btn-outline-primary px-4">Login</a>
     </div>
+    @endauth
   </div>
 </nav>
+

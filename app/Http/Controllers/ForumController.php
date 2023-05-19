@@ -12,7 +12,8 @@ class ForumController extends Controller
     public function index()
     {
         return view('dashboard.forum', [
-            'title' => 'Forum'
+            'title' => 'Forum',
+            'name' => auth()->user()->name
         ]);
     }
 
@@ -22,7 +23,9 @@ class ForumController extends Controller
     public function create()
     {
         return view('dashboard.create-forum', [
-            'title' => 'Forum'
+            'title' => 'Forum',
+            'name' => auth()->user()->name
+            
         ]);
     }
 

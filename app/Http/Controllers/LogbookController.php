@@ -13,7 +13,8 @@ class LogbookController extends Controller
     public function index()
     {
         return view('dashboard.logbook', [
-            'title' => 'Logbook'
+            'title' => 'Logbook',
+            'name' => auth()->user()->name
         ]);
     }
 
@@ -23,7 +24,8 @@ class LogbookController extends Controller
     public function create()
     {
         return view('dashboard.create-logbook',[
-            'title' => 'logbook'
+            'title' => 'logbook',
+            'name' => auth()->user()->name
         ]);
     }
 
