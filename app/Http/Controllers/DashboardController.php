@@ -13,11 +13,6 @@ class DashboardController extends Controller
     //     ]);
     // }
 
-    public function forum(){
-        return view('dashboard.forum', [
-            'title' => 'Forum'
-        ]);
-    }
 
     public function pendaftaranMBKM(){
         return view('dashboard.pendaftaran-mbkm', [

@@ -13,11 +13,14 @@
   <!-- Nucleo Icons -->
   <link href="css/nucleo-icons.css" rel="stylesheet" />
   <link href="css/nucleo-svg.css" rel="stylesheet" />
+  
   <!-- Font Awesome Icons -->
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
   <link href="css/nucleo-svg.css" rel="stylesheet" />
+
   <!-- CSS Files -->
   <link id="pagestyle" href="css/argon-dashboard.css?v=2.0.4" rel="stylesheet" />
+  {{-- <link id="pagestyle" href="{{ URL::asset('css/argon-dashboard.css?v=2.0.4') }}" rel="stylesheet" /> --}}
   {{-- Trix-dependency --}}
   <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.0/dist/trix.css">
   <script type="text/javascript" src="https://unpkg.com/trix@2.0.0/dist/trix.umd.min.js"></script>

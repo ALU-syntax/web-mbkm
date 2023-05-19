@@ -1,15 +1,16 @@
 @extends('layout.dashboard')
 @section('container')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-<form >
-    @csrf
-    <div class="row">
-        <div class="col-12">
-            <div class="card mb-4">
-                <div class="card-header pb-0">
-                    <h4>Upload Kurikulum</h4>
-                </div>
-                <div class="card-body">
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4>Upload Kurikulum</h4>
+            </div>
+
+            <div class="card-body">
+                <form >
+                    @csrf
                     <div class="row">
                         <div class="mb-3">
                             <label for="dokumen" class="form-label">Post Dokumen</label>
@@ -40,20 +41,26 @@
                         </div>
                     </div>
                     <hr class="horizontal dark">
+                </form>
+                <div class="row  mt-2">
+                    <div class="col-12">
+                      {{-- <a class="mb-2 tambahsks btn btn-secondary text-white btn-xs" id="album">
+                        <div class="icon-plus"></div>
+                        Tambah Mata Kuliah
+                      </a> --}}
+                      <button id="add" type="button" class="btn btn-outline-primary"> Tambah mata kuliah</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</form>
-<div class="row ms-2 mt-2">
-    <div class="col-12">
-      {{-- <a class="mb-2 tambahsks btn btn-secondary text-white btn-xs" id="album">
-        <div class="icon-plus"></div>
-        Tambah Mata Kuliah
-      </a> --}}
-      <button id="add" type="button" class="btn btn-primary me-5"> Tambah mata kuliah</button>
+        <div class="d-flex align-items-center ">
+            <div class="ms-md-auto d-flex">
+              <Button class="btn btn-primary align-items-center d-flex m-4 ">Submit</Button>
+            </div>
+        </div>
     </div>
 </div>
+
 
 <script>
     let i = 0;

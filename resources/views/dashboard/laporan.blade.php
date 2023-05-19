@@ -4,7 +4,7 @@
     <div class="col-12">
         <div class="card mb-4">
             <div class="card-header">
-                <h3>Hasil Laporan</h3>
+                <h3>Laporan</h3>
             </div>
 
             <div class="card-body">
