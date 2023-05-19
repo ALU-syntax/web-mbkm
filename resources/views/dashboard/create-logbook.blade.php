@@ -14,14 +14,12 @@
                   @csrf
 
                   <div class="row">
-
                     <div class="col-md-4">
                       <div class="form-group">
                         <label for="tempat" class="form-control-label">Input Tanggal</label>
                         <input class="form-control" type="datetime-local" name="tempat" >
                       </div>
                     </div>
-
                     <div class="col-md-4">
                       <div class="form-group">
                         <label for="tempat" class="form-control-label">Tempat</label>
@@ -37,7 +35,11 @@
                       <trix-editor input="body"></trix-editor>
                     </div>                    
                   </div>
-                  <a href="" class="btn btn-primary ">Submit</a>
+                  <div class="d-flex align-items-center">
+                    <div class="ms-md-auto d-flex">
+                      <a href="#" class="btn btn-primary align-items-center d-flex m-2">Submit</a>
+                    </div>
+                  </div>
                 </form>
           </div>
         </div>
