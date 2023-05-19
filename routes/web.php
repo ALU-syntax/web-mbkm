@@ -25,11 +25,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/about', [AboutController::class, 'index']);
 
-Route::get('/login', [LoginController::class, 'index']);
+Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
+Route::post('/login', [LoginController::class, 'authenticate']);
 Route::get('/auth/pnj', [LoginController::class, 'redirectToSSOPNJ']);
 Route::get('/cb', [LoginController::class, 'callback']);
 
-Route::get('/dashboard/', [DashboardController::class, 'welcome']);
+// Route::get('/dashboard/', [DashboardController::class, 'welcome']);
+Route::get('/dashboard/', [LoginController::class, 'callback']);
 
 Route::resource('/dashboard/forum', ForumController::class);
 

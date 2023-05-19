@@ -50,19 +50,36 @@
                   <p class="mb-0">Enter your email and password to sign in</p>
                 </div>
                 <div class="card-body">
-                  <form role="form">
+
+                  @if(session()->has('loginError'))
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                      {{ session('loginError') }}
+                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                  @endif
+
+                  <form action="/login" method="post">
                     @csrf
-                    <div class="mb-3">
-                      <input type="email" class="form-control form-control-lg" placeholder="Email" aria-label="Email">
+                    <div class="">
+                      <label for="email">Email Address</label>
+                      <input type="email" class="form-control @error('email') is-invalid @enderror form-control-lg" placeholder="name@example.com" id="email" value="{{ old('email') }}" autofocus required>
+                      @error('email')
+                      <div class="invalid-feedback">
+                        {{ $message }}
+                      </div>
+                      @enderror
                     </div>
                     <div class="mb-3">
-                      <input type="email" class="form-control form-control-lg" placeholder="Password" aria-label="Password">
+                      <label for="password"></label>
+                      <input type="password" name="password" class="form-control form-control-lg" placeholder="Password" id="password" required>
                     </div>
+
                     <div class="text-center">
-                      <a href="/dashboard/" class="btn btn-lg btn-primary w-100 mt-4 mb-0">Sign in</a>
-                      {{-- <button type="button" class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">Sign in</button> --}}
+                      {{-- <a href="/dashboard/" class="btn btn-lg btn-primary w-100 mt-4 mb-0">Sign in</a> --}}
+                      <button type="submit" class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">Sign in</button>
                     </div>
                   </form>
+
                   <div class="text-center align-items-center">
                     <a href="/auth/pnj" target="_blank" class="btn btn-lg btn-outline- w-100 mt-3 mb-0"><i class="pnj-icon"></i>Sign in With SSO PNJ</a>
                   </div>

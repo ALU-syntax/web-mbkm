@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
+
 
 class LoginController extends Controller
 {
@@ -11,13 +14,31 @@ class LoginController extends Controller
         return view('login');
     }
 
+    public function authenticate(Request $request){
+        $credentials = $request->validate([
+            // 'email' => 'required|email:dns',
+            'email' => 'required|email', 
+            'password' => 'required'
+        ]);
+
+        if(Auth::attempt($credentials)){
+            $request->session()->regenerate();
+            return redirect()->intended('/dashboard/');
+        }
+
+        return back()->with('loginError', 'Login failed!');
+    }
+
     public function redirectToSSOPNJ(){
         return Socialite::driver('pnj')->redirect();
     }
 
     public function callback(){
-        $user = Socialite::driver('pnj')->user();
-        
-        return response()->json($user);
+        $pnjuser = Socialite::driver('pnj')->user();
+
+        dd($pnjuser);
+    return redirect('/dashboard/');
+
+        // return response()->json($pnjuser);
     }
 }

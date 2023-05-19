@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Laravel\Socialite\Facades\Socialite;
 class DashboardController extends Controller
 {
     // public function index(){
@@ -46,6 +46,7 @@ class DashboardController extends Controller
     }
 
     public function welcome(){
+
         return view('dashboard.welcome', [
             'title' => 'welcome'
         ]);
