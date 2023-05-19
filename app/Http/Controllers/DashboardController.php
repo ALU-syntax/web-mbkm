@@ -37,9 +37,10 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function loogbook(){
-        return view('dashboard.loogbook', [
-            'title' => 'Loogbook'
+
+    public function createLogbook(){
+        return view('dashboard.create-logbook',[
+            'title' => 'Logbook'
         ]);
     }
 
