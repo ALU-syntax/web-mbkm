@@ -10,18 +10,22 @@
                 </div>
             </div>
             <div class="card-body">
-                <form action="">
+                <form method="post" action="/dashboard/forum">
                   @csrf
 
                   <div class="row">
                     <div class="col-12 mb-3">
                       <label for="body" class="form-label">Body</label>
-                      <input id="body" type="hidden" name="body" >
+                      @error('body')
+                        <p class="text-danger">{{ $message }}</p>
+                      @enderror
+                      <input id="body" type="hidden" name="body" value="{{ old('body') }}" autofocus required>
                       <trix-editor input="body"></trix-editor>
                     </div>                    
                   <div class="d-flex align-items-center">
                     <div class="ms-md-auto d-flex">
-                      <a href="#" class="btn btn-primary align-items-center d-flex m-2">Submit</a>
+                      <button type="submit" class="btn btn-primary">Create Post</button>
+                      {{-- <a href="#" class="btn btn-primary align-items-center d-flex m-2">Submit</a> --}}
                     </div>
                   </div>
                 </form>

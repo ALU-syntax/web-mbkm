@@ -1,5 +1,12 @@
 @extends('layout.dashboard')
 @section('container')
+
+@if(session()->has('success'))
+  <div class="alert alert-success col-lg-8" role="alert">
+    {{ session('success') }}
+  </div>
+@endif
+
       <div class="row">
         <div class="col-12">
           <div class="card mb-4">
@@ -15,58 +22,26 @@
                 </div>
               </div>
             </div>
+            
             <div class="card-body ms-3">
-              
+              @foreach($posts as $post)
               <div class="row mt-3">
                 <div class="d-flex align-items-center">
-                  <h4>Author</h4>
-                  <small class="ms-2 m-0">role</small>
+                  <h4>{{ $post->author->name }}</h4>
+                  <small class="ms-2 m-0">{{ $post->author->role }}</small>
                 </div>
-                <small class="mt-0">time 12/03/2023</small>
+                <small class="mt-0">{{ $post->created_at->diffForHumans() }}</small>
               </div>
               <div class="row mt-3">
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto, totam. 
-                  Asperiores quaerat ipsa nihil iusto corrupti eaque quos voluptatibus commodi?</p>
+                <p>{!! $post->body !!}</p>
+                
               <div class="d-flex">
-                <div class="btn btn-info me-2">Share</div>
-                <div class="btn">Comment</div>
+                {{-- <div class="btn btn-info me-2">Share</div> --}}
+                <div class="btn btn-info">Comment</div>
               </div>
               </div>
               <hr class="horizontal dark mt-0">
-
-              <div class="row mt-3">
-                <div class="d-flex align-items-center">
-                  <h4>Author</h4>
-                  <small class="ms-2 m-0">role</small>
-                </div>
-                <small class="mt-0">time 12/03/2023</small>
-              </div>
-              <div class="row mt-3">
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto, totam. 
-                  Asperiores quaerat ipsa nihil iusto corrupti eaque quos voluptatibus commodi?</p>
-              <div class="d-flex">
-                <div class="btn btn-info me-2">Share</div>
-                <div class="btn">Comment</div>
-              </div>
-              </div>
-              <hr class="horizontal dark mt-0">
-
-              <div class="row mt-3">
-                <div class="d-flex align-items-center">
-                  <h4>Author</h4>
-                  <small class="ms-2 m-0">role</small>
-                </div>
-                <small class="mt-0">time 12/03/2023</small>
-              </div>
-              <div class="row mt-3">
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto, totam. 
-                  Asperiores quaerat ipsa nihil iusto corrupti eaque quos voluptatibus commodi?</p>
-              <div class="d-flex">
-                <div class="btn btn-info me-2">Share</div>
-                <div class="btn">Comment</div>
-              </div>
-              </div>
-              <hr class="horizontal dark mt-0">
+              @endforeach
 
           </div>
         </div>
