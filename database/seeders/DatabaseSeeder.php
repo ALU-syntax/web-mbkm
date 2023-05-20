@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\User;
 use App\Models\Fakultas;
+use App\Models\Role;
 use App\Models\Jurusan;
 use Illuminate\Database\Seeder;
 
@@ -30,6 +31,11 @@ class DatabaseSeeder extends Seeder
             'fakultas_id' => '1',
             'jurusan_id' => '1',
             'status' => '1' 
+        ]);
+
+        Role::create([
+            'name' => 'Super Admin',
+            'status' => '1'
         ]);
 
         Fakultas::create([
