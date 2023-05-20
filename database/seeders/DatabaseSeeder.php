@@ -33,10 +33,31 @@ class DatabaseSeeder extends Seeder
             'status' => '1' 
         ]);
 
+        User::create([
+            'name' => 'Woodie',
+            'email' => 'woodiechek@gmail.com',
+            'password' => bcrypt('woodiechek911'),
+            'role' => '2',
+            'fakultas_id' => '1',
+            'jurusan_id' => '1',
+            'status' => '1' 
+        ]);
+
         Role::create([
             'name' => 'Super Admin',
             'status' => '1'
         ]);
+
+        Role::create([
+            'name' => 'Admin',
+            'status' => '1'
+        ]);
+
+        Role::create([
+            'name' => 'Dosen Pembimbing',
+            'status' => '1'
+        ]);
+
 
         Fakultas::create([
             'name' => 'Fakultas Teknik Informatika dan Komputer',

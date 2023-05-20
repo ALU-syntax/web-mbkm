@@ -2,9 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 
 class ForumPost extends Model
 {
@@ -13,15 +16,13 @@ class ForumPost extends Model
     protected $guarded = ['id'];
 
     public function author(){
-        
-        // $posts = DB::table('forum_posts')
-        //             ->leftJoin('users', 'forum_posts.created_by', '=', 'users.id')
-        //             ->leftJoin('roles', 'users.role', '=', 'roles.id')
-        //             ->select('forum_posts.*', 'users.name', 'roles.name')
-        //             ->get();    
-
         return $this->belongsTo(User::class, 'created_by');
-        // return $posts;
     }
+
+    public function role(){
+        return $this->belongsTo(Role::class);
+    }
+
+    
 
 }

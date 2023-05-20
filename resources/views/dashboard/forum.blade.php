@@ -27,21 +27,42 @@
               @foreach($posts as $post)
               <div class="row mt-3">
                 <div class="d-flex align-items-center">
-                  <h4>{{ $post->author->name }}</h4>
-                  <small class="ms-2 m-0">{{ $post->author->role }}</small>
+                  <h4>{{ $post->name }}</h4>
+                  <small class="ms-2 m-0">{{ $post->role_name }}</small>
                 </div>
-                <small class="mt-0">{{ $post->created_at->diffForHumans() }}</small>
+                <small class="mt-0">{{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}</small>
               </div>
               <div class="row mt-3">
                 <p>{!! $post->body !!}</p>
                 
               <div class="d-flex">
-                {{-- <div class="btn btn-info me-2">Share</div> --}}
+                 {{-- <div class="btn btn-info me-2">Share</div>  --}}
                 <div class="btn btn-info">Comment</div>
               </div>
-              </div>
-              <hr class="horizontal dark mt-0">
+            </div>
+            <hr class="horizontal dark mt-0">
               @endforeach
+
+              
+            {{-- <div class="card-body ms-3">
+              @foreach($posts as $post)
+              <div class="row mt-3">
+                <div class="d-flex align-items-center">
+                  <h4>{{ $post->author->name }}</h4>
+                  <small class="ms-2 m-0">{{ $post->author['role']->name }}</small>
+                </div>
+                <small class="mt-0">{{ $post->created_at->diffForHumans()}}</small>
+              </div>
+              <div class="row mt-3">
+                <p>{!! $post->body !!}</p>
+                
+              <div class="d-flex">
+                {{-- <div class="btn btn-info me-2">Share</div>  
+                <div class="btn btn-info">Comment</div>
+              </div>
+            </div>
+            <hr class="horizontal dark mt-0">
+              @endforeach --}}
 
           </div>
         </div>
