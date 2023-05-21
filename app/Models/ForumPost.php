@@ -19,10 +19,4 @@ class ForumPost extends Model
         return $this->belongsTo(User::class, 'created_by');
     }
 
-    public function role(){
-        return $this->belongsTo(Role::class);
-    }
-
-    
-
 }
