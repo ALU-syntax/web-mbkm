@@ -14,8 +14,6 @@
               <div class="d-flex align-items-center">
                 <button class="btn ">Sort By</button>  
                 <div class="ms-md-auto d-flex">
-                  <a href="/dashboard/mypost" class="btn btn-primary align-items-center  m-0 me-3 w-50">My Post</a>
-                  <a href="/dashboard/forum/create" class="btn btn-outline-primary align-items-center d-flex m-0 me-2 w-50"><i class="fas fa-plus me-2" aria-hidden="true"></i>New Post</a>
                   <div class="input-group ms-md-auto d-flex">
                     <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
                     <input type="text" class="form-control me-3" placeholder="Search here..." onfocus="focused(this)" onfocusout="defocused(this)">
@@ -23,27 +21,6 @@
                 </div>
               </div>
             </div>
-            
-            {{-- <div class="card-body ms-3">
-              @foreach($posts as $post)
-              <div class="row mt-3">
-                <div class="d-flex align-items-center">
-                  <h4>{{ $post->name }}</h4>
-                  <small class="ms-2 m-0">{{ $post->role_name }}</small>
-                </div>
-                <small class="mt-0">{{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}</small>
-              </div>
-              <div class="row mt-3">
-                <p>{!! $post->body !!}</p>
-                
-              <div class="d-flex">
-                 {{-- <div class="btn btn-info me-2">Share</div>  
-                <div class="btn btn-info">Comment</div>
-              </div>
-            </div>
-            <hr class="horizontal dark mt-0">
-              @endforeach --}}
-
               
             <div class="card-body ms-3">
               @foreach($posts as $post)

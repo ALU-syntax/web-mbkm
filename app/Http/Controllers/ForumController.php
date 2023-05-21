@@ -81,4 +81,12 @@ class ForumController extends Controller
     {
         //
     }
+
+    public function myPost(){
+        return view('dashboard.mypost',[
+            'title' => 'My Forum Post',
+            'name' => auth()->user()->name,
+            'posts' => ForumPost::where('created_by', auth()->user()->id)->get()
+        ]);
+    }
 }

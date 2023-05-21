@@ -36,6 +36,7 @@ Route::get('/dashboard/index', [DashboardController::class, 'welcome']);
 Route::get('/dashboard/', [LoginController::class, 'callback']);
 
 Route::resource('/dashboard/forum', ForumController::class)->middleware('auth');
+Route::get('/dashboard/mypost', [ForumController::class, 'myPost'])->middleware('auth');
 
 Route::get('/dashboard/pendaftaran-mbkm', [DashboardController::class, 'pendaftaranMBKM'])->middleware('auth');
 Route::get('/dashboard/upload-kurikulum', [DashboardController::class, 'uploadKurikulum'])->middleware('auth');
