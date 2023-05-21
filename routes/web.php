@@ -35,7 +35,11 @@ Route::get('/dashboard/index', [DashboardController::class, 'welcome']);
 
 Route::get('/dashboard/', [LoginController::class, 'callback']);
 
-Route::resource('/dashboard/forum', ForumController::class)->middleware('auth');
+Route::resource('/dashboard/forums', ForumController::class)->middleware('auth');
+// Route::get('/dashboard/forums', [ForumController::class,'page']);
+// Route::get('/forum', [ForumController::class,'page']);
+// Route::get('/page', [ForumController::class,'page'])->middleware('auth');
+
 
 Route::get('/dashboard/pendaftaran-mbkm', [DashboardController::class, 'pendaftaranMBKM'])->middleware('auth');
 Route::get('/dashboard/upload-kurikulum', [DashboardController::class, 'uploadKurikulum'])->middleware('auth');

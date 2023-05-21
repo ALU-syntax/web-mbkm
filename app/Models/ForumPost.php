@@ -15,7 +15,7 @@ class ForumPost extends Model
 
     protected $guarded = ['id'];
 
-    public function author(){
+    public function authors(){
         return $this->belongsTo(User::class, 'created_by');
     }
 

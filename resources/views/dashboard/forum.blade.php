@@ -23,8 +23,8 @@
               </div>
             </div>
             
-            <div class="card-body ms-3">
-              @foreach($posts as $post)
+            {{-- <div class="card-body ms-3">
+              @foreach($users as $post)
               <div class="row mt-3">
                 <div class="d-flex align-items-center">
                   <h4>{{ $post->name }}</h4>
@@ -35,34 +35,34 @@
               <div class="row mt-3">
                 <p>{!! $post->body !!}</p>
                 
-              <div class="d-flex">
-                 {{-- <div class="btn btn-info me-2">Share</div>  --}}
-                <div class="btn btn-info">Comment</div>
+              <div class="d-flex"> --}}
+                {{-- <div class="btn btn-info me-2">Share</div>  --}}
+                {{-- <div class="btn btn-info">Comment</div>
               </div>
             </div>
             <hr class="horizontal dark mt-0">
-              @endforeach
+              @endforeach --}}
 
               
-            {{-- <div class="card-body ms-3">
-              @foreach($posts as $post)
+            <div class="card-body ms-3">
+              @foreach($users as $post)
               <div class="row mt-3">
                 <div class="d-flex align-items-center">
-                  <h4>{{ $post->author->name }}</h4>
-                  <small class="ms-2 m-0">{{ $post->author['role']->name }}</small>
+                  <h4>{{ $post->authors->name }}</h4>
+                  <small class="ms-2 m-0">{{ $post->authors->roles->name}}</small>
                 </div>
-                <small class="mt-0">{{ $post->created_at->diffForHumans()}}</small>
+                {{-- <small class="mt-0">{{ $post->created_at->diffForHumans()}}</small> --}}
               </div>
               <div class="row mt-3">
                 <p>{!! $post->body !!}</p>
                 
               <div class="d-flex">
-                {{-- <div class="btn btn-info me-2">Share</div>  
+                {{-- <div class="btn btn-info me-2">Share</div>   --}}
                 <div class="btn btn-info">Comment</div>
               </div>
             </div>
             <hr class="horizontal dark mt-0">
-              @endforeach --}}
+            @endforeach 
 
           </div>
         </div>

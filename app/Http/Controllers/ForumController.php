@@ -14,21 +14,33 @@ class ForumController extends Controller
      */
     public function index()
     {
-        $users = DB::table('forum_posts')
-            ->leftJoin('users', 'forum_posts.created_by', '=', 'users.id')
-            ->leftJoin('roles', 'users.id', '=', 'roles.id')
-            ->select('roles.name as role_name', 'users.name', 'forum_posts.*')
-            ->orderBy('forum_posts.created_at', 'ASC')
-            ->get();
- 
-        return view('dashboard.forum', [
-            'title' => 'Forum',
-            'name' => auth()->user()->name,
-            // 'posts' => ForumPost::latest()->get(),
-            'posts' => $users,
-        ]);
+        // $users = DB::table('forum_posts')
+        //     ->leftJoin('users', 'forum_posts.created_by', '=', 'users.id')
+        //     ->leftJoin('roles', 'users.id', '=', 'roles.id')
+        //     ->select('roles.name as role_name', 'users.name', 'forum_posts.*')
+        //     ->orderBy('forum_posts.created_at', 'ASC')
+        //     ->get();
+
+        // return view('dashboard.forum', [
+        //     'title' => 'Forum',
+        //     'name' => auth()->user()->name,
+        //     // 'posts' => ForumPost::latest()->get(),
+        //     'posts' => $users,
+        // ]);
+
+        $users = ForumPost::with('authors')->latest()->get();
+
+        return view('dashboard.forum',compact('users'));
     }
 
+
+    public function page()
+    {
+        $users = ForumPost::with('authors');
+
+        return view('dashboard.forum',compact('users'));
+    }
+    
     /**
      * Show the form for creating a new resource.
      */
