@@ -46,6 +46,8 @@
 
               
             <div class="card-body ms-3">
+              @if($posts->count())
+              
               @foreach($posts as $post)
               <div class="row mt-3">
                 <div class="d-flex align-items-center">
@@ -61,9 +63,14 @@
                  {{-- <div class="btn btn-info me-2">Share</div>   --}}
                 <div class="btn btn-info">Comment</div>
               </div>
-            </div>
-            <hr class="horizontal dark mt-0">
-              @endforeach
+              </div>
+              <hr class="horizontal dark mt-0">
+            @endforeach
+
+              @else
+              <h3>Belum Ada Postingan</h3>
+              <hr class="horizontal dark mt-0">
+              @endif
 
           </div>
         </div>

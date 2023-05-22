@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\ForumPost;
+use Illuminate\Cache\RedisStore;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -20,7 +21,7 @@ class ForumController extends Controller
             'title' => 'Forum',
             'title_page' => 'Forum ',
             'name' => auth()->user()->name,
-            'posts' => ForumPost::with('author')->latest('updated_at')->get(),
+            'posts' => ForumPost::with('author')->where('created_by', auth()->user()->id)->where('is_delete', '0')->latest('updated_at')->get()
         ]);
     }
 
@@ -31,6 +32,7 @@ class ForumController extends Controller
     {
         return view('dashboard.create-forum', [
             'title' => 'Forum',
+            'title_page' => 'Create Post Forum',
             'name' => auth()->user()->name
             
         ]);
@@ -101,9 +103,10 @@ class ForumController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ForumPost $forum)
+    public function destroy(Request $request, ForumPost $forum)
     {
-        //
+        
+        return redirect('/dashboard/forum')->with('success', 'Post has bee Deleted!');
     }
 
     public function myPost(){
@@ -111,7 +114,17 @@ class ForumController extends Controller
             'title' => 'My Forum Post',
             'title_page' => 'Forum / My Post',
             'name' => auth()->user()->name,
-            'posts' => ForumPost::where('created_by', auth()->user()->id)->get()
+            'posts' => ForumPost::where('created_by', auth()->user()->id)->where('is_delete', '0')->latest('updated_at')->get()
         ]);
+    }
+
+    public function deleted(Request $request, $forum){
+
+        $postingan = ForumPost::find($forum);
+        $postingan['is_delete'] = '1';
+
+        $postingan->update($request->all());
+        return redirect('/dashboard/forum')->with('success', 'Post has been updated!');
+
     }
 }

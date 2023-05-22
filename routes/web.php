@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ForumController;
 use App\Http\Controllers\LogbookController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MbkmController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,10 +36,16 @@ Route::get('/dashboard/index', [DashboardController::class, 'welcome']);
 
 Route::get('/dashboard/', [LoginController::class, 'callback']);
 
+// Forum Route
 Route::resource('/dashboard/forum', ForumController::class)->middleware('auth');
 Route::get('/dashboard/mypost', [ForumController::class, 'myPost'])->middleware('auth');
+Route::post('/dashboard/mypost/{id}', [ForumController::class, 'deleted'])->middleware('auth');
 
+// Mbkm Route
 Route::get('/dashboard/pendaftaran-mbkm', [DashboardController::class, 'pendaftaranMBKM'])->middleware('auth');
+Route::post('/dashboard/pendaftaran-mbkm/create', [MbkmController::class, 'store'])->middleware('auth');
+
+
 Route::get('/dashboard/upload-kurikulum', [DashboardController::class, 'uploadKurikulum'])->middleware('auth');
 Route::get('/dashboard/hasil-konversi', [DashboardController::class, 'hasilKonversi'])->middleware('auth');
 
