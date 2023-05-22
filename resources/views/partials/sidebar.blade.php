@@ -11,7 +11,7 @@
   <div class="w-auto" id="sidenav-collapse-main">
     <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link " href="/dashboard/forum">
+          <a class="nav-link @if($active == 'Forum') active @endif" href="/dashboard/forum">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-world text-primary text-sm opacity-10"></i>
             </div>
@@ -19,7 +19,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="/dashboard/pendaftaran-mbkm">
+          <a class="nav-link @if($active == 'Pendaftaran MBKM') active @endif" href="/dashboard/pendaftaran-mbkm">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-ruler-pencil text-dark text-sm opacity-10"></i>
             </div>
@@ -27,7 +27,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="/dashboard/upload-kurikulum">
+          <a class="nav-link @if($active == 'Upload Kurikulum') active @endif" href="/dashboard/upload-kurikulum">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-app text-info text-sm opacity-10"></i>
             </div>
@@ -35,7 +35,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="/dashboard/hasil-konversi">
+          <a class="nav-link @if($active == 'Hasil Konversi') active @endif" href="/dashboard/hasil-konversi">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-paper-diploma text-success text-sm opacity-10"></i>
             </div>
@@ -43,7 +43,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="/dashboard/logbook">
+          <a class="nav-link @if($active == 'Logbook') active @endif" href="/dashboard/logbook">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-book-bookmark text-secondary text-sm opacity-10"></i>
             </div>
@@ -51,7 +51,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="/dashboard/laporan">
+          <a class="nav-link @if($active == 'Laporan') active @endif" href="/dashboard/laporan">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-books text-primary text-sm opacity-10"></i>
             </div>
@@ -62,7 +62,7 @@
           <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Admin pages</h6>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="./pages/profile.html">
+          <a class="nav-link @if($active == 'Create User') active @endif" href="./pages/profile.html">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
             </div>
@@ -70,7 +70,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="./pages/sign-in.html">
+          <a class="nav-link @if($active == 'Master Data') active @endif" href="./pages/sign-in.html">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-single-copy-04 text-warning text-sm opacity-10"></i>
             </div>

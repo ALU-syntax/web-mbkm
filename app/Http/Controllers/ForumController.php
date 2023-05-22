@@ -19,7 +19,8 @@ class ForumController extends Controller
     {
         return view('dashboard.forum', [
             'title' => 'Forum',
-            'title_page' => 'Forum ',
+            'title_page' => 'Forum',
+            'active' => 'Forum',
             'name' => auth()->user()->name,
             'posts' => ForumPost::with('author')->where('created_by', auth()->user()->id)->where('is_delete', '0')->latest('updated_at')->get()
         ]);
@@ -32,6 +33,7 @@ class ForumController extends Controller
     {
         return view('dashboard.create-forum', [
             'title' => 'Forum',
+            'active' => 'Forum',
             'title_page' => 'Create Post Forum',
             'name' => auth()->user()->name
             
@@ -75,6 +77,7 @@ class ForumController extends Controller
         return view('dashboard.edit-forum', [
             'title' => 'Edit Post',
             'title_page' => 'Forum / My Post / Edit',
+            'active' => 'Forum',
             'name' => auth()->user()->name, 
             'forum' => $forum
         ]);
@@ -113,6 +116,7 @@ class ForumController extends Controller
         return view('dashboard.mypost',[
             'title' => 'My Forum Post',
             'title_page' => 'Forum / My Post',
+            'active' => 'Forum',
             'name' => auth()->user()->name,
             'posts' => ForumPost::where('created_by', auth()->user()->id)->where('is_delete', '0')->latest('updated_at')->get()
         ]);

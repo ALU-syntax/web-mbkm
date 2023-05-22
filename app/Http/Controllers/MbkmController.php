@@ -29,10 +29,10 @@ class MbkmController extends Controller
 
     public function myForm(){
 
-
         return view('dashboard.my-mbkm-form',[
             'title' => 'My Mbkm Form',
             'title_page' => 'Pendaftaran-Mbkm / Form Mbkm Saya',
+            'active' => 'Pendaftaran MBKM',
             'name' => auth()->user()->name,
             'mbkms' => Mbkm::latest()->get()
         ]);

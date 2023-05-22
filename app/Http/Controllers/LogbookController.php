@@ -15,6 +15,7 @@ class LogbookController extends Controller
         return view('dashboard.logbook', [
             'title' => 'Logbook',
             'title_page' => 'Logbook',
+            'active' => 'Logbook',
             'name' => auth()->user()->name
         ]);
     }

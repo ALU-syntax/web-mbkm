@@ -18,6 +18,7 @@ class DashboardController extends Controller
         return view('dashboard.pendaftaran-mbkm', [
             'title' => 'Pendaftaran MBKM',
             'title_page' => 'Pendaftaran MBKM',
+            'active' => 'Pendaftaran MBKM',
             'name' => auth()->user()->name
         ]);
     }
@@ -26,6 +27,7 @@ class DashboardController extends Controller
         return view('dashboard.upload-kurikulum', [
             'title' => 'Upload Kurikulum',
             'title_page' => 'Upload Kurikulum',
+            'active' => 'Upload Kurikulum',
             'name' => auth()->user()->name
         ]);
     }
@@ -34,6 +36,7 @@ class DashboardController extends Controller
         return view('dashboard.hasil-konversi', [
             'title' => 'Hasil Konversi',
             'title_page' => 'Hasil Konversi',
+            'active' => 'Hasil Konversi',
             'name' => auth()->user()->name
         ]);
     }
@@ -43,6 +46,7 @@ class DashboardController extends Controller
         return view('dashboard.create-logbook',[
             'title' => 'Logbook',
             'title_page' => 'Hasil Logbook',
+            'active' => 'Logbook',
             'name' => auth()->user()->name
         ]);
     }
@@ -51,6 +55,7 @@ class DashboardController extends Controller
         return view('dashboard.laporan', [
             'title' => 'Laporan',
             'title_page' => 'Laporan',
+            'active' => 'Laporan',
             'name' => auth()->user()->name
         ]);
     }
@@ -60,6 +65,7 @@ class DashboardController extends Controller
         return view('dashboard.welcome', [
             'title' => 'welcome',
             'title_page' => 'Dashboard',
+            'active' => '',
             'name' => auth()->user()->name
         ]);
     }
