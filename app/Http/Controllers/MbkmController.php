@@ -26,4 +26,15 @@ class MbkmController extends Controller
 
         return redirect('/dashboard/pendaftaran-mbkm')->with('success', 'New Data Mbkm has been added!');
     }
+
+    public function myForm(){
+
+
+        return view('dashboard.my-mbkm-form',[
+            'title' => 'My Mbkm Form',
+            'title_page' => 'Pendaftaran-Mbkm / Form Mbkm Saya',
+            'name' => auth()->user()->name,
+            'mbkms' => Mbkm::latest()->get()
+        ]);
+    }
 }

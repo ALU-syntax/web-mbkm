@@ -7,7 +7,8 @@
     </a>
   </div>
   <hr class="horizontal dark mt-0">
-  <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
+  {{-- <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main"> --}}
+  <div class="w-auto" id="sidenav-collapse-main">
     <ul class="navbar-nav">
         <li class="nav-item">
           <a class="nav-link " href="/dashboard/forum">
@@ -55,6 +56,25 @@
               <i class="ni ni-books text-primary text-sm opacity-10"></i>
             </div>
             <span class="nav-link-text ms-1">Laporan</span>
+          </a>
+        </li>
+        <li class="nav-item mt-3">
+          <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Admin pages</h6>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " href="./pages/profile.html">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Create User</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " href="./pages/sign-in.html">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-single-copy-04 text-warning text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Master Data</span>
           </a>
         </li>
     </ul>

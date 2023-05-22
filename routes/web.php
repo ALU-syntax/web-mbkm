@@ -43,6 +43,7 @@ Route::post('/dashboard/mypost/{id}', [ForumController::class, 'deleted'])->midd
 
 // Mbkm Route
 Route::get('/dashboard/pendaftaran-mbkm', [DashboardController::class, 'pendaftaranMBKM'])->middleware('auth');
+Route::get('/dashboard/pendaftaran-mbkm/personal', [MbkmController::class, 'myForm'])->middleware('auth');
 Route::post('/dashboard/pendaftaran-mbkm/create', [MbkmController::class, 'store'])->middleware('auth');
 
 
