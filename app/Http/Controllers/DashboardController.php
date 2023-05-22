@@ -17,6 +17,7 @@ class DashboardController extends Controller
     public function pendaftaranMBKM(){
         return view('dashboard.pendaftaran-mbkm', [
             'title' => 'Pendaftaran MBKM',
+            'title_page' => 'Pendaftaran MBKM',
             'name' => auth()->user()->name
         ]);
     }
@@ -54,6 +55,7 @@ class DashboardController extends Controller
 
         return view('dashboard.welcome', [
             'title' => 'welcome',
+            'title_page' => 'Dashboard',
             'name' => auth()->user()->name
         ]);
     }

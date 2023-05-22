@@ -29,7 +29,7 @@
                   <h4>{{ $post->author->name }}</h4>
                   <small class="ms-2 m-0">{{ $post->author->roles->name }}</small>
                 </div>
-                <small class="mt-0">{{ $post->created_at->diffForHumans()}}</small>
+                <small class="mt-0">{{ $post->updated_at->diffForHumans()}}</small>
               </div>
               <div class="row mt-3">
                 <p>{!! $post->body !!}</p>
@@ -37,6 +37,7 @@
               <div class="d-flex">
                  {{-- <div class="btn btn-info me-2">Share</div>   --}}
                 <div class="btn btn-info">Comment</div>
+                <a class="btn btn-outline-info ms-2" href="/dashboard/forum/{{ $post->id }}/edit">Edit</a>
               </div>
             </div>
             <hr class="horizontal dark mt-0">

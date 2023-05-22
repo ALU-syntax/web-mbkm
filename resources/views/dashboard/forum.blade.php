@@ -52,7 +52,7 @@
                   <h4>{{ $post->author->name }}</h4>
                   <small class="ms-2 m-0">{{ $post->author->roles->name }}</small>
                 </div>
-                <small class="mt-0">{{ $post->created_at->diffForHumans()}}</small>
+                <small class="mt-0">{{ $post->updated_at->diffForHumans()}}</small>
               </div>
               <div class="row mt-3">
                 <p>{!! $post->body !!}</p>

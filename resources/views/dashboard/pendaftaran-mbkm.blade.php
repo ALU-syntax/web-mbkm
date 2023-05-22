@@ -59,40 +59,43 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                            <label for="tanggalmulai" class="form-control-label">Input Tanggal Mulai</label>
-                            <input class="form-control" type="datetime-local" name="tanggalmulai">
+                            <label for="tanggal_mulai" class="form-control-label">Input Tanggal Mulai</label>
+                            <input class="form-control" type="datetime-local" name="tanggal_mulai">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                            <label for="tanggalselesai" class="form-control-label">Input Tanggal Selesai</label>
-                            <input class="form-control" type="datetime-local" name="tanggalselesai" >
+                            <label for="tanggal_selesai" class="form-control-label">Input Tanggal Selesai</label>
+                            <input class="form-control" type="datetime-local" name="tanggal_selesai" >
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                            <label for="tempatprogram" class="form-control-label">Tempat Program(Perusahaan)</label>
-                            <input class="form-control" type="text" name="tempatprogram">
+                            <label for="tempat_program_perusahaan" class="form-control-label">Tempat Program(Perusahaan)</label>
+                            <input class="form-control" type="text" name="tempat_program_perusahaan">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                            <label for="lokasiprogram" class="form-control-label">Lokasi Program</label>
-                            <input class="form-control" type="text" name="lokasiprogram" >
+                            <label for="lokasi_program" class="form-control-label">Lokasi Program</label>
+                            <input class="form-control" type="text" name="lokasi_program" >
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                            <label for="programberapa" class="form-control-label">Pengambilan Program Ke-Berapa</label>
-                            <input class="form-control" type="text" name="programberapa">
+                            <label for="program_keberapa" class="form-control-label">Pengambilan Program Ke-Berapa</label>
+                            <input class="form-control" type="text" name="program_keberapa">
                             </div>
                         </div>
                         
                     </div>
                     <hr class="horizontal dark">
+
+                    <button type="submit" class="btn btn-primary ms-md-auto me-3 d-flex">Create Post</button>
                 </div>
             </div>
         </div>
     </div>
+    
 </form>
 @endsection

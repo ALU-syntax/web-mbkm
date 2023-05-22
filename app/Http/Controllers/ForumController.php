@@ -7,6 +7,8 @@ use App\Models\ForumPost;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+use function Deployer\timestamp;
+
 class ForumController extends Controller
 {
     /**
@@ -16,8 +18,9 @@ class ForumController extends Controller
     {
         return view('dashboard.forum', [
             'title' => 'Forum',
+            'title_page' => 'Forum ',
             'name' => auth()->user()->name,
-            'posts' => ForumPost::with('author')->latest()->get(),
+            'posts' => ForumPost::with('author')->latest('updated_at')->get(),
         ]);
     }
 
@@ -47,7 +50,7 @@ class ForumController extends Controller
 
         ForumPost::create($validatedData);
 
-        return redirect('/dashboard/forum')->with('success', 'New Post has beend added!');
+        return redirect('/dashboard/forum')->with('success', 'New Post has been added!');
     }
 
     /**
@@ -63,7 +66,16 @@ class ForumController extends Controller
      */
     public function edit(ForumPost $forum)
     {
-        //
+        if($forum->author->id !== auth()->user()->id) {
+            abort(403);
+       }
+
+        return view('dashboard.edit-forum', [
+            'title' => 'Edit Post',
+            'title_page' => 'Forum / My Post / Edit',
+            'name' => auth()->user()->name, 
+            'forum' => $forum
+        ]);
     }
 
     /**
@@ -71,7 +83,19 @@ class ForumController extends Controller
      */
     public function update(Request $request, ForumPost $forum)
     {
-        //
+        $rules = [
+            'body' => 'required'
+        ];
+
+        $validatedData = $request->validate($rules);
+
+        $validatedData['created_by'] = auth()->user()->id;
+
+        ForumPost::where('id', $forum->id)
+                ->update($validatedData);
+
+        return redirect('/dashboard/forum')->with('success', 'Post has been updated!');
+
     }
 
     /**
@@ -85,6 +109,7 @@ class ForumController extends Controller
     public function myPost(){
         return view('dashboard.mypost',[
             'title' => 'My Forum Post',
+            'title_page' => 'Forum / My Post',
             'name' => auth()->user()->name,
             'posts' => ForumPost::where('created_by', auth()->user()->id)->get()
         ]);
