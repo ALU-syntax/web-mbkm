@@ -66,6 +66,7 @@ Route::post('/dashboard/register', [RegisterController::class, 'store'])->middle
 //Fakultas Route
 Route::get('/dashboard/fakultas', [FakultasController::class , 'index'])->middleware('auth');
 Route::get('/dashboard/fakultas/create', [FakultasController::class, 'create'])->middleware('auth');
+Route::get('/dashboard/fakultas/{id}', [FakultasController::class, 'edit'])->middleware('auth');
 Route::post('/dashboard/fakultas', [FakultasController::class, 'store'])->middleware('auth');
 
 

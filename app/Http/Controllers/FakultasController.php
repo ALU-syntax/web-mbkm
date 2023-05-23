@@ -13,7 +13,7 @@ class FakultasController extends Controller
             'title_page' => 'Fakultas',
             'active' => 'Fakultas',
             'name' => auth()->user()->name,
-            'fakultas' => Fakultas::latest()->get()
+            'fakultas' => Fakultas::all()
         ]);
     }
 
@@ -34,5 +34,15 @@ class FakultasController extends Controller
         Fakultas::create($validatedData);
 
         return redirect('/dashboard/fakultas')->with('success', 'Fakultas Berhasil Dibuat!');
+    }
+
+    public function edit($id){
+        return view('dashboard.edit-fakultas',[
+            'title' => 'Edit',
+            'title_page' => 'Fakultas / Edit',
+            'active' => 'Fakultas',
+            'name' => auth()->user()->name,
+            'fakultas' => Fakultas::find($id)
+        ]);
     }
 }

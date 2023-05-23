@@ -46,7 +46,17 @@
                                   @endif    
                                 </td>
                                 <td class="align-middle text-center text-sm">
-
+                                  <td>
+                                    <a href="/dashboard/fakultas/{{ $data->id }}" ><span class="badge badge-primary"></span><i class="fa fa-regular fa-pen" style="color: #fecb3e;"></i></a>
+                                    <form action="/dashboard/posts/" method="post" class="d-inline">
+                                      @method('delete')
+                                      @csrf
+                                      <button class="border-0 bg-transparent" onclick="return confirm('Are you sure?')">
+                                        <span class="badge badge-danger"></span>
+                                        <i class="fa fa-solid fa-trash" style="color: #bf0040;"></i>
+                                      </button>
+                                    </form>
+                                  </td>
                                 </td>
                         @endforeach        
                       </tbody>
