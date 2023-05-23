@@ -46,7 +46,7 @@ class LoginController extends Controller
         $pnjuser = Socialite::driver('pnj')->user();
 
         dd($pnjuser);
-    return redirect('/dashboard/');
+        return redirect('/dashboard/');
 
         // return response()->json($pnjuser);
     }

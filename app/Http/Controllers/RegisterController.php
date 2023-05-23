@@ -38,11 +38,12 @@ class RegisterController extends Controller
     }
 
     public function kelolaAkun(){
-        view('dashboard.kelola-akun', [
+        return view('dashboard.kelola-akun', [
             'title' => 'Buat Akun / Kelola Akun',
             'title_page' => 'Buat Akun',
             'name' => auth()->user()->name,
-            'active' => 'Buat Akun' 
+            'active' => 'Buat Akun',
+            'users' => User::latest()->get()
         ]);
     }
 }
