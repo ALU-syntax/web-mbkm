@@ -155,7 +155,7 @@
                             </div>
                         </div>
                         <hr class="horizontal dark">
-                        <button type="submit" class="btn btn-primary ms-md-auto me-3 d-flex">Create Forumuli Mbkm</button>      
+                        <button type="submit" class="btn btn-primary ms-md-auto me-3 d-flex">Buat Formulir Mbkm</button>      
                     </form>
                 </div>
             </div>

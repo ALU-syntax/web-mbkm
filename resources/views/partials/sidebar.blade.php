@@ -62,21 +62,21 @@
           <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Admin pages</h6>
         </li>
         <li class="nav-item">
-          <a class="nav-link @if($active == 'Create User') active @endif" href="./pages/profile.html">
+          <a class="nav-link @if($active == 'Buat Akun') active @endif" href="/dashboard/register">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
             </div>
-            <span class="nav-link-text ms-1">Create User</span>
+            <span class="nav-link-text ms-1">Buat Akun</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link @if($active == 'Master Data') active @endif" href="./pages/sign-in.html">
+          <a class="nav-link @if($active == 'Master Data') active @endif" href="">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-single-copy-04 text-warning text-sm opacity-10"></i>
             </div>
             <span class="nav-link-text ms-1">Master Data</span>
           </a>
-        </li>
+        </li>        
     </ul>
   </div>
 </aside>

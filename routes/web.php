@@ -7,6 +7,7 @@ use App\Http\Controllers\ForumController;
 use App\Http\Controllers\LogbookController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MbkmController;
+use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -55,5 +56,12 @@ Route::resource('/dashboard/logbook', LogbookController::class)->middleware('aut
 // Route::get('/dashboard/logbook/create', [DashboardController::class, 'createLogbook']);
 
 Route::get('/dashboard/laporan', [DashboardController::class, 'laporan'])->middleware('auth');
+
+// Register Route
+Route::get('/dashboard/register', [RegisterController::class, 'index'])->middleware('auth');
+Route::get('/dashboard/register/kelola-akun', [RegisterController::class, 'kelolaAkun'])->middleware('auth');
+Route::post('/dashboard/register', [RegisterController::class, 'store'])->middleware('auth');
+
+
 
 

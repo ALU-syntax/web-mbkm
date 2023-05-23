@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('role_kedua')->nullable();
             $table->string('fakultas_id');
             $table->string('jurusan_id');
-            $table->string('status');
+            $table->string('status')->default('1');
             $table->rememberToken();
             $table->timestamps();
 
