@@ -45,4 +45,9 @@ class FakultasController extends Controller
             'fakultas' => Fakultas::find($id)
         ]);
     }
+
+    public function destroy($id){
+        Fakultas::destroy($id);
+        return redirect('/dashboard/fakultas')->with('success', 'Data Fakultas Berhasil di Hapus');
+    }
 }

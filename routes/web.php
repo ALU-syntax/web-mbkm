@@ -68,6 +68,7 @@ Route::get('/dashboard/fakultas', [FakultasController::class , 'index'])->middle
 Route::get('/dashboard/fakultas/create', [FakultasController::class, 'create'])->middleware('auth');
 Route::get('/dashboard/fakultas/{id}', [FakultasController::class, 'edit'])->middleware('auth');
 Route::post('/dashboard/fakultas', [FakultasController::class, 'store'])->middleware('auth');
+Route::post('/dashboard/fakultas/{id}/delete', [FakultasController::class, 'destroy'])->middleware('auth');
 
 
 

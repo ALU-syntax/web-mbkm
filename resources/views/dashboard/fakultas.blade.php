@@ -48,8 +48,7 @@
                                 <td class="align-middle text-center text-sm">
                                   <td>
                                     <a href="/dashboard/fakultas/{{ $data->id }}" ><span class="badge badge-primary"></span><i class="fa fa-regular fa-pen" style="color: #fecb3e;"></i></a>
-                                    <form action="/dashboard/posts/" method="post" class="d-inline">
-                                      @method('delete')
+                                    <form action="/dashboard/fakultas/{{ $data->id }}/delete" method="post" class="d-inline">
                                       @csrf
                                       <button class="border-0 bg-transparent" onclick="return confirm('Are you sure?')">
                                         <span class="badge badge-danger"></span>
