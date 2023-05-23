@@ -9,6 +9,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MbkmController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\FakultasController;
+use App\Http\Controllers\JurusanController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -69,6 +70,14 @@ Route::get('/dashboard/fakultas/create', [FakultasController::class, 'create'])-
 Route::get('/dashboard/fakultas/{id}', [FakultasController::class, 'edit'])->middleware('auth');
 Route::post('/dashboard/fakultas', [FakultasController::class, 'store'])->middleware('auth');
 Route::post('/dashboard/fakultas/{id}/delete', [FakultasController::class, 'destroy'])->middleware('auth');
+
+// Jurusan Route
+Route::get('/dashboard/jurusan', [JurusanController::class, 'index'])->middleware('auth');
+Route::get('/dashboard/jurusan/create', [JurusanController::class, 'create'])->middleware('auth');
+Route::get('/dashboard/jurusan/{id}', [JurusanController::class, 'edit'])->middleware('auth');
+Route::post('/dashboard/jurusan', [JurusanController::class, 'store'])->middleware('auth');
+Route::post('/dashboard/jurusan/{id}/delete', [JurusanController::class, 'destroy'])->middleware('auth');
+
 
 
 

@@ -11,4 +11,8 @@ class Jurusan extends Model
     public $table = "jurusan";
 
     protected $guarded = ['id'];
+
+    public function listFakultas(){
+        return $this->belongsTo(Fakultas::class, 'fakultas_id');
+    }
 }
