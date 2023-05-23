@@ -61,37 +61,37 @@ class DatabaseSeeder extends Seeder
 
         Fakultas::create([
             'name' => 'Fakultas Teknik Informatika dan Komputer',
-            'status' => '1'
+            'status' => 'Aktif'
         ]);
 
         Jurusan::create([
             'name' => 'Prodi Teknik Informatika Reguler (TI-Reg)',
             'fakultas_id' => '1',
-            'status' => '1'
+            'status' => 'Aktif'
         ]);
 
         Jurusan::create([
             'name' => 'Prodi Teknik Informatika CCIT (TI-CCIT)',
             'fakultas_id' => '1',
-            'status' => '1'
+            'status' => 'Aktif'
         ]);
         
         Jurusan::create([
             'name' => 'Prodi Teknik Multimedia Digital (TMD)',
             'fakultas_id' => '1',
-            'status' => '1'
+            'status' => 'Aktif'
         ]);
 
         Jurusan::create([
             'name' => 'Prodi Teknik Multimedia dan Jaringan (TMJ)',
             'fakultas_id' => '1',
-            'status' => '1'
+            'status' => 'Fakultas'
         ]);
 
         Jurusan::create([
             'name' => 'Prodi Teknik Komputer dan Jaringan (TKJ)',
             'fakultas_id' => '1',
-            'status' => '1'
+            'status' => 'Aktif'
         ]);
         
     }

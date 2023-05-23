@@ -8,6 +8,7 @@ use App\Http\Controllers\LogbookController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MbkmController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\FakultasController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -61,6 +62,11 @@ Route::get('/dashboard/laporan', [DashboardController::class, 'laporan'])->middl
 Route::get('/dashboard/register', [RegisterController::class, 'index'])->middleware('auth');
 Route::get('/dashboard/register/kelola-akun', [RegisterController::class, 'kelolaAkun'])->middleware('auth');
 Route::post('/dashboard/register', [RegisterController::class, 'store'])->middleware('auth');
+
+//Fakultas Route
+Route::get('/dashboard/fakultas', [FakultasController::class , 'index'])->middleware('auth');
+Route::get('/dashboard/fakultas/create', [FakultasController::class, 'create'])->middleware('auth');
+Route::post('/dashboard/fakultas', [FakultasController::class, 'store'])->middleware('auth');
 
 
 

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->string('fakultas_id');
-            $table->string('status');
+            $table->string('status')->default('Aktif');
             $table->timestamps();
         });
     }

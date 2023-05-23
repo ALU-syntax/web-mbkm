@@ -13,7 +13,7 @@
             <div class="card mb-4">
                 <div class="card-header pb-0">
                     <div class="ms-md-auto d-flex">
-                        <h4>Input Informasi MBKM</h4>
+                        <h4>Buat Akun</h4>
                         <a href="/dashboard/register/kelola-akun" class="btn btn-primary d-flex ms-md-auto ms-3">Kelola Akun</a>
                     </div>
                 </div>
