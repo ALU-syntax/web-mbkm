@@ -85,7 +85,7 @@ class DatabaseSeeder extends Seeder
         Jurusan::create([
             'name' => 'Prodi Teknik Multimedia dan Jaringan (TMJ)',
             'fakultas_id' => '1',
-            'status' => 'Fakultas'
+            'status' => 'Aktif'
         ]);
 
         Jurusan::create([

@@ -50,6 +50,15 @@ class JurusanController extends Controller
         ]);
     }
 
+    public function update(Request $request, $jurusan){
+
+        $postingan = Jurusan::find($jurusan);
+
+        $postingan->update($request->all());
+        return redirect('/dashboard/jurusan')->with('success', 'Data Jurusan has been updated!');
+
+    }
+
     public function destroy($id){
         Jurusan::destroy($id);
         return redirect('/dashboard/jurusan')->with('success', 'Data Jurusan Berhasil di Hapus');

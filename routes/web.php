@@ -71,6 +71,7 @@ Route::get('/dashboard/fakultas/create', [FakultasController::class, 'create'])-
 Route::get('/dashboard/fakultas/{id}', [FakultasController::class, 'edit'])->middleware('auth');
 Route::post('/dashboard/fakultas', [FakultasController::class, 'store'])->middleware('auth');
 Route::post('/dashboard/fakultas/{id}/delete', [FakultasController::class, 'destroy'])->middleware('auth');
+Route::post('/dashboard/fakultas/{id}/edit', [FakultasController::class, 'update'])->middleware('auth');
 
 // Jurusan Route
 Route::get('/dashboard/jurusan', [JurusanController::class, 'index'])->middleware('auth');
@@ -78,6 +79,7 @@ Route::get('/dashboard/jurusan/create', [JurusanController::class, 'create'])->m
 Route::get('/dashboard/jurusan/{id}', [JurusanController::class, 'edit'])->middleware('auth');
 Route::post('/dashboard/jurusan', [JurusanController::class, 'store'])->middleware('auth');
 Route::post('/dashboard/jurusan/{id}/delete', [JurusanController::class, 'destroy'])->middleware('auth');
+Route::post('/dashboard/jurusan/{id}/edit', [JurusanController::class, 'update'])->middleware('auth');
 
 // Role Route
 Route::get('/dashboard/role', [RoleController::class, 'index'])->middleware('auth');

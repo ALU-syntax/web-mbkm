@@ -9,7 +9,7 @@
             </div>
 
             <div class="card-body">
-                <form action="/dashboard/Jurusan" method="post">
+                <form action="/dashboard/jurusan/{{ $jurusan->id }}/edit" method="post">
                     @csrf
                     <div class="row">            
                         <div class="mb-3 col-10">

@@ -46,6 +46,15 @@ class FakultasController extends Controller
         ]);
     }
 
+    public function update(Request $request, $role){
+
+        $postingan = Fakultas::find($role);
+
+        $postingan->update($request->all());
+        return redirect('/dashboard/fakultas')->with('success', 'Data Fakultas has been updated!');
+
+    }
+
     public function destroy($id){
         Fakultas::destroy($id);
         return redirect('/dashboard/fakultas')->with('success', 'Data Fakultas Berhasil di Hapus');

@@ -33,7 +33,7 @@ class RoleController extends Controller
         ]);
         Role::create($validatedData);
 
-        return redirect('/dashboard/role')->with('success', 'Fakultas Berhasil Dibuat!');
+        return redirect('/dashboard/role')->with('success', 'Role Berhasil Dibuat!');
     }
 
     public function edit($id){
