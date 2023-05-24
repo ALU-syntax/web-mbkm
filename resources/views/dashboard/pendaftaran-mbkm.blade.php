@@ -153,6 +153,23 @@
                                     @enderror
                                 </div>
                             </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="dosen_pembimbing" class="form-label">Dosen Pembimbing</label>
+                                <select id="dosen_pembimbing" class="form-select @error('dosen_pembimbing') is-invalid @enderror" name="dosen_pembimbing" required>
+                                    <option value="0" >Pilih Dosen Pembimbing</option>
+                                    <option value="1">Bambang</jurusann>
+                                    <option value="2" selected="selected">Lisa</jurusann>
+                                    <option value="3">Joko</jurusann>
+                                </select>
+                                <div id="reset">
+                                    <span class="badge badge-pill badge-md bg-gradient-warning">Reset</span>
+                                </div>
+                                @error('dosen_pembimbing')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
                         </div>
                         <hr class="horizontal dark">
                         <button type="submit" class="btn btn-primary ms-md-auto me-3 d-flex">Buat Formulir Mbkm</button>      
@@ -161,4 +178,15 @@
             </div>
         </div>
     </div>
+
+    <script>
+        
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    $("#reset").on("click", function () {
+            $('#dosen_pembimbing option').prop('selected', function() {
+                return this.defaultSelected;
+            });
+        });
+    </script>
 @endsection

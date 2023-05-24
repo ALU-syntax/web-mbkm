@@ -45,17 +45,17 @@ class DatabaseSeeder extends Seeder
 
         Role::create([
             'name' => 'Super Admin',
-            'status' => '1'
+            'status' => 'Aktif'
         ]);
 
         Role::create([
             'name' => 'Admin',
-            'status' => '1'
+            'status' => 'Aktif'
         ]);
 
         Role::create([
             'name' => 'Dosen Pembimbing',
-            'status' => '1'
+            'status' => 'Aktif'
         ]);
 
 
