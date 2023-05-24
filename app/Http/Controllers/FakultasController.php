@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Jurusan;
 use App\Models\Fakultas;
 use Illuminate\Http\Request;
 
@@ -57,6 +58,8 @@ class FakultasController extends Controller
 
     public function destroy($id){
         Fakultas::destroy($id);
+        $jurusan = Jurusan::where('fakultas_id', $id)->get();
+        Jurusan::destroy($jurusan);
         return redirect('/dashboard/fakultas')->with('success', 'Data Fakultas Berhasil di Hapus');
     }
 }

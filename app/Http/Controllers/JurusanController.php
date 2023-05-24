@@ -30,7 +30,7 @@ class JurusanController extends Controller
 
     public function store(Request $request){
         $validatedData = $request->validate([
-            'name' => 'required|unique:fakultas',
+            'name' => 'required|unique:jurusan',
             'fakultas_id' => 'required',
             'status' => 'required'
         ]);

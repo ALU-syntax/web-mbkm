@@ -14,7 +14,7 @@
                     <div class="row">            
                         <div class="mb-3 col-10">
                             <label for="name" class="form-label">Nama</label>
-                            <input class="form-control @error('name') is-invalid @enderror" type="text" id="name" name="name" placeholder="Masukan Nama Jurusan" autofocus required>  
+                            <input class="form-control @error('name') is-invalid @enderror" type="text" id="name" name="name" placeholder="Masukan Nama Jurusan" value="{{ old('name') }}" required autofocus>  
                             @error('name')
                                 <div class="invalid-feedback">
                                     {{ $message }}
