@@ -87,6 +87,18 @@
                                 <td class="align-middle text-center text-sm">
                                     <p class="text-xs font-weight-bold mb-0">{{ $mbkm->created_at }}</p>
                                 </td>
+                                <td class="align-middle text-center text-sm">
+                                    <td>
+                                      <a href="/dashboard/pendaftaran-mbkm/{{ $mbkm->id }}" ><span class="badge badge-primary"></span><i class="fa fa-regular fa-pen" style="color: #fecb3e;"></i></a>
+                                      {{-- <form action="/dashboard/fakultas//delete" method="post" class="d-inline">
+                                        @csrf
+                                        <button class="border-0 bg-transparent" onclick="return confirm('Data Jurusan dari Fakultas yang bersangkutan akan ikut terhapus secara permanen, Apakah kamu yakin?')">
+                                          <span class="badge badge-danger"></span>
+                                          <i class="fa fa-solid fa-trash" style="color: #bf0040;"></i>
+                                        </button>
+                                      </form> --}}
+                                    </td>
+                                  </td>
                             </tr>                        
                         @endforeach
                         

@@ -14,18 +14,18 @@
             <div class="card mb-4">
                 <div class="card-header pb-0">
                     <div class="ms-md-auto d-flex">
-                        <h4>Input Informasi MBKM</h4>
-                        <a href="/dashboard/pendaftaran-mbkm/personal" class="btn btn-primary d-flex ms-md-auto ms-3">Formulir MBKM Saya</a>
+                        <h4>Edit Informasi MBKM</h4>
+                        {{-- <a href="/dashboard/pendaftaran-mbkm/personal" class="btn btn-primary d-flex ms-md-auto ms-3">Formulir MBKM Saya</a> --}}
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="/dashboard/pendaftaran-mbkm/create" method="post">
+                    <form action="/dashboard/pendaftaran-mbkm/{{ $mbkm->id }}/edit" method="post">
                         @csrf
                         <div class="row">   
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="name" class="form-control-label">Nama</label>
-                                    <input class="form-control @error('name') is-invalid @enderror" id="name" type="text" name="name" placeholder="Masukan Nama" autofocus required>
+                                    <input class="form-control @error('name') is-invalid @enderror" id="name" type="text" name="name" placeholder="Masukan Nama" value="{{ old('name', $mbkm->name) }}" autofocus required>
                                     @error('name')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -36,7 +36,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="nim" class="form-control-label">NIM</label>
-                                    <input class="form-control @error('nim') is-invalid @enderror" id="nim" type="text" name="nim" placeholder="Masukan NIM" required>
+                                    <input class="form-control @error('nim') is-invalid @enderror" id="nim" type="text" name="nim" value="{{ old('nim', $mbkm->nim) }}" placeholder="Masukan NIM" required>
                                     @error('nim')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -49,7 +49,11 @@
                                 <select class="form-select @error('fakultas') is-invalid @enderror" id="fakultas" name="fakultas" required>
                                     <option value="" disabled selected>Pilih Fakultas</option>
                                     @foreach($fakultas as $data)
-                                        <option value="{{ $data->id }}">{{ $data->name }}</option>
+                                        @if(old('fakultas', $mbkm->fakultas) == $data->id)
+                                            <option value="{{ $data->id }}" selected>{{ $data->name }}</option>
+                                        @else
+                                            <option value="{{ $data->id }}">{{ $data->name }}</option>
+                                        @endif
                                     @endforeach
                                 </select>
                                 @error('fakultas')
@@ -62,6 +66,11 @@
                                 <label for="jurusan" class="form-label">Jurusan</label>
                                 <select class="form-select @error('jurusan') is-invalid @enderror" id="jurusan" name="jurusan" required>
                                     <option value="" disabled selected>Pilih Jurusan</option>
+                                    @foreach($jurusans as $jurusan)
+                                        @if(old('jurusan', $mbkm->jurusan) == $jurusan->id)
+                                            <option value="{{ $jurusan->id }}" selected>{{ $jurusan->name }}</option>
+                                        @endif
+                                    @endforeach
                                 </select>
                                 <small>*note:<i> pilih fakultas terlebih dahulu</i></small>
                                 @error('jurusan')
@@ -74,10 +83,14 @@
                                 <label for="semester" class="form-label">Semester</label>
                                 <select class="form-select @error('semester') is-invalid @enderror" id="semester" name="semester" required>
                                     <option value="" disabled selected>Pilih Semester</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
+                                    @if(old('semester', $mbkm->semester))
+                                            <option value="{{ $mbkm->semester }}" selected>{{ $mbkm->semester }}</option>
+                                        @else
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                    @endif
                                 </select>
                                 @error('semester')
                                     <div class="invalid-feedback">
@@ -90,7 +103,11 @@
                                 <select class="form-select @error('program') is-invalid @enderror" id="program" name="program" required>
                                     <option value="" disabled selected>Pilih Program</option>
                                     @foreach($programs as $program)
-                                        <option value="{{ $program->id }}">{{ $program->name }}</option>
+                                        @if(old('program', $mbkm->program) == $program->id)
+                                            <option value="{{ $program->id }}" selected>{{ $program->name }}</option>
+                                        @else
+                                            <option value="{{ $program->id }}">{{ $program->name }}</option>
+                                        @endif
                                     @endforeach
                                 </select>
                                 @error('program')
@@ -102,7 +119,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="tanggal_mulai" class="form-control-label">Input Tanggal Mulai</label>
-                                    <input class="form-control @error('tanggal_mulai') is-invalid @enderror" id="tanggal_mulai" type="datetime-local" name="tanggal_mulai" required>
+                                    <input class="form-control @error('tanggal_mulai') is-invalid @enderror" id="tanggal_mulai" type="datetime-local" name="tanggal_mulai" value="{{ old('tanggal_mulai', $mbkm->tanggal_mulai) }}" required>
                                     @error('tanggal_mulai')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -113,7 +130,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="tanggal_selesai" class="form-control-label">Input Tanggal Selesai</label>
-                                    <input class="form-control @error('tanggal_selesai') is-invalid @enderror" id="tanggal_selesai" type="datetime-local" name="tanggal_selesai" required>
+                                    <input class="form-control @error('tanggal_selesai') is-invalid @enderror" id="tanggal_selesai" type="datetime-local" name="tanggal_selesai" value="{{ old('tanggal_selesai', $mbkm->tanggal_selesai) }}" required>
                                     @error('tanggal_selesai')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -124,7 +141,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="tempat_program_perusahaan" class="form-control-label">Tempat Program(Perusahaan)</label>
-                                    <input class="form-control @error('tempat_program_perusahaan') is-invalid @enderror" id="tempat_program_perusahaan" type="text" name="tempat_program_perusahaan" placeholder="Tempat Program (Perusahaan)" required>
+                                    <input class="form-control @error('tempat_program_perusahaan') is-invalid @enderror" id="tempat_program_perusahaan" type="text" name="tempat_program_perusahaan" placeholder="Tempat Program (Perusahaan)" value="{{ old('tempat_program_perusahaan', $mbkm->tempat_program_perusahaan) }}"required>
                                     @error('tempat_program_perusahaan')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -135,7 +152,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="lokasi_program" class="form-control-label">Lokasi Program</label>
-                                    <input class="form-control @error('lokasi_program') is-invalid @enderror" id="lokasi_program" type="text" name="lokasi_program" placeholder="Masukan Lokasi Program" required>
+                                    <input class="form-control @error('lokasi_program') is-invalid @enderror" id="lokasi_program" type="text" name="lokasi_program" placeholder="Masukan Lokasi Program" value="{{ old('lokasi_program', $mbkm->lokasi_program) }}" required>
                                     @error('lokasi_program')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -148,8 +165,12 @@
                                     <label for="program_keberapa" class="form-control-label">Pengambilan Program Ke-Berapa</label>
                                     <select class="form-select @error('program_keberapa') is-invalid @enderror" id="program_keberapa" name="program_keberapa" required>
                                         <option value="" disabled selected>Program Ke-</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
+                                        @if(old('program_keberapa', $mbkm->program_keberapa))
+                                            <option value="{{ $mbkm->program_keberapa }}" selected>{{ $mbkm->program_keberapa }}</option>
+                                        @else
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                        @endif
                                     </select>
                                     @error('program_keberapa')
                                         <div class="invalid-feedback">
@@ -163,8 +184,13 @@
                                 <select id="dosen_pembimbing" class="form-select @error('dosen_pembimbing') is-invalid @enderror" name="dosen_pembimbing">
                                     <option value="" disabled selected>Pilih Dosen Pembimbing</option>
                                     @foreach($dosbing as $dosen)
-                                        <option value="{{ $dosen->id }}">{{ $dosen->name }}</option>
+                                        @if(old('dosen_pembimbing', $mbkm->dosen_pembimbing) == $dosen->id)
+                                            <option value="{{ $dosen->id }}" selected>{{ $dosen->name }}</option>
+                                        @else
+                                            <option value="{{ $dosen->id }}">{{ $dosen->name }}</option>
+                                        @endif
                                     @endforeach
+
                                 </select>
                                 <small>*note: <i>bisa dipilih nanti</i></small>
                                 <div id="reset">
@@ -180,7 +206,7 @@
                             </div>
                         </div>
                         <hr class="horizontal dark">
-                        <button type="submit" class="btn btn-primary ms-md-auto me-3 d-flex">Buat Formulir Mbkm</button>      
+                        <button type="submit" class="btn btn-primary ms-md-auto me-3 d-flex">Update Formulir Mbkm</button>      
                     </form>
                 </div>
             </div>
