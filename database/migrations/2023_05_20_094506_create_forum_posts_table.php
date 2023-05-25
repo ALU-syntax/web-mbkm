@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('forum_posts', function (Blueprint $table) {
             $table->id();
-            $table->string('body');
+            $table->text('body');
             $table->string('is_delete');
             $table->string('created_by');
             $table->timestamps();

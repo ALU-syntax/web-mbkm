@@ -88,7 +88,8 @@ Route::post('/dashboard/role', [RoleController::class, 'store'])->middleware('au
 Route::get('/dashboard/role/{id}', [RoleController::class, 'edit'])->middleware('auth');
 Route::post('/dashboard/role/{id}/edit', [RoleController::class, 'update'])->middleware('auth');
 
-
+// Utility Route
+Route::post('/api/fetch-jurusan', [DashboardController::class, 'fetchJurusan']);
 
 
 

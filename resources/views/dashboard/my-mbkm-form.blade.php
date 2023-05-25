@@ -11,7 +11,7 @@
     <div class="col-12">
         <div class="card mb-4">
             <div class="card-header">
-                <h3>Formuli Pendaftaran MBKM Saya</h3>
+                <h3>Formulir Pendaftaran MBKM Saya</h3>
             </div>
 
             <div class="card-body">

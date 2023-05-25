@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Fakultas;
+use App\Models\Jurusan;
+use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -13,7 +16,9 @@ class RegisterController extends Controller
             'title' => 'Buat Akun',
             'title_page' => 'Buat Akun',
             'name' => auth()->user()->name,
-            'active' => 'Buat Akun'
+            'active' => 'Buat Akun',
+            'roles' => Role::all(),
+            'fakultas' => Fakultas::all(),
         ]);
     }
 
@@ -23,7 +28,6 @@ class RegisterController extends Controller
             'email' => 'required|email:dns|unique:users',
             'password' => 'required|min:5|max:255',
             'role' => 'required',
-            'role_kedua' => 'required',
             'fakultas_id' => 'required',
             'jurusan_id' => 'required',
         ]);

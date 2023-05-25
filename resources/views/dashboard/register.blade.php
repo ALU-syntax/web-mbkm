@@ -6,7 +6,7 @@
     {{ session('success') }}
   </div>
 @endif
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <div class="row">
         <div class="col-12">
@@ -58,10 +58,9 @@
                                 <label for="role" class="form-label">Role</label>
                                 <select class="form-select @error('role') is-invalid @enderror" id="role" name="role" required>
                                     <option value="" disabled selected>Pilih Role</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
+                                    @foreach($roles as $role)
+                                        <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                    @endforeach
                                 </select>
                                 @error('role')
                                     <div class="invalid-feedback">
@@ -71,13 +70,13 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="role_kedua" class="form-label">Role Kedua</label>
-                                <select class="form-select @error('role_kedua') is-invalid @enderror" id="role_kedua" name="role_kedua" required>
+                                <select class="form-select @error('role_kedua') is-invalid @enderror" id="role_kedua" name="role_kedua">
                                     <option value="" disabled selected>Pilih Role Kedua</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
+                                    @foreach($roles as $role)
+                                        <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                    @endforeach
                                 </select>
+                                <small>*note:<i> optional</i></small>
                                 @error('role_kedua')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -88,8 +87,9 @@
                                 <label for="fakultas_id" class="form-label">Fakultas</label>
                                 <select class="form-select @error('fakultas_id') is-invalid @enderror" id="fakultas_id" name="fakultas_id" required>
                                     <option value="" disabled selected>Pilih Fakultas</option>
-                                    <option value="Teknik">Fakultas Teknik</option>
-                                    <option value="Teknik">Fakultas Ilmu Budaya</option>
+                                    @foreach($fakultas as $data)
+                                        <option value="{{ $data->id }}">{{ $data->name }}</option>
+                                    @endforeach
                                 </select>
                                 @error('fakultas_id')
                                     <div class="invalid-feedback">
@@ -101,10 +101,8 @@
                                 <label for="jurusan_id" class="form-label">Jurusan</label>
                                 <select class="form-select @error('jurusan_id') is-invalid @enderror" id="jurusan_id" name="jurusan_id" required>
                                     <option value="" disabled selected>Pilih Jurusan</option>
-                                    <option value="1">Teknik Elektro</jurusann>
-                                    <option value="2">Teknik Komputer</jurusann>
-                                    <option value="3">Teknik Bimodik</jurusann>
                                 </select>
+                                <small>*note:<i> pilih fakultas terlebih dahulu</i></small>
                                 @error('jurusan_id')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -119,4 +117,31 @@
             </div>
         </div>
     </div>
+
+    <script>
+        $(document).ready(function () {
+           
+           $('#fakultas_id').on('change', function () {
+               var idFakultas = this.value;
+               $("#jurusan_id").html('');
+               $.ajax({
+                   url: "{{url('/api/fetch-jurusan')}}",
+                   type: "POST",
+                   data: {
+                       fakultas_id: idFakultas,
+                       _token: '{{csrf_token()}}'
+                   },
+                   dataType: 'json',
+                   success: function (result) {
+                       $('#jurusan_id').html('<option value="" disabled selected>Pilih Jurusan</option>');
+                       $.each(result.jurusan, function (key, value) {
+                           $("#jurusan_id").append('<option value="' + value
+                               .id + '">' + value.name + '</option>');
+                       });
+                       // $('#city-dropdown').html('<option value="">-- Select City --</option>');
+                   }
+               });
+           });
+       });
+   </script>
 @endsection

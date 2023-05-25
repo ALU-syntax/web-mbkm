@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Fakultas;
+use App\Models\Jurusan;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
+
 class DashboardController extends Controller
 {
     // public function index(){
@@ -14,12 +18,23 @@ class DashboardController extends Controller
     // }
 
 
+    public function fetchJurusan(Request $request){
+        $data['jurusan'] = Jurusan::where("fakultas_id", $request->fakultas_id)
+                            ->get(["name", "id"]);
+
+        return response()->json($data);
+    }
+
     public function pendaftaranMBKM(){
+        
         return view('dashboard.pendaftaran-mbkm', [
             'title' => 'Pendaftaran MBKM',
             'title_page' => 'Pendaftaran MBKM',
             'active' => 'Pendaftaran MBKM',
-            'name' => auth()->user()->name
+            'name' => auth()->user()->name,
+            'fakultas' => Fakultas::all(),
+            'dosbing' => User::where('role', '3')->orWhere('role_kedua', '3')->get()
+
         ]);
     }
 

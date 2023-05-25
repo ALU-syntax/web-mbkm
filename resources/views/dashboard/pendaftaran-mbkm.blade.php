@@ -6,6 +6,7 @@
     {{ session('success') }}
   </div>
 @endif
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
     <div class="row">
@@ -47,8 +48,9 @@
                                 <label for="fakultas" class="form-label">Fakultas</label>
                                 <select class="form-select @error('fakultas') is-invalid @enderror" id="fakultas" name="fakultas" required>
                                     <option value="" disabled selected>Pilih Fakultas</option>
-                                    <option value="Teknik">Fakultas Teknik</option>
-                                    <option value="Teknik">Fakultas Ilmu Budaya</option>
+                                    @foreach($fakultas as $data)
+                                        <option value="{{ $data->id }}">{{ $data->name }}</option>
+                                    @endforeach
                                 </select>
                                 @error('fakultas')
                                     <div class="invalid-feedback">
@@ -58,12 +60,10 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="jurusan" class="form-label">Jurusan</label>
-                                <select class="form-select @error('fakultas') is-invalid @enderror" id="jurusan" name="jurusan" required>
+                                <select class="form-select @error('jurusan') is-invalid @enderror" id="jurusan" name="jurusan" required>
                                     <option value="" disabled selected>Pilih Jurusan</option>
-                                    <option value="1">Teknik Elektro</jurusann>
-                                    <option value="2">Teknik Komputer</jurusann>
-                                    <option value="3">Teknik Bimodik</jurusann>
                                 </select>
+                                <small>*note:<i> pilih fakultas terlebih dahulu</i></small>
                                 @error('jurusan')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -145,7 +145,11 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="program_keberapa" class="form-control-label">Pengambilan Program Ke-Berapa</label>
-                                    <input class="form-control @error('program_keberapa') is-invalid @enderror" id="program_keberapa" type="text" name="program_keberapa" placeholder="Program Ke-" required>
+                                    <select class="form-select @error('program_keberapa') is-invalid @enderror" id="program_keberapa" name="program_keberapa" required>
+                                        <option value="" disabled selected>Program Ke-</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                    </select>
                                     @error('program_keberapa')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -155,14 +159,17 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="dosen_pembimbing" class="form-label">Dosen Pembimbing</label>
-                                <select id="dosen_pembimbing" class="form-select @error('dosen_pembimbing') is-invalid @enderror" name="dosen_pembimbing" required>
-                                    <option value="0" >Pilih Dosen Pembimbing</option>
-                                    <option value="1">Bambang</jurusann>
-                                    <option value="2" selected="selected">Lisa</jurusann>
-                                    <option value="3">Joko</jurusann>
+                                <select id="dosen_pembimbing" class="form-select @error('dosen_pembimbing') is-invalid @enderror" name="dosen_pembimbing">
+                                    <option value="" disabled selected>Pilih Dosen Pembimbing</option>
+                                    @foreach($dosbing as $dosen)
+                                        <option value="{{ $dosen->id }}">{{ $dosen->name }}</option>
+                                    @endforeach
                                 </select>
+                                <small>*note: <i>bisa dipilih nanti</i></small>
                                 <div id="reset">
-                                    <span class="badge badge-pill badge-md bg-gradient-warning">Reset</span>
+                                    <span id="reset-btn" class="badge badge-pill badge-md bg-gradient-warning">Reset</span>
+                                    {{-- <button type="reset" id="reset-btn" class="btn btn-secondary m-btn m-btn--air m-btn--custom">Reset</button> --}}
+                                    {{-- <button  id="reset-btn" class="badge badge-pill badge-md bg-gradient-warning m-btn--air m-btn--custom">Reset</button> --}}
                                 </div>
                                 @error('dosen_pembimbing')
                                     <div class="invalid-feedback">
@@ -179,13 +186,41 @@
         </div>
     </div>
 
-    <script>
+
+    {{-- <button type="reset" id="reset-btn" class="btn btn-secondary m-btn m-btn--air m-btn--custom"> --}}
+
         
+    <script>
+        $( "#reset-btn" ).click(function() {
+            // $('#m_select2_3').val('').change();
+            $('#dosen_pembimbing').val('').change();
+        });
+
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    $("#reset").on("click", function () {
-            $('#dosen_pembimbing option').prop('selected', function() {
-                return this.defaultSelected;
+
+    <script>
+         $(document).ready(function () {
+            
+            $('#fakultas').on('change', function () {
+                var idFakultas = this.value;
+                $("#jurusan").html('');
+                $.ajax({
+                    url: "{{url('/api/fetch-jurusan')}}",
+                    type: "POST",
+                    data: {
+                        fakultas_id: idFakultas,
+                        _token: '{{csrf_token()}}'
+                    },
+                    dataType: 'json',
+                    success: function (result) {
+                        $('#jurusan').html('<option value="" disabled selected>Pilih Jurusan</option>');
+                        $.each(result.jurusan, function (key, value) {
+                            $("#jurusan").append('<option value="' + value
+                                .id + '">' + value.name + '</option>');
+                        });
+                        // $('#city-dropdown').html('<option value="">-- Select City --</option>');
+                    }
+                });
             });
         });
     </script>
