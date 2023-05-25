@@ -89,8 +89,9 @@
                                 <label for="program" class="form-label">Program</label>
                                 <select class="form-select @error('program') is-invalid @enderror" id="program" name="program" required>
                                     <option value="" disabled selected>Pilih Program</option>
-                                    <option value="1">Kampus Merdeka</option>
-                                    <option value="2">Bangkit</option>
+                                    @foreach($programs as $program)
+                                        <option value="{{ $program->id }}">{{ $program->name }}</option>
+                                    @endforeach
                                 </select>
                                 @error('program')
                                     <div class="invalid-feedback">

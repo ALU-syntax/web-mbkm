@@ -39,37 +39,37 @@
                       <tbody>
                         @foreach($mbkms as $mbkm)
                             <tr>
-                                <td class="align-middle text-center text-sm>
+                                <td class="align-middle text-center text-sm">
                                     <p class="text-xs font-weight-bold mb-0">{{ $mbkm->name }}</p>
                                 </td>
-                                <td class="align-middle text-center text-sm>
+                                <td class="align-middle text-center text-sm">
                                     <p class="text-xs font-weight-bold mb-0">{{ $mbkm->nim }}</p>
                                 </td>
-                                <td class="align-middle text-center text-sm>
-                                    <p class="text-xs font-weight-bold mb-0">{{ $mbkm->fakultas }}</p>
+                                <td class="align-middle text-center text-sm">
+                                    <p class="text-xs font-weight-bold mb-0">{{ $mbkm->dataFakultas->name }}</p>
                                 </td>
-                                <td class="align-middle text-center text-sm>
-                                    <p class="text-xs font-weight-bold mb-0">{{ $mbkm->jurusan }}</p>
+                                <td class="align-middle text-center text-sm">
+                                    <p class="text-xs font-weight-bold mb-0">{{ $mbkm->dataJurusan->name }}</p>
                                 </td>
-                                <td class="align-middle text-center text-sm>
+                                <td class="align-middle text-center text-sm">
                                     <p class="text-xs font-weight-bold mb-0">{{ $mbkm->semester }}</p>
                                 </td>
-                                <td class="align-middle text-center text-sm>
-                                    <p class="text-xs font-weight-bold mb-0">{{ $mbkm->program }}</p>
+                                <td class="align-middle text-center text-sm">
+                                    <p class="text-xs font-weight-bold mb-0">{{ $mbkm->dataProgram->name }}</p>
                                 </td>
-                                <td class="align-middle text-center text-sm>
+                                <td class="align-middle text-center text-sm">
                                     <p class="text-xs font-weight-bold mb-0">{{ $mbkm->tanggal_mulai }}</p>
                                 </td>
-                                <td class="align-middle text-center text-sm>
+                                <td class="align-middle text-center text-sm">
                                     <p class="text-xs font-weight-bold mb-0">{{ $mbkm->tanggal_selesai }}</p>
                                 </td>
-                                <td class="align-middle text-center text-sm>
+                                <td class="align-middle text-center text-sm">
                                     <p class="text-xs font-weight-bold mb-0">{{ $mbkm->tempat_program_perusahaan }}</p>
                                 </td>
-                                <td class="align-middle text-center text-sm>
+                                <td class="align-middle text-center text-sm">
                                     <p class="text-xs font-weight-bold mb-0">{{ $mbkm->lokasi_program }}</p>
                                 </td>
-                                <td class="align-middle text-center text-sm>
+                                <td class="align-middle text-center text-sm">
                                     <p class="text-xs font-weight-bold mb-0">{{ $mbkm->program_keberapa }}</p>
                                 </td>
                                 <td class="align-middle text-center text-sm" >
@@ -84,9 +84,8 @@
                                     @endif
                                 </td>
                                 
-
                                 <td class="align-middle text-center text-sm">
-                                    <span class="badge badge-sm bg-gradient-success">Accepted</span>
+                                    <p class="text-xs font-weight-bold mb-0">{{ $mbkm->created_at }}</p>
                                 </td>
                             </tr>                        
                         @endforeach

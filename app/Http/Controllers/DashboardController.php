@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Fakultas;
 use App\Models\Jurusan;
+use App\Models\ProgramMbkm;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
@@ -20,6 +21,7 @@ class DashboardController extends Controller
 
     public function fetchJurusan(Request $request){
         $data['jurusan'] = Jurusan::where("fakultas_id", $request->fakultas_id)
+                            ->where('status', '=' , 'Aktif')
                             ->get(["name", "id"]);
 
         return response()->json($data);
@@ -32,7 +34,8 @@ class DashboardController extends Controller
             'title_page' => 'Pendaftaran MBKM',
             'active' => 'Pendaftaran MBKM',
             'name' => auth()->user()->name,
-            'fakultas' => Fakultas::all(),
+            'fakultas' => Fakultas::where('status', 'Aktif')->get(),
+            'programs' => ProgramMbkm::where('status', 'Aktif')->get(),
             'dosbing' => User::where('role', '3')->orWhere('role_kedua', '3')->get()
 
         ]);

@@ -3,10 +3,58 @@
 namespace App\Http\Controllers;
 
 use App\Models\Mbkm;
+use App\Models\ProgramMbkm;
 use Illuminate\Http\Request;
 
 class MbkmController extends Controller
 {
+
+    public function programIndex(){
+        return view('dashboard.program-mbkm', [
+            'title' => 'Program MBKM',
+            'title_page' => 'Program MBKM',
+            'active' => 'Program Mbkm',
+            'name' => auth()->user()->name,
+            'programMbkm' => ProgramMbkm::all()
+        ]);
+    }
+
+    public function create(){
+        return view('dashboard.create-program-mbkm', [
+            'title' => 'Create',
+            'title_page' => 'Program MBKM / Create',
+            'active' => 'Program Mbkm',
+            'name' => auth()->user()->name,
+        ]);
+    }
+
+    public function storeProgram(Request $request){
+        $validatedData = $request->validate([
+            'name' => 'required|unique:program_mbkms',
+            'status' => 'required'
+        ]);
+        ProgramMbkm::create($validatedData);
+
+        return redirect('/dashboard/program-mbkm')->with('success', 'Program MBKM Berhasil Dibuat!');
+    }
+
+    public function edit($id){
+        return view('dashboard.edit-program-mbkm',[
+            'title' => 'Edit',
+            'title_page' => 'Program Mbkm / Edit',
+            'active' => 'Program Mbkm',
+            'name' => auth()->user()->name,
+            'program' => ProgramMbkm::find($id)
+        ]);
+    }
+
+    public function update(Request $request, $program){
+        $mbkm = ProgramMbkm::find($program);
+
+        $mbkm->update($request->all());
+        return redirect('/dashboard/program-mbkm')->with('success', 'Data Program Mbkm has been updated!');
+    }
+
     public function store(Request $request){
         $validatedData = $request->validate([
             'name' => 'required|max:255',

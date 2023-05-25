@@ -93,6 +93,14 @@
             <span class="nav-link-text ms-1">Role</span>
           </a>
         </li>        
+        <li class="nav-item">
+          <a class="nav-link @if($active == 'Program Mbkm') active @endif" href="/dashboard/program-mbkm">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-square-pin text-secondary text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Program Mbkm</span>
+          </a>
+        </li>        
 
     </ul>
   </div>
