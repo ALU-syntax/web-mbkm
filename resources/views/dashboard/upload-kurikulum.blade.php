@@ -9,26 +9,32 @@
             </div>
 
             <div class="card-body">
-                <form >
+                <form action="/dashboard/upload-kurikulum" method="post" enctype="multipart/form-data">
                     @csrf
-                    <div class="row">
-                        <div class="mb-3">
+                    <div class="row mb-3">
+                        <div class="">
                             <label for="dokumen" class="form-label">Post Dokumen</label>
-                            <input class="form-control" type="file" id="dokumen" name="dokumen">  
+                            <input class="form-control @error('dokumen') is-invalid @enderror" type="file" id="dokumen" name="dokumen">  
+                            @error('dokumen')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
+                        <small>*note: <i>ukuran maximal file 2MB</i></small>
                     </div>
                     <div class="row" id="field-matakuliah">
                         <div class="row" id="row-matakuliah" >
                             <div class="col-md-5">
                                 <div class="form-group">
                                     <label for="matakuliah" class="form-control-label">Matakuliah</label>
-                                    <input class="form-control" type="text" name="inputs[0]['matakuliah']" placeholder="Masukan mata kuliah">
+                                    <input class="form-control" type="text" name="inputs[0][matakuliah]" placeholder="Masukan mata kuliah">
                                 </div>
                             </div>
                             <div class="col-md-5">
                                 <div class="form-group">
                                     <label for="sks" class="form-control-label">SKS</label>
-                                    <input class="form-control" type="text" name="inputs[0]['sks']" placeholder="Masukan jumlah sks">
+                                    <input class="form-control" type="text" name="inputs[0][sks]" placeholder="Masukan jumlah sks">
                                 </div>
                             </div>
                             <div class="col-md-2 mt-4">
@@ -41,23 +47,23 @@
                         </div>
                     </div>
                     <hr class="horizontal dark">
-                </form>
-                <div class="row  mt-2">
-                    <div class="col-12">
-                      {{-- <a class="mb-2 tambahsks btn btn-secondary text-white btn-xs" id="album">
-                        <div class="icon-plus"></div>
-                        Tambah Mata Kuliah
-                      </a> --}}
-                      <button id="add" type="button" class="btn btn-outline-primary"> Tambah mata kuliah</button>
+                
+                    <div class="row  mt-2">
+                        <div class="col-12">
+                        {{-- <a class="mb-2 tambahsks btn btn-secondary text-white btn-xs" id="album">
+                            <div class="icon-plus"></div>
+                            Tambah Mata Kuliah
+                        </a> --}}
+                        <button id="add" type="button" class="btn btn-outline-primary"> Tambah mata kuliah</button>
                     </div>
-                </div>
+                    <div class="d-flex align-items-center ">
+                        <div class="ms-md-auto d-flex">
+                          <Button class="btn btn-primary align-items-center d-flex m-4 ">Submit</Button>
+                        </div>
+                    </div>
+                </form>
             </div>
-        </div>
-        <div class="d-flex align-items-center ">
-            <div class="ms-md-auto d-flex">
-              <Button class="btn btn-primary align-items-center d-flex m-4 ">Submit</Button>
-            </div>
-        </div>
+        </div>    
     </div>
 </div>
 
@@ -71,13 +77,13 @@
                 <div class="col-md-5">
                     <div class="form-group">
                         <label for="matakuliah" class="form-control-label">Matakuliah</label>
-                        <input class="form-control" type="text" name="inputs[`+i+`]['matakuliah']" placeholder="Masukan mata kuliah">
+                        <input class="form-control" type="text" name="inputs[`+i+`][matakuliah]" placeholder="Masukan mata kuliah">
                     </div>
                 </div>
                 <div class="col-md-5">
                     <div class="form-group">
                         <label for="sks" class="form-control-label">SKS</label>
-                        <input class="form-control" type="text" name="inputs[0]['sks']" placeholder="Masukan jumlah sks">
+                        <input class="form-control" type="text" name="inputs[`+i+`][sks]" placeholder="Masukan jumlah sks">
                     </div>
                 </div>
                 <div class="col-md-2 mt-4">

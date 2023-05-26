@@ -7,6 +7,7 @@ use App\Http\Controllers\ForumController;
 use App\Http\Controllers\LogbookController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MbkmController;
+use App\Http\Controllers\KurikulumController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\FakultasController;
 use App\Http\Controllers\JurusanController;
@@ -52,9 +53,10 @@ Route::get('/dashboard/pendaftaran-mbkm/{id}', [MbkmController::class, 'editMyFo
 Route::post('/dashboard/pendaftaran-mbkm/create', [MbkmController::class, 'store'])->middleware('auth');
 Route::post('/dashboard/pendaftaran-mbkm/{id}/edit', [MbkmController::class, 'updateMyForm'])->middleware('auth');
 
-
-
+// Upload Kurikulum Route
 Route::get('/dashboard/upload-kurikulum', [DashboardController::class, 'uploadKurikulum'])->middleware('auth');
+Route::post('/dashboard/upload-kurikulum', [KurikulumController::class, 'store'])->middleware('auth');
+
 Route::get('/dashboard/hasil-konversi', [DashboardController::class, 'hasilKonversi'])->middleware('auth');
 
 // Route::get('/dashboard/logbook', [DashboardController::class, 'loogbook']);
