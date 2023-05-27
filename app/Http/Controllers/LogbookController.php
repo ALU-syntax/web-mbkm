@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-// use App\Models\Logbook;
+use App\Models\Logbook;
 use Illuminate\Http\Request;
 
 class LogbookController extends Controller
@@ -16,7 +16,9 @@ class LogbookController extends Controller
             'title' => 'Logbook',
             'title_page' => 'Logbook',
             'active' => 'Logbook',
-            'name' => auth()->user()->name
+            'name' => auth()->user()->name,
+            'logbooks' => Logbook::with('listMbkm')->where('user', auth()->user()->id)->get()
+            // 'posts' => ForumPost::with('author')->where('created_by', auth()->user()->id)->where('is_delete', '0')->latest('updated_at')->get()
         ]);
     }
 
@@ -71,5 +73,14 @@ class LogbookController extends Controller
     public function destroy()
     {
         //
+    }
+
+    public function myLogbook(){
+        return view('dashboard.my-logbook',[
+            'title' => 'Create',
+            'title_page' => 'Logbook / Create',
+            'name' => auth()->user()->name,
+            'active' => 'Logbook'
+        ]);
     }
 }

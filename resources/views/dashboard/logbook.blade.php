@@ -17,27 +17,32 @@
             <div class="card-body">
 
               {{-- @if($posts->count()) --}}
-              {{-- @foreach($posts as $post) --}}
+              @foreach($logbooks as $logbook)
               <div class="row mt-3">
                 <div class="d-flex align-items-center">
-                  <h4>Nama Perusahaan</h4>
-                  <small class="ms-2 m-0">Program</small>
+                  <h4>{{ $logbook->listMbkm['tempat_program_perusahaan'] }}</h4>
+                  <small class="ms-2 m-0">{{ $logbook->listMbkm->dataProgram['name'] }}</small>
                   <div class="ms-md-auto">
-                    <p>tanggal mulai - tanggal selesai</p>
+                    <p>Tanggal Kegiatan: <b>{{ $logbook->listMbkm->tanggal_mulai }}</b> - <b>{{ $logbook->listMbkm->tanggal_selesai }}</b> </p>
                   </div>
                 </div>
-                <small class="mt-0">Program Ke : </small>
-                <small class="mt-0">Dosen Pembimbing</small>
+                <small class="mt-0">Program Ke : {{ $logbook->listMbkm->program_keberapa }}</small>
+                @if($logbook->listMbkm->dosen_pembimbing != 0)
+                  <small class="mt-0">Dosen Pembimbing: {{ $logbook->listMbkm->listUser->name }}</small>
+                @else
+                  <small class="mt-0">Dosen Pembimbing: Belum Ada</small>
+                @endif
+                
               </div>
               <div class="row mt-3">
-                <p>Alamat</p>
+                <p>{{ $logbook->listMbkm->lokasi_program }}</p>
                 <div class="d-flex">
-                   {{-- <div class="btn btn-info me-2">Share</div>   --}}
-                   <div class="btn btn-info">Detail</div>
+                   {{-- <div class="btn btn-info">Detail</div> --}}
+                   <a class="btn btn-info" href="/dashboard/logbook/detail">Detail</a>
                 </div>
               </div>
               <hr class="horizontal dark mt-0">
-              {{-- @endforeach   --}}
+              @endforeach  
 
               {{-- @else
                 <h3>Belum Ada Logbook</h3>

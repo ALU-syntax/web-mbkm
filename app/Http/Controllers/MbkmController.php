@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Mbkm;
-use App\Models\Fakultas;
-use App\Models\Jurusan;
 use App\Models\User;
+use App\Models\Jurusan;
+use App\Models\Logbook;
+use App\Models\Fakultas;
 use App\Models\ProgramMbkm;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MbkmController extends Controller
 {
@@ -74,8 +76,22 @@ class MbkmController extends Controller
         ]);
 
         $validatedData['user'] = auth()->user()->id;
+        $validatedData['dosen_pembimbing'] = $request['dosen_pembimbing'];
 
         Mbkm::create($validatedData);
+
+        $lastIdMbkm = DB::table('mbkms')
+                            ->select('id')
+                            ->where('user', '=', auth()->user()->id)
+                            ->orderByDesc('id')
+                            ->limit(1)
+                            ->get();
+        
+        Logbook::create([
+            'name' => auth()->user()->name,
+            'mbkm' => $lastIdMbkm[0]->id,
+            'user' => auth()->user()->id
+        ]);
 
         return redirect('/dashboard/informasi-mbkm')->with('success', 'New Data Mbkm has been added!');
     }
@@ -91,6 +107,10 @@ class MbkmController extends Controller
     }
 
     public function editMyForm($mbkm){
+        if($mbkm->author->id !== auth()->user()->id) {
+            abort(403);
+       }
+
         return view('dashboard.edit-my-mbkm-form',[
             'title' => 'Edit',
             'title_page' => 'Informasi Mbkm / Form Mbkm Saya / Edit',
@@ -105,6 +125,10 @@ class MbkmController extends Controller
     }
 
     public function updateMyForm(Request $request, $mbkm){
+
+        if($mbkm->author->id !== auth()->user()->id) {
+            abort(403);
+       }
 
         $form = Mbkm::find($mbkm);
 

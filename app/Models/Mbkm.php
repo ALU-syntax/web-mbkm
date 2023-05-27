@@ -22,4 +22,12 @@ class Mbkm extends Model
     public function dataProgram(){
         return $this->belongsTo(ProgramMbkm::class, 'program');
     }
+
+    public function mbkms(){
+        return $this->hasMany(Logbook::class);
+    }
+
+    public function listUser(){
+        return $this->belongsTo(User::class, 'dosen_pembimbing');
+    }
 }

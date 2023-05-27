@@ -22,7 +22,7 @@ class ForumController extends Controller
             'title_page' => 'Forum',
             'active' => 'Forum',
             'name' => auth()->user()->name,
-            'posts' => ForumPost::with('author')->where('created_by', auth()->user()->id)->where('is_delete', '0')->latest('updated_at')->get()
+            'posts' => ForumPost::with('author')->where('is_delete', '0')->latest('updated_at')->get()
         ]);
     }
 
@@ -123,6 +123,10 @@ class ForumController extends Controller
     }
 
     public function deleted(Request $request, $forum){
+
+        if($forum->author->id !== auth()->user()->id) {
+            abort(403);
+       }
 
         $postingan = ForumPost::find($forum);
         $postingan['is_delete'] = '1';

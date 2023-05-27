@@ -10,4 +10,9 @@ class Logbook extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+
+    public function listMbkm(){
+        return $this->belongsTo(Mbkm::class, 'mbkm');
+    }
+
 }

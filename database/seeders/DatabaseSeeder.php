@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Fakultas;
 use App\Models\Role;
 use App\Models\Jurusan;
+use App\Models\ProgramMbkm;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -38,6 +39,16 @@ class DatabaseSeeder extends Seeder
             'email' => 'woodiechek@gmail.com',
             'password' => bcrypt('woodiechek911'),
             'role' => '2',
+            'fakultas_id' => '1',
+            'jurusan_id' => '1',
+            'status' => '1' 
+        ]);
+
+        User::create([
+            'name' => 'Professor Albert Einstein',
+            'email' => 'einstein@gmail.com',
+            'password' => bcrypt('123456'),
+            'role' => '3',
             'fakultas_id' => '1',
             'jurusan_id' => '1',
             'status' => '1' 
@@ -91,6 +102,16 @@ class DatabaseSeeder extends Seeder
         Jurusan::create([
             'name' => 'Prodi Teknik Komputer dan Jaringan (TKJ)',
             'fakultas_id' => '1',
+            'status' => 'Aktif'
+        ]);
+
+        ProgramMbkm::create([
+            'name' => 'Bangkit',
+            'status' => 'Aktif'
+        ]);
+
+        ProgramMbkm::create([
+            'name' => 'Kampus Merdeka',
             'status' => 'Aktif'
         ]);
         

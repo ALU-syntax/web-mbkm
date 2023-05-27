@@ -77,7 +77,7 @@
                                 </td>
                                 <td class="align-middle text-center text-sm">
                                     <td>
-                                      <a href="/dashboard/pendaftaran-mbkm/{{ $mbkm->id }}" ><span class="badge badge-primary"></span><i class="fa fa-regular fa-pen" style="color: #fecb3e;"></i></a>
+                                      <a href="/dashboard/informasi-mbkm/{{ $mbkm->id }}" ><span class="badge badge-primary"></span><i class="fa fa-regular fa-pen" style="color: #fecb3e;"></i></a>
                                       {{-- <form action="/dashboard/fakultas//delete" method="post" class="d-inline">
                                         @csrf
                                         <button class="border-0 bg-transparent" onclick="return confirm('Data Jurusan dari Fakultas yang bersangkutan akan ikut terhapus secara permanen, Apakah kamu yakin?')">

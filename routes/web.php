@@ -59,9 +59,10 @@ Route::post('/dashboard/upload-kurikulum', [KurikulumController::class, 'store']
 
 Route::get('/dashboard/hasil-konversi', [DashboardController::class, 'hasilKonversi'])->middleware('auth');
 
-// Route::get('/dashboard/logbook', [DashboardController::class, 'loogbook']);
+// Logbook Route
+Route::get('/dashboard/logbook/detail', [LogbookController::class, 'myLogbook'])->middleware('auth');
 Route::resource('/dashboard/logbook', LogbookController::class)->middleware('auth');
-// Route::get('/dashboard/logbook/create', [DashboardController::class, 'createLogbook']);
+Route::get('/dashboard/logbook/create', [DashboardController::class, 'createLogbook']);
 
 Route::get('/dashboard/laporan', [DashboardController::class, 'laporan'])->middleware('auth');
 

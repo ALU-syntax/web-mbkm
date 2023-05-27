@@ -21,9 +21,13 @@ class KurikulumController extends Controller
 
         $lastIdKurikulum = DB::table('kurikulums')
                             ->select('id')
+                            ->where('owner', '=', auth()->user()->id)
                             ->orderByDesc('id')
                             ->limit(1)
                             ->get();
+        
+        
+        // dd($lastIdKurikulum[0]->id);
 
         $request->validate([
             'inputs.*.mata_kuliah' => 'required',
