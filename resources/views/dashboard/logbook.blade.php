@@ -15,109 +15,34 @@
                 </div>
             </div>
             <div class="card-body">
-                <div class="row">
-                    <div class="col-md-2 mb-3">
-                        <div class="card" >
-                            <div class="card-body">
-                              <p class="card-text">11 Agustus 1045 20:10</p>
 
-                              <p>
-                                <small class="text-body-secondary">
-                                    By. <a class="text-decoration-none" href="/posts?author="> 
-                                        Ardian
-                                    </a>
-                                </small>
-                              </p>
-                              <a href="/posts/" class="btn btn-primary">Read more</a>
-                            </div>
-                          </div>
-                    </div>
-    
-                    <div class="col-md-2 mb-3">
-                        <div class="card" >
-                            <div class="card-body">
-                              <p class="card-text">12 Agustus 1045 20:10</p>
-
-                              <p>
-                                <small class="text-body-secondary">
-                                    By. <a class="text-decoration-none" href="/posts?author="> 
-                                        Ardian
-                                    </a>
-                                </small>
-                              </p>
-                              <a href="/posts/" class="btn btn-primary">Read more</a>
-                            </div>
-                          </div>
-                    </div>
-    
-                    <div class="col-md-2 mb-3">
-                        <div class="card" >
-                            <div class="card-body">
-                              <p class="card-text">13 Agustus 1045 20:10</p>
-
-                              <p>
-                                <small class="text-body-secondary">
-                                    By. <a class="text-decoration-none" href="/posts?author="> 
-                                        Ardian
-                                    </a>
-                                </small>
-                              </p>
-                              <a href="/posts/" class="btn btn-primary">Read more</a>
-                            </div>
-                          </div>
-                    </div>
-    
-                    <div class="col-md-2 mb-3">
-                        <div class="card" >
-                            <div class="card-body">
-                              <p class="card-text">14 Agustus 1045 20:10</p>
-
-                              <p>
-                                <small class="text-body-secondary">
-                                    By. <a class="text-decoration-none" href="/posts?author="> 
-                                        Ardian
-                                    </a>
-                                </small>
-                              </p>
-                              <a href="/posts/" class="btn btn-primary">Read more</a>
-                            </div>
-                          </div>
-                    </div>
-
-                    <div class="col-md-2 mb-3">
-                        <div class="card" >
-                            <div class="card-body">
-                              <p class="card-text">15 Agustus 1045 20:10</p>
-
-                              <p>
-                                <small class="text-body-secondary">
-                                    By. <a class="text-decoration-none" href="/posts?author="> 
-                                        Ardian
-                                    </a>
-                                </small>
-                              </p>
-                              <a href="/posts/" class="btn btn-primary">Read more</a>
-                            </div>
-                          </div>
-                    </div>
-
-                    <div class="col-md-2 mb-3">
-                        <div class="card" >
-                            <div class="card-body">
-                              <p class="card-text">16 Agustus 1045 20:10</p>
-
-                              <p>
-                                <small class="text-body-secondary">
-                                    By. <a class="text-decoration-none" href="/posts?author="> 
-                                        Ardian
-                                    </a>
-                                </small>
-                              </p>
-                              <a href="/posts/" class="btn btn-primary">Read more</a>
-                            </div>
-                          </div>
-                    </div>
+              {{-- @if($posts->count()) --}}
+              {{-- @foreach($posts as $post) --}}
+              <div class="row mt-3">
+                <div class="d-flex align-items-center">
+                  <h4>Nama Perusahaan</h4>
+                  <small class="ms-2 m-0">Program</small>
+                  <div class="ms-md-auto">
+                    <p>tanggal mulai - tanggal selesai</p>
+                  </div>
                 </div>
+                <small class="mt-0">Program Ke : </small>
+                <small class="mt-0">Dosen Pembimbing</small>
+              </div>
+              <div class="row mt-3">
+                <p>Alamat</p>
+                <div class="d-flex">
+                   {{-- <div class="btn btn-info me-2">Share</div>   --}}
+                   <div class="btn btn-info">Detail</div>
+                </div>
+              </div>
+              <hr class="horizontal dark mt-0">
+              {{-- @endforeach   --}}
+
+              {{-- @else
+                <h3>Belum Ada Logbook</h3>
+                <hr class="horizontal dark mt-0">
+              @endif --}}
           </div>
         </div>
       </div>    

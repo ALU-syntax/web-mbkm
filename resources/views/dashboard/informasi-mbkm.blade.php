@@ -15,11 +15,11 @@
                 <div class="card-header pb-0">
                     <div class="ms-md-auto d-flex">
                         <h4>Input Informasi MBKM</h4>
-                        <a href="/dashboard/pendaftaran-mbkm/personal" class="btn btn-primary d-flex ms-md-auto ms-3">Formulir MBKM Saya</a>
+                        <a href="/dashboard/informasi-mbkm/personal" class="btn btn-primary d-flex ms-md-auto ms-3">Formulir MBKM Saya</a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="/dashboard/pendaftaran-mbkm/create" method="post">
+                    <form action="/dashboard/informasi-mbkm/create" method="post">
                         @csrf
                         <div class="row">   
                             <div class="col-md-6">

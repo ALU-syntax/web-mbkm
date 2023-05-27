@@ -77,14 +77,14 @@ class MbkmController extends Controller
 
         Mbkm::create($validatedData);
 
-        return redirect('/dashboard/pendaftaran-mbkm')->with('success', 'New Data Mbkm has been added!');
+        return redirect('/dashboard/informasi-mbkm')->with('success', 'New Data Mbkm has been added!');
     }
 
     public function myForm(){
         return view('dashboard.my-mbkm-form',[
             'title' => 'My Mbkm Form',
-            'title_page' => 'Pendaftaran-Mbkm / Form Mbkm Saya',
-            'active' => 'Pendaftaran MBKM',
+            'title_page' => 'Informasi Mbkm / Form Mbkm Saya',
+            'active' => 'Informasi MBKM',
             'name' => auth()->user()->name,
             'mbkms' => Mbkm::where('user', auth()->user()->id)->get()
         ]);
@@ -93,8 +93,8 @@ class MbkmController extends Controller
     public function editMyForm($mbkm){
         return view('dashboard.edit-my-mbkm-form',[
             'title' => 'Edit',
-            'title_page' => 'Pendaftaran Mbkm / Form Mbkm Saya / Edit',
-            'active' => 'Pendaftaran MBKM',
+            'title_page' => 'Informasi Mbkm / Form Mbkm Saya / Edit',
+            'active' => 'Informasi MBKM',
             'name' => auth()->user()->name,
             'mbkm' => Mbkm::find($mbkm),
             'fakultas' => Fakultas::where('status', 'Aktif')->get(),
@@ -123,6 +123,6 @@ class MbkmController extends Controller
         ];
 
         $form->update($request->validate($rules));
-        return redirect('/dashboard/pendaftaran-mbkm/personal')->with('success', 'Data Mbkm has been updated!');
+        return redirect('/dashboard/informasi-mbkm/personal')->with('success', 'Data Mbkm has been updated!');
     }
 }

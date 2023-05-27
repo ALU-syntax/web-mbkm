@@ -29,10 +29,10 @@ class DashboardController extends Controller
 
     public function pendaftaranMBKM(){
         
-        return view('dashboard.pendaftaran-mbkm', [
+        return view('dashboard.informasi-mbkm', [
             'title' => 'Pendaftaran MBKM',
-            'title_page' => 'Pendaftaran MBKM',
-            'active' => 'Pendaftaran MBKM',
+            'title_page' => 'Informasi MBKM',
+            'active' => 'Informasi MBKM',
             'name' => auth()->user()->name,
             'fakultas' => Fakultas::where('status', 'Aktif')->get(),
             'programs' => ProgramMbkm::where('status', 'Aktif')->get(),

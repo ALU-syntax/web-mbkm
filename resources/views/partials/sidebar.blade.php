@@ -19,7 +19,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link @if($active == 'Pendaftaran MBKM') active @endif" href="/dashboard/pendaftaran-mbkm">
+          <a class="nav-link @if($active == 'Informasi MBKM') active @endif" href="/dashboard/informasi-mbkm">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-ruler-pencil text-dark text-sm opacity-10"></i>
             </div>
