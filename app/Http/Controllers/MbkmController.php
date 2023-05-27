@@ -63,7 +63,7 @@ class MbkmController extends Controller
     public function store(Request $request){
         $validatedData = $request->validate([
             'name' => 'required|max:255',
-            'nim' => 'required|unique:mbkms',
+            'nim' => 'required',
             'fakultas' => 'required',
             'jurusan' => 'required',
             'semester' => 'required',

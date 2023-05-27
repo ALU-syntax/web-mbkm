@@ -124,7 +124,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="tempat_program_perusahaan" class="form-control-label">Tempat Program(Perusahaan)</label>
-                                    <input class="form-control @error('tempat_program_perusahaan') is-invalid @enderror" id="tempat_program_perusahaan" type="text" name="tempat_program_perusahaan" placeholder="Tempat Program (Perusahaan)" required>
+                                    <input class="form-control @error('tempat_program_perusahaan') is-invalid @enderror" id="tempat_program_perusahaan" type="text" name="tempat_program_perusahaan" placeholder="Tempat Program (Perusahaan). ex: Google, Bukalapak" required>
                                     @error('tempat_program_perusahaan')
                                         <div class="invalid-feedback">
                                             {{ $message }}

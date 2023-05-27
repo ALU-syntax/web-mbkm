@@ -1,5 +1,12 @@
 @extends('layout.dashboard')
 @section('container')
+
+@if(session()->has('success'))
+  <div class="alert alert-success col-lg-8" role="alert">
+    {{ session('success') }}
+  </div>
+@endif
+
       <div class="row">
         <div class="col-12">
           <div class="card mb-4">
@@ -16,7 +23,7 @@
             </div>
             <div class="card-body">
 
-              {{-- @if($posts->count()) --}}
+              @if($logbooks->count())
               @foreach($logbooks as $logbook)
               <div class="row mt-3">
                 <div class="d-flex align-items-center">
@@ -38,16 +45,16 @@
                 <p>{{ $logbook->listMbkm->lokasi_program }}</p>
                 <div class="d-flex">
                    {{-- <div class="btn btn-info">Detail</div> --}}
-                   <a class="btn btn-info" href="/dashboard/logbook/detail">Detail</a>
+                   <a class="btn btn-info" href="/dashboard/logbook/{{ $logbook->id }}">Detail</a>
                 </div>
               </div>
               <hr class="horizontal dark mt-0">
               @endforeach  
 
-              {{-- @else
-                <h3>Belum Ada Logbook</h3>
+              @else
+                <h3>Belum Ada Logbook, silahkan isi informasi mbkm terlebih dahulu</h3>
                 <hr class="horizontal dark mt-0">
-              @endif --}}
+              @endif
           </div>
         </div>
       </div>    

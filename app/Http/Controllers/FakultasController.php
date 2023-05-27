@@ -38,6 +38,7 @@ class FakultasController extends Controller
     }
 
     public function edit($id){
+
         return view('dashboard.edit-fakultas',[
             'title' => 'Edit',
             'title_page' => 'Fakultas / Edit',
