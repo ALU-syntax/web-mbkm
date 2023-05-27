@@ -1,6 +1,13 @@
 @extends('layout.dashboard')
 @section('container')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+@if(session()->has('success'))
+  <div class="alert alert-success col-lg-8" role="alert">
+    {{ session('success') }}
+  </div>
+@endif
+
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -27,8 +34,8 @@
                         <div class="row" id="row-matakuliah" >
                             <div class="col-md-5">
                                 <div class="form-group">
-                                    <label for="matakuliah" class="form-control-label">Matakuliah</label>
-                                    <input class="form-control" type="text" name="inputs[0][matakuliah]" placeholder="Masukan mata kuliah">
+                                    <label for="mata_kuliah" class="form-control-label">Matakuliah</label>
+                                    <input class="form-control" type="text" name="inputs[0][mata_kuliah]" placeholder="Masukan mata kuliah">
                                 </div>
                             </div>
                             <div class="col-md-5">
@@ -76,8 +83,8 @@
             `<div class="row" id="row-matakuliah" >
                 <div class="col-md-5">
                     <div class="form-group">
-                        <label for="matakuliah" class="form-control-label">Matakuliah</label>
-                        <input class="form-control" type="text" name="inputs[`+i+`][matakuliah]" placeholder="Masukan mata kuliah">
+                        <label for="mata_kuliah" class="form-control-label">Matakuliah</label>
+                        <input class="form-control" type="text" name="inputs[`+i+`][mata_kuliah]" placeholder="Masukan mata kuliah">
                     </div>
                 </div>
                 <div class="col-md-5">

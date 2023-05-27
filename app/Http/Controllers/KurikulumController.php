@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kurikulum;
-use App\Models\LogMatakuliah;
 use Illuminate\Http\Request;
+use App\Models\LogMatakuliah;
+use Illuminate\Support\Facades\DB;
+use Haruncpi\LaravelIdGenerator\IdGenerator;
 
 class KurikulumController extends Controller
 {
@@ -17,22 +19,28 @@ class KurikulumController extends Controller
         $kurikulum['owner'] = auth()->user()->id;
         Kurikulum::create($kurikulum);
 
-        dd($request);
+        $lastIdKurikulum = DB::table('kurikulums')
+                            ->select('id')
+                            ->orderByDesc('id')
+                            ->limit(1)
+                            ->get();
 
-        $logMatakuliah = $request->validate([
-            'inputs.*.matakuliah' => 'required',
-            'inputs.*.sks' => 'required',
+        $request->validate([
+            'inputs.*.mata_kuliah' => 'required',
+            'inputs.*.sks' => 'required'
         ],[
-            'inputs.*.matakuliah' => 'Mata Kuliah Tidak Boleh Kosong',
-            'inputs.*.sks' => 'SKS tidak boleh kosong'
+            'inputs.*.mata_kuliah' => 'Mata Kuliah Tidak Boleh Kosong',
+            'inputs.*.sks' => 'SKS tidak boleh kosong',
         ]);
         
-        $logMatakuliah['kurikulum'] = Request::instance()->id;
-        dd($logMatakuliah);
-        
-
-        foreach($logMatakuliah['inputs'] as $key => $value){
-            LogMatakuliah::create($value);
+        foreach($request->inputs as $key => $value){
+            LogMatakuliah::create([
+                'mata_kuliah' => $value['mata_kuliah'],
+                'sks' => $value['sks'],
+                'kurikulum' => $lastIdKurikulum[0]->id
+            ]);
         }
+        return redirect('/dashboard/upload-kurikulum')->with('success', 'Upload Kurikulum has been updated!');
     }
+
 }

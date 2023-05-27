@@ -25,7 +25,6 @@ return new class extends Migration
             $table->string('lokasi_program');
             $table->string('program_keberapa');
             $table->string('dosen_pembimbing')->nullable();
-            $table->string('status')->default('Dalam Pengecekan');
             $table->string('user');
             $table->timestamps();
         });

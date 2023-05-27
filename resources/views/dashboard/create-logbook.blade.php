@@ -6,7 +6,7 @@
           <div class="card mb-4">
             <div class="card-header pb-0">
                 <div class="d-flex align-items-center">
-                    <h5>Logbook Saefullah</h5>
+                    <h5>Create Logbook</h5>
                 </div>
             </div>
             <div class="card-body">

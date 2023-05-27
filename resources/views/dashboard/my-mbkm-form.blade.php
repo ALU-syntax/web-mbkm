@@ -31,7 +31,6 @@
                           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tempat Program Perusahaan</th>
                           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Lokasi Program</th>
                           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Program Ke-</th>
-                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
                           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tanggal Dibuat</th>
                           <th class="text-secondary opacity-7"></th>
                         </tr>
@@ -71,17 +70,6 @@
                                 </td>
                                 <td class="align-middle text-center text-sm">
                                     <p class="text-xs font-weight-bold mb-0">{{ $mbkm->program_keberapa }}</p>
-                                </td>
-                                <td class="align-middle text-center text-sm" >
-                                    @if($mbkm->status == 'Dalam Pengecekan')
-                                        <span class="badge badge-sm bg-gradient-secondary">{{ $mbkm->status }}</span>
-                                    @endif    
-                                    @if($mbkm->status == 'Diterima')
-                                        <span class="badge badge-sm bg-gradient-success">{{ $mbkm->status }}</span>
-                                    @endif
-                                    @if($mbkm->status == 'Ditolak')
-                                        <span class="badge badge-sm bg-gradient-danger">{{ $mbkm->status }}</span>
-                                    @endif
                                 </td>
                                 
                                 <td class="align-middle text-center text-sm">

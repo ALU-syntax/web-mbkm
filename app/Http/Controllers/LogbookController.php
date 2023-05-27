@@ -26,8 +26,10 @@ class LogbookController extends Controller
     public function create()
     {
         return view('dashboard.create-logbook',[
-            'title' => 'logbook',
-            'name' => auth()->user()->name
+            'title' => 'Create',
+            'title_page' => 'Logbook / Create',
+            'name' => auth()->user()->name,
+            'active' => 'Logbook'
         ]);
     }
 
