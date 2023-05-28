@@ -19,16 +19,22 @@
                 <div class="row">
                   @if($log_logbooks->count())
                   @foreach($log_logbooks as $logbook)
-                    <div class="col-md-2 mb-3">
-                      <div class="card" >
+                    <div class="col-md-4 mb-3">
+                      <div class="card h-100" >
                           <div class="card-body">
-                            <p class="card-text">{{ $logbook->tanggal_dibuat }}</p>
-                            <p class="card-text">{!! $logbook->body !!}</p>
+                            <p class="card-text"><b>{{ $logbook->tanggal_dibuat }}</b></p>
+                            <p class="card-text">{!! $logbook->excerpt !!}</p>
                             <p>
-                              <small class="text-body-secondary">{{ $logbook->lokasi }}</small>
+                              <small class="text-body-secondary">lokasi: {{ $logbook->lokasi }}</small>
                             </p>
-                            <a href="/posts/" class="btn btn-primary">Read more</a>
+                            
                           </div>
+                          <div class="d-flex justify-content-between align-items-center p-3">
+                            <div class="btn-group">
+                                {{-- <button type="button" class="btn btn-sm btn-outline-secondary">View</button> --}}
+                                <a href="/dashboard/logbook/{{ $logbook->id }}/detail" class="btn btn-sm btn-primary">Read more</a>
+                            </div>
+                            </div>
                       </div>
                     </div>
                   @endforeach
@@ -42,4 +48,7 @@
           </div>
         </div>
       </div>    
+
+
+
 @endsection

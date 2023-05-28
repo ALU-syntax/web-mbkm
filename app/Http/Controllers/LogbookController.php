@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Logbook;
 use App\Models\LogLogbook;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Str;
+use Carbon\Carbon;
 class LogbookController extends Controller
 {
 
@@ -16,7 +17,6 @@ class LogbookController extends Controller
             'active' => 'Logbook',
             'name' => auth()->user()->name,
             'logbooks' => Logbook::with('listMbkm')->where('user', auth()->user()->id)->get()
-            // 'posts' => ForumPost::with('author')->where('created_by', auth()->user()->id)->where('is_delete', '0')->latest('updated_at')->get()
         ]);
     }
 
@@ -39,6 +39,7 @@ class LogbookController extends Controller
             'logbook' => 'required'
         ]);
         $validatedData['owner'] = auth()->user()->id;
+        $validatedData['excerpt'] = Str::limit(strip_tags($validatedData['body'], 100));
 
         LogLogbook::create($validatedData);
 
@@ -47,12 +48,45 @@ class LogbookController extends Controller
 
     public function myLogbook($id){
         return view('dashboard.my-logbook',[
-            'title' => 'Detail',
-            'title_page' => 'Logbook / Detail',
+            'title' => 'List',
+            'title_page' => 'Logbook / List',
             'name' => auth()->user()->name,
             'active' => 'Logbook',
             'idLogbook' => $id,
             'log_logbooks' => LogLogbook::where('logbook', $id)->get()
         ]);
+    }
+
+    public function detail($id){
+        return view('dashboard.detail-logbook',[
+            'title' => 'Detail',
+            'title_page' => 'Logbook / List / Detail',
+            'name' => auth()->user()->name,
+            'active' => 'Logbook',
+            'log_logbooks' => LogLogbook::find($id)
+        ]);
+    }
+
+    public function edit($id){
+        return view('dashboard.edit-log-logbook',[
+            'title' => 'Edit',
+            'title_page' => 'Logbook / List / Detail / Edit',
+            'name' => auth()->user()->name,
+            'active' => 'Logbook',
+            'log_logbooks' => LogLogbook::find($id)
+        ]);
+    }
+
+    public function update(Request $request, $id){
+        $dataLogbook = LogLogbook::find($id);
+        $dataLogbook['excerpt'] = Str::limit(strip_tags($dataLogbook['body'], 100));
+
+        $dataLogbook->update($request->all());
+        return redirect('/dashboard/logbook')->with('success', 'Data Logbook has been updated!');
+    }
+
+    public function destroy($id){
+        LogLogbook::destroy($id);
+        return redirect('/dashboard/logbook')->with('success', 'Data Logbook Berhasil di Hapus');
     }
 }

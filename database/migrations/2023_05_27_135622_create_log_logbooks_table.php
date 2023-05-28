@@ -15,8 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('owner');
             $table->text('body');
-            $table->date('tanggal_dibuat');
+            $table->dateTime('tanggal_dibuat');
+            // $table->timestamp('tanggal_dibuat', $precision = 0);
             $table->string('lokasi');
+            $table->text('excerpt');
             $table->string('logbook');
             $table->timestamps();
         });
