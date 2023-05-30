@@ -12,8 +12,8 @@
         <div class="card mb-4">
             <div class="card-header">
               <div class="ms-md-auto d-flex">
-                <h4>Data Jurusan</h4>
-                <a href="/dashboard/jurusan/create" class="btn btn-primary d-flex ms-md-auto ms-3">Buat Jurusan</a>
+                <h4>Data Prodi</h4>
+                <a href="/dashboard/jurusan/create" class="btn btn-primary d-flex ms-md-auto ms-3">Buat Prodi</a>
             </div>
             </div>
 
@@ -25,7 +25,7 @@
                         <tr>
                           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No.</th>
                           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama</th>
-                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Fakultas</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Jurusan</th>
                           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Status</th>
                           <th class="text-secondary opacity-7"></th>
                         </tr>

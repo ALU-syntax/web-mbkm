@@ -5,7 +5,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4>Edit Jurusan</h4>
+                <h4>Edit Prodi</h4>
             </div>
 
             <div class="card-body">
@@ -17,9 +17,9 @@
                             <input class="form-control" type="text" id="name" name="name" placeholder="Masukan Nama Jurusan" value="{{ old('name', $jurusan->name) }}" autofocus required>  
                         </div>
                         <div class="col-10 mb-3">
-                            <label for="fakultas_id" class="form-label">Fakultas</label>
+                            <label for="fakultas_id" class="form-label">Jurusan</label>
                             <select class="form-select" name="fakultas_id">
-                                <option  disabled selected>Pilih Fakultas</option>
+                                <option  disabled selected>Pilih Jurusan</option>
                                 @foreach($fakultas as $data)
                                     @if(old('fakultas_id', $jurusan->fakultas_id) == $data->id)
                                         <option value="{{ $data->id }}" selected>{{ $data->name }}</option>

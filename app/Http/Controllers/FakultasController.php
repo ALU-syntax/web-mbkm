@@ -10,8 +10,8 @@ class FakultasController extends Controller
 {
     public function index(){
         return view('dashboard.fakultas',[
-            'title' => 'Fakultas',
-            'title_page' => 'Fakultas',
+            'title' => 'Jurusan',
+            'title_page' => 'Jurusan',
             'active' => 'Fakultas',
             'name' => auth()->user()->name,
             'fakultas' => Fakultas::all()
@@ -21,7 +21,7 @@ class FakultasController extends Controller
     public function create(){
         return view('dashboard.create-fakultas', [
             'title' => 'Create',
-            'title_page' => 'Fakultas / Create',
+            'title_page' => 'Jurusan / Create',
             'active' => 'Fakultas',
             'name' => auth()->user()->name,
         ]);
@@ -41,7 +41,7 @@ class FakultasController extends Controller
 
         return view('dashboard.edit-fakultas',[
             'title' => 'Edit',
-            'title_page' => 'Fakultas / Edit',
+            'title_page' => 'Jurusan / Edit',
             'active' => 'Fakultas',
             'name' => auth()->user()->name,
             'fakultas' => Fakultas::find($id)
@@ -53,7 +53,7 @@ class FakultasController extends Controller
         $postingan = Fakultas::find($role);
 
         $postingan->update($request->all());
-        return redirect('/dashboard/fakultas')->with('success', 'Data Fakultas has been updated!');
+        return redirect('/dashboard/fakultas')->with('success', 'Data Jurusan has been updated!');
 
     }
 
@@ -61,6 +61,6 @@ class FakultasController extends Controller
         Fakultas::destroy($id);
         $jurusan = Jurusan::where('fakultas_id', $id)->get();
         Jurusan::destroy($jurusan);
-        return redirect('/dashboard/fakultas')->with('success', 'Data Fakultas Berhasil di Hapus');
+        return redirect('/dashboard/fakultas')->with('success', 'Data Jurusan Berhasil di Hapus');
     }
 }

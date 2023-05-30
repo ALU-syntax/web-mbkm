@@ -5,7 +5,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4>Buat Fakultas</h4>
+                <h4>Buat Jurusan</h4>
             </div>
 
             <div class="card-body">

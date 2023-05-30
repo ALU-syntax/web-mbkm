@@ -10,8 +10,8 @@ class JurusanController extends Controller
 {
     public function index(){
         return view('dashboard.jurusan',[
-            'title' => 'Jurusan',
-            'title_page' => 'Jurusan',
+            'title' => 'Prodi',
+            'title_page' => 'Prodi',
             'active' => 'Jurusan',
             'name' => auth()->user()->name,
             'jurusan' => Jurusan::all()
@@ -21,7 +21,7 @@ class JurusanController extends Controller
     public function create(){
         return view('dashboard.create-jurusan', [
             'title' => 'Create',
-            'title_page' => 'Jurusan / Create',
+            'title_page' => 'Prodi / Create',
             'active' => 'Jurusan',
             'name' => auth()->user()->name,
             'fakultas' => Fakultas::all()
@@ -36,13 +36,13 @@ class JurusanController extends Controller
         ]);
         Jurusan::create($validatedData);
 
-        return redirect('/dashboard/jurusan')->with('success', 'Jurusan Berhasil Dibuat!');
+        return redirect('/dashboard/jurusan')->with('success', 'Prodi Berhasil Dibuat!');
     }
 
     public function edit($id){
         return view('dashboard.edit-jurusan',[
             'title' => 'Edit',
-            'title_page' => 'Jurusan / Edit',
+            'title_page' => 'Prodi / Edit',
             'active' => 'Jurusan',
             'name' => auth()->user()->name,
             'jurusan' => Jurusan::find($id),
@@ -55,12 +55,12 @@ class JurusanController extends Controller
         $postingan = Jurusan::find($jurusan);
 
         $postingan->update($request->all());
-        return redirect('/dashboard/jurusan')->with('success', 'Data Jurusan has been updated!');
+        return redirect('/dashboard/jurusan')->with('success', 'Data Prodi has been updated!');
 
     }
 
     public function destroy($id){
         Jurusan::destroy($id);
-        return redirect('/dashboard/jurusan')->with('success', 'Data Jurusan Berhasil di Hapus');
+        return redirect('/dashboard/jurusan')->with('success', 'Data Prodi Berhasil di Hapus');
     }
 }

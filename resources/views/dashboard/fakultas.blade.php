@@ -12,8 +12,8 @@
         <div class="card mb-4">
             <div class="card-header">
               <div class="ms-md-auto d-flex">
-                <h4>Data Fakultas</h4>
-                <a href="/dashboard/fakultas/create" class="btn btn-primary d-flex ms-md-auto ms-3">Buat Fakultas</a>
+                <h4>Data Jurusan</h4>
+                <a href="/dashboard/fakultas/create" class="btn btn-primary d-flex ms-md-auto ms-3">Buat Jurusan</a>
             </div>
             </div>
 

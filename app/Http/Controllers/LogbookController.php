@@ -21,6 +21,11 @@ class LogbookController extends Controller
     }
 
     public function create($id){        
+        $owner = Logbook::find($id);
+        if($owner['user'] != auth()->user()->id){
+            abort(403);
+        }
+
         return view('dashboard.create-logbook',[
             'title' => 'Create',
             'title_page' => 'Logbook / Create',
@@ -47,6 +52,10 @@ class LogbookController extends Controller
     }
 
     public function myLogbook($id){
+        $owner = Logbook::find($id);
+        if($owner['user'] != auth()->user()->id){
+            abort(403);
+        }
         return view('dashboard.my-logbook',[
             'title' => 'List',
             'title_page' => 'Logbook / List',
@@ -58,6 +67,10 @@ class LogbookController extends Controller
     }
 
     public function detail($id){
+        $pemilik = LogLogbook::find($id);
+        if($pemilik['owner'] != auth()->user()->id){
+            abort(403);
+        }
         return view('dashboard.detail-logbook',[
             'title' => 'Detail',
             'title_page' => 'Logbook / List / Detail',
@@ -68,6 +81,10 @@ class LogbookController extends Controller
     }
 
     public function edit($id){
+        $pemilik = LogLogbook::find($id);
+        if($pemilik['owner'] != auth()->user()->id){
+            abort(403);
+        }
         return view('dashboard.edit-log-logbook',[
             'title' => 'Edit',
             'title_page' => 'Logbook / List / Detail / Edit',
@@ -79,6 +96,10 @@ class LogbookController extends Controller
 
     public function update(Request $request, $id){
         $dataLogbook = LogLogbook::find($id);
+        
+        if($dataLogbook['owner'] != auth()->user()->id){
+            abort(403);
+        }
         $dataLogbook['excerpt'] = Str::limit(strip_tags($dataLogbook['body'], 100));
 
         $dataLogbook->update($request->all());
@@ -86,6 +107,10 @@ class LogbookController extends Controller
     }
 
     public function destroy($id){
+        $pemilik = LogLogbook::find($id);
+        if($pemilik['owner'] != auth()->user()->id){
+            abort(403);
+        }
         LogLogbook::destroy($id);
         return redirect('/dashboard/logbook')->with('success', 'Data Logbook Berhasil di Hapus');
     }

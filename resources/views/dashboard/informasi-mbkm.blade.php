@@ -45,9 +45,9 @@
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="fakultas" class="form-label">Fakultas</label>
+                                <label for="fakultas" class="form-label">Jurusan</label>
                                 <select class="form-select @error('fakultas') is-invalid @enderror" id="fakultas" name="fakultas" required>
-                                    <option value="" disabled selected>Pilih Fakultas</option>
+                                    <option value="" disabled selected>Pilih Jurusan</option>
                                     @foreach($fakultas as $data)
                                         <option value="{{ $data->id }}">{{ $data->name }}</option>
                                     @endforeach
@@ -59,11 +59,11 @@
                                 @enderror
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="jurusan" class="form-label">Jurusan</label>
+                                <label for="jurusan" class="form-label">Prodi</label>
                                 <select class="form-select @error('jurusan') is-invalid @enderror" id="jurusan" name="jurusan" required>
-                                    <option value="" disabled selected>Pilih Jurusan</option>
+                                    <option value="" disabled selected>Pilih Prodi</option>
                                 </select>
-                                <small>*note:<i> pilih fakultas terlebih dahulu</i></small>
+                                <small>*note:<i> pilih jurusan terlebih dahulu</i></small>
                                 @error('jurusan')
                                     <div class="invalid-feedback">
                                         {{ $message }}
