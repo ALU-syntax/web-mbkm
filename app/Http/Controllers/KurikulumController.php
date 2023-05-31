@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Kurikulum;
 use Illuminate\Http\Request;
 use App\Models\LogMatakuliah;
+use App\Models\HasilKonversi;
+use App\Models\CommentKonversi;
 use Illuminate\Support\Facades\DB;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 
@@ -44,6 +46,25 @@ class KurikulumController extends Controller
                 'kurikulum' => $lastIdKurikulum[0]->id
             ]);
         }
+
+        HasilKonversi::create([
+            'kurikulum' => $lastIdKurikulum,
+            'owner' => auth()->user()->id
+        ]);
+
+        $lastIdKonversis = DB::table('hasil_konversis')
+                            ->select('id')
+                            ->where('owner', '=', auth()->user()->id)
+                            ->orderByDesc('id')
+                            ->limit(1)
+                            ->get();
+
+        CommentKonversi::create([
+            'hasil_konversi' => $lastIdKonversis,
+            'body' => 'Belum ada komen'
+        ]);
+
+
         return redirect('/dashboard/upload-kurikulum')->with('success', 'Upload Kurikulum has been updated!');
     }
 

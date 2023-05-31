@@ -55,7 +55,8 @@ class DashboardController extends Controller
             'title' => 'Hasil Konversi',
             'title_page' => 'Hasil Konversi',
             'active' => 'Hasil Konversi',
-            'name' => auth()->user()->name
+            'name' => auth()->user()->name,
+            // 'hasil' => 
         ]);
     }
 
