@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('log_comment_konversis', function (Blueprint $table) {
+        Schema::create('comment_laporans', function (Blueprint $table) {
             $table->id();
             $table->text('body');
-            $table->string('comment_konversis');
+            $table->string('laporan');
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('log_comment_konversis');
+        Schema::dropIfExists('comment_laporans');
     }
 };

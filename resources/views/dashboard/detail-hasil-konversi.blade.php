@@ -21,7 +21,7 @@
                     <div class="row mb-3">
                         <div class="">
                             <label for="dokumen" class="form-label">Post Dokumen</label>
-                            <h1>{{ $kurikulum->dokumen }}</h1>
+                            <h2>{{ $kurikulum->dokumen }}</h2>
                             @error('dokumen')
                                 <div class="invalid-feedback">
                                     {{ $message }}

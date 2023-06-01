@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Kurikulum;
 use Illuminate\Http\Request;
 use App\Models\LogMatakuliah;
-use App\Models\LogCommentKonversi;
 use App\Models\HasilKonversi;
 use App\Models\CommentKonversi;
 use Illuminate\Support\Facades\DB;
@@ -67,18 +66,6 @@ class KurikulumController extends Controller
             'body' => 'Belum ada komen',
             'owner' => auth()->user()->id
         ]);
-
-        $lastIdComment = DB::table('comment_konversis')
-                            ->select('id')
-                            ->where('owner', '=', auth()->user()->id)
-                            ->orderByDesc('id')
-                            ->get();
-
-        LogCommentKonversi::create([
-            'body' => 'Belum ada komen',
-            'comment_konversis' => $lastIdComment[0]->id
-        ]);
-
 
         return redirect('/dashboard/upload-kurikulum')->with('success', 'Upload Kurikulum has been Added!');
     }

@@ -68,7 +68,7 @@ class DashboardController extends Controller
             'title_page' => 'Hasil Konversi',
             'active' => 'Hasil Konversi',
             'name' => auth()->user()->name,
-            'hasil' => CommentKonversi::with('dataHasilKonversi')->where('owner', auth()->user()->id)->get(),
+            'hasil' => CommentKonversi::with('dataHasilKonversi')->where('owner', auth()->user()->id)->latest()->get(),
         ]);
     }
 
