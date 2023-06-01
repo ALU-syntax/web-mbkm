@@ -11,4 +11,7 @@ class Kurikulum extends Model
 
     protected $guarded = ['id'];
 
+    public function dataDokumen(){
+        return $this->hasMany(HasilKonversi::class, 'kurikulum');
+    }
 }

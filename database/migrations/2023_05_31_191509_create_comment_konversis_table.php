@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('hasil_konversi');
             $table->text('body');
+            $table->string('owner');
             $table->timestamps();
         });
     }

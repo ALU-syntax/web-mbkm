@@ -21,37 +21,46 @@
                     <div class="row mb-3">
                         <div class="">
                             <label for="dokumen" class="form-label">Post Dokumen</label>
-                            <input class="form-control @error('dokumen') is-invalid @enderror" type="file" id="dokumen" name="dokumen">  
+                            <h1>{{ $kurikulum->dokumen }}</h1>
                             @error('dokumen')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
                             @enderror
                         </div>
-                        <small>*note: <i>ukuran maximal file 2MB</i></small>
+                        {{-- <small>*note: <i>ukuran maximal file 2MB</i></small> --}}
                     </div>
                     <div class="row" id="field-matakuliah">
+                        @foreach($matakuliah as $matkul)
                         <div class="row" id="row-matakuliah" >
                             <div class="col-md-5">
                                 <div class="form-group">
                                     <label for="mata_kuliah" class="form-control-label">Matakuliah</label>
-                                    <input class="form-control" type="text" name="inputs[0][mata_kuliah]" placeholder="Masukan mata kuliah">
+                                    <input class="form-control" type="text" name="inputs[0][mata_kuliah]" placeholder="Masukan mata kuliah" value="{{ $matkul->mata_kuliah }}" disabled>
                                 </div>
                             </div>
                             <div class="col-md-5">
                                 <div class="form-group">
                                     <label for="sks" class="form-control-label">SKS</label>
-                                    <input class="form-control" type="text" name="inputs[0][sks]" placeholder="Masukan jumlah sks">
+                                    <input class="form-control" type="text" name="inputs[0][sks]" placeholder="Masukan jumlah sks" value="{{ $matkul->sks }}" disabled>
                                 </div>
                             </div>
                             <div class="col-md-2 mt-4">
                                 <div class="form-group">
-                                    <a class="btn btn-outline-primary" style="cursor: no-drop" disabled>
-                                      <div class="ni ni-fat-remove"></div>
+                                    <a class="badge badge-pill badge-md bg-gradient-secondary mt-3" style="cursor: no-drop" disabled>
+                                        <div class="ni ni-watch-time align-items-center d-flex "></div>
                                     </a>
                                 </div>
                             </div>
                         </div>
+                        @endforeach
+                        
+                        @foreach($logcomment as $comment)
+                        <div class="row mt-2">
+                            <label for="comment" class="form-control-label">Comment</label>
+                            <textarea class="m-2" id="comment" name="comment" disabled>{{ $comment->body }}</textarea>
+                        </div>
+                        @endforeach
                     </div>
                     <hr class="horizontal dark">
                 
@@ -61,11 +70,11 @@
                             <div class="icon-plus"></div>
                             Tambah Mata Kuliah
                         </a> --}}
-                        <button id="add" type="button" class="btn btn-outline-primary"> Tambah mata kuliah</button>
+                        {{-- <button id="add" type="button" class="btn btn-outline-primary"> Tambah mata kuliah</button> --}}
                     </div>
                     <div class="d-flex align-items-center ">
                         <div class="ms-md-auto d-flex">
-                          <Button class="btn btn-primary align-items-center d-flex m-4" onclick="return confirm('Data Kurikulum yang sudah diupload tidak dapat diubah, apakah kamu yakin datamu sudah benar?')">Submit</Button>
+                          {{-- <Button class="btn btn-primary align-items-center d-flex m-4 ">Submit</Button> --}}
                         </div>
                     </div>
                 </form>
@@ -73,6 +82,7 @@
         </div>    
     </div>
 </div>
+
 
 <script>
     let i = 0;

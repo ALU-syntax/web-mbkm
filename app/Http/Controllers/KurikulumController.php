@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Kurikulum;
 use Illuminate\Http\Request;
 use App\Models\LogMatakuliah;
+use App\Models\LogCommentKonversi;
 use App\Models\HasilKonversi;
 use App\Models\CommentKonversi;
 use Illuminate\Support\Facades\DB;
@@ -12,6 +13,7 @@ use Haruncpi\LaravelIdGenerator\IdGenerator;
 
 class KurikulumController extends Controller
 {
+
     public function store(Request $request){
 
         $kurikulum = $request->validate([
@@ -19,6 +21,8 @@ class KurikulumController extends Controller
         ]);
 
         $kurikulum['owner'] = auth()->user()->id;
+        $kurikulum['dokumen'] = $request->dokumen->getClientOriginalName();
+
         Kurikulum::create($kurikulum);
 
         $lastIdKurikulum = DB::table('kurikulums')
@@ -48,7 +52,7 @@ class KurikulumController extends Controller
         }
 
         HasilKonversi::create([
-            'kurikulum' => $lastIdKurikulum,
+            'kurikulum' => $lastIdKurikulum[0]->id,
             'owner' => auth()->user()->id
         ]);
 
@@ -56,16 +60,27 @@ class KurikulumController extends Controller
                             ->select('id')
                             ->where('owner', '=', auth()->user()->id)
                             ->orderByDesc('id')
-                            ->limit(1)
                             ->get();
 
         CommentKonversi::create([
-            'hasil_konversi' => $lastIdKonversis,
-            'body' => 'Belum ada komen'
+            'hasil_konversi' => $lastIdKonversis[0]->id,
+            'body' => 'Belum ada komen',
+            'owner' => auth()->user()->id
+        ]);
+
+        $lastIdComment = DB::table('comment_konversis')
+                            ->select('id')
+                            ->where('owner', '=', auth()->user()->id)
+                            ->orderByDesc('id')
+                            ->get();
+
+        LogCommentKonversi::create([
+            'body' => 'Belum ada komen',
+            'comment_konversis' => $lastIdComment[0]->id
         ]);
 
 
-        return redirect('/dashboard/upload-kurikulum')->with('success', 'Upload Kurikulum has been updated!');
+        return redirect('/dashboard/upload-kurikulum')->with('success', 'Upload Kurikulum has been Added!');
     }
 
 }

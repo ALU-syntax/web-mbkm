@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Fakultas;
-use App\Models\Jurusan;
-use App\Models\ProgramMbkm;
 use App\Models\User;
+use App\Models\Jurusan;
+use App\Models\Fakultas;
+use App\Models\ProgramMbkm;
 use Illuminate\Http\Request;
+use App\Models\HasilKonversi;
+use App\Models\CommentKonversi;
+use Illuminate\Support\Facades\DB;
 use Laravel\Socialite\Facades\Socialite;
 
 class DashboardController extends Controller
@@ -51,12 +54,21 @@ class DashboardController extends Controller
     }
 
     public function hasilKonversi(){
+        $idKonversi = DB::table('hasil_konversis')
+                            ->select('id')
+                            ->where('owner', '=', auth()->user()->id)
+                            ->orderByDesc('id')
+                            ->limit(1)
+                            ->get();
+        // dd($data);
+
+
         return view('dashboard.hasil-konversi', [
             'title' => 'Hasil Konversi',
             'title_page' => 'Hasil Konversi',
             'active' => 'Hasil Konversi',
             'name' => auth()->user()->name,
-            // 'hasil' => 
+            'hasil' => CommentKonversi::with('dataHasilKonversi')->where('owner', auth()->user()->id)->get(),
         ]);
     }
 
