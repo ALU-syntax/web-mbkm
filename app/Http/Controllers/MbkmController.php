@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CommentLaporan;
 use App\Models\Mbkm;
 use App\Models\User;
 use App\Models\Jurusan;
 use App\Models\Logbook;
 use App\Models\Fakultas;
+use App\Models\Laporan;
 use App\Models\ProgramMbkm;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -90,6 +92,24 @@ class MbkmController extends Controller
         Logbook::create([
             'name' => auth()->user()->name,
             'mbkm' => $lastIdMbkm[0]->id,
+            'user' => auth()->user()->id
+        ]);
+
+        Laporan::create([
+            'mbkm' => $lastIdMbkm[0]->id,
+            'owner' => auth()->user()->id
+        ]);
+
+        $lastIdLaporan = DB::table('laporans')
+                            ->select('id')
+                            ->where('owner', '=', auth()->user()->id)
+                            ->orderByDesc('id')
+                            ->limit(1)
+                            ->get();
+
+        CommentLaporan::create([
+            'body' => 'Belum ada komen',
+            'laporan' => $lastIdLaporan[0]->id,
             'user' => auth()->user()->id
         ]);
 

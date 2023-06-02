@@ -10,4 +10,8 @@ class CommentLaporan extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+
+    public function dataLaporan(){
+        return $this->belongsTo(Laporan::class, 'laporan');
+    }
 }

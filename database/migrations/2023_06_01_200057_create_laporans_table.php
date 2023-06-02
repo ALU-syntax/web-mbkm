@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('dokumen')->default('belum ada laporan');
             $table->string('mbkm');
-            $table->string('status');
+            $table->string('status')->default('sedang berjalan');
             $table->string('owner');
             $table->timestamps();
         });

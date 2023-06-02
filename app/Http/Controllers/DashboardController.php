@@ -6,6 +6,8 @@ use App\Models\User;
 use App\Models\Jurusan;
 use App\Models\Fakultas;
 use App\Models\ProgramMbkm;
+use App\Models\Laporan;
+use App\Models\CommentLaporan;
 use Illuminate\Http\Request;
 use App\Models\HasilKonversi;
 use App\Models\CommentKonversi;
@@ -87,7 +89,8 @@ class DashboardController extends Controller
             'title' => 'Laporan',
             'title_page' => 'Laporan',
             'active' => 'Laporan',
-            'name' => auth()->user()->name
+            'name' => auth()->user()->name,
+            'laporans' => CommentLaporan::with('dataLaporan')->where('user', auth()->user()->id)->get()
         ]);
     }
 

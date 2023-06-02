@@ -10,6 +10,7 @@ use App\Http\Controllers\MbkmController;
 use App\Http\Controllers\HasilKonversiController;
 use App\Http\Controllers\KurikulumController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\FakultasController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\RoleController;
@@ -72,7 +73,9 @@ Route::post('/dashboard/logbook/create', [LogbookController::class, 'store'])->m
 Route::post('/dashboard/logbook/{id}/update', [LogbookController::class, 'update'])->middleware('auth');
 Route::post('/dashboard/logbook/{id}/delete', [LogbookController::class, 'destroy'])->middleware('auth');
 
+// Laporan Route
 Route::get('/dashboard/laporan', [DashboardController::class, 'laporan'])->middleware('auth');
+Route::get('/dashboard/laporan/{id}', [LaporanController::class, 'index'])->middleware('auth');
 
 // Register Route
 Route::get('/dashboard/register', [RegisterController::class, 'index'])->middleware('auth');
@@ -111,6 +114,7 @@ Route::post('/dashboard/program-mbkm/{id}/edit', [MbkmController::class, 'update
 
 // Utility Route
 Route::post('/api/fetch-jurusan', [DashboardController::class, 'fetchJurusan']);
+Route::get('/pdf/view', [LaporanController::class, 'viewPdf'])->middleware('auth');
 
 
 
