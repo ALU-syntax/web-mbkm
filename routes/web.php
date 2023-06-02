@@ -77,6 +77,8 @@ Route::post('/dashboard/logbook/{id}/delete', [LogbookController::class, 'destro
 Route::get('/dashboard/laporan', [DashboardController::class, 'laporan'])->middleware('auth');
 Route::get('/dashboard/laporan/{id}', [LaporanController::class, 'index'])->middleware('auth');
 Route::post('/dashboard/laporan/{id}', [LaporanController::class, 'update'])->middleware('auth');
+Route::get('/dashobard/laporan/view-pdf/{id}', [LaporanController::class, 'viewPdf'])->middleware('auth');
+Route::post('/api/fetch-dokumen', [LaporanController::class, 'fetchDokumen']);
 
 // Register Route
 Route::get('/dashboard/register', [RegisterController::class, 'index'])->middleware('auth');
@@ -115,7 +117,7 @@ Route::post('/dashboard/program-mbkm/{id}/edit', [MbkmController::class, 'update
 
 // Utility Route
 Route::post('/api/fetch-jurusan', [DashboardController::class, 'fetchJurusan']);
-Route::get('/pdf/view', [LaporanController::class, 'viewPdf'])->middleware('auth');
+// Route::get('/pdf/view', [LaporanController::class, 'viewPdf'])->middleware('auth');
 
 
 

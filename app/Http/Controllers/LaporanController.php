@@ -19,8 +19,20 @@ class LaporanController extends Controller
         ]);
     }    
 
-    public function viewPdf(){
-        return view('dashboard.viewpdf');
+    public function viewPdf($id){
+        // $test = Laporan::find($id)->get();
+        // dd($test);
+        
+        return view('dashboard.viewpdf',[
+            'laporan' => Laporan::find($id)->get()
+        ]);
+    }
+
+    public function fetchDokumen(Request $request){
+        $data['dokumen'] = Laporan::where("id", $request->dokumen)
+                            ->get("dokumen_path");
+
+        return response()->json($data);
     }
 
     public function update(Request $request, $id){

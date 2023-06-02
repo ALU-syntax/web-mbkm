@@ -98,7 +98,8 @@
                             <label for="dokumen" class="form-label">Post Dokumen</label>
                             <h4>{{ $laporan[0]->dokumen_name }}</h4>
                         </div>
-                      </div>
+                    </div>
+                    <a href="/dashobard/laporan/view-pdf/{{ $laporan[0]->id }}" class="btn btn-outline-primary">Sign Dokumen</a>
                 @else
                 <form action="/dashboard/laporan/{{ $laporan[0]->id }}" method="POST" enctype="multipart/form-data">
                     @csrf

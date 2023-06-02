@@ -1,3 +1,5 @@
+
+
 function changeActiveTool(event) {
   var element = $(event.target).hasClass('tool-button')
     ? $(event.target)
