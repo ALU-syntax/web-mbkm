@@ -13,7 +13,10 @@ return new class extends Migration
     {
         Schema::create('laporans', function (Blueprint $table) {
             $table->id();
-            $table->string('dokumen')->default('belum ada laporan');
+            $table->string('dokumen_name')->default('belum ada file laporan');
+            $table->string('dokumen_path')->nullable();
+            $table->string('sign_first')->nullable();
+            $table->string('sign_second')->nullable();
             $table->string('mbkm');
             $table->string('status')->default('sedang berjalan');
             $table->string('owner');

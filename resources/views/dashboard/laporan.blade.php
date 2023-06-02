@@ -31,7 +31,7 @@
                                 <img src="img/document.png" width="75" height="75" alt="">
                               </div>
                               <div class="d-flex flex-column justify-content-center">
-                                <h6 class="mb-0 text-sm">{{ $laporan->dataLaporan->dokumen }}</h6>
+                                <h6 class="mb-0 text-sm">{{ $laporan->dataLaporan->dokumen_name }}</h6>
                                 
                                 <p class="text-xs text-secondary mb-0">{{ $laporan->dataLaporan->listMbkm->dataProgram->name }}</p>
                               </div>

@@ -20,7 +20,8 @@ class KurikulumController extends Controller
         ]);
 
         $kurikulum['owner'] = auth()->user()->id;
-        $kurikulum['dokumen'] = $request->dokumen->getClientOriginalName();
+        $kurikulum['dokumen_name'] = $request->dokumen->getClientOriginalName();
+        $kurikulum['dokumen_path'] = $request->file('dokumen')->store('dokumen-kurikulum');
 
         Kurikulum::create($kurikulum);
 

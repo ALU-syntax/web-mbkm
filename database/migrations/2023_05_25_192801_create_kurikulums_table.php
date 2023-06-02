@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('kurikulums', function (Blueprint $table) {
             $table->id();
-            $table->string('dokumen')->nullable();
+            $table->string('dokumen_path')->nullable();
+            $table->string('dokumen_name')->nullable();
             $table->string('owner');
             $table->timestamps();
         });

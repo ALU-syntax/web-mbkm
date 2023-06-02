@@ -76,6 +76,7 @@ Route::post('/dashboard/logbook/{id}/delete', [LogbookController::class, 'destro
 // Laporan Route
 Route::get('/dashboard/laporan', [DashboardController::class, 'laporan'])->middleware('auth');
 Route::get('/dashboard/laporan/{id}', [LaporanController::class, 'index'])->middleware('auth');
+Route::post('/dashboard/laporan/{id}', [LaporanController::class, 'update'])->middleware('auth');
 
 // Register Route
 Route::get('/dashboard/register', [RegisterController::class, 'index'])->middleware('auth');
