@@ -14,7 +14,13 @@ class LoginSSOController extends Controller
 
     public function callback(){
         $user = Socialite::driver('pnj')->user();
+
+        // try {
+        //     $user = Socialite::driver('google')->user();
+        // } catch (\Exception $e) {
+        //     return redirect('/login');
+        // }
         
-        return response()->json($user);
+        return response()->json($user->attributes);
     }
 }
