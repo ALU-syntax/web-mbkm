@@ -38,22 +38,4 @@ class LoginController extends Controller
         return redirect('/');
     }
 
-    // public function redirectToSSOPNJ(){
-    //     return Socialite::driver('pnj')->redirect();
-    // }
-
-    // public function callback(){
-    //     $pnjuser = Socialite::driver('pnj')->user();
-
-    //     dd($pnjuser);
-    //     // return redirect('/dashboard');
-
-    //     return response()->json($pnjuser);
-    // }
-
-    // public function callback(){
-    //     $user = Socialite::driver('pnj')->user();
-        
-    //     return response()->json($user);
-    // }
 }

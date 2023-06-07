@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('fakultas_id');
             $table->string('jurusan_id');
             $table->string('status')->default('Aktif');
+            $table->string('nim')->nullable();
             $table->rememberToken();
             $table->timestamps();
 
