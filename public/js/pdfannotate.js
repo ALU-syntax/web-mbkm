@@ -218,8 +218,41 @@ PDFAnnotate.prototype.addImageToCanvas = function () {
           var image = new Image();
           image.onload = function () {
             fabricObj.add(new fabric.Image(image));
+            console.log(`debugImage.onload= ${fabricObj.add(new fabric.Image(image))}`);
           };
           image.src = this.result;
+          console.log(`debugImage.src= ${this.result}`);
+        },
+        false
+      );
+      reader.readAsDataURL(inputElement.files[0]);
+      console.log(`debugReader= ${reader.readAsDataURL(inputElement.files[0])}`);
+    };
+    document.getElementsByTagName('body')[0].appendChild(inputElement);
+    inputElement.click();
+  }
+};
+
+PDFAnnotate.prototype.addImageFromSignPad = function () {
+  var inst = this;
+  var fabricObj = inst.fabricObjects[inst.active_canvas];
+
+  if (fabricObj) {
+    // var inputElement = document.createElement('input');
+    // inputElement.type = 'file';
+    // inputElement.accept = '.jpg,.jpeg,.png,.PNG,.JPG,.JPEG';
+    inputElement.onchange = function () {
+      var reader = new FileReader();
+      reader.addEventListener(
+        'load',
+        function () {
+          inputElement.remove();
+          var image = new Image();
+          image.onload = function () {
+            fabricObj.add(new fabric.Image(image));
+          };
+          image.src = this.result;
+          
         },
         false
       );
@@ -229,6 +262,7 @@ PDFAnnotate.prototype.addImageToCanvas = function () {
     inputElement.click();
   }
 };
+
 
 PDFAnnotate.prototype.deleteSelectedObject = function () {
   var inst = this;

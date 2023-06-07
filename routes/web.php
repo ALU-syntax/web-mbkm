@@ -15,6 +15,7 @@ use App\Http\Controllers\FakultasController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LoginSSOController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,18 +31,22 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('index');
 // });
+
+Route::get('/auth/pnj', [LoginSSOController::class, 'redirectToSSOPNJ']);
+Route::get('/dashboard/', [LoginSSOController::class, 'callback']);
+
 Route::get('/', [HomeController::class, 'index']);
+
 Route::get('/about', [AboutController::class, 'index']);
 
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout']);
-Route::get('/auth/pnj', [LoginController::class, 'redirectToSSOPNJ']);
-Route::get('/cb', [LoginController::class, 'callback']);
+
 
 Route::get('/dashboard/index', [DashboardController::class, 'welcome']);
 
-Route::get('/dashboard/', [LoginController::class, 'callback']);
+
 
 // Forum Route
 Route::resource('/dashboard/forum', ForumController::class)->middleware('auth');
@@ -117,7 +122,9 @@ Route::post('/dashboard/program-mbkm/{id}/edit', [MbkmController::class, 'update
 
 // Utility Route
 Route::post('/api/fetch-jurusan', [DashboardController::class, 'fetchJurusan']);
-// Route::get('/pdf/view', [LaporanController::class, 'viewPdf'])->middleware('auth');
+Route::get('/test/sign-pad', function(){
+    return view('dashboard.signpad');
+});
 
 
 

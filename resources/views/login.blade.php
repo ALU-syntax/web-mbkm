@@ -81,7 +81,7 @@
                   </form>
 
                   <div class="text-center align-items-center">
-                    <a href="/auth/pnj" target="_blank" class="btn btn-lg btn-outline- w-100 mt-3 mb-0"><i class="pnj-icon"></i>Sign in With SSO PNJ</a>
+                    <a href="/auth/pnj" class="btn btn-lg btn-outline- w-100 mt-3 mb-0"><i class="pnj-icon"></i>Sign in With SSO PNJ</a>
                   </div>
                 </div>
                 <div class="card-footer text-center pt-0 px-lg-2 px-1">

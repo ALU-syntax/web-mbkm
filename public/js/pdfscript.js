@@ -37,6 +37,8 @@ function enableAddArrow(event) {
 function addImage(event) {
   event.preventDefault();
   pdf.addImageToCanvas();
+  console.log(`Test= ${pdf.addImageToCanvas()}`);
+  console.log(`Test= ${event}`);
 }
 
 function enableRectangle(event) {
@@ -61,15 +63,18 @@ function clearPage() {
   pdf.clearActivePage();
 }
 
-function showPdfData() {
-  pdf.serializePdf(function (string) {
-    $('#dataModal .modal-body pre')
-      .first()
-      .text(JSON.stringify(JSON.parse(string), null, 4));
-    PR.prettyPrint();
-    $('#dataModal').modal('show');
-  });
-}
+
+
+// function showPdfData() {
+//   pdf.serializePdf(function (string) {
+//     $('#dataModal .modal-body pre')
+//       .first()
+//       .text(JSON.stringify(JSON.parse(string), null, 4));
+//     PR.prettyPrint();
+//     $('#dataModal').modal('show');
+//   });
+// }
+
 
 $(function () {
   $('.color-tool').click(function () {

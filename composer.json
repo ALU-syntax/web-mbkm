@@ -9,6 +9,7 @@
         "chillrend/pnj-socialite-provider": "^1.1",
         "deployer/deployer": "^7.3",
         "deployer/recipes": "^6.2",
+        "doctrine/dbal": "^3.6",
         "guzzlehttp/guzzle": "^7.2",
         "haruncpi/laravel-id-generator": "^1.1",
         "laravel/framework": "^10.8",

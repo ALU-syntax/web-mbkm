@@ -7,6 +7,11 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">
 	<link rel="stylesheet" href="/css/pdfstyles.css">
 	<link rel="stylesheet" href="/css/pdfannotate.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<script src = "/js/jSignature.min.js"></script>
+	<script src = "/js/modernizr.js"></script> 
+
 </head>
 <body>
 	<input id="dokumen" type="text" value="{{ $laporan[0]->id }}" hidden>
@@ -65,6 +70,30 @@
 	</div> --}}
 
 	<div class="tool">
+		{{-- <button class="btn btn-info btn-sm" onclick="showSignPad()">Pad</button> --}}
+		{{-- <button class="btn btn-info btn-sm" >Pad</button> --}}
+		{{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#signpad" style="color: white">
+			Sign pad
+		  </button> --}}
+		  {{-- <div class="container">
+			<div class="panel panel-default">
+			  <div class="panel-body">
+				<div class="row">
+				  <div class="col-sm-6">
+					<h3>Click to sign</h3>
+					<input type="image" id="txt" style="border-radius: 5px;">
+				  </div>
+				</div>
+			  </div>
+			</div>
+		  </div> --}}
+		  <div class="tool-button d-flex ">
+		  	<input type="text" id="txt" style="border-radius: 5px;" hidden>
+			<small>signpad-></small>
+		  </div>
+	</div>
+
+	<div class="tool">
 		<button class="tool-button"><i class="fa fa-picture-o" title="Add an Image" onclick="addImage(event)"></i></button>
 	</div>
 
@@ -85,6 +114,7 @@
 </div>
 <div id="pdf-container"></div>
 
+{{-- Modal Pdf annotation data --}}
 <div class="modal fade" id="dataModal" tabindex="-1" role="dialog" aria-labelledby="dataModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
@@ -101,7 +131,44 @@
 		</div>
 	</div>
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+{{-- Modal Sign Pad --}}
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+		</div>
+		<div class="modal-body">
+			<form method="POST" >
+				@csrf
+				<div class="col-md-12">
+					 <label class="" for="">Name:</label>
+					 <input type="text" name="name" class="form-group" value="">
+				</div>        
+				<div class="col-md-12">
+					<label>Signature:</label>
+					<br/>
+					<div id="sig"></div>
+					<br/><br/>
+					<button id="clear" class="btn btn-danger btn-sm">Clear</button>
+					<textarea id="signature" name="signed" style="display: none"></textarea>
+				</div>
+				<br/>
+				<button class="btn btn-primary">Save</button>
+			</form>
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		  <button type="button" class="btn btn-primary">Save changes</button>
+		</div>
+	  </div>
+	</div>
+  </div>
+
+  @include('dashboard.signpad')
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.min.js"></script>
@@ -114,13 +181,24 @@
 <script src="/js/sample_output.js"></script>
 <script src="/js/pdfannotate.min.js"></script>
 <script src="/js/pdfscript.js"></script>
+<script src="/js/sketch.js"></script>
+
 
 <script>
 	var pdf;
+	function downloadBase64File(base64Data, fileName) {
+			const linkSource = base64Data;
+			const downloadLink = document.createElement("a");
+			downloadLink.href = linkSource;
+			downloadLink.download = fileName;
+			downloadLink.click();
+	}
 	$(document).ready(function () {
 		
 		var dokValue = $("#dokumen").val();
 		console.log(dokValue);
+		var appUrl = '{{ env('APP_URL') }}';
+
 		$.ajax({
 			url: "{{url('/api/fetch-dokumen')}}",
 			type: "POST",
@@ -131,7 +209,7 @@
 			dataType: 'json',
 			success: function (result) {
 				console.log(result.dokumen[0]['dokumen_path']);
-				pdf = new PDFAnnotate('pdf-container', 'http://web-mbkm.test/storage/' + result.dokumen[0]['dokumen_path'], {
+				pdf = new PDFAnnotate('pdf-container', appUrl + '/storage/'  + result.dokumen[0]['dokumen_path'], {
 						onPageUpdated(page, oldData, newData) {
 							console.log(page, oldData, newData);
 						},
@@ -145,7 +223,36 @@
 						
 			}
 		});
+
+		var sign = $('#txt').SignaturePad({
+                allowToSign: true,
+                img64: 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
+                border: '1px solid #c7c8c9',
+                width: '40px',
+                height: '20px',
+                callback: function (data, action) {
+                    console.log(data);
+					downloadBase64File(data, 'SIMBKM-signature.png');					
+					pdf.addImageToCanvas();
+                }
+            });
+
+			
+		
+ 
     });
+
+	function showSignPad() {
+  pdf.serializePdf(function (string) {
+    $('#exampleModal .modal-body ')
+    //   .first()
+    //   .text(JSON.stringify(JSON.parse(string), null, 4));
+    // PR.prettyPrint();
+    $('#exampleModal').modal('show');
+  });
+}
+
 </script>
 </body>
 </html>
+
