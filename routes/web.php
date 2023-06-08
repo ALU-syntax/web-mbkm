@@ -42,9 +42,10 @@ Route::get('/login', [LoginController::class, 'index'])->name('login')->middlewa
 Route::post('/login', [LoginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout']);
 
-Route::get('/auth/pnj', [LoginSSOController::class, 'redirectToSSOPNJ'])->name('login');
+Route::get('/auth/pnj', [LoginSSOController::class, 'redirectToSSOPNJ']);
 Route::get('/dashboard/', [LoginSSOController::class, 'callback']);
 Route::get('/dashboard/index', [DashboardController::class, 'welcome']);
+// Route::get('/dashboard/first-create', [LoginSSOController::class, 'firstCreate'])->middleware('auth');
 
 
 

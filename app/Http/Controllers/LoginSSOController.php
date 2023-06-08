@@ -2,32 +2,37 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\SSOUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\DepartementAndLevel;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use Laravel\Socialite\Facades\Socialite;
 
 class LoginSSOController extends Controller
 {
     public function redirectToSSOPNJ(){
+        
+
         return Socialite::driver('pnj')->redirect();
     }
 
     public function callback(){
         $user = Socialite::driver('pnj')->user();
 
-        // dd($user->attributes['department_and_level'][0]['access_level']);
         // check if they're an existing user
         $existingUserSSO = SSOUser::where('email', $user->attributes['email'])->first();
-        $existingUser = User::where('sso_pnj', $existingUserSSO->id)->first();
-        if($existingUser){
+        
+        if($existingUserSSO){
             // log them in
-            Auth::login($existingUser, true);
+            $existingUser = User::where('sso_pnj', $existingUserSSO->id)->first();
+            
+            Auth::login($existingUser);
             request()->session()->regenerate();
             // auth()->login($existingUser, true);
+            
             return redirect()->intended('/dashboard/index');
         } else {
             // create a new user
@@ -77,7 +82,7 @@ class LoginSSOController extends Controller
             $newUserLogin = User::create([
                 'name' => $user->attributes['name'],
                 'email' => $user->attributes['email'],
-                'sso_pnj' => $lastIdSSOUser
+                'sso_pnj' => $lastIdSSOUser[0]->id
             ]);
 
             Auth::login($newUserLogin, true);
