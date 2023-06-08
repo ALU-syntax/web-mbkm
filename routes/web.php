@@ -32,8 +32,7 @@ use App\Http\Controllers\LoginSSOController;
 //     return view('index');
 // });
 
-Route::get('/auth/pnj', [LoginSSOController::class, 'redirectToSSOPNJ']);
-Route::get('/dashboard/', [LoginSSOController::class, 'callback']);
+
 
 Route::get('/', [HomeController::class, 'index']);
 
@@ -43,7 +42,8 @@ Route::get('/login', [LoginController::class, 'index'])->name('login')->middlewa
 Route::post('/login', [LoginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout']);
 
-
+Route::get('/auth/pnj', [LoginSSOController::class, 'redirectToSSOPNJ'])->name('login');
+Route::get('/dashboard/', [LoginSSOController::class, 'callback']);
 Route::get('/dashboard/index', [DashboardController::class, 'welcome']);
 
 

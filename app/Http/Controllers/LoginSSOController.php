@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\SSOLogin;
 use App\Models\SSOUser;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Models\DepartementAndLevel;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use SocialiteProviders\Manager\Config;
 use Laravel\Socialite\Facades\Socialite;
 
 class LoginSSOController extends Controller
@@ -18,47 +19,73 @@ class LoginSSOController extends Controller
     public function callback(){
         $user = Socialite::driver('pnj')->user();
 
-        // dd($user->attributes['sub']);
+        // dd($user->attributes['department_and_level'][0]['access_level']);
         // check if they're an existing user
-        $existingUser = SSOUser::where('email', $user->attributes['email'])->first();
+        $existingUserSSO = SSOUser::where('email', $user->attributes['email'])->first();
+        $existingUser = User::where('sso_pnj', $existingUserSSO->id)->first();
         if($existingUser){
-            // $login = SSOLogin::where
-            auth()->login($existingUser, true);
-
+            // log them in
+            Auth::login($existingUser, true);
+            request()->session()->regenerate();
+            // auth()->login($existingUser, true);
+            return redirect()->intended('/dashboard/index');
         } else {
             // create a new user
-            $newUser                  = new SSOUser();
-            $newUser->name            = $user->name;
-            $newUser->email           = $user->email;
-            $newUser->google_id       = $user->id;
-            $newUser->avatar          = $user->avatar;
-            $newUser->avatar_original = $user->avatar_original;
+            $newUser                 = new SSOUser();
+            
+            $newUser->sub            = $user->attributes['sub'];
+            $newUser->ident          = $user->attributes['ident'];
+            $newUser->name           = $user->attributes['name'];
+            $newUser->email          = $user->attributes['email'];
+            $newUser->address        = $user->attributes['address'];
+            $newUser->date_of_birth  = $user->attributes['date_of_birth'];
+            $newUser->date_of_birth  = $user->attributes['date_of_birth'];
+
+            $existingDepartment = DepartementAndLevel::where('access_level_name', $user->attributes['department_and_level'][0]['access_level_name'])
+                                                        ->where('department', $user->attributes['department_and_level'][0]['department'])
+                                                        ->first();
+
+            if($existingDepartment){
+                $newUser->department_and_level = $existingDepartment->id;
+            }else{
+                $newDepartment = new DepartementAndLevel();
+                $newDepartment->access_level = $user->attributes['department_and_level'][0]['access_level'];
+                $newDepartment->access_level_name = $user->attributes['department_and_level'][0]['access_level_name'];
+                $newDepartment->department = $user->attributes['department_and_level'][0]['department'];
+                $newDepartment->department_short_name = $user->attributes['department_and_level'][0]['department_short_name'];
+                $newDepartment->save();
+
+                
+            }
+
+            $lastIdDepartment = DB::table('departement_and_levels')
+                            ->select('id')
+                            ->orderByDesc('id')
+                            ->limit(1)
+                            ->get();
+
+            $newUser->department_and_level = $lastIdDepartment;
             $newUser->save();
+
+            $lastIdSSOUser = DB::table('s_s_o_users')
+                            ->select('id')
+                            ->where('sub', $user->attributes['sub'])
+                            ->orderByDesc('id')
+                            ->limit(1)
+                            ->get();
+
+            $newUserLogin = User::create([
+                'name' => $user->attributes['name'],
+                'email' => $user->attributes['email'],
+                'sso_pnj' => $lastIdSSOUser
+            ]);
+
+            Auth::login($newUserLogin, true);
+            request()->session()->regenerate();
             // auth()->login($newUser, true);
         }
-        return redirect()->to('/home');
-
-        // try {
-        //     $user = Socialite::driver('google')->user();
-        // } catch (\Exception $e) {
-        //     return redirect('/login');
-        // }
-        
-        return response()->json($user->attributes);
+        return redirect()->intended('/dashboard/index');
     }
 
-    public function authenticate(Request $request){
-        $credentials = $request->validate([
-            // 'email' => 'required|email:dns',
-            'email' => 'required|email', 
-            'password' => 'required'
-        ]);
-
-        if(Auth::attempt($credentials)){
-            $request->session()->regenerate();
-            return redirect()->intended('/dashboard/index');
-        }
-        return back()->with('loginError', 'Login failed!');
-    }
-
+    
 }
