@@ -38,6 +38,7 @@ Route::get('/', [HomeController::class, 'index']);
 
 Route::get('/about', [AboutController::class, 'index']);
 
+
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout']);
@@ -45,7 +46,9 @@ Route::post('/logout', [LoginController::class, 'logout']);
 Route::get('/auth/pnj', [LoginSSOController::class, 'redirectToSSOPNJ']);
 Route::get('/dashboard/', [LoginSSOController::class, 'callback']);
 Route::get('/dashboard/index', [DashboardController::class, 'welcome']);
-// Route::get('/dashboard/first-create', [LoginSSOController::class, 'firstCreate'])->middleware('auth');
+Route::get('/dashboard/first-create', [LoginSSOController::class, 'firstLogin']);
+Route::post('/dashboard/first-create/{id}', [LoginSSOController::class, 'storeFirstLogin']);
+
 
 
 

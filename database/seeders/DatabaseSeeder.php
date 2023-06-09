@@ -69,6 +69,11 @@ class DatabaseSeeder extends Seeder
             'status' => 'Aktif'
         ]);
 
+        Role::create([
+            'name' => 'Mahasiswa',
+            'status' => 'Aktif'
+        ]);
+
 
         Fakultas::create([
             'name' => 'Fakultas Teknik Informatika dan Komputer',

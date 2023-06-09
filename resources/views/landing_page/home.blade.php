@@ -26,7 +26,7 @@
             <div class="card h-100 shadow-sm" >
                 <img src="img/kampus_mengajar.JPG" width="100" height="200" class="card-img-top" alt="kampus_mengajar_logo">
               <div class="card-body">
-                <h3 class="card-title">Kampus Kurang</h3>
+                <h3 class="card-title">Kampus Mengajar</h3>
                 <p class="card-text ">Kampus Mengajar merupakan kanal pembelajaran yang memberikan kesempatan kepada mahasiswa untuk belajar di luar kampus selama satu semester guna melatih kemampuan menyelesaikan permasalahan yang kompleks dengan menjadi mitra guru untuk berinovasi dalam pembelajaran, pengembangan strategi, dan model pembelajaran yang kreatif, inovatif, dan menyenangkan.</p>
               </div>
               <div class="d-flex justify-content-between align-items-end p-3">

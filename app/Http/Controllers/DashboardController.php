@@ -95,6 +95,11 @@ class DashboardController extends Controller
     }
 
     public function welcome(){
+        $auth = auth()->user();
+
+        if(is_null($auth->jurusan_id) || empty($auth->jurusan_id) ){
+            return redirect()->intended('/dashboard/first-create');
+        }
 
         return view('dashboard.welcome', [
             'title' => 'welcome',
