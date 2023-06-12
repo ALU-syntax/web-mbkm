@@ -10,7 +10,13 @@
   {{-- <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main"> --}}
   <div class="w-auto mb-4" id="sidenav-collapse-main">
     <ul class="navbar-nav">
-        <li class="nav-item">
+      
+      {{-- MAHASISWA SIDEBAR VIEW --}}
+      @if(auth()->user()->roles->name == "Mahasiswa" || auth()->user()->role == "1")
+      <li class="nav-item mt-3">
+        <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Mahasiswa Pages</h6>
+      </li>
+      <li class="nav-item">
           <a class="nav-link @if($active == 'Forum') active @endif" href="/dashboard/forum">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-world text-primary text-sm opacity-10"></i>
@@ -58,50 +64,86 @@
             <span class="nav-link-text ms-1">Laporan</span>
           </a>
         </li>
-        <li class="nav-item mt-3">
-          <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Admin pages</h6>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link @if($active == 'Buat Akun') active @endif" href="/dashboard/register">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Buat Akun</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link @if($active == 'Fakultas') active @endif" href="/dashboard/fakultas">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-building text-secondary text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Jurusan</span>
-          </a>
-        </li>        
-        <li class="nav-item">
-          <a class="nav-link @if($active == 'Jurusan') active @endif" href="/dashboard/jurusan">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-archive-2 text-primary text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Prodi</span>
-          </a>
-        </li>        
-        <li class="nav-item">
-          <a class="nav-link @if($active == 'Role') active @endif" href="/dashboard/role">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-badge text-dark text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Role</span>
-          </a>
-        </li>        
-        <li class="nav-item">
-          <a class="nav-link @if($active == 'Program Mbkm') active @endif" href="/dashboard/program-mbkm">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-square-pin text-secondary text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Program Mbkm</span>
-          </a>
-        </li>        
+      @endif
 
+      {{-- Dosbing SIDEBAR VIEW --}}
+      @if(auth()->user()->roles->name == "Dosen Pembimbing" || auth()->user()->role == "1")
+      <li class="nav-item mt-3">
+        <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Dosen Pembimbing Pages</h6>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link @if($active == 'Dashboard Dosbing') active @endif" href="/dashboard/dosbing/">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-building text-primary text-sm"></i>
+            </div>
+            <span class="nav-link-text ms-1">Dashboard</span>
+          </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link @if($active == 'Logbook Dosbing') active @endif" href="/logbook/dosbing/">
+          <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+            <i class="ni ni-book-bookmark text-secondary text-sm opacity-10"></i>
+          </div>
+          <span class="nav-link-text ms-1">Logbook</span>
+        </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link @if($active == 'Laporan Dosbing') active @endif" href="/dashboard/forum">
+        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+          <i class="ni ni-books text-primary text-sm opacity-10"></i>
+        </div>
+        <span class="nav-link-text ms-1">Laporan</span>
+      </a>
+  </li>
+      @endif
+
+
+      {{-- ADMIN SIDEBAR VIEW --}}
+      @if(auth()->user()->role == "1" || auth()->user()->role == "2")
+      <li class="nav-item mt-3">
+        <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Admin pages</h6>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link @if($active == 'Buat Akun') active @endif" href="/dashboard/register">
+          <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+            <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
+          </div>
+          <span class="nav-link-text ms-1">Buat Akun</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link @if($active == 'Fakultas') active @endif" href="/dashboard/fakultas">
+          <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+            <i class="ni ni-building text-secondary text-sm opacity-10"></i>
+          </div>
+          <span class="nav-link-text ms-1">Jurusan</span>
+        </a>
+      </li>        
+      <li class="nav-item">
+        <a class="nav-link @if($active == 'Jurusan') active @endif" href="/dashboard/jurusan">
+          <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+            <i class="ni ni-archive-2 text-primary text-sm opacity-10"></i>
+          </div>
+          <span class="nav-link-text ms-1">Prodi</span>
+        </a>
+      </li>        
+      <li class="nav-item">
+        <a class="nav-link @if($active == 'Role') active @endif" href="/dashboard/role">
+          <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+            <i class="ni ni-badge text-dark text-sm opacity-10"></i>
+          </div>
+          <span class="nav-link-text ms-1">Role</span>
+        </a>
+      </li>        
+      <li class="nav-item">
+        <a class="nav-link @if($active == 'Program Mbkm') active @endif" href="/dashboard/program-mbkm">
+          <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+            <i class="ni ni-square-pin text-secondary text-sm opacity-10"></i>
+          </div>
+          <span class="nav-link-text ms-1">Program Mbkm</span>
+        </a>
+      </li>        
+      @endif
     </ul>
   </div>
 </aside>

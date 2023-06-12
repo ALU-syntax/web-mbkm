@@ -19,7 +19,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="/dashboard/pendaftaran-mbkm/{{ $mbkm->id }}/edit" method="post">
+                    <form action="/dashboard/informasi-mbkm/{{ $mbkm->id }}/edit" method="post">
                         @csrf
                         <div class="row">   
                             <div class="col-md-6">

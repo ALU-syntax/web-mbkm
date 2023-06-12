@@ -127,7 +127,8 @@ class MbkmController extends Controller
     }
 
     public function editMyForm($mbkm){
-        if($mbkm->author->id !== auth()->user()->id) {
+        
+        if($mbkm != auth()->user()->id) {
             abort(403);
        }
 
@@ -146,7 +147,7 @@ class MbkmController extends Controller
 
     public function updateMyForm(Request $request, $mbkm){
 
-        if($mbkm->author->id !== auth()->user()->id) {
+        if($mbkm != auth()->user()->id) {
             abort(403);
        }
 
@@ -164,6 +165,7 @@ class MbkmController extends Controller
             'tempat_program_perusahaan' => 'required',
             'lokasi_program' => 'required',
             'program_keberapa' => 'required',
+            'dosen_pembimbing' => 'required',
         ];
 
         $form->update($request->validate($rules));

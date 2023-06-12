@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('lokasi');
             $table->text('excerpt');
             $table->string('logbook');
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }

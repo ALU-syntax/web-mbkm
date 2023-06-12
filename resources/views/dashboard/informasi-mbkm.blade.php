@@ -25,7 +25,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="name" class="form-control-label">Nama</label>
-                                    <input class="form-control @error('name') is-invalid @enderror" id="name" type="text" name="name" placeholder="Masukan Nama" autofocus required>
+                                    <input class="form-control @error('name') is-invalid @enderror" id="name" type="text" name="name" value="{{ old('name', auth()->user()->name) }}" placeholder="Masukan Nama" autofocus required>
                                     @error('name')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -36,7 +36,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="nim" class="form-control-label">NIM</label>
-                                    <input class="form-control @error('nim') is-invalid @enderror" id="nim" type="text" name="nim" placeholder="Masukan NIM" required>
+                                    <input class="form-control @error('nim') is-invalid @enderror" id="nim" type="text" value="{{ old('nim', auth()->user()->nim) }}" name="nim" placeholder="Masukan NIM" required>
                                     @error('nim')
                                         <div class="invalid-feedback">
                                             {{ $message }}

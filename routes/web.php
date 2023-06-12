@@ -14,6 +14,7 @@ use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\FakultasController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\DosbingController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginSSOController;
 
@@ -123,6 +124,14 @@ Route::get('/dashboard/program-mbkm/create', [MbkmController::class, 'create'])-
 Route::get('/dashboard/program-mbkm/{id}', [MbkmController::class, 'edit'])->middleware('auth');
 Route::post('/dashboard/program-mbkm', [MbkmController::class, 'storeProgram'])->middleware('auth');
 Route::post('/dashboard/program-mbkm/{id}/edit', [MbkmController::class, 'update'])->middleware('auth');
+
+// Route Dosen Pembimbing
+Route::get('/dashboard/dosbing/', [DosbingController::class, 'dashboard'])->middleware('auth');
+Route::get('/logbook/dosbing/', [DosbingController::class, 'logbook'])->middleware('auth');
+Route::get('/logbook/dosbing/list-logbook/{owner}', [DosbingController::class, 'listLogbookMahasiswa'])->middleware('auth');
+Route::get('/logbook/dosbing/detail/{id}', [DosbingController::class, 'detailLogbook'])->middleware('auth');
+Route::get('/logbook/dosbing/detail/logbook-mahasiswa/{id}', [DosbingController::class, 'logLogbook'])->middleware('auth');
+// End Route Dosen Pembimbing
 
 // Utility Route
 Route::post('/api/fetch-jurusan', [DashboardController::class, 'fetchJurusan']);
