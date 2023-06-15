@@ -47,7 +47,7 @@ Route::post('/logout', [LoginController::class, 'logout']);
 Route::get('/auth/pnj', [LoginSSOController::class, 'redirectToSSOPNJ']);
 Route::get('/dashboard/', [LoginSSOController::class, 'callback']);
 Route::get('/dashboard/index', [DashboardController::class, 'welcome']);
-Route::get('/dashboard/first-create', [LoginSSOController::class, 'firstLogin']);
+Route::get('/dashboard/first-create/{sso}', [LoginSSOController::class, 'firstLogin']);
 Route::post('/dashboard/first-create/{id}', [LoginSSOController::class, 'storeFirstLogin']);
 
 
@@ -128,9 +128,12 @@ Route::post('/dashboard/program-mbkm/{id}/edit', [MbkmController::class, 'update
 // Route Dosen Pembimbing
 Route::get('/dashboard/dosbing/', [DosbingController::class, 'dashboard'])->middleware('auth');
 Route::get('/logbook/dosbing/', [DosbingController::class, 'logbook'])->middleware('auth');
-Route::get('/logbook/dosbing/list-logbook/{owner}', [DosbingController::class, 'listLogbookMahasiswa'])->middleware('auth');
+Route::get('/logbook/dosbing/list-logbook/{id}', [DosbingController::class, 'listLogbookMahasiswa'])->middleware('auth');
 Route::get('/logbook/dosbing/detail/{id}', [DosbingController::class, 'detailLogbook'])->middleware('auth');
 Route::get('/logbook/dosbing/detail/logbook-mahasiswa/{id}', [DosbingController::class, 'logLogbook'])->middleware('auth');
+Route::get('/laporan/dosbing', [DosbingController::class, 'laporan'])->middleware('auth');
+Route::get('/laporan/dosbing/{id}', [DosbingController::class, 'listLaporan'])->middleware('auth');
+Route::get('/laporan/dosbing/detail/{id}', [DosbingController::class, 'detailLaporan'])->middleware('auth');
 // End Route Dosen Pembimbing
 
 // Utility Route

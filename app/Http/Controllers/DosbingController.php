@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Logbook;
-use App\Models\LogLogbook;
-use Throwable;
 use App\Models\Mbkm;
 use App\Models\User;
+use App\Models\Laporan;
+use App\Models\Logbook;
+use App\Models\LogLogbook;
 use Illuminate\Http\Request;
+use App\Models\CommentLaporan;
 
 class DosbingController extends Controller
 {
@@ -50,13 +51,13 @@ class DosbingController extends Controller
         ]);
     }
     
-    public function listLogbookMahasiswa($owner){
+    public function listLogbookMahasiswa($id){
         return view('dashboard.dosbing.list-logbook', [
             'title' => 'Logbook',
             'title_page' => 'Logbook / Mahasiswa',
             'active' => 'Dosbing Logbook',
             'name' => auth()->user()->name,
-            'logbooks' => Logbook::with('listMbkm')->where('user', $owner)->get()
+            'logbooks' => Logbook::with('listMbkm')->where('mbkm', $id)->get()
         ]);
     }
 
@@ -81,5 +82,42 @@ class DosbingController extends Controller
             'logbook' => $logbook
         ]);
     }
-    
+
+    public function laporan(){
+        $mbkm = Mbkm::where('dosen_pembimbing', auth()->user()->id)->get();
+        $user = '';
+        if(empty($mbkm)){
+            $user = User::where('email', $mbkm[0]->email)->get();
+        }else{
+            $user = $mbkm;
+        }
+        
+        return view('dashboard.dosbing.laporan', [
+            'title' => 'Laporan',
+            'title_page' => 'Laporan',
+            'active' => 'Laporan Dosbing',
+            'name' => auth()->user()->name,
+            'mahasiswa' => $user
+        ]);
+    }
+
+    public function listLaporan($id){
+        return view('dashboard.dosbing.list-laporan', [
+            'title' => 'Laporan',
+            'title_page' => 'Laporan',
+            'active' => 'Laporan Dosbing',
+            'laporans' => CommentLaporan::with('dataLaporan')->where('user', $id)->get()
+        ]);
+    }
+
+    public function detailLaporan($id){
+
+        return view('dashboard.dosbing.detail-laporan', [
+            'title' => 'Laporan',
+            'title_page' => 'Laporan / Detail',
+            'active' => 'Laporan Dosbing',
+            'laporan' => Laporan::find($id)->with('listMbkm')->get(),
+            'logcomment' => CommentLaporan::all()->where('laporan', $id)
+        ]);
+    }
 }

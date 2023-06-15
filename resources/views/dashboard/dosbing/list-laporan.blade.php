@@ -4,11 +4,13 @@
     <div class="col-12">
         <div class="card mb-4">
             <div class="card-header">
-                <h3>Hasil Konversi</h3>
+                <h3>Laporan</h3>
             </div>
 
             <div class="card-body">
-              @if($hasil->count())
+              @if($laporans->count())
+                
+
                 <div class="table-responsive p-0">
                     <table class="table align-items-center mb-0">
                       <thead>
@@ -16,55 +18,59 @@
                           <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">File</th>
                           <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Comment</th>
                           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
-                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Dibuat Pada</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Date Create</th>
                           <th class="text-secondary opacity-7"></th>
                         </tr>
                       </thead>
                       <tbody>
-                        @foreach ($hasil as $data)
+                        @foreach ($laporans as $laporan)
                         <tr>
                           <td>
                             <div class="d-flex px-2 py-1">
                               <div>
                                 <img src="/img/document.png" width="75" height="75" alt="">
-                                
                               </div>
                               <div class="d-flex flex-column justify-content-center">
-                                <h6 class="mb-0 text-sm">{{ $data->dataHasilKonversi->dataKurikulum->dokumen_name }}</h6>
-                                <p class="text-xs text-secondary mb-0">By {{ $data->dataHasilKonversi->dataOwner->name }}</p>
+                                <h6 class="mb-0 text-sm">{{ $laporan->dataLaporan->dokumen_name }}</h6>
+                                
+                                <p class="text-xs text-secondary mb-0">{{ $laporan->dataLaporan->listMbkm->dataProgram->name }}</p>
                               </div>
                             </div>
                           </td>
-                            
+
                           <td>
-                            <p class="text-xs font-weight-bold mb-0">{{ $data->body }}</p>
+                            <p class="text-xs font-weight-bold mb-0">{{ $laporan->body }}</p>
                             
                           </td>
 
                           <td class="align-middle text-center text-sm">
-                            <span class="badge badge-sm bg-gradient-secondary">{{ $data->dataHasilKonversi->status }}</span>
+                            <span class="badge badge-sm bg-gradient-secondary">{{ $laporan->dataLaporan->status }}</span>
                           </td>
 
                           <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold">{{ $data->dataHasilKonversi->created_at }}</span>
+                            <span class="text-secondary text-xs font-weight-bold">{{ $laporan->dataLaporan->created_at }}</span>
                           </td>
 
                           <td class="align-middle">
-                            <a href="/dashboard/hasil-konversi/{{ $data->dataHasilKonversi->dataKurikulum->id }}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                              View
+                            <a href="/laporan/dosbing/detail/{{ $laporan->dataLaporan->id }}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                              Detail
                             </a>
                           </td>
-                        </tr>
+                        </tr>    
                         @endforeach
-                        @else
-                          <h3>Belum Ada Kurikulum yang dikonversi, silahkan isi Upload Kurikulum terlebih dahulu</h3>
-                          <hr class="horizontal dark mt-0">
-                        @endif
                         
                       </tbody>
                     </table>
                 </div>
-
+                @else
+                <h3>Belum Ada Laporan, silahkan isi informasi Mbkm terlebih dahulu</h3>
+                <hr class="horizontal dark mt-0">
+                {{-- <div class="d-flex align-items-center m-2">
+                    <div class="ms-md-auto d-flex">
+                        <Button class="btn btn-outline-primary align-items-center d-flex m-2">Upload Form TTD</Button>
+                    </div>
+                </div> --}}
+              @endif
             </div>
         </div>
     </div>

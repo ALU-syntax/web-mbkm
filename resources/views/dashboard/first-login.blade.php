@@ -120,7 +120,7 @@
                         <label for="role" class="form-label">Role</label>
                         <select class="form-select @error('role') is-invalid @enderror" id="role" name="role" required>
                             <option value="" disabled selected>Pilih Role</option>
-                            @foreach($fakultas as $data)
+                            @foreach($roles as $data)
                                 <option value="{{ $data->id }}">{{ $data->name }}</option>
                             @endforeach
                         </select>
@@ -134,7 +134,7 @@
                         <label for="role_kedua" class="form-label">Role Kedua</label>
                         <select class="form-select @error('role_kedua') is-invalid @enderror" id="role_kedua" name="role_kedua">
                             <option value="" disabled selected>Pilih Role Kedua</option>
-                            @foreach($fakultas as $data)
+                            @foreach($roles as $data)
                                 <option value="{{ $data->id }}">{{ $data->name }}</option>
                             @endforeach
                         </select>

@@ -88,7 +88,7 @@
         </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link @if($active == 'Laporan Dosbing') active @endif" href="/dashboard/forum">
+      <a class="nav-link @if($active == 'Laporan Dosbing') active @endif" href="/laporan/dosbing">
         <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
           <i class="ni ni-books text-primary text-sm opacity-10"></i>
         </div>

@@ -22,7 +22,11 @@
                     <div class="col-md-4 mb-3">
                       <div class="card h-100" >
                           <div class="card-body">
-                            <p class="card-text"><b>{{ $logbook->tanggal_dibuat }}</b></p>
+                            <div class="d-flex">
+                              <p class="card-text"><b>{{ $logbook->tanggal_dibuat }}</b></p>
+                              <div class="ni ni-watch-time align-items-center ms-md-auto" ></div>
+                            </div>
+                            
                             <p class="card-text">{!! $logbook->excerpt !!}</p>
                             <p>
                               <small class="text-body-secondary">lokasi: {{ $logbook->lokasi }}</small>
