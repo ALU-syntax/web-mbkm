@@ -99,24 +99,15 @@
                             <h4>{{ $laporan[0]->dokumen_name }}</h4>
                         </div>
                     </div>
-                    <a href="/dashobard/laporan/view-pdf/{{ $laporan[0]->id }}" class="btn btn-outline-primary">Sign Dokumen</a>
+                    <a href="/laporan/dosbing/view-pdf/{{ $laporan[0]->id }}" class="btn btn-outline-gray900">View Dokumen</a>
                 @else
-                <form action="/dashboard/laporan/{{ $laporan[0]->id }}" method="POST" enctype="multipart/form-data">
-                    @csrf
                   <div class="row mt-5">
-                    <div class="col-md-8  d-flex">
+                    <div class="col-md-8 ">
                         <label for="dokumen" class="form-label">Post Dokumen</label>
-                        <input class="form-control @error('dokumen') is-invalid @enderror" type="file" id="dokumen" name="dokumen">  
-                            @error('dokumen')
-                                <div class="invalid-feedback">
-                                   {{ $message }}
-                                </div>
-                            @enderror
+                        <h3>File Laporan belum Diupload</h3>
                     </div>
                   </div>
-                    <Button class="btn btn-primary align-items-center d-flex m-4" onclick="return confirm('Apakah data Laporan sudah benar?')">Submit</Button>
-                      <hr class="horizontal dark">
-                </form>
+                  <hr class="horizontal dark">
                 @endif
                 
 

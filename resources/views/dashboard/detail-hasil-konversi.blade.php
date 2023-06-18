@@ -66,11 +66,6 @@
                 
                     <div class="row  mt-2">
                         <div class="col-12">
-                        {{-- <a class="mb-2 tambahsks btn btn-secondary text-white btn-xs" id="album">
-                            <div class="icon-plus"></div>
-                            Tambah Mata Kuliah
-                        </a> --}}
-                        {{-- <button id="add" type="button" class="btn btn-outline-primary"> Tambah mata kuliah</button> --}}
                     </div>
                     <div class="d-flex align-items-center ">
                         <div class="ms-md-auto d-flex">

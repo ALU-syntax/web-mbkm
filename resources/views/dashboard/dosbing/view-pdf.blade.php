@@ -20,31 +20,15 @@
 		<span>SIMBKM Signature</span>
 	</div>
 
-	<div class="tool">
-		  <div class="tool-button d-flex ">
-		  	<input type="text" id="txt" style="border-radius: 5px;" hidden>
-			<small>signpad-></small>
-		  </div>
-	</div>
-
-	<div class="tool">
-		<button class="tool-button"><i class="fa fa-picture-o" title="Add an Image" onclick="addImage(event)"></i></button>
-	</div>
-
-	<div class="tool">
-		<button class="btn btn-danger btn-sm" onclick="deleteSelectedObject(event)"><i class="fa fa-trash"></i></button>
-	</div>
-
-	<div class="tool">
-		<button class="btn btn-danger btn-sm" onclick="clearPage()">Clear Page</button>
-	</div>
-
-	<div class="tool">
+	<div class="tool d-flex justify-content-between">
+		<form action="/laporan/dosbing/view-pdf/approve/{{ $laporan[0]->id }}" method="post" >
+			@csrf
+			<button class="btn btn-success btn-sm" ><i class="fa fa-check"></i> Terima</button>
+		</form>
 		<form action="">
 			@csrf
-			<button class="btn btn-light btn-sm"><i class="fa fa-save"></i> Save</button>
+			<button class="btn btn-danger btn-sm" ><i class="fa fa-minus"></i> Tolak</button>
 		</form>
-		
 	</div>
 </div>
 <div id="pdf-container"></div>

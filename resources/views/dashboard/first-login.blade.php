@@ -217,7 +217,7 @@
                },
                dataType: 'json',
                success: function (result) {
-                   $('#jurusan_id').html('<option value="" disabled selected>Pilih Jurusan</option>');
+                   $('#jurusan_id').html('<option value="" disabled selected>Pilih Prodi</option>');
                    $.each(result.jurusan, function (key, value) {
                        $("#jurusan_id").append('<option value="' + value
                            .id + '">' + value.name + '</option>');

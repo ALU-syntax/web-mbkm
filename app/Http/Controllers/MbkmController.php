@@ -128,9 +128,9 @@ class MbkmController extends Controller
 
     public function editMyForm($mbkm){
         
-        if($mbkm != auth()->user()->id) {
-            abort(403);
-       }
+    //     if($author != auth()->user()->id) {
+    //         abort(403);
+    //    }
 
         return view('dashboard.edit-my-mbkm-form',[
             'title' => 'Edit',
@@ -147,9 +147,9 @@ class MbkmController extends Controller
 
     public function updateMyForm(Request $request, $mbkm){
 
-        if($mbkm != auth()->user()->id) {
-            abort(403);
-       }
+    //     if($mbkm != auth()->user()->id) {
+    //         abort(403);
+    //    }
 
         $form = Mbkm::find($mbkm);
 

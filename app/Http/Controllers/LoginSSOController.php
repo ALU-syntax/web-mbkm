@@ -35,7 +35,7 @@ class LoginSSOController extends Controller
             Auth::login($existingUser);
             request()->session()->regenerate();
             if(is_null($existingUser->jurusan_id) || empty($existingUser->jurusan_id) ){
-                return redirect()->intended('/dashboard/first-create');
+                return redirect()->intended('/dashboard/first-create/1');
             }
             
             return redirect()->intended('/dashboard/index');
@@ -99,7 +99,7 @@ class LoginSSOController extends Controller
             Auth::login($newUserLogin, true);
             request()->session()->regenerate();
 
-            return redirect()->intended('/dashboard/first-create');
+            return redirect()->intended('/dashboard/first-create/1');
 
         }
         return redirect()->intended('/dashboard/index');

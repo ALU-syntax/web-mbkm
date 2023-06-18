@@ -32,7 +32,7 @@
                                 </td>
                                 <td class="align-middle text-center text-sm ">
                                   <td>
-                                    <a href="/logbook/dosbing/list-logbook/{{ $data->id }}" ><span class="badge badge-primary"></span><i class="fa fa-regular fa-eye" style="color: #3eeefe;"></i></a>
+                                    <a href="/logbook/dosbing/detail/{{ $data->id }}" ><span class="badge badge-primary"></span><i class="fa fa-regular fa-eye" style="color: #3eeefe;"></i></a>
                                   </td>
                                 </td>
                           @endforeach

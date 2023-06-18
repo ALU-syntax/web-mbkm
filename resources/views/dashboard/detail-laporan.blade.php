@@ -94,12 +94,37 @@
                     </div>
                 @if($laporan[0]->dokumen_path != null)
                     <div class="row mt-5">
-                        <div class="col-md-8 ">
-                            <label for="dokumen" class="form-label">Post Dokumen</label>
-                            <h4>{{ $laporan[0]->dokumen_name }}</h4>
+                        <div class="d-flex">
+                            <div class="col-md-8 ">
+                                <label for="dokumen" class="form-label">Post Dokumen</label>
+                                <h4>{{ $laporan[0]->dokumen_name }}</h4>
+                            </div>
+                            @if($laporan[0]->status == "Diterima")
+                            <div class="row">
+                                <div class="col">
+                                    <span class="badge bg-gradient-success">Laporan Diterima</span>
+                                </div>
+                            </div>
+                            @endif
+                            @if($laporan[0]->status == "Ditolak")
+                            <div class="row">
+                                <div class="col">
+                                    <span class="badge bg-gradient-danger">Laporan Ditolak</span>
+                                </div>
+                            </div>
+                            @endif
+                            @if($laporan[0]->status == "sedang berjalan")
+                            <div class="row">
+                                <div class="col">
+                                    <span class="badge bg-gradient-secondary">Sedang Ditinjau</span>
+                                </div>
+                            </div>
+                            @endif
                         </div>
+                        @if($laporan[0]->status == "Diterima")
+                        <a href="/dashobard/laporan/view-pdf/{{ $laporan[0]->id }}" class="btn btn-outline-primary col-12">Sign Dokumen</a>
+                        @endif
                     </div>
-                    <a href="/dashobard/laporan/view-pdf/{{ $laporan[0]->id }}" class="btn btn-outline-primary">Sign Dokumen</a>
                 @else
                 <form action="/dashboard/laporan/{{ $laporan[0]->id }}" method="POST" enctype="multipart/form-data">
                     @csrf
@@ -121,9 +146,9 @@
                 
 
                 @foreach($logcomment as $comment)
-                        <div class="row mt-2">
+                        <div class="row mt-4">
                             <label for="comment" class="form-control-label">Comment</label>
-                            <textarea class="m-2" id="comment" name="comment" disabled>{{ $comment->body }}</textarea>
+                            <textarea class="mx-2" id="comment" name="comment" disabled>{{ $comment->body }}</textarea>
                         </div>
                 @endforeach
           </div>

@@ -9,11 +9,12 @@ use App\Models\Logbook;
 use App\Models\LogLogbook;
 use Illuminate\Http\Request;
 use App\Models\CommentLaporan;
+use Illuminate\Support\Facades\DB;
 
 class DosbingController extends Controller
 {
     public function dashboard(){
-        $mbkm = Mbkm::where('dosen_pembimbing', auth()->user()->id)->get();
+        $mbkm = Mbkm::where('dosen_pembimbing', auth()->user()->id)->distinct()->get('name');
         $user = '';
 
         if(empty($mbkm)){
@@ -34,7 +35,6 @@ class DosbingController extends Controller
 
     public function logbook(){
         $mbkm = Mbkm::where('dosen_pembimbing', auth()->user()->id)->get();
-        // $logbook = Logbook::where('dosen_pembimbing', auth()->user()->id)->get();
         $user = '';
 
         if(empty($mbkm)){
@@ -62,12 +62,16 @@ class DosbingController extends Controller
     }
 
     public function detailLogbook($id){
-        $log_logbook = LogLogbook::where('logbook', $id)->get();
+        $logbook = Logbook::with('listMbkm')->where('mbkm', $id)->get();
+        // dd($logbook[0]->name);
+        $log_logbook = LogLogbook::where('logbook', $logbook[0]->id)->get();
+        // dd($log_logbook);
         return view('dashboard.dosbing.detail-logbook',[
             'title' => 'Logbook',
             'title_page' => 'Logbook / Mahasiswa / Detail',
             'active' => 'Dosbing Logbook',
             'name' => auth()->user()->name,
+            'owner' =>  $logbook[0]->name,
             'log_logbook' => $log_logbook,
         ]);
     }
@@ -120,4 +124,20 @@ class DosbingController extends Controller
             'logcomment' => CommentLaporan::all()->where('laporan', $id)
         ]);
     }
+
+    public function viewPdf($id){
+        return view('dashboard.dosbing.view-pdf',[
+            'laporan' => Laporan::find($id)->get()
+        ]);
+    }
+
+    public function approveFile(Request $request, $file){
+        $laporan = Laporan::find($file);
+
+        $laporan['status'] = 'Diterima';
+        $laporan->update();
+        return redirect('/laporan/dosbing');
+
+    }
+
 }

@@ -122,16 +122,16 @@ class ForumController extends Controller
         ]);
     }
 
-    public function deleted(Request $request, $forum){
+    public function deleted($forum){
 
-        if($forum->author->id !== auth()->user()->id) {
-            abort(403);
-       }
+    //     if($forum->author->id !== auth()->user()->id) {
+    //         abort(403);
+    //    }
 
         $postingan = ForumPost::find($forum);
         $postingan['is_delete'] = '1';
 
-        $postingan->update($request->all());
+        $postingan->update();
         return redirect('/dashboard/forum')->with('success', 'Post has been updated!');
 
     }

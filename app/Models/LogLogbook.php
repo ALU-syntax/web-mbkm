@@ -10,4 +10,9 @@ class LogLogbook extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+
+    public function listOwner()
+    {
+        return $this->belongsTo(User::class, 'owner');
+    }
 }

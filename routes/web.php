@@ -134,6 +134,8 @@ Route::get('/logbook/dosbing/detail/logbook-mahasiswa/{id}', [DosbingController:
 Route::get('/laporan/dosbing', [DosbingController::class, 'laporan'])->middleware('auth');
 Route::get('/laporan/dosbing/{id}', [DosbingController::class, 'listLaporan'])->middleware('auth');
 Route::get('/laporan/dosbing/detail/{id}', [DosbingController::class, 'detailLaporan'])->middleware('auth');
+Route::get('/laporan/dosbing/view-pdf/{id}', [DosbingController::class, 'viewPdf'])->middleware('auth');
+Route::post('/laporan/dosbing/view-pdf/approve/{file}', [DosbingController::class, 'approveFile'])->middleware('auth');
 // End Route Dosen Pembimbing
 
 // Utility Route

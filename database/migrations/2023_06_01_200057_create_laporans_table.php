@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('dokumen_path')->nullable();
             $table->string('sign_first')->nullable();
             $table->string('sign_second')->nullable();
+            $table->string('sign_third')->nullable();
+            $table->string('sign_fourth')->nullable();
             $table->string('mbkm');
             $table->string('status')->default('sedang berjalan');
             $table->string('owner');

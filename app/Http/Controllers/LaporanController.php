@@ -20,9 +20,6 @@ class LaporanController extends Controller
     }    
 
     public function viewPdf($id){
-        // $test = Laporan::find($id)->get();
-        // dd($test);
-        
         return view('dashboard.viewpdf',[
             'laporan' => Laporan::find($id)->get()
         ]);
@@ -52,7 +49,10 @@ class LaporanController extends Controller
 
         $laporan->update($rules);
 
-        return redirect('/dashboard/laporan/'.$id)->with('success', 'Dokumen Laporan berhasil ditambahkan!');
+        return redirect('/dashboard/laporan/'.$id)->with('success', 'Dokumen Laporan berhasil ditambahkan!');       
+    }
+
+    public function savePdf($id){
         
     }
 }

@@ -6,7 +6,7 @@
         <div class="card mb-4">
             <div class="card-header">
               <div class="ms-md-auto d-flex">
-                <h4>Logbook Mahasiswa</h4>
+                <h4>Logbook {{ $owner }}</h4>
               </div>
             </div>
 
@@ -16,7 +16,7 @@
                     <table class="table align-items-center mb-0" >
                       <thead>
                         <tr >
-                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">No.</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">Week.</th>
                           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">Tanggal</th>
                           <th class="text-secondary opacity-7 col-2"></th>
                         </tr>
