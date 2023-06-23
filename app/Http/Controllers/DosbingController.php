@@ -136,7 +136,7 @@ class DosbingController extends Controller
 
         $laporan['status'] = 'Diterima';
         $laporan->update();
-        return redirect('/laporan/dosbing');
+        return redirect('/laporan/dosbing')->with('success', 'Laporan Mahasiswa Berhasil Disetujui');
 
     }
 

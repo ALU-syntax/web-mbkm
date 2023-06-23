@@ -48,6 +48,9 @@ class DatabaseSeeder extends Seeder
             'name' => 'Professor Albert Einstein',
             'email' => 'einstein@gmail.com',
             'password' => bcrypt('123456'),
+            'role' => '3',
+            'fakultas_id' => '1',
+            'jurusan_id' => '1',
             'status' => '1' 
         ]);
 

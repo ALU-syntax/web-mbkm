@@ -9,12 +9,14 @@
 	<link rel="stylesheet" href="/css/pdfannotate.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<script src = "/js/jSignature.min.js"></script>
 	<script src = "/js/modernizr.js"></script> 
 
 </head>
 <body>
-	<input id="dokumen" type="text" value="{{ $laporan[0]->id }}" hidden>
+	<input id="dokumen"  type="text" value="{{ $laporan[0]->id }}" hidden>
+	<input id="dokumenName"  type="text" value="{{ $laporan[0]->dokumen_name }}" hidden>
 <div class="toolbar">
 	<div class="tool">
 		<span>SIMBKM Signature</span>
@@ -36,15 +38,20 @@
 	</div>
 
 	<div class="tool">
+		<button class="btn btn-info btn-sm" onclick="showPdfData()">{}</button>
+	</div>
+
+	<div class="tool">
 		<button class="btn btn-danger btn-sm" onclick="clearPage()">Clear Page</button>
 	</div>
 
 	<div class="tool">
-		<form action="">
+		{{-- <form action="/dashboard/laporan/save-document" method="POST" enctype="multipart/form-data">
 			@csrf
+			<input id="dokumen" name="dokumen" type="text" value="{{ $laporan[0]->id }}" hidden>
 			<button class="btn btn-light btn-sm"><i class="fa fa-save"></i> Save</button>
-		</form>
-		
+		</form> --}}
+		<button id="saveFile" class="btn btn-light btn-sm"><i class="fa fa-save"></i> Save</button>
 	</div>
 </div>
 <div id="pdf-container"></div>
@@ -80,7 +87,7 @@
 				@csrf
 				<div class="col-md-12">
 					 <label class="" for="">Name:</label>
-					 <input type="text" name="name" class="form-group" value="">
+					 <input type="text" name="name" class="form-group" value="" hidden>
 				</div>        
 				<div class="col-md-12">
 					<label>Signature:</label>
@@ -109,19 +116,58 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.min.js"></script>
 <script>pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.worker.min.js';</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.3.0/fabric.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.2.0/jspdf.umd.min.js"></script>
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.debug.js"></script> --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"></script>
+
 <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js"></script>
 <script src="/js/arrow.fabric.js"></script>
 <script src="/js/sample_output.js"></script>
-<script src="/js/pdfannotate.min.js"></script>
+<script src="/js/sample_output_2.js"></script>
+{{-- <script src="/js/pdfannotate.min.js"></script> --}}
+<script src="/js/pdfannotate.js"></script>
 <script src="/js/pdfscript.js"></script>
 <script src="/js/sketch.js"></script>
 
 
 <script>
 	var pdf;
-	function downloadBase64File(base64Data, fileName) {
+	var canvas;
+	var CSRF_TOKEN = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
+
+	async function fetchAnnonate() {
+	try {
+		const response = await fetch('your-api-endpoint');
+		const data = await response.json();
+		
+		// Process the fetched data
+		
+		return data; // Return the fetched data
+		} catch (error) {
+			console.error('Error:', error);
+			throw error; // Throw the error to indicate failure
+		}
+	}
+
+	async function performFetch() {
+		try {
+			const result = await fetchData();
+			
+			// Do something with the fetched data
+			
+			console.log('Fetch completed successfully');
+			// Set the "done" state or trigger the next action
+		} catch (error) {
+			// Handle the error case
+			console.error('Fetch failed:', error);
+			// Set the "done" state or trigger an error handling action
+		}
+	}
+
+
+	function downloadBase64File(base64Data, fileName) {		
 			const linkSource = base64Data;
 			const downloadLink = document.createElement("a");
 			downloadLink.href = linkSource;
@@ -131,8 +177,11 @@
 	$(document).ready(function () {
 		
 		var dokValue = $("#dokumen").val();
-		console.log(dokValue);
+		var dokName = $("#dokumenName").val();
 		var appUrl = '{{ env('APP_URL') }}';
+		// var source = window.document.getElementById('pdf-container')[0];
+		var sourceBody = window.document.getElementsByTagName("body")[0];
+
 
 		$.ajax({
 			url: "{{url('/api/fetch-dokumen')}}",
@@ -143,19 +192,152 @@
 			},
 			dataType: 'json',
 			success: function (result) {
-				console.log(result.dokumen[0]['dokumen_path']);
+				console.log(result);
 				pdf = new PDFAnnotate('pdf-container', appUrl + '/storage/'  + result.dokumen[0]['dokumen_path'], {
 						onPageUpdated(page, oldData, newData) {
 							console.log(page, oldData, newData);
+							console.log("page: " + page);
+							console.log("oldData: " + oldData);
+							console.log("newData: " + newData);
+							console.log($('.canvas-container'));
+							// var doc = new jsPDF();
+							
+							// $('#saveFile').click(function(){
+							// 	var canvas = $('.canvas-container');
+							// 	var imgData = canvas.toDataURL("image/jpeg", 1.0);
+							// 	var pdfDoc = new jsPDF();
+
+							// 	pdfDoc.addImage(imgData, 'JPEG', 0, 0);
+							// 	pdfDoc.save("download.pdf");
+							// 	doc.fromHTML(
+							// 		$('.canvas-container'), 15, 15,
+							// 		{width: 170},
+							// 		function(){
+							// 			var blob = doc.output('blob');
+							// 			// var blob = doc.output('datauri');
+							// 			// var blob = doc.output('base64');
+							// 			var formData = new FormData();
+							// 			var blobPDF = new Blob([doc.output('blob')], {type : 'application/pdf'});
+							// 			var blobUrl = URL.createObjectURL(blobPDF);
+							// 			// formData.append('pdf', blob);
+							// 			formData.append('pdf', blobUrl);
+							// 			formData.append('_token', CSRF_TOKEN);
+							// 			formData.append('dokumen', dokValue);
+							// 			formData.append('dokumenName', dokName);
+							// 			// $.ajax({
+							// 			// 	url: "{{url('/dashboard/laporan/save-document')}}",
+							// 			// 	type: "POST",
+							// 			// 	data: formData,
+							// 			// 	processData: false,
+							// 			// 	contentType: false,
+							// 			// 	success: function(data){console.log(data)},
+							// 			// 	error: function(data){console.log(data)}
+							// 			// })
+							// 			console.log('clicked');
+										
+							// 		}
+							// 	)
+							// });
+							
+							
 						},
 						ready() {
+							// let json;
+							fetch(appUrl + '/storage/'  + result.dokumen[0]['json_annotate'])
+								.then(response => response.json())
+								// .then(response => console.log(response))
+								.then(data => {
+									console.log(data); // Process the retrieved JSON data
+									// const result = {
+									// 	json: `var test = ${JSON.stringify(data, null, 4)}`
+									// };
+									// const jsonString = JSON.stringify(data);
+									var dynamicVariableName = "result";
+									var variableValue = JSON.stringify(data, null, 4);
+
+									// Create a variable with a dynamic name
+									window[dynamicVariableName] = variableValue;
+
+									// Access the dynamically created variable
+									// console.log(window[dynamicVariableName]); // Output: 42
+									// console.log(myVariable);
+									const jsonString = JSON.stringify(data, null, 4);
+									const test = JSON.stringify(data);
+									// console.log(JSON.stringify(data, null, 4));
+									// var json = `var foo = {${JSON.stringify(data, null, 4)}}`
+									// console.log(jsonString);
+									// console.log(JSON.parse(data));
+									// console.log(test);
+									// json = data;
+									// pdf.loadFromJSON(result);
+									// pdf.savePdf();
+								})
+								.catch(error => {
+									console.error('Error:', error);
+							});
+							// pdf.loadFromJson(json);
 							console.log('Plugin initialized successfully');
-							// pdf.loadFromJSON(sampleOutput);
+							// pdf.loadFromJSON(sampleOutput2);
+							// console.log(result.dokumen[0]['json_annotate']);
+							// console.log(appUrl + '/storage/'  + result.dokumen[0]['json_annotate'])
+							// var json = appUrl + '/storage/'  + result.dokumen[0]['json_annotate'];
+							// console.log(json);
+							// pdf.loadFromJSON(appUrl + '/storage/'  + result.dokumen[0]['json_annotate']);
+							var doc = new jsPDF();
+							
+							$('#saveFile').click(function(){
+								pdf.serializePdf(function(string){
+									pdf.saveToServer('{{url('/dashboard/laporan/save-document')}}', CSRF_TOKEN, dokName, dokValue, string);
+								})
+								// pdf.saveToServer('{{url('/dashboard/laporan/save-document')}}', CSRF_TOKEN, dokName, dokValue);
+								// console.log(pdf.serializePdf());
+								// pdf.saveToServer('{{url('/dashboard/laporan/save-document')}}');
+								// var source = window.document.getElementById('pdf-container');
+								// var imgData = source.toDataURL("image/jpeg", 1.0);
+								// var pdfDoc = new jsPDF();
+
+								// pdfDoc.addImage(imgData, 'JPEG', 0, 0);
+								// pdfDoc.save("download.pdf");
+								// doc.fromHTML(
+								// 	$('.canvas-container'), 15, 15,
+								// 	{width: 170},
+								// 	function(){
+								// 		var blob = doc.output('blob');
+								// 		// var blob = doc.output('datauri');
+								// 		// var blob = doc.output('base64');
+								// 		var formData = new FormData();
+								// 		var blobPDF = new Blob([doc.output('blob')], {type : 'application/pdf'});
+								// 		var blobUrl = URL.createObjectURL(blobPDF);
+								// 		// formData.append('pdf', blob);
+								// 		formData.append('pdf', blobUrl);
+								// 		formData.append('_token', CSRF_TOKEN);
+								// 		formData.append('dokumen', dokValue);
+								// 		formData.append('dokumenName', dokName);
+								// 		// $.ajax({
+								// 		// 	url: "{{url('/dashboard/laporan/save-document')}}",
+								// 		// 	type: "POST",
+								// 		// 	data: formData,
+								// 		// 	processData: false,
+								// 		// 	contentType: false,
+								// 		// 	success: function(data){console.log(data)},
+								// 		// 	error: function(data){console.log(data)}
+								// 		// })
+								// 		console.log('clicked');
+										
+								// 	}
+								// )
+							});
 						},
 						scale: 1.5,
-						pageImageCompression: 'MEDIUM', // FAST, MEDIUM, SLOW(Helps to control the new PDF file size)
+						pageImageCompression: 'FAST', // FAST, MEDIUM, SLOW(Helps to control the new PDF file size)
 						});
-						
+				// console.log("pdf: " + pdf);
+				// pdf.forEach((element, index) => console.log(element));
+				// for(const element in pdf){
+				// 	console.log("test: " + element);
+				// }
+				// console.log("test: " + pdf.savePdf())
+				
 			}
 		});
 
@@ -172,19 +354,78 @@
                 }
             });
 
-			
-		
- 
+			$('#savepdf').click(function(){
+				$.ajax({
+					url: "{{url('/dashboard/laporan/save-document')}}",
+					type: "POST",
+					data: {
+						_token: '{{csrf_token()}}'
+					},
+					dataType: 'json',
+					success: function(result){
+						console.log(result);
+						console.log(pdf);
+						var input = document.createElement('input');
+						input.name = 'dokumen_name';
+						input.value = pdf;
+					}
+				});
+			});
     });
 
+	
 	function showSignPad() {
-  pdf.serializePdf(function (string) {
-    $('#exampleModal .modal-body ')
-    //   .first()
-    //   .text(JSON.stringify(JSON.parse(string), null, 4));
-    // PR.prettyPrint();
-    $('#exampleModal').modal('show');
+  	pdf.serializePdf(function (string) {
+    	$('#exampleModal .modal-body ')
+    	//   .first()
+    	//   .text(JSON.stringify(JSON.parse(string), null, 4));
+    	// PR.prettyPrint();
+    	$('#exampleModal').modal('show');
   });
+
+  
+  
+  function saveFile(){
+	console.log("Terpanggil");
+	var doc = new jsPDF();
+							$('#saveFile').click(function(){
+								doc.fromHTML(
+									$('.canvas-container'), 15, 15,
+									{width: 170},
+									function(){
+										var blob = doc.output('blob');
+										// var blob = doc.output('datauri');
+										// var blob = doc.output('base64');
+										var formData = new FormData();
+										var blobPDF = new Blob([doc.output('blob')], {type : 'application/pdf'});
+										var blobUrl = URL.createObjectURL(blobPDF);
+										// formData.append('pdf', blob);
+										formData.append('pdf', blobUrl);
+										formData.append('_token', CSRF_TOKEN);
+										formData.append('dokumen', dokValue);
+										formData.append('dokumenName', dokName);
+										// $.ajax({
+										// 	url: "{{url('/dashboard/laporan/save-document')}}",
+										// 	type: "POST",
+										// 	data: formData,
+										// 	processData: false,
+										// 	contentType: false,
+										// 	success: function(data){console.log(data)},
+										// 	error: function(data){console.log(data)}
+										// })
+										console.log('clicked');
+										doc.save();
+									}
+								)
+								
+								// console.log(doc);
+								// console.log(source);
+								
+							});
+  }
+
+
+  
 }
 
 </script>

@@ -14,4 +14,8 @@ class Laporan extends Model
     public function listMbkm(){
         return $this->belongsTo(Mbkm::class, 'mbkm');
     }
+
+    public function pemilik(){
+        return $this->belongsTo(User::class, 'owner');
+    }
 }

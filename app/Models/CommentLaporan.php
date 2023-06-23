@@ -14,4 +14,6 @@ class CommentLaporan extends Model
     public function dataLaporan(){
         return $this->belongsTo(Laporan::class, 'laporan');
     }
+
+    
 }

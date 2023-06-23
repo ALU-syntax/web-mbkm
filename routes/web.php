@@ -84,11 +84,14 @@ Route::post('/dashboard/logbook/{id}/update', [LogbookController::class, 'update
 Route::post('/dashboard/logbook/{id}/delete', [LogbookController::class, 'destroy'])->middleware('auth');
 
 // Laporan Route
+Route::post('/dashboard/laporan/save-document', [LaporanController::class, 'savePdf'])->middleware('auth');
+
 Route::get('/dashboard/laporan', [DashboardController::class, 'laporan'])->middleware('auth');
 Route::get('/dashboard/laporan/{id}', [LaporanController::class, 'index'])->middleware('auth');
 Route::post('/dashboard/laporan/{id}', [LaporanController::class, 'update'])->middleware('auth');
 Route::get('/dashobard/laporan/view-pdf/{id}', [LaporanController::class, 'viewPdf'])->middleware('auth');
 Route::post('/api/fetch-dokumen', [LaporanController::class, 'fetchDokumen']);
+// Route::post('/api/save-document', [LaporanController::class, 'savePdf'])->middleware('auth');
 
 // Register Route
 Route::get('/dashboard/register', [RegisterController::class, 'index'])->middleware('auth');

@@ -89,7 +89,12 @@
                     <div class="col-md-6 mb-3">
                         <label for="dosen_pembimbing" class="form-label">Dosen Pembimbing / KPS</label>
                         <select id="dosen_pembimbing" class="form-select" name="dosen_pembimbing" disabled>
+                            @if($laporan[0]->listMbkm->listUser != null)
                             <option value="" disabled selected>{{ $laporan[0]->listMbkm->listUser->name }}</option>
+                            @else
+                            <option value="" disabled selected></option>
+                            @endif
+                            
                         </select>
                     </div>
                 @if($laporan[0]->dokumen_path != null)

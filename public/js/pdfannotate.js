@@ -80,6 +80,7 @@ var PDFAnnotate = function (container_id, url, options = {}) {
           width: 1,
           color: inst.color,
         },
+      // enableRetinaScaling: false
       });
       inst.fabricObjects.push(fabricObj);
       if (typeof options.onPageUpdated == 'function') {
@@ -218,15 +219,15 @@ PDFAnnotate.prototype.addImageToCanvas = function () {
           var image = new Image();
           image.onload = function () {
             fabricObj.add(new fabric.Image(image));
-            console.log(`debugImage.onload= ${fabricObj.add(new fabric.Image(image))}`);
+            // console.log(`debugImage.onload= ${fabricObj.add(new fabric.Image(image))}`);
           };
           image.src = this.result;
-          console.log(`debugImage.src= ${this.result}`);
+          // console.log(`debugImage.src= ${this.result}`);
         },
         false
       );
       reader.readAsDataURL(inputElement.files[0]);
-      console.log(`debugReader= ${reader.readAsDataURL(inputElement.files[0])}`);
+      // console.log(`debugReader= ${reader.readAsDataURL(inputElement.files[0])}`);
     };
     document.getElementsByTagName('body')[0].appendChild(inputElement);
     inputElement.click();
@@ -397,4 +398,143 @@ PDFAnnotate.prototype.setDefaultTextForTextBox = function (text) {
   if (typeof text === 'string') {
     inst.textBoxText = text;
   }
+};
+
+// PDFAnnotate.prototype.saveToServer = function (link) {
+// 	var inst = this;
+//   var format = inst.format || 'a4';
+//   var orientation = inst.orientation || 'portrait';
+// 	var doc = new jsPDF({format, orientation});
+// 	$.each(inst.fabricObjects, function (index, fabricObj) {
+// 	    if (index != 0) {
+// 	        doc.addPage(format, orientation);
+// 	        doc.setPage(index + 1);
+// 	    }
+// 	    doc.addImage(fabricObj.toDataURL(), 'png', 0, 0);
+// 	});
+
+//         var file = new File([doc.output('blob')], 'file.pdf', { type: "application/pdf"});
+// 	var formData = new FormData();
+//   console.log(file);
+//   doc.save();
+// 	formData.append('file', file);
+//   formData.append('_token', '{{csrf_token()}}');
+	
+// 	jQuery.ajax(link,
+// 	{
+// 		method: 'POST',
+// 		data: formData,
+// 		processData: false,
+// 		contentType: false,
+// 		success: function(data){console.log(data)},
+// 		error: function(data){console.log(data)}
+// 	});
+// }
+
+function blobToFile(theBlob, fileName){
+  //A Blob() is almost a File() - it's just missing the two properties below which we will add
+  theBlob.lastModifiedDate = new Date();
+  theBlob.name = fileName;
+  return theBlob;
+}
+
+const blobToBinary = async (blob) => {
+  const buffer = await blob.arrayBuffer();
+  
+  const view = new Int8Array(buffer);
+  
+  return [...view].map((n) => n.toString(2)).join(' ');
+};
+PDFAnnotate.prototype.saveToServer = function (link, token, name, id, json) {
+  var inst = this;
+  var format = inst.format || 'a4';
+  var orientation = inst.orientation || 'portrait';
+  if (!inst.fabricObjects.length) return;
+  var doc = new jspdf.jsPDF({ format, orientation });
+  
+
+  inst.fabricObjects.forEach(function (fabricObj, index) {
+    if (index != 0) {
+      doc.addPage(format, orientation);
+      doc.setPage(index + 1);
+    }
+    doc.addImage(
+      fabricObj.toDataURL({
+        format: 'png',
+      }),
+      inst.pageImageCompression == 'NONE' ? 'PNG' : 'JPEG',
+      0,
+      0,
+      doc.internal.pageSize.getWidth(),
+      doc.internal.pageSize.getHeight(),
+      `page-${index + 1}`,
+      ['FAST', 'MEDIUM', 'SLOW'].indexOf(inst.pageImageCompression) >= 0 ?
+        inst.pageImageCompression :
+        undefined
+    );
+    if (index === inst.fabricObjects.length - 1) {
+      // doc.save('haduh.pdf');
+      // var file = new File([doc.output('blob')], 'file.pdf', { type: "application/pdf"});
+      
+      $.ajaxSetup({
+        headers: {
+        'X-CSRF-TOKEN': token
+          }
+        });
+      var blob = doc.output('blob');
+      var blobPDF = new Blob([doc.output('blob')], {type: "application/pdf"});
+      // var blobPDF = new Blob([doc.output('blob')]);
+
+      // blobToBinary(blob).then(console.log);
+      
+      const myFile = blobToFile(URL.createObjectURL(blob), name);
+      
+      // var json;
+      // pdf.serializePdf(function(string){
+      //   json = string;
+      // });
+      
+      // var blobUrl = URL.createObjectURL(blobPDF);
+      var blobUrl = URL.createObjectURL(blobPDF);
+      var file = new File([blobUrl], name, { type: "application/json"});
+      // var file = new File([blob], name);
+      
+      var fileName = name.split('.').slice(0, -1).join('.'); // Remove the extension
+      console.log(fileName);
+      var formData = new FormData();
+      
+      formData.append('fileId', id);
+      formData.append('_token', token);
+      formData.append('file', json)
+      formData.append('name', fileName)
+      // console.log(file.mozFullPath);
+      // console.log(doc.output('datauristring'));
+      // console.log(URL.revokeObjectURL(blobUrl));
+      // console.log(myFile);
+      // console.log(blob);
+      // console.log(blobUrl);
+      // console.log(URL.createObjectURL(file));
+      // console.log(formData.get('file'));
+
+      $.ajax({
+        // headers: {
+        //   'Content-Type': 'multipart/form-data; boundary='+ Math.random().toString().substr(2),
+        //   // 'X-CSRF-TOKEN': token
+        // },
+        type: "POST",
+        // method:"POST",
+        url: link,
+        // enctype: 'multipart/form-data',
+        // dataType: 'FILE',     
+        data: formData,
+        processData: false,
+        contentType: false,
+        cache: false,
+        success: function(data){console.log(data)},
+        error: function(data){console.log(data)}
+      })
+      
+    }
+  });
+  
 };

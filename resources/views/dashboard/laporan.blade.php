@@ -44,7 +44,16 @@
                           </td>
 
                           <td class="align-middle text-center text-sm">
-                            <span class="badge badge-sm bg-gradient-secondary">{{ $laporan->dataLaporan->status }}</span>
+                            @if($laporan->dataLaporan->status == "Diterima")
+                              <span class="badge badge-sm bg-gradient-success">{{ $laporan->dataLaporan->status }}</span>
+                            @endif
+                            @if($laporan->dataLaporan->status == "Ditolak")
+                              <span class="badge badge-sm bg-gradient-danger">{{ $laporan->dataLaporan->status }}</span>
+                            @endif
+                            @if($laporan->dataLaporan->status == "sedang berjalan")
+                              <span class="badge badge-sm bg-gradient-secondary">{{ $laporan->dataLaporan->status }}</span>
+                            @endif
+                            
                           </td>
 
                           <td class="align-middle text-center">

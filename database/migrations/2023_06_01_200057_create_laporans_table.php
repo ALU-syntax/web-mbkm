@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('dokumen_name')->default('belum ada file laporan');
             $table->string('dokumen_path')->nullable();
+            $table->string('json_annotate')->nullable();
             $table->string('sign_first')->nullable();
             $table->string('sign_second')->nullable();
             $table->string('sign_third')->nullable();
