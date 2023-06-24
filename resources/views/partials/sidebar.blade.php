@@ -161,7 +161,7 @@
       @endif
 
        {{-- Pembimbing Akademik SIDEBAR VIEW --}}
-       @if(auth()->user()->roles->name == "Pembimbing Akademik" || auth()->user()->roleKedua->name == "Pembimbing Akademik" || auth()->user()->roleKetiga->name == "Pembimbing Akademik" || auth()->user()->role == "1")
+       @if(auth()->user()->roles->name == "Pembimbing Akademik" || auth()->user()->role_kedua == "5" || auth()->user()->role_ketiga == "5" || auth()->user()->role == "1")
        <li class="nav-item mt-3">
          <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Pembimbing Akademik Pages</h6>
        </li>
@@ -184,12 +184,12 @@
        @endif
 
        {{-- Wadir SIDEBAR VIEW --}}
-       @if(auth()->user()->roles->name == "Pembimbing Akademik" || auth()->user()->roleKedua->name == "Pembimbing Akademik" || auth()->user()->roleKetiga->name == "Pembimbing Akademik" || auth()->user()->role == "1")
+       @if(auth()->user()->roles->name == "Wadir" || auth()->user()->roleKedua->name == "Wadir" || auth()->user()->roleKetiga->name == "Wadir" || auth()->user()->role == "1")
        <li class="nav-item mt-3">
-         <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Pembimbing Akademik Pages</h6>
+         <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Wadir Pages</h6>
        </li>
        <li class="nav-item">
-           <a class="nav-link @if($active == 'Dashboard Pembimbing Akademik') active @endif" href="/dashboard/pa">
+           <a class="nav-link @if($active == 'Dashboard Wadir') active @endif" href="/dashboard/wadir">
              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                <i class="ni ni-building text-primary text-sm"></i>
              </div>

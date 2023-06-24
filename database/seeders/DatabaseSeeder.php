@@ -84,6 +84,16 @@ class DatabaseSeeder extends Seeder
             'status' => '1' 
         ]);
 
+        User::create([
+            'name' => 'Wadir',
+            'email' => 'wadir@gmail.com',
+            'password' => bcrypt('123456'),
+            'role' => '2',
+            'fakultas_id' => '1',
+            'jurusan_id' => '1',
+            'status' => '1' 
+        ]);
+
         Role::create([
             'name' => 'Super Admin',
             'status' => 'Aktif'

@@ -18,6 +18,7 @@ use App\Http\Controllers\DosbingController;
 use App\Http\Controllers\KpsController;
 use App\Http\Controllers\PembimbingIndustriController;
 use App\Http\Controllers\PembimbingAkademikController;
+use App\Http\Controllers\WadirController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginSSOController;
 
@@ -159,8 +160,11 @@ Route::get('/laporan/pi', [PembimbingIndustriController::class, 'laporan'])->mid
 
 // Route Pembimbing Akademik
 Route::get('/dashboard/pa', [PembimbingAkademikController::class, 'dashboard'])->middleware('auth');
-
 // End Route Pembimbing Akademik
+
+// Route Wadir
+Route::get('/dashboard/wadir', [WadirController::class, 'dashboard'])->middleware('auth');
+// End Route Wadir
 
 // Utility Route
 Route::post('/api/fetch-jurusan', [DashboardController::class, 'fetchJurusan']);
