@@ -86,8 +86,10 @@ Route::post('/dashboard/logbook/{id}/delete', [LogbookController::class, 'destro
 // Laporan Route
 Route::post('/dashboard/laporan/save-document', [LaporanController::class, 'savePdf'])->middleware('auth');
 
+Route::get('/dashboard/laporan/download', [LaporanController::class, 'saveAndRedirect'])->middleware('auth');
 Route::get('/dashboard/laporan', [DashboardController::class, 'laporan'])->middleware('auth');
 Route::get('/dashboard/laporan/{id}', [LaporanController::class, 'index'])->middleware('auth');
+Route::get('/dashboard/laporan/preview/{id}', [LaporanController::class, 'previewPdf'])->middleware('auth');
 Route::post('/dashboard/laporan/{id}', [LaporanController::class, 'update'])->middleware('auth');
 Route::get('/dashobard/laporan/view-pdf/{id}', [LaporanController::class, 'viewPdf'])->middleware('auth');
 Route::post('/api/fetch-dokumen', [LaporanController::class, 'fetchDokumen']);

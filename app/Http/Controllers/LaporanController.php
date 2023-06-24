@@ -59,45 +59,26 @@ class LaporanController extends Controller
     }
 
     public function savePdf(Request $request){
-        // $rules['dokumen_name'] = $request->file->getClientOriginalName();
-        // $rules['dokumen_path'] = $request->file('file')->store('dokumen-laporan');
-        // $rules['sign_first'] = 1;
-        
-        
-        // return response()->json($pdf);
-        // return $request->dokumenName;
-        // return response()->json($pdf);
-
-        // if($request->hasFile('image')) {
-        //     $file = $request->file('image');
- 
-        //     //you also need to keep file extension as well
-        //     $name = $file->getClientOriginalName().'.'.$file->getClientOriginalExtension();
- 
-        //     //using the array instead of object
-        //     $image['filePath'] = $name;
-        //     $file->move(public_path().'/uploads/', $name);
-        //     $user->image= public_path().'/uploads/'. $name;
-        //     $user->save();
-        // Storage::url($filename)
-        // if($request->hasFile('file')){
-        //     return $request->file->getClientOriginalName();
-        // }else{
-        //     return $request->all();
-        // }
-        // $path = $request->file->store('public/uploads');
-        // $data = Input::all();
-        // $fileContents = file_get_contents($request->file->get());
         Storage::makeDirectory('dokumen-annotate');
         $data = json_decode($request->file, true);
         Storage::put('dokumen-annotate/'.$request->name.'.json', json_encode($data));
-        // Storage::move($sourcePath, $destinationPath);
-        // $file = Storage::putFileAs('dokumen-annotate', new File(json_encode($data)), 'annotate_'.$request->name.'.json' );
+
         $rules['json_annotate'] = 'dokumen-annotate/'.$request->name.'.json';
+        $rules['sign_first'] = '1';
 
         $pdf = Laporan::find($request->fileId);
         $pdf->update($rules);
 
         return $pdf;
+    }
+
+    public function previewPdf($id){
+        return view('dashboard.preview-pdf',[
+            'laporan' => Laporan::find($id)->get()
+        ]);
+    }
+
+    public function saveAndRedirect(){
+        return redirect('/dashboard/laporan')->with('success', 'Dokumen Laporan berhasil didownload!');       
     }
 }

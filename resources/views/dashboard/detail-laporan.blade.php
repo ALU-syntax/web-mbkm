@@ -126,8 +126,24 @@
                             </div>
                             @endif
                         </div>
-                        @if($laporan[0]->status == "Diterima")
+                        @if($laporan[0]->status == "Diterima" && $laporan[0]->sign_first == 0)
                         <a href="/dashobard/laporan/view-pdf/{{ $laporan[0]->id }}" class="btn btn-outline-primary col-12">Sign Dokumen</a>
+                        @endif
+                        
+                        @if($laporan[0]->sign_first == 1 && $laporan[0]->sign_second == 0)
+                            <a  class="btn btn-outline-secondary col-12" disabled>View & Download</a>
+                            <i>Dosen Pembimbing Belum Tanda Tangan </i>
+                        @endif
+                        @if($laporan[0]->sign_second == 1 && $laporan[0]->third == 0)
+                            <a class="btn btn-outline-secondary col-12" disabled>View & Download</a>
+                            <i>Pembimbing Industri Belum Tanda Tangan </i>
+                        @endif
+                        @if($laporan[0]->sign_third == 1 && $laporan[0]->sign_fourth == 0)
+                            <a class="btn btn-outline-secondary col-12" disabled>View & Download</a>
+                            <i>KPS Belum Tanda Tangan </i>
+                        @endif
+                        @if($laporan[0]->sign_first == 1 && $laporan[0]->sign_second == 1 && $laporan[0]->sign_third == 1 && $laporan[0]->fourth == 1)
+                            <a href="/dashboard/laporan/preview/{{ $laporan[0]->id }}" class="btn btn-outline-primary col-12" disabled>View & Download</a>
                         @endif
                     </div>
                 @else

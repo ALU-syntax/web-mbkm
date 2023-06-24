@@ -22,14 +22,14 @@
 		<span>SIMBKM Signature</span>
 	</div>
 
-	<div class="tool">
+	{{-- <div class="tool">
 		  <div class="tool-button d-flex ">
 		  	<input type="text" id="txt" style="border-radius: 5px;" hidden>
 			<small>signpad-></small>
 		  </div>
-	</div>
+	</div> --}}
 
-	<div class="tool">
+	{{-- <div class="tool">
 		<button class="tool-button"><i class="fa fa-picture-o" title="Add an Image" onclick="addImage(event)"></i></button>
 	</div>
 
@@ -43,15 +43,13 @@
 
 	<div class="tool">
 		<button class="btn btn-danger btn-sm" onclick="clearPage()">Clear Page</button>
-	</div>
+	</div> --}}
 
-	<div class="tool">
-		{{-- <form action="/dashboard/laporan/save-document" method="POST" enctype="multipart/form-data">
-			@csrf
-			<input id="dokumen" name="dokumen" type="text" value="{{ $laporan[0]->id }}" hidden>
-			<button class="btn btn-light btn-sm"><i class="fa fa-save"></i> Save</button>
-		</form> --}}
-		<button id="saveFile" class="btn btn-light btn-sm"><i class="fa fa-save"></i> Save</button>
+	<div class="tool d-flex justify-content-between">
+        <form action="/dashboard/laporan/download" method="GET">
+            <button class="btn btn-light btn-sm"><i class="fa fa-save"></i> Return</button>
+        </form>
+		<button id="saveFile" class="btn btn-light btn-sm"><i class="fa fa-save"></i> Download</button>
 	</div>
 </div>
 <div id="pdf-container"></div>
@@ -221,23 +219,16 @@
 		var dataAnnotate;
 
 		function fetchSaveData(page, oldData, newData){
-			if(dataAnnotate != undefined || dataAnnotate != null){
-				var dynamicVariableName = "annotate";
-				var variableValue = dataAnnotate;
+			var dynamicVariableName = "annotate";
+			var variableValue = dataAnnotate;
 
-				// Create a variable with a dynamic name
-				window[dynamicVariableName] = variableValue;
-				let lastIndex = annotate.pages.length - 1;
-				annotate.pages[page - 1] = newData;
-				annotate.pages[lastIndex] = oldData;
+			// Create a variable with a dynamic name
+			window[dynamicVariableName] = variableValue;
+			let lastIndex = annotate.pages.length - 1;
+			annotate.pages[page - 1] = newData;
+			annotate.pages[lastIndex] = oldData;
 
-				let dataJson = JSON.stringify(annotate);
-				$('#saveFile').click(function(){
-					pdf.saveToServer('{{url('/dashboard/laporan/save-document')}}', CSRF_TOKEN, dokName, dokValue, dataJson);
-					window.location.href = '/dashboard/laporan';
-				});
-			}
-			
+			let dataJson = JSON.stringify(annotate);
 			// pdf.saveToServer('{{url('/dashboard/laporan/save-document')}}', CSRF_TOKEN, dokName, dokValue, string);
 			
 			
@@ -287,27 +278,23 @@
 
 							fetchSaveData(page, basicData, newData);
 
-							if(dataAnnotate == null || dataAnnotate == undefined){
-								pdf.serializePdf(function(string){
-									let json = JSON.parse(string);
-									let lastIndex = json.pages.length - 1;
-									json.pages[page - 1] = newData;
-									json.pages[lastIndex] = oldData;
-
-									let dataJson = JSON.stringify(json);
-									// pdf.saveToServer('{{url('/dashboard/laporan/save-document')}}', CSRF_TOKEN, dokName, dokValue, dataJson);
-									// pdf.saveToServer('{{url('/dashboard/laporan/save-document')}}', CSRF_TOKEN, dokName, dokValue, string);
-								});
-								$('#saveFile').click(function(){
-									pdf.saveToServer('{{url('/dashboard/laporan/save-document')}}', CSRF_TOKEN, dokName, dokValue, dataJson);
-									window.location.href = '/dashboard/laporan';
-								});
-							}
-							
+                            $('#saveFile').click(function(){
+                                pdf.savePdf(dokName);
+                                console.log('redirect masuk');
+                            });
 
 							// $('#saveFile').click(function(){
 								
-							// 	// 
+							// 	// pdf.serializePdf(function(string){
+							// 	// 	// let json = JSON.parse(string);
+							// 	// 	// let lastIndex = json.pages.length - 1;
+							// 	// 	// json.pages[page - 1] = newData;
+							// 	// 	// json.pages[lastIndex] = oldData;
+
+							// 	// 	// let dataJson = JSON.stringify(json);
+							// 	// 	// pdf.saveToServer('{{url('/dashboard/laporan/save-document')}}', CSRF_TOKEN, dokName, dokValue, dataJson);
+							// 	// 	// pdf.saveToServer('{{url('/dashboard/laporan/save-document')}}', CSRF_TOKEN, dokName, dokValue, string);
+							// 	// });
 							// 	// pdf.saveToServer('{{url('/dashboard/laporan/save-document')}}', CSRF_TOKEN, dokName, dokValue);
 							// 	// console.log(pdf.serializePdf());
 							// 	// pdf.saveToServer('{{url('/dashboard/laporan/save-document')}}');

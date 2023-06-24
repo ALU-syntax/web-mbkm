@@ -1,5 +1,13 @@
 @extends('layout.dashboard')
 @section('container')
+
+@if(session()->has('success'))
+  <div class="alert alert-success col-lg-8" role="alert">
+    {{ session('success') }}
+  </div>
+@endif
+
+
 <div class="row">
     <div class="col-12">
         <div class="card mb-4">

@@ -54,9 +54,14 @@ function deleteSelectedObject(event) {
   pdf.deleteSelectedObject();
 }
 
-function savePDF() {
+function savePDF(name) {
   // pdf.savePdf();
-  pdf.savePdf('output.pdf'); // save with given file name
+  pdf.savePdf(name); // save with given file name
+}
+
+function downloadAndRedirect(fileName, redirect){
+  pdf.savePdf(fileName);
+  window.location.href = redirect;
 }
 
 function clearPage() {

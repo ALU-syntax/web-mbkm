@@ -268,6 +268,8 @@ PDFAnnotate.prototype.addImageFromSignPad = function () {
 PDFAnnotate.prototype.deleteSelectedObject = function () {
   var inst = this;
   var activeObject = inst.fabricObjects[inst.active_canvas].getActiveObject();
+  console.log('ini hapus gambar');
+  console.log(activeObject);
   if (activeObject) {
     if (confirm('Are you sure ?')) {
       inst.fabricObjects[inst.active_canvas].remove(activeObject);
@@ -489,18 +491,12 @@ PDFAnnotate.prototype.saveToServer = function (link, token, name, id, json) {
       
       const myFile = blobToFile(URL.createObjectURL(blob), name);
       
-      // var json;
-      // pdf.serializePdf(function(string){
-      //   json = string;
-      // });
-      
       // var blobUrl = URL.createObjectURL(blobPDF);
       var blobUrl = URL.createObjectURL(blobPDF);
       var file = new File([blobUrl], name, { type: "application/json"});
       // var file = new File([blob], name);
       
       var fileName = name.split('.').slice(0, -1).join('.'); // Remove the extension
-      console.log(fileName);
       var formData = new FormData();
       
       formData.append('fileId', id);
