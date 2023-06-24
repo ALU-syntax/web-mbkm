@@ -67,7 +67,7 @@
       @endif
 
       {{-- Dosbing SIDEBAR VIEW --}}
-      @if(auth()->user()->roles->name == "Dosen Pembimbing" || auth()->user()->role == "1")
+      @if(auth()->user()->roles->name == "Dosen Pembimbing" || auth()->user()->role_kedua == "4" || auth()->user()->role_ketiga == "4" || auth()->user()->role == "1")
       <li class="nav-item mt-3">
         <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Dosen Pembimbing Pages</h6>
       </li>
@@ -86,20 +86,51 @@
           </div>
           <span class="nav-link-text ms-1">Logbook</span>
         </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link @if($active == 'Laporan Dosbing') active @endif" href="/laporan/dosbing">
-        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-          <i class="ni ni-books text-primary text-sm opacity-10"></i>
-        </div>
-        <span class="nav-link-text ms-1">Laporan</span>
-      </a>
-  </li>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link @if($active == 'Laporan Dosbing') active @endif" href="/laporan/dosbing">
+          <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+            <i class="ni ni-books text-primary text-sm opacity-10"></i>
+          </div>
+          <span class="nav-link-text ms-1">Laporan</span>
+        </a>
+      </li>
       @endif
+
+       {{-- Pembimbing Industri SIDEBAR VIEW --}}
+       @if(auth()->user()->roles->name == "Pembimbing Industri" || auth()->user()->roleKedua->name == "Pembimbing Industri" || auth()->user()->roleKetiga->name == "Pembimbing Industri" || auth()->user()->role == "1")
+       <li class="nav-item mt-3">
+         <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Pembimbing Industri Pages</h6>
+       </li>
+       <li class="nav-item">
+           <a class="nav-link @if($active == 'Dashboard Pembimbing Industri') active @endif" href="/dashboard/pi">
+             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+               <i class="ni ni-building text-primary text-sm"></i>
+             </div>
+             <span class="nav-link-text ms-1">Dashboard</span>
+           </a>
+       </li>
+       <li class="nav-item">
+        <a class="nav-link @if($active == 'Logbook Pembimbing Industri') active @endif" href="/logbook/pi">
+          <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+            <i class="ni ni-book-bookmark text-secondary text-sm opacity-10"></i>
+          </div>
+          <span class="nav-link-text ms-1">Logbook</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link @if($active == 'Laporan Pembimbing Industri') active @endif" href="/laporan/pi">
+          <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+            <i class="ni ni-books text-primary text-sm opacity-10"></i>
+          </div>
+          <span class="nav-link-text ms-1">Laporan</span>
+        </a>
+      </li>
+       @endif
 
 
       {{-- KPS SIDEBAR VIEW --}}
-      @if(auth()->user()->roles->name == "KPS" || auth()->user()->role == "1")
+      @if(auth()->user()->roles->name == "KPS" || auth()->user()->role_kedua == "3" || auth()->user()->role_ketiga == "3" || auth()->user()->role == "1")
       <li class="nav-item mt-3">
         <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">KPS Pages</h6>
       </li>
@@ -130,7 +161,7 @@
       @endif
 
       {{-- ADMIN SIDEBAR VIEW --}}
-      @if(auth()->user()->role == "1" || auth()->user()->role == "2")
+      @if(auth()->user()->role == "1")
       <li class="nav-item mt-3">
         <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Admin pages</h6>
       </li>

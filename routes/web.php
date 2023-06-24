@@ -16,6 +16,7 @@ use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\DosbingController;
 use App\Http\Controllers\KpsController;
+use App\Http\Controllers\PembimbingIndustriController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginSSOController;
 
@@ -148,6 +149,12 @@ Route::post('/laporan/dosbing/view-pdf/approve/{file}', [DosbingController::clas
 Route::get('/dashboard/kps', [KpsController::class, 'dashboard'])->middleware('auth');
 Route::get('/logbook/kps', [KpsController::class, 'logbook'])->middleware('auth');
 // End Route KPS
+
+// Route Pembimbing Industri
+Route::get('/dashboard/pi', [PembimbingIndustriController::class, 'dashboard'])->middleware('auth');
+Route::get('/logbook/pi', [PembimbingIndustriController::class, 'logbook'])->middleware('auth');
+Route::get('/laporan/pi', [PembimbingIndustriController::class, 'laporan'])->middleware('auth');
+// End Route Pembimbing Industri
 
 // Utility Route
 Route::post('/api/fetch-jurusan', [DashboardController::class, 'fetchJurusan']);
