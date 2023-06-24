@@ -22,10 +22,12 @@ return new class extends Migration
             $table->date('tanggal_mulai');
             $table->date('tanggal_selesai');
             $table->string('tempat_program_perusahaan');
-            $table->string('lokasi_program');
+            $table->string('lokasi_program')->nullable();
             $table->string('program_keberapa');
             $table->string('mobilisasi')->nullable();
             $table->string('dosen_pembimbing')->nullable();
+            $table->string('pembimbing_industri')->nullable();
+            $table->string('informasi_tambahan')->nullable();
             $table->string('user');
             $table->timestamps();
         });

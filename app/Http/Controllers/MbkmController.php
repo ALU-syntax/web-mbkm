@@ -71,9 +71,12 @@ class MbkmController extends Controller
             'semester' => 'required',
             'program' => 'required',
             'tanggal_mulai' => 'required',
+            'mobilisasi' => 'nullable',
+            'lokasi_program' => 'nullable',
+            'pembimbing_industri' => 'nullable',
+            'informasi_tambahan' => 'nullable',
             'tanggal_selesai' => 'required',
             'tempat_program_perusahaan' => 'required',
-            'lokasi_program' => 'required',
             'program_keberapa' => 'required',
         ]);
 

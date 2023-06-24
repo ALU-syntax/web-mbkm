@@ -38,7 +38,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Woodie',
             'email' => 'woodiechek@gmail.com',
             'password' => bcrypt('woodiechek911'),
-            'role' => '2',
+            'role' => '1',
             'fakultas_id' => '1',
             'jurusan_id' => '1',
             'status' => '1' 
@@ -48,7 +48,27 @@ class DatabaseSeeder extends Seeder
             'name' => 'Professor Albert Einstein',
             'email' => 'einstein@gmail.com',
             'password' => bcrypt('123456'),
+            'role' => '4',
+            'fakultas_id' => '1',
+            'jurusan_id' => '1',
+            'status' => '1' 
+        ]);
+
+        User::create([
+            'name' => 'KPS',
+            'email' => 'kps@gmail.com',
+            'password' => bcrypt('123456'),
             'role' => '3',
+            'fakultas_id' => '1',
+            'jurusan_id' => '1',
+            'status' => '1' 
+        ]);
+
+        User::create([
+            'name' => 'Pembimbing Industri',
+            'email' => 'pi@gmail.com',
+            'password' => bcrypt('123456'),
+            'role' => '6',
             'fakultas_id' => '1',
             'jurusan_id' => '1',
             'status' => '1' 
@@ -60,12 +80,27 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Role::create([
-            'name' => 'Admin',
+            'name' => 'Wadir',
+            'status' => 'Aktif'
+        ]);
+
+        Role::create([
+            'name' => 'KPS',
             'status' => 'Aktif'
         ]);
 
         Role::create([
             'name' => 'Dosen Pembimbing',
+            'status' => 'Aktif'
+        ]);
+
+        Role::create([
+            'name' => 'Pembimbing Akademik',
+            'status' => 'Aktif'
+        ]);
+
+        Role::create([
+            'name' => 'Pembimbing Industri',
             'status' => 'Aktif'
         ]);
 

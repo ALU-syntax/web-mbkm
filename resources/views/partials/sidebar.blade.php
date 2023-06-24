@@ -98,6 +98,37 @@
       @endif
 
 
+      {{-- KPS SIDEBAR VIEW --}}
+      @if(auth()->user()->roles->name == "KPS" || auth()->user()->role == "1")
+      <li class="nav-item mt-3">
+        <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">KPS Pages</h6>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link @if($active == 'Dashboard KPS') active @endif" href="/dashboard/kps">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-building text-primary text-sm"></i>
+            </div>
+            <span class="nav-link-text ms-1">Dashboard</span>
+          </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link @if($active == 'Logbook KPS') active @endif" href="/logbook/kps">
+          <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+            <i class="ni ni-book-bookmark text-secondary text-sm opacity-10"></i>
+          </div>
+          <span class="nav-link-text ms-1">Logbook</span>
+        </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link @if($active == 'Forum') active @endif" href="/dashboard/forum">
+        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+          <i class="ni ni-world text-primary text-sm opacity-10"></i>
+        </div>
+        <span class="nav-link-text ms-1">Forum</span>
+      </a>
+    </li>
+      @endif
+
       {{-- ADMIN SIDEBAR VIEW --}}
       @if(auth()->user()->role == "1" || auth()->user()->role == "2")
       <li class="nav-item mt-3">

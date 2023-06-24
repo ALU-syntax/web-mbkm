@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('password')->nullable();
             $table->string('role')->nullable();
             $table->string('role_kedua')->nullable();
+            $table->string('role_ketiga')->nullable();
             $table->string('fakultas_id')->nullable();
             $table->string('jurusan_id')->nullable();
             $table->string('status')->default('Aktif');

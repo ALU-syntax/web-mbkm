@@ -146,7 +146,8 @@ class LoginSSOController extends Controller
             'nim' => 'required',
             'email' => 'required',
             'role' => 'required',
-            'role_kedua' => 'optional',
+            'role_kedua' => 'nullable',
+            'role_kedua' => 'nullable',
             'fakultas_id' => 'required',
             'jurusan_id' => 'required',
         ];

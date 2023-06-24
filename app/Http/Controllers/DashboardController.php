@@ -33,6 +33,8 @@ class DashboardController extends Controller
     }
 
     public function pendaftaranMBKM(){
+        $test = Laporan::where('owner', auth()->user()->id)->get();
+        // dd($test->count());
         
         return view('dashboard.informasi-mbkm', [
             'title' => 'Pendaftaran MBKM',
@@ -41,7 +43,9 @@ class DashboardController extends Controller
             'name' => auth()->user()->name,
             'fakultas' => Fakultas::where('status', 'Aktif')->get(),
             'programs' => ProgramMbkm::where('status', 'Aktif')->get(),
-            'dosbing' => User::where('role', '3')->orWhere('role_kedua', '3')->get()
+            'dosbing' => User::where('role', '4')->orWhere('role_kedua', '4')->orWhere('role_ketiga', '4')->get(),
+            'pembimbing_industri' => User::where('role', '6')->orWhere('role_kedua', '6')->orWhere('role_ketiga', '4')->get(),
+            'mbkm' => Laporan::where('owner', auth()->user()->id)->get()
 
         ]);
     }
