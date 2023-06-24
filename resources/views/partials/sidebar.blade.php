@@ -98,7 +98,7 @@
       @endif
 
        {{-- Pembimbing Industri SIDEBAR VIEW --}}
-       @if(auth()->user()->roles->name == "Pembimbing Industri" || auth()->user()->roleKedua->name == "Pembimbing Industri" || auth()->user()->roleKetiga->name == "Pembimbing Industri" || auth()->user()->role == "1")
+       @if(auth()->user()->roles->name == "Pembimbing Industri" || auth()->user()->role_kedua == "6" || auth()->user()->role_ketiga == "6" || auth()->user()->role == "1")
        <li class="nav-item mt-3">
          <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Pembimbing Industri Pages</h6>
        </li>
@@ -159,6 +159,52 @@
       </a>
     </li>
       @endif
+
+       {{-- Pembimbing Akademik SIDEBAR VIEW --}}
+       @if(auth()->user()->roles->name == "Pembimbing Akademik" || auth()->user()->roleKedua->name == "Pembimbing Akademik" || auth()->user()->roleKetiga->name == "Pembimbing Akademik" || auth()->user()->role == "1")
+       <li class="nav-item mt-3">
+         <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Pembimbing Akademik Pages</h6>
+       </li>
+       <li class="nav-item">
+           <a class="nav-link @if($active == 'Dashboard Pembimbing Akademik') active @endif" href="/dashboard/pa">
+             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+               <i class="ni ni-building text-primary text-sm"></i>
+             </div>
+             <span class="nav-link-text ms-1">Dashboard</span>
+           </a>
+       </li>
+       <li class="nav-item">
+        <a class="nav-link @if($active == 'Forum') active @endif" href="/dashboard/forum">
+          <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+            <i class="ni ni-world text-primary text-sm opacity-10"></i>
+          </div>
+          <span class="nav-link-text ms-1">Forum</span>
+        </a>
+      </li>
+       @endif
+
+       {{-- Wadir SIDEBAR VIEW --}}
+       @if(auth()->user()->roles->name == "Pembimbing Akademik" || auth()->user()->roleKedua->name == "Pembimbing Akademik" || auth()->user()->roleKetiga->name == "Pembimbing Akademik" || auth()->user()->role == "1")
+       <li class="nav-item mt-3">
+         <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Pembimbing Akademik Pages</h6>
+       </li>
+       <li class="nav-item">
+           <a class="nav-link @if($active == 'Dashboard Pembimbing Akademik') active @endif" href="/dashboard/pa">
+             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+               <i class="ni ni-building text-primary text-sm"></i>
+             </div>
+             <span class="nav-link-text ms-1">Dashboard</span>
+           </a>
+       </li>
+       <li class="nav-item">
+        <a class="nav-link @if($active == 'Forum') active @endif" href="/dashboard/forum">
+          <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+            <i class="ni ni-world text-primary text-sm opacity-10"></i>
+          </div>
+          <span class="nav-link-text ms-1">Forum</span>
+        </a>
+      </li>
+       @endif
 
       {{-- ADMIN SIDEBAR VIEW --}}
       @if(auth()->user()->role == "1")

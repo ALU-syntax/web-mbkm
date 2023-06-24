@@ -74,6 +74,16 @@ class DatabaseSeeder extends Seeder
             'status' => '1' 
         ]);
 
+        User::create([
+            'name' => 'Pembimbing Akademik',
+            'email' => 'pa@gmail.com',
+            'password' => bcrypt('123456'),
+            'role' => '5',
+            'fakultas_id' => '1',
+            'jurusan_id' => '1',
+            'status' => '1' 
+        ]);
+
         Role::create([
             'name' => 'Super Admin',
             'status' => 'Aktif'
