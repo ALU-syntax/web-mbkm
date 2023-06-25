@@ -30,4 +30,8 @@ class Mbkm extends Model
     public function listUser(){
         return $this->belongsTo(User::class, 'dosen_pembimbing');
     }
+
+    public function listPI(){
+        return $this->belongsTo(User::class, 'pembimbing_industri');
+    }
 }

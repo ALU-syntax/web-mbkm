@@ -14,7 +14,8 @@ use Illuminate\Support\Facades\DB;
 class DosbingController extends Controller
 {
     public function dashboard(){
-        $mbkm = Mbkm::where('dosen_pembimbing', auth()->user()->id)->distinct()->get('name');
+        $mbkm = Mbkm::where('dosen_pembimbing', auth()->user()->id)->latest()->get();
+        // dd($mbkm);
         $user = '';
 
         if(empty($mbkm)){
@@ -30,6 +31,16 @@ class DosbingController extends Controller
             'name' => auth()->user()->name,
             'mahasiswa' => $user
             
+        ]);
+    }
+
+    public function detailMahasiswa($id){
+        
+        return view('dashboard.dosbing.detail-mahasiswa', [
+            'title' => 'Dashboard',
+            'title_page' => 'Dashboard / Detail Mahasiswa',
+            'active' => 'Dashboard Dosbing',
+            'laporan' => Laporan::where('mbkm', $id)->with('listMbkm')->get()
         ]);
     }
 
@@ -137,6 +148,20 @@ class DosbingController extends Controller
         $laporan['status'] = 'Diterima';
         $laporan->update();
         return redirect('/laporan/dosbing')->with('success', 'Laporan Mahasiswa Berhasil Disetujui');
+
+    }
+
+    public function canceled(Request $request, $file){
+        $laporan = Laporan::find($file);
+
+        $laporan['status'] = 'Ditolak';
+        $laporan->update();
+
+        $commentLaporan = CommentLaporan::where('laporan', $laporan->id)->first();
+        $commentLaporan->body = $request->body;
+        $commentLaporan->update();
+
+        return redirect('/laporan/dosbing')->with('success', 'Laporan Mahasiswa Berhasil Ditolak');
 
     }
 

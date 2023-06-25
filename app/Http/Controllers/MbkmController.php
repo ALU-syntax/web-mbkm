@@ -51,7 +51,8 @@ class MbkmController extends Controller
             'title_page' => 'Program Mbkm / Edit',
             'active' => 'Program Mbkm',
             'name' => auth()->user()->name,
-            'program' => ProgramMbkm::find($id)
+            'program' => ProgramMbkm::find($id),
+            
         ]);
     }
 
@@ -125,7 +126,7 @@ class MbkmController extends Controller
             'title_page' => 'Informasi Mbkm / Form Mbkm Saya',
             'active' => 'Informasi MBKM',
             'name' => auth()->user()->name,
-            'mbkms' => Mbkm::where('user', auth()->user()->id)->get()
+            'mbkms' => Mbkm::where('user', auth()->user()->id)->with('listPI')->with('listUser')->get()
         ]);
     }
 
@@ -144,7 +145,8 @@ class MbkmController extends Controller
             'fakultas' => Fakultas::where('status', 'Aktif')->get(),
             'programs' => ProgramMbkm::where('status', 'Aktif')->get(),
             'jurusans' => Jurusan::where('status', 'Aktif')->get(),
-            'dosbing' => User::where('role', '3')->orWhere('role_kedua', '3')->get()
+            'dosbing' => User::where('role', '4')->orWhere('role_kedua', '4')->orWhere('role_ketiga', '4')->get(),
+            'pembimbing_industri' => User::where('role', '6')->orWhere('role_kedua', '6')->orWhere('role_ketiga', '6')->get(),
         ]);
     }
 
@@ -166,9 +168,12 @@ class MbkmController extends Controller
             'tanggal_mulai' => 'required',
             'tanggal_selesai' => 'required',
             'tempat_program_perusahaan' => 'required',
-            'lokasi_program' => 'required',
+            'lokasi_program' => 'nullable',
+            'mobilisasi' => 'nullable',
+            'pembimbin_industri' => 'nullable',
             'program_keberapa' => 'required',
-            'dosen_pembimbing' => 'required',
+            'dosen_pembimbing' => 'nullable',
+            'informasi_tambahan' => 'nullable',
         ];
 
         $form->update($request->validate($rules));

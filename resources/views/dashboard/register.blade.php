@@ -84,6 +84,21 @@
                                 @enderror
                             </div>
                             <div class="col-md-6 mb-3">
+                                <label for="role_ketiga" class="form-label">Role Ketiga</label>
+                                <select class="form-select @error('role_ketiga') is-invalid @enderror" id="role_ketiga" name="role_ketiga">
+                                    <option value="" disabled selected>Pilih Role Ketiga</option>
+                                    @foreach($roles as $role)
+                                        <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                    @endforeach
+                                </select>
+                                <small>*note:<i> optional</i></small>
+                                @error('role_ketiga')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                            <div class="col-md-6 mb-3">
                                 <label for="fakultas_id" class="form-label">Fakultas</label>
                                 <select class="form-select @error('fakultas_id') is-invalid @enderror" id="fakultas_id" name="fakultas_id" required>
                                     <option value="" disabled selected>Pilih Fakultas</option>

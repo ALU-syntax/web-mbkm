@@ -149,10 +149,22 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6" onload="radioClicked()" onclick="radioClicked()">
+                                <label for="">Mobilisasi</label>
+                                <div class="form-check mb-3" >
+                                    <input class="form-check-input" type="radio" name="mobilisasi" id="customRadio1" value="1" {{ $mbkm->mobilisasi == "1" ? 'checked' : '' }}>
+                                    <label class="custom-control-label" for="customRadio1">Iya</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="mobilisasi" id="customRadio2" value="0" {{ $mbkm->mobilisasi == "0" ? 'checked' : '' }}>
+                                    <label class="custom-control-label" for="customRadio2">Tidak</label>
+                                </div>
+                            </div>
+                            @if($mbkm->mobilisasi == "1")
+                            <div class="col-md-6" id="lokasi">
                                 <div class="form-group">
                                     <label for="lokasi_program" class="form-control-label">Lokasi Program</label>
-                                    <input class="form-control @error('lokasi_program') is-invalid @enderror" id="lokasi_program" type="text" name="lokasi_program" placeholder="Masukan Lokasi Program" value="{{ old('lokasi_program', $mbkm->lokasi_program) }}" required>
+                                    <input class="form-control @error('lokasi_program') is-invalid @enderror" id="lokasi_program" type="text" name="lokasi_program" placeholder="Masukan Lokasi Program" value="{{ old('lokasi_program', $mbkm->lokasi_program) }}">
                                     @error('lokasi_program')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -160,6 +172,20 @@
                                     @enderror
                                 </div>
                             </div>
+                            @else
+                            <div class="col-md-6" id="lokasi" hidden>
+                                <div class="form-group">
+                                    <label for="lokasi_program" class="form-control-label">Lokasi Program</label>
+                                    <input class="form-control @error('lokasi_program') is-invalid @enderror" id="lokasi_program" type="text" name="lokasi_program" placeholder="Masukan Lokasi Program" value="{{ old('lokasi_program', $mbkm->lokasi_program) }}">
+                                    @error('lokasi_program')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                            </div>
+                            @endif
+                            
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="program_keberapa" class="form-control-label">Pengambilan Program Ke-Berapa</label>
@@ -195,14 +221,47 @@
                                 <small>*note: <i>bisa dipilih nanti</i></small>
                                 <div id="reset">
                                     <span id="reset-btn" class="badge badge-pill badge-md bg-gradient-warning">Reset</span>
-                                    {{-- <button type="reset" id="reset-btn" class="btn btn-secondary m-btn m-btn--air m-btn--custom">Reset</button> --}}
-                                    {{-- <button  id="reset-btn" class="badge badge-pill badge-md bg-gradient-warning m-btn--air m-btn--custom">Reset</button> --}}
                                 </div>
                                 @error('dosen_pembimbing')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
                                 @enderror
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="pembimbing_industri" class="form-label">Pembimbing Industri</label>
+                                <select id="pembimbing_industri" class="form-select @error('pembimbing_industri') is-invalid @enderror" name="pembimbing_industri">
+                                    <option value="" disabled selected>Pilih Pembimbing Industri</option>
+                                    @foreach($pembimbing_industri as $pi)
+                                        @if(old('pembimbing_industri', $mbkm->pembimbing_industri) == $pi->id)
+                                            <option value="{{ $pi->id }}" selected>{{ $pi->name }}</option>
+                                        @else
+                                            <option value="{{ $pi->id }}">{{ $pi->name }}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                                <small>*note: <i>bisa dipilih nanti</i></small>
+                                <div id="reset">
+                                    <span id="reset-btn-pi" class="badge badge-pill badge-md bg-gradient-warning">Reset</span>
+                                    {{-- <button type="reset" id="reset-btn" class="btn btn-secondary m-btn m-btn--air m-btn--custom">Reset</button> --}}
+                                    {{-- <button  id="reset-btn" class="badge badge-pill badge-md bg-gradient-warning m-btn--air m-btn--custom">Reset</button> --}}
+                                </div>
+                                @error('pembimbing_industri')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="informasi_tambahan" class="form-control-label">Informasi Tambahan</label>
+                                    <input class="form-control @error('informasi_tambahan') is-invalid @enderror" id="informasi_tambahan" type="text" name="informasi_tambahan" placeholder="Masukan posisi program. ex: Frontend, HR, QC " value="{{ old('informasi_tambahan', $mbkm->informasi_tambahan) }}">
+                                    @error('informasi_tambahan')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
                             </div>
                         </div>
                         <hr class="horizontal dark">
@@ -223,9 +282,36 @@
             $('#dosen_pembimbing').val('').change();
         });
 
+        $( "#reset-btn-pi" ).click(function() {
+            // $('#m_select2_3').val('').change();
+            $('#pembimbing_industri').val('').change();
+        });
+
     </script>
 
     <script>
+        function radioClicked(){
+            let mobilisasiChoice = document.querySelector('input[name="mobilisasi"]:checked').value;
+            let lokasiProgram = document.getElementById('lokasi');
+            let lokasiProgramValue = document.getElementById('lokasi_program');
+            console.log(lokasiProgramValue.value);
+
+            switch (mobilisasiChoice) {
+            case '1':
+                lokasiProgram.removeAttribute("hidden");
+                break;
+
+            case '0':
+                lokasiProgram.setAttribute("hidden", true);
+                lokasiProgramValue.value = '' 
+                break;
+
+            default:
+                
+            }
+        };
+
+        radioClicked()
          $(document).ready(function () {
             
             $('#fakultas').on('change', function () {

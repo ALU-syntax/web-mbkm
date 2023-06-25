@@ -28,6 +28,8 @@ class RegisterController extends Controller
             'email' => 'required|unique:users',
             'password' => 'required|min:5|max:255',
             'role' => 'required',
+            'role_kedua' => 'nullable',
+            'role_ketiga' => 'nullable',
             'fakultas_id' => 'required',
             'jurusan_id' => 'required',
         ]);

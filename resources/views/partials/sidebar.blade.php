@@ -151,6 +151,14 @@
         </a>
     </li>
     <li class="nav-item">
+      <a class="nav-link @if($active == 'Laporan KPS') active @endif" href="/laporan/kps">
+        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+          <i class="ni ni-books text-primary text-sm opacity-10"></i>
+        </div>
+        <span class="nav-link-text ms-1">Laporan</span>
+      </a>
+    </li>
+    <li class="nav-item">
       <a class="nav-link @if($active == 'Forum') active @endif" href="/dashboard/forum">
         <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
           <i class="ni ni-world text-primary text-sm opacity-10"></i>
@@ -184,7 +192,7 @@
        @endif
 
        {{-- Wadir SIDEBAR VIEW --}}
-       @if(auth()->user()->roles->name == "Wadir" || auth()->user()->roleKedua->name == "Wadir" || auth()->user()->roleKetiga->name == "Wadir" || auth()->user()->role == "1")
+       @if(auth()->user()->roles->name == "Wadir" || auth()->user()->role_kedua == "2" || auth()->user()->role_ketiga == "2" || auth()->user()->role == "1")
        <li class="nav-item mt-3">
          <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Wadir Pages</h6>
        </li>

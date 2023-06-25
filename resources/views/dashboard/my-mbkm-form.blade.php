@@ -22,15 +22,19 @@
                         <tr>
                           <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama</th>
                           <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">NIM</th>
-                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Fakultas</th>
                           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Jurusan</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Prodi</th>
                           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Semester</th>
                           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Program</th>
                           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tanggal Mulai</th>
                           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tanggal Selesai</th>
                           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tempat Program Perusahaan</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Mobilisasi</th>
                           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Lokasi Program</th>
                           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Program Ke-</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Dosen Pembimbing</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Pembimbing Industri</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Informasi Tambahan</th>
                           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tanggal Dibuat</th>
                           <th class="text-secondary opacity-7"></th>
                         </tr>
@@ -66,12 +70,28 @@
                                     <p class="text-xs font-weight-bold mb-0">{{ $mbkm->tempat_program_perusahaan }}</p>
                                 </td>
                                 <td class="align-middle text-center text-sm">
+                                    @if($mbkm->mobilisasi == "1")
+                                        <p class="text-xs font-weight-bold mb-0">Iya</p>
+                                    @else
+                                        <p class="text-xs font-weight-bold mb-0">Tidak</p>
+                                    @endif
+                                    
+                                </td>
+                                <td class="align-middle text-center text-sm">
                                     <p class="text-xs font-weight-bold mb-0">{{ $mbkm->lokasi_program }}</p>
                                 </td>
                                 <td class="align-middle text-center text-sm">
                                     <p class="text-xs font-weight-bold mb-0">{{ $mbkm->program_keberapa }}</p>
                                 </td>
-                                
+                                <td class="align-middle text-center text-sm">
+                                    <p class="text-xs font-weight-bold mb-0">{{ $mbkm->listuser->name }}</p>
+                                </td>
+                                <td class="align-middle text-center text-sm">
+                                    <p class="text-xs font-weight-bold mb-0">{{ $mbkm->listPI->name }}</p>
+                                </td>
+                                <td class="align-middle text-center text-sm">
+                                    <p class="text-xs font-weight-bold mb-0">{{ $mbkm->informasi_tambahan }}</p>
+                                </td>
                                 <td class="align-middle text-center text-sm">
                                     <p class="text-xs font-weight-bold mb-0">{{ $mbkm->created_at }}</p>
                                 </td>

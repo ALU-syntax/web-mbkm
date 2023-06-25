@@ -72,12 +72,42 @@
                             <input class="form-control" id="tempat_program_perusahaan" type="text" name="tempat_program_perusahaan" value="{{ $laporan[0]->listMbkm->tempat_program_perusahaan }}" disabled>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="lokasi_program" class="form-control-label">Lokasi Program</label>
-                            <input class="form-control" id="lokasi_program" type="text" name="lokasi_program" value="{{ $laporan[0]->listMbkm->lokasi_program }}" disabled>
+                    <div class="col-md-6" onload="radioClicked()" onclick="radioClicked()">
+                        <label for="">Mobilisasi</label>
+                        <div class="form-check mb-3" >
+                            <input class="form-check-input" type="radio" name="mobilisasi" id="customRadio1" value="1" {{ $laporan[0]->listMbkm->mobilisasi == "1" ? 'checked' : '' }} disabled>
+                            <label class="custom-control-label" for="customRadio1">Iya</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="mobilisasi" id="customRadio2" value="0" {{ $laporan[0]->listMbkm->mobilisasi == "0" ? 'checked' : '' }} disabled>
+                            <label class="custom-control-label" for="customRadio2">Tidak</label>
                         </div>
                     </div>
+                    @if($laporan[0]->listMbkm->mobilisasi == "1")
+                        <div class="col-md-6" id="lokasi">
+                            <div class="form-group">
+                                <label for="lokasi_program" class="form-control-label">Lokasi Program</label>
+                                <input class="form-control @error('lokasi_program') is-invalid @enderror" id="lokasi_program" type="text" name="lokasi_program" placeholder="Masukan Lokasi Program" value="{{ old('lokasi_program', $laporan[0]->listMbkm->lokasi_program) }}" disabled>
+                                @error('lokasi_program')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                        </div>
+                        @else
+                        <div class="col-md-6" id="lokasi" hidden>
+                            <div class="form-group">
+                                <label for="lokasi_program" class="form-control-label">Lokasi Program</label>
+                                <input class="form-control @error('lokasi_program') is-invalid @enderror" id="lokasi_program" type="text" name="lokasi_program" placeholder="Masukan Lokasi Program" value="{{ old('lokasi_program', $laporan[0]->listMbkm->lokasi_program) }}" disabled>
+                                @error('lokasi_program')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                        </div>
+                    @endif
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="program_keberapa" class="form-control-label">Pengambilan Program Ke-Berapa</label>
@@ -87,10 +117,26 @@
                         </div>
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label for="dosen_pembimbing" class="form-label">Dosen Pembimbing / KPS</label>
+                        <label for="dosen_pembimbing" class="form-label">Dosen Pembimbing</label>
                         <select id="dosen_pembimbing" class="form-select" name="dosen_pembimbing" disabled>
                             <option value="" disabled selected>{{ $laporan[0]->listMbkm->listUser->name }}</option>
                         </select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="pembimbing_industri" class="form-label">Pembimbing Industri</label>
+                        <select id="pembimbing_industri" class="form-select" name="pembimbing_industri" disabled>
+                            @if($laporan[0]->listMbkm->listPI != null)
+                            <option value="" disabled selected>{{ $laporan[0]->listMbkm->listPI->name }}</option>
+                            @else
+                            <option value="" disabled selected></option>
+                            @endif        
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="informasi_tambahan" class="form-control-label">Informasi Tambahan</label>
+                            <input class="form-control" id="informasi_tambahan" type="text" name="informasi_tambahan" value="{{ $laporan[0]->listMbkm->informasi_tambahan }}" disabled>
+                        </div>
                     </div>
                 @if($laporan[0]->dokumen_path != null)
                     <div class="row mt-5">

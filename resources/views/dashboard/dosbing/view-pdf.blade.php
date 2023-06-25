@@ -25,10 +25,12 @@
 			@csrf
 			<button class="btn btn-success btn-sm" ><i class="fa fa-check"></i> Terima</button>
 		</form>
-		<form action="">
+		<button  type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#canceledModal" ><i class="fa fa-minus"></i>Tolak</button>
+
+		{{-- <form action="">
 			@csrf
 			<button class="btn btn-danger btn-sm" ><i class="fa fa-minus"></i> Tolak</button>
-		</form>
+		</form> --}}
 	</div>
 </div>
 <div id="pdf-container"></div>
@@ -50,6 +52,33 @@
 		</div>
 	</div>
 </div>
+
+{{-- Modal Canceled Document --}}
+<div class="modal fade" id="canceledModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title" id="exampleModalLabel">Comment Laporan</h5>
+		  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		  </button>
+		</div>
+		<div class="modal-body">
+		  <form action="/laporan/dosbing/view-pdf/canceled/{{  $laporan[0]->id  }}" method="post" id="canceled">
+			@csrf
+			<div class="form-group">
+			  <label for="body" class="col-form-label">Pesan:</label>
+			  <textarea class="form-control" id="body" name="body" autofocus required></textarea>
+			</div>
+		  </form>
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		  <button type="submit" class="btn btn-primary" form="canceled">Send message</button>
+		</div>
+	  </div>
+	</div>
+  </div>
 
 {{-- Modal Sign Pad --}}
 
