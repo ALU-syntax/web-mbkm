@@ -142,6 +142,7 @@ Route::get('/logbook/dosbing/', [DosbingController::class, 'logbook'])->middlewa
 Route::get('/logbook/dosbing/list-logbook/{id}', [DosbingController::class, 'listLogbookMahasiswa'])->middleware('auth');
 Route::get('/logbook/dosbing/detail/{id}', [DosbingController::class, 'detailLogbook'])->middleware('auth');
 Route::get('/logbook/dosbing/detail/logbook-mahasiswa/{id}', [DosbingController::class, 'logLogbook'])->middleware('auth');
+Route::post('/logbook/dosbing/detail/finish/{id}', [DosbingController::class, 'logbookFinish'])->middleware('auth');
 Route::get('/laporan/dosbing', [DosbingController::class, 'laporan'])->middleware('auth');
 Route::get('/laporan/dosbing/{id}', [DosbingController::class, 'listLaporan'])->middleware('auth');
 Route::get('/laporan/dosbing/detail/{id}', [DosbingController::class, 'detailLaporan'])->middleware('auth');

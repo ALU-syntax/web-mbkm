@@ -74,7 +74,7 @@ class DosbingController extends Controller
 
     public function detailLogbook($id){
         $logbook = Logbook::with('listMbkm')->where('mbkm', $id)->get();
-        // dd($logbook[0]->name);
+        // dd($logbook);
         $log_logbook = LogLogbook::where('logbook', $logbook[0]->id)->get();
         // dd($log_logbook);
         return view('dashboard.dosbing.detail-logbook',[
@@ -89,13 +89,24 @@ class DosbingController extends Controller
 
     public function logLogbook($id){
         $logbook = LogLogbook::find($id);
-        // dd($logbook);
         return view('dashboard.dosbing.log-logbook',[
             'title' => 'Logbook',
             'title_page' => 'Logbook / Mahasiswa / Log-Logbook',
             'active' => 'Dosbing Logbook',
             'logbook' => $logbook
         ]);
+    }
+
+    public function logbookFinish($id){
+        $log_logbook = LogLogbook::find($id);
+        $log_logbook['status'] = '1';
+        $log_logbook->update();
+
+        $logbook = Logbook::find($log_logbook->logbook);
+        $mbkm = Mbkm::find($logbook->mbkm);
+        // dd($mbkm->id);
+        
+        return redirect('/logbook/dosbing/detail/'.$mbkm->id)->with('success', 'Logbook Mahasiswa sudah dibaca');
     }
 
     public function laporan(){

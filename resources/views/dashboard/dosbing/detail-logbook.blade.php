@@ -1,6 +1,13 @@
 @extends('layout.dashboard')
 @section('container')
 
+
+@if(session()->has('success'))
+  <div class="alert alert-success col-lg-8" role="alert">
+    {{ session('success') }}
+  </div>
+@endif
+
 <div class="row">
     <div class="col-12">
         <div class="card mb-4">
@@ -18,6 +25,7 @@
                         <tr >
                           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">Week.</th>
                           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">Tanggal</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">Status</th>
                           <th class="text-secondary opacity-7 col-2"></th>
                         </tr>
                       </thead>
@@ -30,9 +38,27 @@
                                 <td class="text-sm text-center ">
                                     <p class="text-xs font-weight-bold mb-0">{{ $data->tanggal_dibuat }}</p>
                                 </td>
+                                @if($data->status == 0)
+                                  <td class="text-sm text-center ">
+                                    <span class="badge badge-sm bg-gradient-secondary">Belum dibaca</span>
+                                  </td>
+                                @else  
+                                  <td class="text-sm text-center ">
+                                    <span class="badge badge-sm bg-gradient-success">Sudah dibaca</span>
+                                  </td>
+                                @endif
                                 <td class="align-middle text-center text-sm ">
                                   <td>
                                     <a href="/logbook/dosbing/detail/logbook-mahasiswa/{{ $data->id }}" ><span class="badge badge-primary"></span><i class="fa fa-regular fa-eye" style="color: #3eeefe;"></i></a>
+                                    @if($data->status == 0)
+                                    <form action="/logbook/dosbing/detail/finish/{{ $data->id }}" method="post" class="d-inline">
+                                      @csrf
+                                      <button class="border-0 bg-transparent" onclick="return confirm('Are you sure?')">
+                                        <span class="badge badge-danger"></span>
+                                        <i class="fa fa-solid fa-check" style="color: #669c35;"></i>
+                                      </button>
+                                    </form>
+                                    @endif
                                   </td>
                                 </td>
                           @endforeach
