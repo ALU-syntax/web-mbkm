@@ -66,7 +66,7 @@ class DosbingController extends Controller
         return view('dashboard.dosbing.list-logbook', [
             'title' => 'Logbook',
             'title_page' => 'Logbook / Mahasiswa',
-            'active' => 'Dosbing Logbook',
+            'active' => 'Logbook Dosbing',
             'name' => auth()->user()->name,
             'logbooks' => Logbook::with('listMbkm')->where('mbkm', $id)->get()
         ]);
@@ -80,7 +80,7 @@ class DosbingController extends Controller
         return view('dashboard.dosbing.detail-logbook',[
             'title' => 'Logbook',
             'title_page' => 'Logbook / Mahasiswa / Detail',
-            'active' => 'Dosbing Logbook',
+            'active' => 'Logbook Dosbing',
             'name' => auth()->user()->name,
             'owner' =>  $logbook[0]->name,
             'log_logbook' => $log_logbook,
@@ -92,7 +92,7 @@ class DosbingController extends Controller
         return view('dashboard.dosbing.log-logbook',[
             'title' => 'Logbook',
             'title_page' => 'Logbook / Mahasiswa / Log-Logbook',
-            'active' => 'Dosbing Logbook',
+            'active' => 'Logbook Dosbing',
             'logbook' => $logbook
         ]);
     }

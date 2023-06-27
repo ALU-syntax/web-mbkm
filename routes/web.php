@@ -154,6 +154,9 @@ Route::post('/laporan/dosbing/view-pdf/canceled/{file}', [DosbingController::cla
 // Route KPS
 Route::get('/dashboard/kps', [KpsController::class, 'dashboard'])->middleware('auth');
 Route::get('/logbook/kps', [KpsController::class, 'logbook'])->middleware('auth');
+Route::get('/logbook/kps/list/{id}', [KpsController::class, 'listLogbook'])->middleware('auth');
+Route::get('/logbook/kps/list/detail/{id}', [KpsController::class, 'logLogbook'])->middleware('auth');
+Route::post('/logbook/kps/list/detail/finish/{id}', [KpsController::class, 'logbookFinish'])->middleware('auth');
 Route::get('/laporan/kps', [KpsController::class, 'laporan'])->middleware('auth');
 Route::get('/laporan/kps/detail/{id}', [KpsController::class, 'detailMahasiswa'])->middleware('auth');
 // End Route KPS

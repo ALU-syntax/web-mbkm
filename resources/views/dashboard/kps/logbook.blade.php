@@ -18,6 +18,7 @@
                         <tr >
                           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">No.</th>
                           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">Nama</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">Program Berjalan</th>
                           <th class="text-secondary opacity-7 col-2"></th>
                         </tr>
                       </thead>
@@ -30,10 +31,14 @@
                                 <td class="text-sm text-center ">
                                     <p class="text-xs font-weight-bold mb-0">{{ $data->name }}</p>
                                 </td>
+                                <td class="text-sm text-center ">
+                                  <p class="text-xs font-weight-bold mb-0">{{ $data->program_keberapa }}</p>
+                              </td>
                                 <td class="align-middle text-center text-sm ">
                                   <td>
-                                    <a href="/logbook/dosbing/detail/{{ $data->id }}" ><span class="badge badge-primary"></span><i class="fa fa-regular fa-eye" style="color: #3eeefe;"></i></a>
+                                    <a href="/logbook/kps/list/{{ $data->id }}" ><span class="badge badge-primary"></span><i class="fa fa-regular fa-eye" style="color: #3eeefe;"></i></a>
                                   </td>
+                                  
                                 </td>
                           @endforeach
                       </tbody>
