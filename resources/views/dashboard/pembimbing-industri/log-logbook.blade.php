@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div class="card-body">
-                <form  action="/logbook/dosbing/detail/finish/{{ $logbook[0]->id }}" method="POST">
+                <form  action="/logbook/pi/detail/finish/{{ $logbook[0]->id }}" method="POST">
                   @csrf
                   <div class="row">
                     <div class="col-md-4">

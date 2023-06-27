@@ -18,8 +18,9 @@
                       <thead>
                         <tr class="row">
                           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-2">No.</th>
-                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-10">Nama</th>
-                          {{-- <th class="text-secondary opacity-7"></th> --}}
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-6">Nama</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-2">Program Berjalan</th>
+                          <th class="text-secondary opacity-7 col-2"></th>
                         </tr>
                       </thead>
                       <tbody>
@@ -28,21 +29,15 @@
                                 <td class="align-middle text-center text-sm col-2">
                                     <p class="text-xs font-weight-bold mb-0">{{ $loop->iteration }}</p>
                                 </td>
-                                <td class="text-sm text-center col-10">
+                                <td class="text-sm text-center col-6">
                                     <p class="text-xs font-weight-bold mb-0">{{ $data->name }}</p>
                                 </td>
-                                {{-- <td class="align-middle text-center text-sm">
-                                  <td>
-                                    <a href="/dashboard/fakultas/" ><span class="badge badge-primary"></span><i class="fa fa-regular fa-pen" style="color: #fecb3e;"></i></a>
-                                    <form action="/dashboard/fakultas//delete" method="post" class="d-inline">
-                                      @csrf
-                                      <button class="border-0 bg-transparent" onclick="return confirm('Data Jurusan dari Fakultas yang bersangkutan akan ikut terhapus secara permanen, Apakah kamu yakin?')">
-                                        <span class="badge badge-danger"></span>
-                                        <i class="fa fa-solid fa-trash" style="color: #bf0040;"></i>
-                                      </button>
-                                    </form>
-                                  </td>
-                                </td> --}}
+                                <td class="text-sm text-center col-2">
+                                  <p class="text-xs font-weight-bold mb-0">{{ $data->program_keberapa }}</p>
+                                </td>
+                                <td class="text-sm text-center col-2">
+                                  <a href="/dashboard/pi/detail-mahasiswa/{{ $data->id }}" ><span class="badge badge-primary"></span><i class="fa fa-regular fa-eye" style="color: #3eeefe;"></i></a>
+                                </td>
                           @endforeach
                       </tbody>
                     </table>

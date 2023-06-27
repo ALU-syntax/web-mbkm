@@ -163,12 +163,15 @@ Route::post('/logbook/kps/list/detail/finish/{id}', [KpsController::class, 'logb
 Route::get('/laporan/kps', [KpsController::class, 'laporan'])->middleware('auth');
 Route::get('/laporan/kps/{id}', [KpsController::class, 'listLaporan'])->middleware('auth');
 Route::get('/laporan/kps/detail/{id}', [KpsController::class, 'detailLaporan'])->middleware('auth');
-
 // End Route KPS
 
 // Route Pembimbing Industri
 Route::get('/dashboard/pi', [PembimbingIndustriController::class, 'dashboard'])->middleware('auth');
+Route::get('/dashboard/pi/detail-mahasiswa/{id}', [PembimbingIndustriController::class, 'detailMahasiswa'])->middleware('auth');
 Route::get('/logbook/pi', [PembimbingIndustriController::class, 'logbook'])->middleware('auth');
+Route::get('/logbook/pi/detail/{id}', [PembimbingIndustriController::class, 'detailLogbook'])->middleware('auth');
+Route::get('/logbook/pi/detail/logbook-mahasiswa/{id}', [PembimbingIndustriController::class, 'logLogbook'])->middleware('auth');
+Route::post('/logbook/pi/detail/finish/{id}', [PembimbingIndustriController::class, 'logbookFinish'])->middleware('auth');
 Route::get('/laporan/pi', [PembimbingIndustriController::class, 'laporan'])->middleware('auth');
 // End Route Pembimbing Industri
 

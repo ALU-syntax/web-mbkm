@@ -80,7 +80,7 @@ class DosbingController extends Controller
         // dd($log_logbook);
         return view('dashboard.dosbing.detail-logbook',[
             'title' => 'Logbook',
-            'title_page' => 'Logbook / Mahasiswa / Detail',
+            'title_page' => 'Logbook / Mahasiswa',
             'active' => 'Logbook Dosbing',
             'name' => auth()->user()->name,
             'owner' =>  $logbook[0]->name,
@@ -89,10 +89,12 @@ class DosbingController extends Controller
     }
 
     public function logLogbook($id){
-        $logbook = LogLogbook::find($id);
+        // $logbook = LogLogbook::find($id);
+        $logbook = LogLogbook::with('listOwner')->where('id', $id)->get();
+        // dd($logbook);
         return view('dashboard.dosbing.log-logbook',[
             'title' => 'Logbook',
-            'title_page' => 'Logbook / Mahasiswa / Log-Logbook',
+            'title_page' => 'Logbook / Mahasiswa / Detail',
             'active' => 'Logbook Dosbing',
             'logbook' => $logbook
         ]);
