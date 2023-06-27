@@ -8,6 +8,8 @@ use App\Models\Laporan;
 use App\Models\Logbook;
 use App\Models\LogLogbook;
 use Illuminate\Http\Request;
+use App\Models\CommentLaporan;
+use Illuminate\Support\Facades\Storage;
 
 class PembimbingIndustriController extends Controller
 {
@@ -112,5 +114,45 @@ class PembimbingIndustriController extends Controller
             'name' => auth()->user()->name,
             'mahasiswa' => $user
         ]);
+    }
+
+    public function listLaporan($id){
+        return view('dashboard.pembimbing-industri.list-laporan', [
+            'title' => 'List Laporan',
+            'title_page' => 'Laporan / List Laporan',
+            'active' => 'Laporan Pembimbing Industri',
+            'laporans' => CommentLaporan::with('dataLaporan')->where('user', $id)->get()
+        ]);
+    }
+
+    public function detailLaporan($id){
+        $test = Laporan::find($id)->with('listMbkm')->get();
+        return view('dashboard.pembimbing-industri.detail-laporan', [
+            'title' => 'Laporan',
+            'title_page' => 'Laporan / Detail',
+            'active' => 'Laporan Pembimbing Industri',
+            'laporan' => Laporan::find($id)->with('listMbkm')->get(),
+            'logcomment' => CommentLaporan::all()->where('laporan', $id)
+        ]);
+    }
+
+    public function signPdf($id){
+        return view('dashboard.pembimbing-industri.sign-pdf',[
+            'laporan' => Laporan::find($id)->get()
+        ]);
+    }
+
+    public function savePdf(Request $request){
+        Storage::makeDirectory('dokumen-annotate');
+        $data = json_decode($request->file, true);
+        Storage::put('dokumen-annotate/'.$request->name.'.json', json_encode($data));
+
+        $rules['json_annotate'] = 'dokumen-annotate/'.$request->name.'.json';
+        $rules['sign_third'] = '1';
+
+        $pdf = Laporan::find($request->fileId);
+        $pdf->update($rules);
+
+        return $pdf;
     }
 }

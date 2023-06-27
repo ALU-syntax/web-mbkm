@@ -177,7 +177,7 @@
                             <a href="/laporan/dosbing/sign-pdf/{{ $laporan[0]->id }}" class="btn btn-outline-primary col-12">Sign Dokumen</a>
                             {{-- <i>Dosen Pembimbing Belum Tanda Tangan </i> --}}
                         @endif
-                        @if($laporan[0]->sign_second == 1 && $laporan[0]->third == 0)
+                        @if($laporan[0]->sign_second == 1 && $laporan[0]->sign_third == 0)
                             <a class="btn btn-outline-secondary col-12" disabled>View & Download</a>
                             <i>Pembimbing Industri Belum Tanda Tangan </i>
                         @endif

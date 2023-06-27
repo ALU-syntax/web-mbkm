@@ -9,6 +9,7 @@ use App\Models\Logbook;
 use App\Models\LogLogbook;
 use Illuminate\Http\Request;
 use App\Models\CommentLaporan;
+use Illuminate\Support\Facades\Storage;
 
 class KpsController extends Controller
 {
@@ -110,6 +111,26 @@ class KpsController extends Controller
             'laporan' => Laporan::find($id)->with('listMbkm')->get(),
             'logcomment' => CommentLaporan::all()->where('laporan', $id)
         ]);
+    }
+
+    public function signPdf($id){
+        return view('dashboard.kps.sign-pdf',[
+            'laporan' => Laporan::find($id)->get()
+        ]);
+    }
+
+    public function savePdf(Request $request){
+        Storage::makeDirectory('dokumen-annotate');
+        $data = json_decode($request->file, true);
+        Storage::put('dokumen-annotate/'.$request->name.'.json', json_encode($data));
+
+        $rules['json_annotate'] = 'dokumen-annotate/'.$request->name.'.json';
+        $rules['sign_fourth'] = '1';
+
+        $pdf = Laporan::find($request->fileId);
+        $pdf->update($rules);
+
+        return $pdf;
     }
     
 }

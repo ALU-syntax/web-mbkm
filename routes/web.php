@@ -163,6 +163,8 @@ Route::post('/logbook/kps/list/detail/finish/{id}', [KpsController::class, 'logb
 Route::get('/laporan/kps', [KpsController::class, 'laporan'])->middleware('auth');
 Route::get('/laporan/kps/{id}', [KpsController::class, 'listLaporan'])->middleware('auth');
 Route::get('/laporan/kps/detail/{id}', [KpsController::class, 'detailLaporan'])->middleware('auth');
+Route::get('/laporan/kps/detail/sign-pdf/{id}', [KpsController::class, 'signPdf'])->middleware('auth');
+Route::post('/laporan/kps/detail/save-pdf', [KpsController::class, 'savePdf'])->middleware('auth');
 // End Route KPS
 
 // Route Pembimbing Industri
@@ -173,6 +175,10 @@ Route::get('/logbook/pi/detail/{id}', [PembimbingIndustriController::class, 'det
 Route::get('/logbook/pi/detail/logbook-mahasiswa/{id}', [PembimbingIndustriController::class, 'logLogbook'])->middleware('auth');
 Route::post('/logbook/pi/detail/finish/{id}', [PembimbingIndustriController::class, 'logbookFinish'])->middleware('auth');
 Route::get('/laporan/pi', [PembimbingIndustriController::class, 'laporan'])->middleware('auth');
+Route::get('/laporan/pi/{id}', [PembimbingIndustriController::class, 'listLaporan'])->middleware('auth');
+Route::get('/laporan/pi/detail/{id}', [PembimbingIndustriController::class, 'detailLaporan'])->middleware('auth');
+Route::get('/laporan/pi/detail/sign-pdf/{id}', [PembimbingIndustriController::class, 'signPdf'])->middleware('auth');
+Route::post('/laporan/pi/detail/sign-pdf/save', [PembimbingIndustriController::class, 'savePdf'])->middleware('auth');
 // End Route Pembimbing Industri
 
 // Route Pembimbing Akademik
