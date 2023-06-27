@@ -149,16 +149,21 @@ Route::get('/laporan/dosbing/detail/{id}', [DosbingController::class, 'detailLap
 Route::get('/laporan/dosbing/view-pdf/{id}', [DosbingController::class, 'viewPdf'])->middleware('auth');
 Route::post('/laporan/dosbing/view-pdf/approve/{file}', [DosbingController::class, 'approveFile'])->middleware('auth');
 Route::post('/laporan/dosbing/view-pdf/canceled/{file}', [DosbingController::class, 'canceled'])->middleware('auth');
+Route::get('/laporan/dosbing/sign-pdf/{id}', [DosbingController::class, 'signPdf'])->middleware('auth');
+Route::post('/laporan/dosbing/sign-pdf/save', [DosbingController::class, 'savePdf'])->middleware('auth');
 // End Route Dosen Pembimbing
 
 // Route KPS
 Route::get('/dashboard/kps', [KpsController::class, 'dashboard'])->middleware('auth');
+Route::get('/dashboard/kps/detail/{id}', [KpsController::class, 'detailMahasiswa'])->middleware('auth');
 Route::get('/logbook/kps', [KpsController::class, 'logbook'])->middleware('auth');
 Route::get('/logbook/kps/list/{id}', [KpsController::class, 'listLogbook'])->middleware('auth');
 Route::get('/logbook/kps/list/detail/{id}', [KpsController::class, 'logLogbook'])->middleware('auth');
 Route::post('/logbook/kps/list/detail/finish/{id}', [KpsController::class, 'logbookFinish'])->middleware('auth');
 Route::get('/laporan/kps', [KpsController::class, 'laporan'])->middleware('auth');
-Route::get('/laporan/kps/detail/{id}', [KpsController::class, 'detailMahasiswa'])->middleware('auth');
+Route::get('/laporan/kps/{id}', [KpsController::class, 'listLaporan'])->middleware('auth');
+Route::get('/laporan/kps/detail/{id}', [KpsController::class, 'detailLaporan'])->middleware('auth');
+
 // End Route KPS
 
 // Route Pembimbing Industri

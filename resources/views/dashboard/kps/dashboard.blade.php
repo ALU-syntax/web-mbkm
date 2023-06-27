@@ -38,9 +38,7 @@
                                   <p class="text-xs font-weight-bold mb-0">{{ $data->program_keberapa }}</p>
                                 </td>
                                 <td class="text-sm text-center col-2">
-                                  <a href="/laporan/kps/detail/{{ $data->id }}" ><span class="badge badge-primary"></span><i class="fa fa-regular fa-eye" style="color: #3eeefe;"></i></a>
-                                  
-                                  
+                                  <a href="/dashboard/kps/detail/{{ $data->id }}" ><span class="badge badge-primary"></span><i class="fa fa-regular fa-eye" style="color: #3eeefe;"></i></a>
                                 </td>
                           @endforeach
                       </tbody>

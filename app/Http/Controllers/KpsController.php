@@ -8,6 +8,7 @@ use App\Models\Laporan;
 use App\Models\Logbook;
 use App\Models\LogLogbook;
 use Illuminate\Http\Request;
+use App\Models\CommentLaporan;
 
 class KpsController extends Controller
 {
@@ -25,7 +26,7 @@ class KpsController extends Controller
         return view('dashboard.kps.detail-mahasiswa', [
             'title' => 'Dashboard',
             'title_page' => 'Dashboard / Detail Mahasiswa',
-            'active' => 'Logbook KPS',
+            'active' => 'Dashboard KPS',
             'laporan' => Laporan::where('mbkm', $id)->with('listMbkm')->get()
         ]);
     }
@@ -46,8 +47,8 @@ class KpsController extends Controller
         // dd($log_logbook);
         return view('dashboard.kps.list-logbook',[
             'active' => 'Logbook KPS',
-            'title_page' => 'Logbook',
-            'title' => 'Logbook',
+            'title_page' => 'Logbook / List Logbook',
+            'title' => 'List Logbook',
             'owner' =>  $logbook[0]->name,
             'log_logbook' => $log_logbook,
         ]);
@@ -57,8 +58,8 @@ class KpsController extends Controller
         $logbook = LogLogbook::find($id);
         return view('dashboard.kps.detail-logbook',[
             'active' => 'Logbook KPS',
-            'title_page' => 'Logbook',
-            'title' => 'Logbook',
+            'title_page' => 'Logbook / List Logbook / Detail',
+            'title' => 'Detail',
             'logbook' => $logbook
         ]);
     }
@@ -90,4 +91,25 @@ class KpsController extends Controller
             'mahasiswa' => $user,
         ]);
     }
+
+    public function listLaporan($id){
+        return view('dashboard.kps.list-laporan', [
+            'title' => 'List Laporan',
+            'title_page' => 'Laporan / List Laporan',
+            'active' => 'Laporan KPS',
+            'laporans' => CommentLaporan::with('dataLaporan')->where('user', $id)->get()
+        ]);
+    }
+
+    public function detailLaporan($id){
+
+        return view('dashboard.kps.detail-laporan', [
+            'title' => 'Laporan',
+            'title_page' => 'Laporan / Detail',
+            'active' => 'Laporan Dosbing',
+            'laporan' => Laporan::find($id)->with('listMbkm')->get(),
+            'logcomment' => CommentLaporan::all()->where('laporan', $id)
+        ]);
+    }
+    
 }

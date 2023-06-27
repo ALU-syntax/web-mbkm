@@ -138,6 +138,7 @@
                             <input class="form-control" id="informasi_tambahan" type="text" name="informasi_tambahan" value="{{ $laporan[0]->listMbkm->informasi_tambahan }}" disabled>
                         </div>
                     </div>
+
                 @if($laporan[0]->dokumen_path != null)
                     <div class="row mt-5">
                         <div class="d-flex">
@@ -166,16 +167,14 @@
                                 </div>
                             </div>
                             @endif
-                        </div>    
+                        </div>
                         @if($laporan[0]->status == "Diterima" && $laporan[0]->sign_first == 0)
-                        <a class="btn btn-outline-secondary col-12" disabled>Sign Dokumen</a>
-                        <i>Mahasiswa Belum Tanda Tangan</i>
+                        <a href="/dashobard/laporan/view-pdf/{{ $laporan[0]->id }}" class="btn btn-outline-primary col-12">Sign Dokumen</a>
                         @endif
+                        
                         @if($laporan[0]->sign_first == 1 && $laporan[0]->sign_second == 0)
-                            {{-- <a  class="btn btn-outline-secondary col-12" disabled>View & Download</a> --}}
-                            {{-- <a href="/laporan/dosbing/view-pdf/{{ $laporan[0]->id }}" class="btn btn-outline-gray900">View Dokumen</a> --}}
-                            <a href="/laporan/dosbing/sign-pdf/{{ $laporan[0]->id }}" class="btn btn-outline-primary col-12">Sign Dokumen</a>
-                            {{-- <i>Dosen Pembimbing Belum Tanda Tangan </i> --}}
+                            <a  class="btn btn-outline-secondary col-12" disabled>View & Download</a>
+                            <i>Dosen Pembimbing Belum Tanda Tangan </i>
                         @endif
                         @if($laporan[0]->sign_second == 1 && $laporan[0]->third == 0)
                             <a class="btn btn-outline-secondary col-12" disabled>View & Download</a>
@@ -189,7 +188,7 @@
                             <a href="/dashboard/laporan/preview/{{ $laporan[0]->id }}" class="btn btn-outline-primary col-12" disabled>View & Download</a>
                         @endif    
                     </div>
-                    {{-- <a href="/laporan/dosbing/view-pdf/{{ $laporan[0]->id }}" class="btn btn-outline-gray900">View Dokumen</a> --}}
+                    {{-- <a href="/laporan/dosbing/view-pdf/{{ $laporan[0]->id }}" class="btn btn-outline-primary col-12">Sign Dokumen</a> --}}
                 @else
                   <div class="row mt-5">
                     <div class="col-md-8 ">

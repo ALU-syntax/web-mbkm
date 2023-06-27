@@ -10,6 +10,7 @@ use App\Models\LogLogbook;
 use Illuminate\Http\Request;
 use App\Models\CommentLaporan;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class DosbingController extends Controller
 {
@@ -174,6 +175,26 @@ class DosbingController extends Controller
 
         return redirect('/laporan/dosbing')->with('success', 'Laporan Mahasiswa Berhasil Ditolak');
 
+    }
+
+    public function signPdf($id){
+        return view('dashboard.dosbing.sign-pdf',[
+            'laporan' => Laporan::find($id)->get()
+        ]);
+    }
+
+    public function savePdf(Request $request){
+        Storage::makeDirectory('dokumen-annotate');
+        $data = json_decode($request->file, true);
+        Storage::put('dokumen-annotate/'.$request->name.'.json', json_encode($data));
+
+        $rules['json_annotate'] = 'dokumen-annotate/'.$request->name.'.json';
+        $rules['sign_second'] = '1';
+
+        $pdf = Laporan::find($request->fileId);
+        $pdf->update($rules);
+
+        return $pdf;
     }
 
 }

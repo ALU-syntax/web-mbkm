@@ -233,8 +233,8 @@
 
 				let dataJson = JSON.stringify(annotate);
 				$('#saveFile').click(function(){
-					pdf.saveToServer('{{url('/dashboard/laporan/save-document')}}', CSRF_TOKEN, dokName, dokValue, dataJson);
-					window.location.href = '/dashboard/laporan';
+					pdf.saveToServer('{{url('/laporan/dosbing/sign-pdf/save')}}', CSRF_TOKEN, dokName, dokValue, dataJson);
+					window.location.href = '/laporan/dosbing';
 				});
 			}
 			
@@ -286,7 +286,6 @@
 							// console.log($('.canvas-container'));
 
 							fetchSaveData(page, basicData, newData);
-							let dataJson;
 
 							if(dataAnnotate == null || dataAnnotate == undefined){
 								pdf.serializePdf(function(string){
@@ -295,13 +294,13 @@
 									json.pages[page - 1] = newData;
 									json.pages[lastIndex] = oldData;
 
-									 dataJson = JSON.stringify(json);
+									let dataJson = JSON.stringify(json);
 									// pdf.saveToServer('{{url('/dashboard/laporan/save-document')}}', CSRF_TOKEN, dokName, dokValue, dataJson);
 									// pdf.saveToServer('{{url('/dashboard/laporan/save-document')}}', CSRF_TOKEN, dokName, dokValue, string);
 								});
 								$('#saveFile').click(function(){
-									pdf.saveToServer('{{url('/dashboard/laporan/save-document')}}', CSRF_TOKEN, dokName, dokValue, dataJson);
-									window.location.href = '/dashboard/laporan';
+									pdf.saveToServer('{{url('/laporan/dosbing/sign-pdf/save')}}', CSRF_TOKEN, dokName, dokValue, dataJson);
+									window.location.href = '/laporan/dosbing';
 								});
 							}
 							
@@ -438,23 +437,23 @@
                 }
             });
 
-			$('#savepdf').click(function(){
-				$.ajax({
-					url: "{{url('/dashboard/laporan/save-document')}}",
-					type: "POST",
-					data: {
-						_token: '{{csrf_token()}}'
-					},
-					dataType: 'json',
-					success: function(result){
-						console.log(result);
-						console.log(pdf);
-						var input = document.createElement('input');
-						input.name = 'dokumen_name';
-						input.value = pdf;
-					}
-				});
-			});
+			// $('#savepdf').click(function(){
+			// 	$.ajax({
+			// 		url: "{{url('/dashboard/laporan/save-document')}}",
+			// 		type: "POST",
+			// 		data: {
+			// 			_token: '{{csrf_token()}}'
+			// 		},
+			// 		dataType: 'json',
+			// 		success: function(result){
+			// 			console.log(result);
+			// 			console.log(pdf);
+			// 			var input = document.createElement('input');
+			// 			input.name = 'dokumen_name';
+			// 			input.value = pdf;
+			// 		}
+			// 	});
+			// });
     });
 
 	
