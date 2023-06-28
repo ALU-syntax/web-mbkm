@@ -192,6 +192,9 @@ Route::get('/dashboard/pa/laporan/view-pdf/{id}', [PembimbingAkademikController:
 // Route Wadir
 Route::get('/dashboard/wadir', [WadirController::class, 'dashboard'])->middleware('auth');
 Route::get('/dashboard/wadir/{id}', [WadirController::class, 'detailMahasiswa'])->middleware('auth');
+Route::get('/dashboard/wadir/logbook/{id}', [WadirController::class, 'logbookMahasiswa'])->middleware('auth');
+Route::get('/dashboard/wadir/logbook/detail/{id}', [WadirController::class, 'detailLogbook'])->middleware('auth');
+Route::get('/dashboard/wadir/view-pdf/{id}', [WadirController::class, 'viewPdf'])->middleware('auth');
 // End Route Wadir
 
 // Utility Route

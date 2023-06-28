@@ -50,18 +50,6 @@ class PembimbingAkademikController extends Controller
         ]);
     }
 
-    public function logLogbook($id){
-        // $logbook = LogLogbook::find($id);
-        $logbook = LogLogbook::with('listOwner')->where('id', $id)->get();
-        // dd($logbook);
-        return view('dashboard.dosbing.log-logbook',[
-            'title' => 'Logbook',
-            'title_page' => 'Logbook / Mahasiswa / Detail',
-            'active' => 'Logbook Dosbing',
-            'logbook' => $logbook
-        ]);
-    }
-
     public function viewPdf($id){
         return view('dashboard.pembimbing-akademik.view-pdf',[
             'laporan' => Laporan::find($id)->get()
