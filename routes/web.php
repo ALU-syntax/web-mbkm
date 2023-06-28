@@ -183,10 +183,15 @@ Route::post('/laporan/pi/detail/sign-pdf/save', [PembimbingIndustriController::c
 
 // Route Pembimbing Akademik
 Route::get('/dashboard/pa', [PembimbingAkademikController::class, 'dashboard'])->middleware('auth');
+Route::get('/dashboard/pa/{id}', [PembimbingAkademikController::class, 'detailMahasiswa'])->middleware('auth');
+Route::get('/dashboard/pa/logbook/{id}', [PembimbingAkademikController::class, 'logbookMahasiswa'])->middleware('auth');
+Route::get('/dashboard/pa/logbook/detail/{id}', [PembimbingAkademikController::class, 'detailLogbook'])->middleware('auth');
+Route::get('/dashboard/pa/laporan/view-pdf/{id}', [PembimbingAkademikController::class, 'viewPdf'])->middleware('auth');
 // End Route Pembimbing Akademik
 
 // Route Wadir
 Route::get('/dashboard/wadir', [WadirController::class, 'dashboard'])->middleware('auth');
+Route::get('/dashboard/wadir/{id}', [WadirController::class, 'detailMahasiswa'])->middleware('auth');
 // End Route Wadir
 
 // Utility Route

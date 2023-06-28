@@ -20,7 +20,7 @@
                         <tr class="row">
                           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-2">No.</th>
                           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-8">Nama</th>
-                          <th class="text-secondary opacity-7 col-2"></th>
+                          <th class="text-secondary opacity-7 col-2">Action</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -34,7 +34,7 @@
                                     <p class="text-xs font-weight-bold mb-0">{{ $data->name }}</p>
                                 </td>
                                 <td class="text-sm text-center col-2">
-                                    <a href="" ><span class="badge badge-primary"></span><i class="fa fa-regular fa-eye" style="color: #3eeefe;"></i></a>
+                                    <a href="/dashboard/pa/{{ $data->id }}" ><span class="badge badge-primary"></span><i class="fa fa-regular fa-eye" style="color: #3eeefe;"></i></a>
                                 </td>
                                 {{-- <td class="align-middle text-center text-sm">
                                   <td>

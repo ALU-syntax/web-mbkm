@@ -16,4 +16,10 @@ class WadirController extends Controller
             'mahasiswa' => User::where('fakultas_id', auth()->user()->fakultas_id)->where('role', 7)->get()
         ]);
     }
+
+    public function detailMahasiswa($id){
+        return view('dashboard.wadir.detail-mahasiswa', [
+
+        ]);
+    }
 }
