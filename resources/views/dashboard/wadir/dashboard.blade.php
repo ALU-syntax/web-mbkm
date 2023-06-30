@@ -6,6 +6,10 @@
             <div class="card-header">
               <div class="ms-md-auto d-flex">
                 <h4>Data Mahasiswa</h4>
+                <div class="input-group ms-md-auto d-flex">
+                  <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
+                  <input type="text" class="form-control me-3" placeholder="Search here..." onfocus="focused(this)" onfocusout="defocused(this)">
+                </div>
               </div>
             </div>
 

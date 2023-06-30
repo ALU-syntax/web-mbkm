@@ -35,6 +35,7 @@ class KurikulumController extends Controller
         
         // dd($lastIdKurikulum[0]->id);
 
+
         $request->validate([
             'inputs.*.mata_kuliah' => 'required',
             'inputs.*.sks' => 'required'

@@ -154,6 +154,9 @@ Route::post('/laporan/dosbing/sign-pdf/save', [DosbingController::class, 'savePd
 // End Route Dosen Pembimbing
 
 // Route KPS
+Route::get('/konversi/kps/hasil-konversi', [KpsController::class, 'hasilKonversi'])->middleware('auth');
+Route::get('/konversi/kps/hasil-konversi/{id}', [KpsController::class, 'detailHasilKonversi'])->middleware('auth');
+// Route::get('/konversi/kps/hasil-konversi/detail/{id}', [KpsController::class, 'detailHasilKonversi'])->middleware('auth');
 Route::get('/dashboard/kps', [KpsController::class, 'dashboard'])->middleware('auth');
 Route::get('/dashboard/kps/detail/{id}', [KpsController::class, 'detailMahasiswa'])->middleware('auth');
 Route::get('/logbook/kps', [KpsController::class, 'logbook'])->middleware('auth');
@@ -165,6 +168,14 @@ Route::get('/laporan/kps/{id}', [KpsController::class, 'listLaporan'])->middlewa
 Route::get('/laporan/kps/detail/{id}', [KpsController::class, 'detailLaporan'])->middleware('auth');
 Route::get('/laporan/kps/detail/sign-pdf/{id}', [KpsController::class, 'signPdf'])->middleware('auth');
 Route::post('/laporan/kps/detail/save-pdf', [KpsController::class, 'savePdf'])->middleware('auth');
+Route::get('/konversi/kps', [KpsController::class, 'konversi'])->middleware('auth');
+Route::get('/konversi/kps/{id}', [KpsController::class, 'detailKonversi'])->middleware('auth');
+
+Route::post('/konversi/kps/correct/{id}', [KpsController::class, 'correct'])->middleware('auth');
+Route::post('/konversi/kps/incorrect/{id}', [KpsController::class, 'incorrect'])->middleware('auth');
+Route::post('/konversi/kps/confirm/{id}', [KpsController::class, 'konfirmasi'])->middleware('auth');
+
+
 // End Route KPS
 
 // Route Pembimbing Industri

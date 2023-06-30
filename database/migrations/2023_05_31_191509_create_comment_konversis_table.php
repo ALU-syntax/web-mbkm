@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('comment_konversis', function (Blueprint $table) {
             $table->id();
             $table->string('hasil_konversi');
-            $table->text('body');
+            $table->text('body')->nullable();
             $table->string('owner');
             $table->timestamps();
         });

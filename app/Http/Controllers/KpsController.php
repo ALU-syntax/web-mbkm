@@ -7,8 +7,12 @@ use App\Models\User;
 use App\Models\Laporan;
 use App\Models\Logbook;
 use App\Models\LogLogbook;
+use App\Models\Kurikulum;
+use App\Models\LogMatakuliah;
+use App\Models\CommentKonversi;
 use Illuminate\Http\Request;
 use App\Models\CommentLaporan;
+use App\Models\HasilKonversi;
 use Illuminate\Support\Facades\Storage;
 
 class KpsController extends Controller
@@ -132,5 +136,83 @@ class KpsController extends Controller
 
         return $pdf;
     }
+
+    public function konversi(){
+        $user = User::where('fakultas_id', auth()->user()->fakultas_id)->where('role', 7)->get('id')->toArray();
+        $konversi = HasilKonversi::whereIn('owner', $user)->where('status', 'dalam pemeriksaan')->with('dataOwner')->get();
+        return view('dashboard.kps.konversi',[
+            'title' => 'Konversi',
+            'title_page' => 'Konversi',
+            'active' => 'Konversi KPS',
+            'konversis' => $konversi, 
+        ]);
+    }
+
+    public function detailKonversi($id){
+        $kurikulum = Kurikulum::find($id);
+        $matakuliah = LogMatakuliah::where('kurikulum', $kurikulum->id)->get();
+        $logcomment = CommentKonversi::where('hasil_konversi', $id)->get();
+        return view('dashboard.kps.detail-konversi',[
+            'title' => 'Konversi',
+            'title_page' => 'Konversi',
+            'active' => 'Konversi KPS',
+            'kurikulum' => $kurikulum,
+            'matakuliah' => $matakuliah,
+            'logcomment' => $logcomment
+        ]);
+    }
+
+    public function konfirmasi(Request $request, $id){
+        $logcomment = CommentKonversi::find($id);
+        $logcomment['body'] = $request->body;
+        $logcomment->update();
+
+        $konversi = HasilKonversi::find($logcomment->hasil_konversi);
+        $konversi['status'] = "Sudah Dikonversi";
+        $konversi->update();
+        
+        return redirect('/konversi/kps')->with('success', 'Konversi Berhasil');
+    }
+
+    public function correct($id){
+        $matkul = LogMatakuliah::find($id);
+        $matkul['status'] = 1;
+        $matkul->update();
+
+        return redirect('/konversi/kps/'.$matkul->kurikulum);        
+    }
+
+    public function incorrect($id){
+        $matkul = LogMatakuliah::find($id);
+        $matkul['status'] = 0;
+        $matkul->update();
+
+        return redirect('/konversi/kps/'.$matkul->kurikulum);        
+    }
     
+    public function hasilKonversi(){
+        $user = User::where('fakultas_id', auth()->user()->fakultas_id)->where('role', 7)->get('id')->toArray();
+        $konversi = HasilKonversi::whereIn('owner', $user)->where('status', 'Sudah Dikonversi')->with('dataOwner')->get();
+        return view('dashboard.kps.hasil-konversi', [
+            'title' => 'Konversi / Hasil Konversi',
+            'title_page' => 'Konversi',
+            'active' => 'Konversi KPS',
+            'konversis' => $konversi, 
+        ]);
+    }
+
+    public function detailHasilKonversi($id){
+        $kurikulum = Kurikulum::find($id);
+        $matakuliah = LogMatakuliah::where('kurikulum', $kurikulum->id)->get();
+        $logcomment = CommentKonversi::where('hasil_konversi', $id)->get();
+        
+        return view('dashboard.kps.detail-hasil-konversi', [
+            'title' => 'Konversi / Hasil Konversi / Detail',
+            'title_page' => 'Konversi',
+            'active' => 'Konversi KPS',
+            'kurikulum' => $kurikulum,
+            'matakuliah' => $matakuliah,
+            'logcomment' =>$logcomment
+        ]);
+    }
 }

@@ -62,4 +62,12 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class, 'role_ketiga');
     }
+
+    public function dataFakultas(){
+        return $this->belongsTo(Fakultas::class, 'fakultas_id');
+    }
+
+    public function dataJurusan(){
+        return $this->belongsTo(Jurusan::class, 'jurusan_id');
+    }
 }
