@@ -210,6 +210,7 @@ Route::get('/dashboard/wadir/view-pdf/{id}', [WadirController::class, 'viewPdf']
 
 // Utility Route
 Route::post('/api/fetch-jurusan', [DashboardController::class, 'fetchJurusan']);
+Route::get('/api/fetch-chart-label', [PembimbingAkademikController::class, 'fetchChartLabel']);
 Route::get('/test/sign-pad', function(){
     return view('dashboard.signpad');
 });

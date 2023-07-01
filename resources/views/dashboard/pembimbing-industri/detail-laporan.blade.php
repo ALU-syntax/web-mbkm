@@ -186,7 +186,7 @@
                             <a class="btn btn-outline-secondary col-12" disabled>View & Download</a>
                             <i>KPS Belum Tanda Tangan </i>
                         @endif
-                        @if($laporan[0]->sign_first == 1 && $laporan[0]->sign_second == 1 && $laporan[0]->sign_third == 1 && $laporan[0]->fourth == 1)
+                        @if($laporan[0]->sign_first == 1 && $laporan[0]->sign_second == 1 && $laporan[0]->sign_third == 1 && $laporan[0]->sign_fourth == 1)
                             <a href="/dashboard/laporan/preview/{{ $laporan[0]->id }}" class="btn btn-outline-primary col-12" disabled>View & Download</a>
                         @endif    
                     </div>

@@ -175,5 +175,31 @@ class DatabaseSeeder extends Seeder
             'status' => 'Aktif'
         ]);
         
+        ProgramMbkm::create([
+            'name' => 'Studi Independen',
+            'status' => 'Aktif'
+        ]);
+
+        ProgramMbkm::create([
+            'name' => 'Kampus Mengajar',
+            'status' => 'Aktif'
+        ]);
+
+        ProgramMbkm::create([
+            'name' => 'Pertukaran Mahasiswa Merdeka (PMM)',
+            'status' => 'Aktif'
+        ]);
+
+        ProgramMbkm::create([
+            'name' => 'IISMA',
+            'status' => 'Aktif'
+        ]);
+
+        ProgramMbkm::create([
+            'name' => 'Wirausaha Merdeka Kemendikbudristek (WMK)',
+            'status' => 'Aktif'
+        ]);
+
+        
     }
 }

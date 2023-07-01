@@ -185,11 +185,14 @@
                             <a class="btn btn-outline-secondary col-12" disabled>View & Download</a>
                             <i>KPS Belum Tanda Tangan </i>
                         @endif
-                        @if($laporan[0]->sign_first == 1 && $laporan[0]->sign_second == 1 && $laporan[0]->sign_third == 1 && $laporan[0]->fourth == 1)
+                        @if($laporan[0]->sign_first == 1 && $laporan[0]->sign_second == 1 && $laporan[0]->sign_third == 1 && $laporan[0]->sign_fourth == 1)
                             <a href="/dashboard/laporan/preview/{{ $laporan[0]->id }}" class="btn btn-outline-primary col-12" disabled>View & Download</a>
                         @endif    
                     </div>
-                    {{-- <a href="/laporan/dosbing/view-pdf/{{ $laporan[0]->id }}" class="btn btn-outline-gray900">View Dokumen</a> --}}
+                    @if($laporan[0]->status == "sedang berjalan")
+                    <a href="/laporan/dosbing/view-pdf/{{ $laporan[0]->id }}" class="btn btn-outline-gray900">View Dokumen</a>
+                    @endif
+            
                 @else
                   <div class="row mt-5">
                     <div class="col-md-8 ">

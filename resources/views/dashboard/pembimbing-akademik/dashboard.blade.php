@@ -66,26 +66,44 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-    const ctx = document.getElementById('myChart');
-  
-    new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-          label: '# of Votes',
-          data: [12, 19, 3, 5, 2, 3],
-          borderWidth: 1
-        }]
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
+const ctx = document.getElementById('myChart');
+
+      $.ajax({
+      url: "{{url('/api/fetch-chart-label')}}",
+      type: "GET",
+      dataType: 'json',
+      success: function (result){
+        console.log(result)
+        $.ajax({
+          url: "{{url('/api/')}}"
+        })
+        new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: result,
+            datasets: [{
+              label: '# of Votes',
+              data: [12, 19 ],
+              borderWidth: 1
+            }]
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true
+              }
+            }
           }
-        }
+        });
       }
     });
+  
+
+
+    
+  
+   
   </script>
 @endsection

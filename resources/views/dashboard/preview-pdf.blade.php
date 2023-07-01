@@ -22,32 +22,9 @@
 		<span>SIMBKM Signature</span>
 	</div>
 
-	{{-- <div class="tool">
-		  <div class="tool-button d-flex ">
-		  	<input type="text" id="txt" style="border-radius: 5px;" hidden>
-			<small>signpad-></small>
-		  </div>
-	</div> --}}
-
-	{{-- <div class="tool">
-		<button class="tool-button"><i class="fa fa-picture-o" title="Add an Image" onclick="addImage(event)"></i></button>
-	</div>
-
-	<div class="tool">
-		<button class="btn btn-danger btn-sm" onclick="deleteSelectedObject(event)"><i class="fa fa-trash"></i></button>
-	</div>
-
-	<div class="tool">
-		<button class="btn btn-info btn-sm" onclick="showPdfData()">{}</button>
-	</div>
-
-	<div class="tool">
-		<button class="btn btn-danger btn-sm" onclick="clearPage()">Clear Page</button>
-	</div> --}}
-
 	<div class="tool d-flex justify-content-between">
         <form action="/dashboard/laporan/download" method="GET">
-            <button class="btn btn-light btn-sm"><i class="fa fa-save"></i> Return</button>
+            <button class="btn btn-light btn-sm"><i class="fa fa-reply"></i> Return</button>
         </form>
 		<button id="saveFile" class="btn btn-light btn-sm"><i class="fa fa-save"></i> Download</button>
 	</div>

@@ -56,7 +56,7 @@
   <script src="/js/core/bootstrap.min.js"></script>
   <script src="/js/plugins/perfect-scrollbar.min.js"></script>
   <script src="/js/plugins/smooth-scrollbar.min.js"></script>
-  {{-- <script src="/js/plugins/chartjs.min.js"></script> --}}
+  <script src="/js/plugins/chartjs.min.js"></script>
   
   
   <script>
