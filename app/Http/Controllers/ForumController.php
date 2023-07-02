@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\ForumPost;
+use App\Models\ForumDoc;
 use Illuminate\Cache\RedisStore;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -54,6 +55,27 @@ class ForumController extends Controller
 
         ForumPost::create($validatedData);
 
+        $lastIdForum = DB::table('forum_posts')
+                            ->select('id')
+                            ->where('created_by', '=', auth()->user()->id)
+                            ->orderByDesc('id')
+                            ->limit(1)
+                            ->get();
+
+        if($request->dokumens){
+            $request->validate([
+                'dokumens.*' => 'nullable'
+            ]);
+
+            foreach($request->dokumens as $key => $value){
+                ForumDoc::create([
+                    'file_name' => $value->getClientOriginalName(),
+                    'file_path' => $value->store('dokumen-forum'),
+                    'forum_id' => $lastIdForum[0]->id
+                ]);
+            }
+        }
+    
         return redirect('/dashboard/forum')->with('success', 'New Post has been added!');
     }
 

@@ -95,6 +95,14 @@
           <span class="nav-link-text ms-1">Laporan</span>
         </a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link @if($active == 'Forum') active @endif" href="/dashboard/forum">
+          <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+            <i class="ni ni-world text-primary text-sm opacity-10"></i>
+          </div>
+          <span class="nav-link-text ms-1">Forum</span>
+        </a>
+      </li>
       @endif
 
        {{-- Pembimbing Industri SIDEBAR VIEW --}}
