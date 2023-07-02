@@ -20,7 +20,8 @@ return new class extends Migration
             $table->string('lokasi');
             $table->text('excerpt');
             $table->string('logbook');
-            $table->string('status')->default('0');
+            $table->string('status_dosbing')->default('0');
+            $table->string('status_pi')->default('0');
             $table->timestamps();
         });
     }

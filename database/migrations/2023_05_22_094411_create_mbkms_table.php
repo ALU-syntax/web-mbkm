@@ -23,6 +23,7 @@ return new class extends Migration
             $table->date('tanggal_selesai');
             $table->string('tempat_program_perusahaan');
             $table->string('lokasi_program')->nullable();
+            $table->string('lokasi_mobilisasi')->nullable();
             $table->string('program_keberapa');
             $table->string('mobilisasi')->nullable();
             $table->string('dosen_pembimbing')->nullable();

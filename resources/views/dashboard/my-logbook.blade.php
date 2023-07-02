@@ -24,7 +24,12 @@
                           <div class="card-body">
                             <div class="d-flex">
                               <p class="card-text"><b>{{ $logbook->tanggal_dibuat }}</b></p>
-                              @if($logbook->status == 1)
+                              @if($logbook->status_dosbing == 1)
+                                <div class="align-items-center ms-md-auto"><i class="fa fa-solid fa-check" style="color: #669c35;"></i></div>
+                              @else
+                              <div class="ni ni-watch-time align-items-center ms-md-auto" ></div>
+                              @endif
+                              @if($logbook->status_pi == 1)
                                 <div class="align-items-center ms-md-auto"><i class="fa fa-solid fa-check" style="color: #669c35;"></i></div>
                               @else
                               <div class="ni ni-watch-time align-items-center ms-md-auto" ></div>

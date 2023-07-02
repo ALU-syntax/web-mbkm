@@ -149,6 +149,17 @@
                                     </div>
                                     <div class="col-md-6" id="lokasi" hidden>
                                         <div class="form-group">
+                                            <label for="lokasi_mobilisasi" class="form-control-label">Lokasi Mobilisasi</label>
+                                            <input class="form-control @error('lokasi_mobilisasi') is-invalid @enderror" id="lokasi_mobilisasi" type="text" name="lokasi_mobilisasi" placeholder="Masukan Lokasi Mobilisasi">
+                                            @error('lokasi_mobilisasi')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6"  >
+                                        <div class="form-group">
                                             <label for="lokasi_program" class="form-control-label">Lokasi Program</label>
                                             <input class="form-control @error('lokasi_program') is-invalid @enderror" id="lokasi_program" type="text" name="lokasi_program" placeholder="Masukan Lokasi Program">
                                             @error('lokasi_program')
@@ -355,6 +366,17 @@
                             </div>
                             <div class="col-md-6" id="lokasi" hidden>
                                 <div class="form-group">
+                                    <label for="lokasi_mobilisasi" class="form-control-label">Lokasi Mobilisasi</label>
+                                    <input class="form-control @error('lokasi_mobilisasi') is-invalid @enderror" id="lokasi_mobilisasi" type="text" name="lokasi_mobilisasi" placeholder="Masukan Lokasi Mobilisasi">
+                                    @error('lokasi_mobilisasi')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6" >
+                                <div class="form-group">
                                     <label for="lokasi_program" class="form-control-label">Lokasi Program</label>
                                     <input class="form-control @error('lokasi_program') is-invalid @enderror" id="lokasi_program" type="text" name="lokasi_program" placeholder="Masukan Lokasi Program">
                                     @error('lokasi_program')
@@ -462,7 +484,7 @@
         function radioClicked(){
             let mobilisasiChoice = document.querySelector('input[name="mobilisasi"]:checked').value;
             let lokasiProgram = document.getElementById('lokasi');
-            let lokasiProgramValue = document.getElementById('lokasi_program');
+            let lokasiProgramValue = document.getElementById('lokasi_mobilisasi');
             console.log(lokasiProgramValue.value);
 
             switch (mobilisasiChoice) {

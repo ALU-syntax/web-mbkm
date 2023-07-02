@@ -163,9 +163,9 @@
                             @if($mbkm->mobilisasi == "1")
                             <div class="col-md-6" id="lokasi">
                                 <div class="form-group">
-                                    <label for="lokasi_program" class="form-control-label">Lokasi Program</label>
-                                    <input class="form-control @error('lokasi_program') is-invalid @enderror" id="lokasi_program" type="text" name="lokasi_program" placeholder="Masukan Lokasi Program" value="{{ old('lokasi_program', $mbkm->lokasi_program) }}">
-                                    @error('lokasi_program')
+                                    <label for="lokasi_mobilisasi" class="form-control-label">Lokasi Mobilisasi</label>
+                                    <input class="form-control @error('lokasi_mobilisasi') is-invalid @enderror" id="lokasi_mobilisasi" type="text" name="lokasi_mobilisasi" placeholder="Masukan Lokasi Mobilisasi" value="{{ old('lokasi_mobilisasi', $mbkm->lokasi_mobilisasi) }}">
+                                    @error('lokasi_mobilisasi')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
@@ -174,6 +174,18 @@
                             </div>
                             @else
                             <div class="col-md-6" id="lokasi" hidden>
+                                <div class="form-group">
+                                    <label for="lokasi_mobilisasi" class="form-control-label">Lokasi Mobilisasi</label>
+                                    <input class="form-control @error('lokasi_mobilisasi') is-invalid @enderror" id="lokasi_mobilisasi" type="text" name="lokasi_mobilisasi" placeholder="Masukan Lokasi Mobilisasi" value="{{ old('lokasi_mobilisasi', $mbkm->lokasi_mobilisasi) }}">
+                                    @error('lokasi_mobilisasi')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                            </div>
+                            @endif
+                            <div class="col-md-6" >
                                 <div class="form-group">
                                     <label for="lokasi_program" class="form-control-label">Lokasi Program</label>
                                     <input class="form-control @error('lokasi_program') is-invalid @enderror" id="lokasi_program" type="text" name="lokasi_program" placeholder="Masukan Lokasi Program" value="{{ old('lokasi_program', $mbkm->lokasi_program) }}">
@@ -184,8 +196,6 @@
                                     @enderror
                                 </div>
                             </div>
-                            @endif
-                            
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="program_keberapa" class="form-control-label">Pengambilan Program Ke-Berapa</label>

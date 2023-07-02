@@ -31,6 +31,7 @@
                           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tempat Program Perusahaan</th>
                           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Mobilisasi</th>
                           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Lokasi Program</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Lokasi Mobilisasi</th>
                           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Program Ke-</th>
                           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Dosen Pembimbing</th>
                           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Pembimbing Industri</th>
@@ -79,6 +80,9 @@
                                 </td>
                                 <td class="align-middle text-center text-sm">
                                     <p class="text-xs font-weight-bold mb-0">{{ $mbkm->lokasi_program }}</p>
+                                </td>
+                                <td class="align-middle text-center text-sm">
+                                    <p class="text-xs font-weight-bold mb-0">{{ $mbkm->lokasi_mobilisasi }}</p>
                                 </td>
                                 <td class="align-middle text-center text-sm">
                                     <p class="text-xs font-weight-bold mb-0">{{ $mbkm->program_keberapa }}</p>
