@@ -14,20 +14,17 @@ use Illuminate\Support\Facades\DB;
 
 class PembimbingAkademikController extends Controller
 {
+    
     public function dashboard(){
-        $test = DB::table('mbkms')->get();
-        $tist = [];
-        // $program = DB::table('program_mbkms')->where('id', );
-        foreach($test as $value){
-            print_r($value);
-            // array_push($tist, $value);
-        }
-        // print_r($tist);
+        $data = DB::select('SELECT pm.name as label, count(pm.name) as total FROM 
+        mbkms m left join program_mbkms pm on pm.id=m.program GROUP BY pm.name');
+        
         return view('dashboard.pembimbing-akademik.dashboard', [
             'active' => 'Dashboard Pembimbing Akademik',
             'title_page' => 'Dashboard',
             'title' => 'Dashboard',
-            'mahasiswa' => User::where('fakultas_id', auth()->user()->fakultas_id)->where('role', 7)->get()
+            'mahasiswa' => Mbkm::distinct()->get(),
+            'jumlahData' => $data
         ]);
     }
 
@@ -38,26 +35,6 @@ class PembimbingAkademikController extends Controller
 
         return response()->json($data);
     }
-
-    public function fetchChartLabel(){
-        $data = Mbkm::all();
-        $idProgram = [];
-        $programName = [];
-        foreach($data as $value){
-            array_push($idProgram, $value->program);
-        }
-
-        // $program = ProgramMbkm::find($idProgram);
-
-        $program = DB::table('program_mbkms')->get();
-        foreach($program as $value){
-            array_push($programName, $value);
-        }
-
-        return response()->json($programName);
-    }
-
-
 
     public function detailMahasiswa($id){
         return view('dashboard.pembimbing-akademik.detail-mahasiswa', [

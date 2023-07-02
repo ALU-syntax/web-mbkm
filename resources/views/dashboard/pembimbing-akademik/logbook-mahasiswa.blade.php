@@ -25,7 +25,8 @@
                         <tr >
                           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">Week.</th>
                           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">Tanggal</th>
-                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">Status</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">Status Dosbing</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">Status PI</th>
                           <th class="text-secondary opacity-7 col-2"></th>
                         </tr>
                       </thead>
@@ -38,7 +39,16 @@
                                 <td class="text-sm text-center ">
                                     <p class="text-xs font-weight-bold mb-0">{{ $data->tanggal_dibuat }}</p>
                                 </td>
-                                @if($data->status == 0)
+                                @if($data->status_dosbing == 0)
+                                  <td class="text-sm text-center ">
+                                    <span class="badge badge-sm bg-gradient-secondary">Belum dibaca</span>
+                                  </td>
+                                @else  
+                                  <td class="text-sm text-center ">
+                                    <span class="badge badge-sm bg-gradient-success">Sudah dibaca</span>
+                                  </td>
+                                @endif
+                                @if($data->status_pi == 0)
                                   <td class="text-sm text-center ">
                                     <span class="badge badge-sm bg-gradient-secondary">Belum dibaca</span>
                                   </td>

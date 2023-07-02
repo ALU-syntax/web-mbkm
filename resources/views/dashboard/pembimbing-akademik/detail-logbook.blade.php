@@ -7,10 +7,16 @@
             <div class="card-header pb-0">
                 <div class="d-flex align-items-center">
                     <h5>Logbook {{ $logbook[0]->listOwner->name }}</h5>
-                    @if($logbook[0]->status == 0)
-                    <span class="badge badge-sm bg-gradient-secondary ms-md-auto me-4">Belum dibaca</span>
+                    @if($logbook[0]->status_dosbing == 0)
+                        <span class="badge badge-sm bg-gradient-secondary ms-md-auto ">Belum dibaca dosen</span>
                     @else
-                    <span class="badge badge-sm bg-gradient-success ms-md-auto me-4">Sudah dibaca</span>
+                        <span class="badge badge-sm bg-gradient-success ms-md-auto ">Sudah dibaca dosen</span>
+                    @endif                    
+
+                    @if($logbook[0]->status_pi == 0)
+                      <span class="badge badge-sm bg-gradient-secondary ms-md-auto me-4">Belum dibaca PI</span>
+                    @else
+                      <span class="badge badge-sm bg-gradient-success ms-md-auto me-4">Sudah dibaca PI</span>
                     @endif                    
                 </div>
             </div>
@@ -24,12 +30,12 @@
                         <input class="form-control" type="datetime-local" name="tanggal_dibuat" value="{{  date('Y-m-d\TH:i', strtotime($logbook[0]->tanggal_dibuat)) }}" disabled>
                       </div>
                     </div>
-                    <div class="col-md-4">
+                    {{-- <div class="col-md-4">
                       <div class="form-group">
                         <label for="lokasi" class="form-control-label">Lokasi</label>
                         <input class="form-control" type="text" name="lokasi" value="{{ $logbook[0]->lokasi }}" disabled>
                       </div>
-                    </div>
+                    </div> --}}
                   </div>
 
                   <div class="row">

@@ -21,37 +21,37 @@
                 <div class="table-responsive p-0">
                     <table class="table align-items-center mb-0" >
                       <thead>
-                        <tr class="row">
-                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-2">No.</th>
-                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-8">Nama</th>
-                          <th class="text-secondary opacity-7 col-2">Action</th>
+                        <tr>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No.</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">Nama</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">Jurusan</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">Prodi</th>
+                          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">Program</th>
+                          <th class="text-secondary opacity-7 ">Action</th>
                         </tr>
                       </thead>
                       <tbody>
                         <h3 class="mt-5">List Mahasiswa</h3>
                         @foreach($mahasiswa as $data)
-                            <tr class="row">
-                                <td class="align-middle text-center text-sm col-2">
+                            <tr>
+                                <td class="align-middle text-center text-sm ">
                                     <p class="text-xs font-weight-bold mb-0">{{ $loop->iteration }}</p>
                                 </td>
-                                <td class="text-sm text-center col-8">
+                                <td class="text-sm text-center ">
                                     <p class="text-xs font-weight-bold mb-0">{{ $data->name }}</p>
                                 </td>
-                                <td class="text-sm text-center col-2">
-                                    <a href="/dashboard/pa/{{ $data->id }}" ><span class="badge badge-primary"></span><i class="fa fa-regular fa-eye" style="color: #3eeefe;"></i></a>
+                                <td class="text-sm text-center ">
+                                  <p class="text-xs font-weight-bold mb-0">{{ $data->dataFakultas->name }}</p>
                                 </td>
-                                {{-- <td class="align-middle text-center text-sm">
-                                  <td>
-                                    <a href="/dashboard/fakultas/" ><span class="badge badge-primary"></span><i class="fa fa-regular fa-pen" style="color: #fecb3e;"></i></a>
-                                    <form action="/dashboard/fakultas//delete" method="post" class="d-inline">
-                                      @csrf
-                                      <button class="border-0 bg-transparent" onclick="return confirm('Data Jurusan dari Fakultas yang bersangkutan akan ikut terhapus secara permanen, Apakah kamu yakin?')">
-                                        <span class="badge badge-danger"></span>
-                                        <i class="fa fa-solid fa-trash" style="color: #bf0040;"></i>
-                                      </button>
-                                    </form>
-                                  </td>
-                                </td> --}}
+                                <td class="text-sm text-center ">
+                                  <p class="text-xs font-weight-bold mb-0">{{ $data->dataJurusan->name }}</p>
+                                </td>
+                                <td class="text-sm text-center ">
+                                  <p class="text-xs font-weight-bold mb-0">{{ $data->dataProgram->name }}</p>
+                                </td>
+                                <td class="text-sm text-center">
+                                    <a href="/dashboard/pa/{{ $data->user }}" ><span class="badge badge-primary"></span><i class="fa fa-regular fa-eye" style="color: #3eeefe;"></i></a>
+                                </td>
                           @endforeach
                       </tbody>
                     </table>
@@ -70,22 +70,23 @@
 <script>
 const ctx = document.getElementById('myChart');
 
-      $.ajax({
-      url: "{{url('/api/fetch-chart-label')}}",
-      type: "GET",
-      dataType: 'json',
-      success: function (result){
-        console.log(result)
-        $.ajax({
-          url: "{{url('/api/')}}"
-        })
-        new Chart(ctx, {
+var value = {!! json_encode($jumlahData, JSON_HEX_TAG) !!};
+
+var label = [];
+var data = [];
+
+for(i=0; i<value.length; i++){
+  label.push(value[i].label)
+  data.push(value[i].total)
+}
+
+    new Chart(ctx, {
           type: 'bar',
           data: {
-            labels: result,
+            labels: label,
             datasets: [{
-              label: '# of Votes',
-              data: [12, 19 ],
+              label: 'Total Mahasiswa',
+              data: data,
               borderWidth: 1
             }]
           },
@@ -97,8 +98,6 @@ const ctx = document.getElementById('myChart');
             }
           }
         });
-      }
-    });
   
 
 
