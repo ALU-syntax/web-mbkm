@@ -40,7 +40,7 @@ class LogbookController extends Controller
         $validatedData = $request->validate([
             'tanggal_dibuat' => 'required',
             'body' => 'required',
-            'lokasi' => 'required',
+            // 'lokasi' => 'required',
             'logbook' => 'required'
         ]);
         $validatedData['owner'] = auth()->user()->id;

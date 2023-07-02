@@ -88,7 +88,7 @@ class PembimbingIndustriController extends Controller
 
     public function logbookFinish($id){
         $log_logbook = LogLogbook::find($id);
-        $log_logbook['status'] = '1';
+        $log_logbook['status_pi'] = '1';
         $log_logbook->update();
 
         $logbook = Logbook::find($log_logbook->logbook);

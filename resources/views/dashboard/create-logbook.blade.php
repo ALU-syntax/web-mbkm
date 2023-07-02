@@ -20,12 +20,12 @@
                         <input class="form-control" type="datetime-local" name="tanggal_dibuat" required>
                       </div>
                     </div>
-                    <div class="col-md-4">
+                    {{-- <div class="col-md-4">
                       <div class="form-group">
                         <label for="lokasi" class="form-control-label">Lokasi</label>
                         <input class="form-control" type="text" name="lokasi" required>
                       </div>
-                    </div>
+                    </div> --}}
                   </div>
 
                   <div class="row">

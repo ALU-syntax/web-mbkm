@@ -16,6 +16,17 @@
                 </div>
             </div>
             <div class="card-body">
+              <div class="row d-flex ms-1 ">
+                <small>Tanda <i class="fa fa-solid fa-check" style="color: #669c35;"></i> / <div class="ni ni-watch-time align-items-center ms-md-auto" ></div>
+                  Disebelah Kiri Adalah status untuk Dosbing
+                </small>
+              </div>
+              <div class="row d-flex ms-1 mb-4">
+                <small>Tanda <i class="fa fa-solid fa-check" style="color: #669c35;"></i> / <div class="ni ni-watch-time align-items-center ms-md-auto" ></div>
+                  Disebelah Kanan Adalah status untuk Pembimbing Industri 
+                </small>
+              </div>
+                 
                 <div class="row">
                   @if($log_logbooks->count())
                   @foreach($log_logbooks as $logbook)
@@ -37,9 +48,9 @@
                             </div>
                             
                             <p class="card-text">{!! $logbook->excerpt !!}</p>
-                            <p>
+                            {{-- <p>
                               <small class="text-body-secondary">lokasi: {{ $logbook->lokasi }}</small>
-                            </p>
+                            </p> --}}
                             
                           </div>
                           <div class="d-flex justify-content-between align-items-center p-3">

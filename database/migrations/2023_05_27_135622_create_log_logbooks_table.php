@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('body');
             $table->dateTime('tanggal_dibuat');
             // $table->timestamp('tanggal_dibuat', $precision = 0);
-            $table->string('lokasi');
+            $table->string('lokasi')->nullable();
             $table->text('excerpt');
             $table->string('logbook');
             $table->string('status_dosbing')->default('0');
