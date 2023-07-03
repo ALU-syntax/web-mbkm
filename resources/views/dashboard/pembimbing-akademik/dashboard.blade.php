@@ -7,10 +7,12 @@
               <div class="ms-md-auto d-flex">
                 <h4>Data Mahasiswa</h4>
               </div>
-              <div class="input-group ms-md-auto d-flex">
-                <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-                <input type="text" class="form-control me-3" placeholder="Search here..." onfocus="focused(this)" onfocusout="defocused(this)">
-              </div>
+              <form action="/dashboard/pa">
+                <div class="input-group ms-md-auto d-flex mt-3">
+                  <input type="text" class="form-control" placeholder="Search.." name="search" value="{{ request('search') }}">
+                  <button class="btn btn-primary mb-0" type="submit" >Search</button>
+                </div>
+              </form>
             </div>
 
             <div class="card-body">
@@ -98,11 +100,5 @@ for(i=0; i<value.length; i++){
             }
           }
         });
-  
-
-
-    
-  
-   
   </script>
 @endsection

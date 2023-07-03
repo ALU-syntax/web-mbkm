@@ -2,21 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Mbkm;
 use App\Models\User;
 use App\Models\Laporan;
 use App\Models\Logbook;
 use App\Models\LogLogbook;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class WadirController extends Controller
 {
     public function dashboard(){
         
+        $data = DB::select('SELECT pm.name as label, count(pm.name) as total FROM 
+        mbkms m left join program_mbkms pm on pm.id=m.program GROUP BY pm.name');
+        
         return view('dashboard.wadir.dashboard', [
             'active' => 'Dashboard Wadir',
             'title_page' => 'Dashboard',
             'title' => 'Dashboard',
-            'mahasiswa' => User::where('role', 7)->get()
+            'mahasiswa' => Mbkm::latest()->filter(request(['search']))
+            ->paginate(7)->withQueryString(),
+            'jumlahData' => $data
         ]);
     }
 

@@ -11,6 +11,33 @@ class Mbkm extends Model
 
     protected $guarded = ['id'];
 
+    public function scopeFilter($query, array $filters){
+
+        $query->when($filters['search'] ?? false, function($query, $search){
+            return $query->where(function($query) use ($search){
+                $query->where('name', 'like', '%' . $search . '%')
+                ->orWhere(function($query) use ($search){
+                    $query->whereHas('dataFakultas', function($fakultas) use ($search){
+                        $fakultas->where('name', 'like', '%' . $search . '%');
+                    });
+                })
+                ->orWhere(function($query) use ($search){
+                    $query->whereHas('dataJurusan', function($jurusan) use ($search){
+                        $jurusan->where('name', 'like', '%' . $search . '%');
+                    });
+                })
+                ->orWhere(function($query) use ($search){
+                    $query->whereHas('dataProgram', function($program) use ($search){
+                        $program->where('name', 'like', '%' . $search . '%');
+                    });
+                });
+            });     
+        });
+    }
+
+    
+
+
     public function dataFakultas(){
         return $this->belongsTo(Fakultas::class, 'fakultas');
     }

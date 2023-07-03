@@ -14,8 +14,8 @@ use Illuminate\Support\Facades\DB;
 
 class PembimbingAkademikController extends Controller
 {
-    
     public function dashboard(){
+        
         $data = DB::select('SELECT pm.name as label, count(pm.name) as total FROM 
         mbkms m left join program_mbkms pm on pm.id=m.program GROUP BY pm.name');
         
@@ -23,7 +23,8 @@ class PembimbingAkademikController extends Controller
             'active' => 'Dashboard Pembimbing Akademik',
             'title_page' => 'Dashboard',
             'title' => 'Dashboard',
-            'mahasiswa' => Mbkm::distinct()->get(),
+            'mahasiswa' => Mbkm::latest()->filter(request(['search']))
+            ->paginate(10)->withQueryString(),
             'jumlahData' => $data
         ]);
     }
