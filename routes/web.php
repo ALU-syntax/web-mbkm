@@ -54,13 +54,14 @@ Route::get('/dashboard/index', [DashboardController::class, 'welcome']);
 Route::get('/dashboard/first-create/{sso}', [LoginSSOController::class, 'firstLogin']);
 Route::post('/dashboard/first-create/{id}', [LoginSSOController::class, 'storeFirstLogin']);
 
-
-
-
 // Forum Route
 Route::resource('/dashboard/forum', ForumController::class)->middleware('auth');
+Route::get('/dashboard/forum/detail/{id}', [ForumController::class, 'detailPost'])->middleware('auth');
 Route::get('/dashboard/mypost', [ForumController::class, 'myPost'])->middleware('auth');
 Route::post('/dashboard/mypost/{id}', [ForumController::class, 'deleted'])->middleware('auth');
+Route::post('/dashboard/mypost/delete/file/{id}', [ForumController::class, 'deleteFile'])->middleware('auth');
+Route::post('/dashboard/mypost/update/{forum}', [ForumController::class, 'updatePost'])->middleware('auth');
+Route::get('/dashobard/file/download/{fileId}', [ForumController::class, 'downloadFile'])->middleware('auth');
 
 // Mbkm Route
 Route::get('/dashboard/informasi-mbkm', [DashboardController::class, 'pendaftaranMBKM'])->middleware('auth');
@@ -169,11 +170,13 @@ Route::get('/laporan/kps/detail/{id}', [KpsController::class, 'detailLaporan'])-
 Route::get('/laporan/kps/detail/sign-pdf/{id}', [KpsController::class, 'signPdf'])->middleware('auth');
 Route::post('/laporan/kps/detail/save-pdf', [KpsController::class, 'savePdf'])->middleware('auth');
 Route::get('/konversi/kps', [KpsController::class, 'konversi'])->middleware('auth');
+Route::get('/konversi/kps/viewpdf/{id}', [KpsController::class, 'viewPdf'])->middleware('auth');
 Route::get('/konversi/kps/{id}', [KpsController::class, 'detailKonversi'])->middleware('auth');
-
 Route::post('/konversi/kps/correct/{id}', [KpsController::class, 'correct'])->middleware('auth');
 Route::post('/konversi/kps/incorrect/{id}', [KpsController::class, 'incorrect'])->middleware('auth');
 Route::post('/konversi/kps/confirm/{id}', [KpsController::class, 'konfirmasi'])->middleware('auth');
+// Route::post('/konversi/kps/api/fetch-dokumen', [LaporanController::class, 'fetchDokumen']);
+Route::post('/konversi/kps/api/fetch-dokumen', [KpsController::class, 'fetchDokumen']);
 
 
 // End Route KPS

@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use Error;
 use App\Models\User;
-use App\Models\ForumPost;
 use App\Models\ForumDoc;
-use Illuminate\Cache\RedisStore;
+use App\Models\ForumPost;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-
 use function Deployer\timestamp;
+use Illuminate\Cache\RedisStore;
+
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class ForumController extends Controller
 {
@@ -96,12 +98,15 @@ class ForumController extends Controller
             abort(403);
        }
 
+       $forum_file = ForumDoc::where('forum_id', $forum->id)->get();
+
         return view('dashboard.edit-forum', [
             'title' => 'Edit Post',
             'title_page' => 'Forum / My Post / Edit',
             'active' => 'Forum',
             'name' => auth()->user()->name, 
-            'forum' => $forum
+            'forum' => $forum,
+            'files' =>$forum_file
         ]);
     }
 
@@ -121,6 +126,19 @@ class ForumController extends Controller
         ForumPost::where('id', $forum->id)
                 ->update($validatedData);
 
+        if($request->dokumens){
+            $request->validate([
+                'dokumens.*' => 'nullable'
+            ]);
+
+            foreach($request->dokumens as $key => $value){
+                ForumDoc::create([
+                    'file_name' => $value->getClientOriginalName(),
+                    'file_path' => $value->store('dokumen-forum'),
+                    'forum_id' => $forum->id
+                ]);
+            }
+        }
         return redirect('/dashboard/forum')->with('success', 'Post has been updated!');
 
     }
@@ -155,6 +173,74 @@ class ForumController extends Controller
 
         $postingan->update();
         return redirect('/dashboard/forum')->with('success', 'Post has been updated!');
+    }
 
+    public function detailPost($id){
+        $forum = ForumPost::find($id);
+        $forum_file = ForumDoc::where('forum_id', $forum->id)->get();
+        
+        return view('dashboard.detail-forum',[
+            'title' => 'Forum',
+            'active' => 'Forum',
+            'title_page' => 'Forum / Detail',
+            'post' => $forum,
+            'files' => $forum_file
+        ]);
+    }
+
+    public function downloadFile($fileId){
+        $file = ForumDoc::find($fileId);
+        $path = public_path('storage/' . $file->file_path);
+        
+        if (file_exists($path)) {
+            return response()->download($path, $file->file_name);
+        }
+
+        abort(404, 'File not found');
+    }
+
+    public function deleteFile($id){
+        $file = ForumDoc::findOrFail($id);
+        $publicPath = public_path('storage/' . $file->file_path);
+        $storagePath = storage_path('app/public/' . $file->file_path);
+
+        if(file_exists($publicPath)){
+            unlink($publicPath);
+        }
+        
+        if (Storage::exists($storagePath)) {
+            Storage::delete($storagePath);
+        }
+        $file->delete();
+
+        return redirect()->back()->with('success', 'File Delete Successfully.');
+    }
+
+    public function updatePost(Request $request, $forum){
+        $rules = [
+            'body' => 'required'
+        ];
+
+        $validatedData = $request->validate($rules);
+
+        $validatedData['created_by'] = auth()->user()->id;
+
+        ForumPost::where('id', $forum)
+                ->update($validatedData);
+
+        if($request->dokumens){
+            $request->validate([
+                'dokumens.*' => 'nullable'
+            ]);
+
+            foreach($request->dokumens as $key => $value){
+                ForumDoc::create([
+                    'file_name' => $value->getClientOriginalName(),
+                    'file_path' => $value->store('dokumen-forum'),
+                    'forum_id' => $forum
+                ]);
+            }
+        }
+        return redirect('/dashboard/forum')->with('success', 'Post has been updated!');
     }
 }

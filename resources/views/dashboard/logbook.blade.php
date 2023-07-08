@@ -13,12 +13,12 @@
             <div class="card-header pb-0">
                 <div class="d-flex align-items-center">
                     <h5>Logbook {{ auth()->user()->name }}</h5>
-                    <div class="ms-md-auto d-flex">
+                    {{-- <div class="ms-md-auto d-flex">
                       <div class="input-group ms-md-auto d-flex">
                         <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
                         <input type="text" class="form-control me-3" placeholder="Search here..." onfocus="focused(this)" onfocusout="defocused(this)">
                       </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
             <div class="card-body">

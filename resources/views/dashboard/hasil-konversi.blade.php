@@ -42,7 +42,11 @@
                           </td>
 
                           <td class="align-middle text-center text-sm">
-                            <span class="badge badge-sm bg-gradient-secondary">{{ $data->dataHasilKonversi->status }}</span>
+                            @if($data->dataHasilKonversi->status == 'dalam pemeriksaan')
+                              <span class="badge badge-sm bg-gradient-secondary">{{ $data->dataHasilKonversi->status }}</span>
+                            @else
+                              <span class="badge badge-sm bg-gradient-success">{{ $data->dataHasilKonversi->status }}</span>
+                            @endif    
                           </td>
 
                           <td class="align-middle text-center">

@@ -172,7 +172,7 @@ class MbkmController extends Controller
             'lokasi_program' => 'nullable',
             'lokasi_mobilisasi' => 'nullable',
             'mobilisasi' => 'nullable',
-            'pembimbin_industri' => 'nullable',
+            'pembimbing_industri' => 'nullable',
             'program_keberapa' => 'required',
             'dosen_pembimbing' => 'nullable',
             'informasi_tambahan' => 'nullable',

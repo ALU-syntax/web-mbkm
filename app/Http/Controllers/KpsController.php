@@ -215,5 +215,18 @@ class KpsController extends Controller
             'logcomment' =>$logcomment
         ]);
     }
+
+    public function viewPdf($id){
+        return view('dashboard.kps.view-pdf',[
+            'laporan' => Kurikulum::find($id)->get()
+        ]);
+    }
+
+    public function fetchDokumen(Request $request){
+        $data['dokumen'] = Kurikulum::where("id", $request->dokumen)
+                            ->get();
+                            
+        return response()->json($data);
+    }
     
 }

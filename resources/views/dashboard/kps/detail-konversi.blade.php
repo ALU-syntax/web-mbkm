@@ -25,6 +25,7 @@
                                 {{ $message }}
                             </div>
                         @enderror
+                        <a href="/konversi/kps/viewpdf/{{ $kurikulum->id }}" class="btn btn-outline-secondary col-12" >View Dokumen</a>
                     </div>
                     {{-- <small>*note: <i>ukuran maximal file 2MB</i></small> --}}
                 </div>

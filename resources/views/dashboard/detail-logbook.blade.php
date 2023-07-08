@@ -7,7 +7,7 @@
             <div class="card-header">
                 <div class="d-flex align-items-center">
                     <h5>Tanggal: <b>{{ $log_logbooks->tanggal_dibuat }}</b></h3>
-                    <p class="ms-md-auto ">Lokasi: <b>{{ $log_logbooks->lokasi }}</b></p>
+                    {{-- <p class="ms-md-auto ">Lokasi: <b>{{ $log_logbooks->lokasi }}</b></p> --}}
                 </div>
                 
 

@@ -12,13 +12,13 @@
           <div class="card mb-4">
             <div class="card-header pb-0">
               <div class="d-flex align-items-center">
-                <button class="btn ">Sort By</button>  
-                <div class="ms-md-auto d-flex">
+                {{-- <button class="btn ">Sort By</button>   --}}
+                {{-- <div class="ms-md-auto d-flex">
                   <div class="input-group ms-md-auto d-flex">
                     <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
                     <input type="text" class="form-control me-3" placeholder="Search here..." onfocus="focused(this)" onfocusout="defocused(this)">
                   </div>
-                </div>
+                </div> --}}
               </div>
             </div>
                           
@@ -45,7 +45,7 @@
                 
               <div class="d-flex">
                  {{-- <div class="btn btn-info me-2">Share</div>   --}}
-                <div class="btn btn-info">Comment</div>
+                {{-- <div class="btn btn-info">Comment</div> --}}
                 <a class="btn btn-outline-info ms-2" href="/dashboard/forum/{{ $post->id }}/edit">Edit</a>
               </div>
             </div>

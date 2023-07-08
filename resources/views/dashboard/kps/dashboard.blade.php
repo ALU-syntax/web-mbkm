@@ -10,9 +10,6 @@
             </div>
 
             <div class="card-body">
-                <div>
-                    <canvas id="myChart"></canvas>
-                </div>
                 @if($mahasiswa->count())
                 <div class="table-responsive p-0">
                     <table class="table align-items-center mb-0" >
@@ -25,7 +22,6 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <h3 class="mt-5">List Mahasiswa</h3>
                         @foreach($mahasiswa as $data)
                             <tr class="row">
                                 <td class="align-middle text-center text-sm col-2">
@@ -53,7 +49,7 @@
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{{-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     const ctx = document.getElementById('myChart');
   
@@ -75,5 +71,5 @@
         }
       }
     });
-  </script>
+  </script> --}}
 @endsection

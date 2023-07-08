@@ -87,12 +87,26 @@
                                 <td class="align-middle text-center text-sm">
                                     <p class="text-xs font-weight-bold mb-0">{{ $mbkm->program_keberapa }}</p>
                                 </td>
+                                @if($mbkm->listUser)
                                 <td class="align-middle text-center text-sm">
                                     <p class="text-xs font-weight-bold mb-0">{{ $mbkm->listuser->name }}</p>
                                 </td>
+                                @else
+                                <td class="align-middle text-center text-sm">
+                                    <p class="text-xs font-weight-bold mb-0">Belum Dipilih</p>
+                                </td>
+                                @endif
+
+                                @if($mbkm->listPI)
                                 <td class="align-middle text-center text-sm">
                                     <p class="text-xs font-weight-bold mb-0">{{ $mbkm->listPI->name }}</p>
                                 </td>
+                                @else
+                                <td class="align-middle text-center text-sm">
+                                    <p class="text-xs font-weight-bold mb-0">Belum Dipilih</p>
+                                </td>
+                                @endif
+                                
                                 <td class="align-middle text-center text-sm">
                                     <p class="text-xs font-weight-bold mb-0">{{ $mbkm->informasi_tambahan }}</p>
                                 </td>

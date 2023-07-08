@@ -21,7 +21,7 @@
                     <div class="row mb-3">
                         <div class="">
                             <label for="dokumen" class="form-label">Post Dokumen</label>
-                            <input class="form-control @error('dokumen') is-invalid @enderror" type="file" id="dokumen" name="dokumen">  
+                            <input class="form-control @error('dokumen') is-invalid @enderror" type="file" id="dokumen" name="dokumen" required>  
                             @error('dokumen')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -35,13 +35,13 @@
                             <div class="col-md-5">
                                 <div class="form-group">
                                     <label for="mata_kuliah" class="form-control-label">Matakuliah</label>
-                                    <input class="form-control" type="text" name="inputs[0][mata_kuliah]" placeholder="Masukan mata kuliah">
+                                    <input class="form-control" type="text" name="inputs[0][mata_kuliah]" placeholder="Masukan mata kuliah" required>
                                 </div>
                             </div>
                             <div class="col-md-5">
                                 <div class="form-group">
                                     <label for="sks" class="form-control-label">SKS</label>
-                                    <input class="form-control" type="text" name="inputs[0][sks]" placeholder="Masukan jumlah sks">
+                                    <input class="form-control" type="text" name="inputs[0][sks]" placeholder="Masukan jumlah sks" required>
                                 </div>
                             </div>
                             <div class="col-md-2 mt-4">
@@ -83,13 +83,13 @@
                 <div class="col-md-5">
                     <div class="form-group">
                         <label for="mata_kuliah" class="form-control-label">Matakuliah</label>
-                        <input class="form-control" type="text" name="inputs[`+i+`][mata_kuliah]" placeholder="Masukan mata kuliah">
+                        <input class="form-control" type="text" name="inputs[`+i+`][mata_kuliah]" placeholder="Masukan mata kuliah" required>
                     </div>
                 </div>
                 <div class="col-md-5">
                     <div class="form-group">
                         <label for="sks" class="form-control-label">SKS</label>
-                        <input class="form-control" type="text" name="inputs[`+i+`][sks]" placeholder="Masukan jumlah sks">
+                        <input class="form-control" type="text" name="inputs[`+i+`][sks]" placeholder="Masukan jumlah sks" required>
                     </div>
                 </div>
                 <div class="col-md-2 mt-4">

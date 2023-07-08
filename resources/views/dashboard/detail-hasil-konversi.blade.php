@@ -45,6 +45,21 @@
                                     <input class="form-control" type="text" name="inputs[0][sks]" placeholder="Masukan jumlah sks" value="{{ $matkul->sks }}" disabled>
                                 </div>
                             </div>
+                            @if($matkul->status != 0 || $matkul->status != null)
+                            <div class="col-md-2 mt-4">
+                                <div class="form-group">
+                                    @if($matkul->status != 0)
+                                    <a class="badge badge-pill badge-md bg-gradient-success mt-3">
+                                        <div class="ni ni-check-bold align-items-center d-flex "></div>
+                                    </a>
+                                    @else
+                                    <a  class="badge badge-pill badge-md bg-gradient-danger mt-3" >
+                                        <div class="ni ni-fat-remove align-items-center d-flex "></div>
+                                    </a>
+                                    @endif
+                                </div>
+                            </div>
+                            @else
                             <div class="col-md-2 mt-4">
                                 <div class="form-group">
                                     <a class="badge badge-pill badge-md bg-gradient-secondary mt-3" style="cursor: no-drop" disabled>
@@ -52,13 +67,16 @@
                                     </a>
                                 </div>
                             </div>
+                            @endif
+                            
                         </div>
                         @endforeach
                         
                         @foreach($logcomment as $comment)
                         <div class="row mt-2">
                             <label for="comment" class="form-control-label">Comment</label>
-                            <textarea class="m-2" id="comment" name="comment" disabled>{{ $comment->body }}</textarea>
+                            {{-- <textarea class="m-2" id="comment" name="comment" disabled>{{ $comment->body }}</textarea> --}}
+                            <h5>{!! $logcomment[0]->body !!}</h5>
                         </div>
                         @endforeach
                     </div>
