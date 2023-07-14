@@ -45,6 +45,10 @@ Route::get('/about', [AboutController::class, 'index']);
 
 
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
+Route::get('/login/forgot-password', [LoginController::class, 'forgotPassword']);
+Route::post('/login/forgot-password', [LoginController::class, 'submitForgotPasswordForm']);
+Route::get('/reset-password/{token}', [LoginController::class, 'showResetPasswordForm'])->name('reset.password.get');
+Route::post('/reset-password', [LoginController::class, 'submitResetPasswordForm'])->name('reset.password.post');
 Route::post('/login', [LoginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout']);
 
@@ -213,6 +217,7 @@ Route::get('/dashboard/wadir/view-pdf/{id}', [WadirController::class, 'viewPdf']
 
 // Utility Route
 Route::post('/api/fetch-jurusan', [DashboardController::class, 'fetchJurusan']);
+Route::get('/export_excel', [LoginController::class, 'exportExcel']);
 Route::get('/api/fetch-chart-label', [PembimbingAkademikController::class, 'fetchChartLabel']);
 Route::get('/test/sign-pad', function(){
     return view('dashboard.signpad');

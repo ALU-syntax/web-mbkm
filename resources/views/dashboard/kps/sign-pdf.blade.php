@@ -41,9 +41,9 @@
 		<button class="btn btn-info btn-sm" onclick="showPdfData()">{}</button>
 	</div>
 
-	<div class="tool">
+	{{-- <div class="tool">
 		<button class="btn btn-danger btn-sm" onclick="clearPage()">Clear Page</button>
-	</div>
+	</div> --}}
 
 	<div class="tool">
 		{{-- <form action="/dashboard/laporan/save-document" method="POST" enctype="multipart/form-data">

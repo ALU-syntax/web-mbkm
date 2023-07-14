@@ -6,6 +6,7 @@
             <div class="card-header">
               <div class="ms-md-auto d-flex">
                 <h4>Data Mahasiswa</h4>
+                <a href="/export_excel" class="btn btn-success ms-md-auto" target="_blank">EXPORT EXCEL</a>
               </div>
               <form action="/dashboard/wadir">
                 <div class="input-group ms-md-auto d-flex mt-3">
@@ -13,6 +14,7 @@
                   <button class="btn btn-primary mb-0" type="submit" >Search</button>
                 </div>
               </form>
+              
             </div>
 
             <div class="card-body">
