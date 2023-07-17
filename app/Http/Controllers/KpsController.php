@@ -138,8 +138,9 @@ class KpsController extends Controller
     }
 
     public function konversi(){
-        $user = User::where('fakultas_id', auth()->user()->fakultas_id)->where('role', 7)->get('id')->toArray();
+        $user = User::where('jurusan_id', auth()->user()->jurusan_id)->where('role', 7)->get('id')->toArray();
         $konversi = HasilKonversi::whereIn('owner', $user)->where('status', 'dalam pemeriksaan')->with('dataOwner')->get();
+        
         return view('dashboard.kps.konversi',[
             'title' => 'Konversi',
             'title_page' => 'Konversi',
@@ -191,7 +192,7 @@ class KpsController extends Controller
     }
     
     public function hasilKonversi(){
-        $user = User::where('fakultas_id', auth()->user()->fakultas_id)->where('role', 7)->get('id')->toArray();
+        $user = User::where('jurusan_id', auth()->user()->jurusan_id)->where('role', 7)->get('id')->toArray();
         $konversi = HasilKonversi::whereIn('owner', $user)->where('status', 'Sudah Dikonversi')->with('dataOwner')->get();
         return view('dashboard.kps.hasil-konversi', [
             'title' => 'Konversi / Hasil Konversi',

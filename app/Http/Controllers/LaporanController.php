@@ -46,7 +46,7 @@ class LaporanController extends Controller
 
         $rules['dokumen_name'] = $request->dokumen->getClientOriginalName();
         $rules['dokumen_path'] = $request->file('dokumen')->store('dokumen-laporan');
-        $rules['sign_first'] = 0;
+        $rules['sign_first'] = 1;
         $rules['sign_second']= 0;
 
         // Laporan::where('id', $id)->update($rules);

@@ -66,6 +66,7 @@ Route::post('/dashboard/mypost/{id}', [ForumController::class, 'deleted'])->midd
 Route::post('/dashboard/mypost/delete/file/{id}', [ForumController::class, 'deleteFile'])->middleware('auth');
 Route::post('/dashboard/mypost/update/{forum}', [ForumController::class, 'updatePost'])->middleware('auth');
 Route::get('/dashobard/file/download/{fileId}', [ForumController::class, 'downloadFile'])->middleware('auth');
+Route::post('/dashboard/forum/detail/comment', [ForumController::class, 'postComment'])->middleware('auth');
 
 // Mbkm Route
 Route::get('/dashboard/informasi-mbkm', [DashboardController::class, 'pendaftaranMBKM'])->middleware('auth');
