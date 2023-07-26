@@ -186,6 +186,7 @@ class DosbingController extends Controller
     }
 
     public function savePdf(Request $request){
+        dd($request);
         Storage::makeDirectory('dokumen-annotate');
         $data = json_decode($request->file, true);
         Storage::put('dokumen-annotate/'.$request->name.'.json', json_encode($data));

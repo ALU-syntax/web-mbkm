@@ -26,9 +26,21 @@ class LaporanController extends Controller
     }    
 
     public function viewPdf($id){
-        return view('dashboard.viewpdf',[
+
+        //PERCOBAAN STAGING
+        return view('staging-view-pdf',[
             'laporan' => Laporan::find($id)->get()
         ]);
+
+        //PERCOBAAN
+        // return view('pdf-signature-test',[
+        //     'laporan' => Laporan::find($id)->get()
+        // ]);
+
+        //YANG UTAMA
+        // return view('dashboard.viewpdf',[
+        //     'laporan' => Laporan::find($id)->get()
+        // ]);
     }
 
     public function fetchDokumen(Request $request){
@@ -77,18 +89,36 @@ class LaporanController extends Controller
         return redirect('/dashboard/laporan/'.$id)->with('success', 'Dokumen Laporan berhasil ditambahkan!');
     }
 
-    public function savePdf(Request $request){
-        Storage::makeDirectory('dokumen-annotate');
-        $data = json_decode($request->file, true);
-        Storage::put('dokumen-annotate/'.$request->name.'.json', json_encode($data));
+    // public function savePdf(Request $request){
+    //     Storage::makeDirectory('dokumen-annotate');
+    //     $data = json_decode($request->file, true);
+    //     Storage::put('dokumen-annotate/'.$request->name.'.json', json_encode($data));
 
-        $rules['json_annotate'] = 'dokumen-annotate/'.$request->name.'.json';
+    //     $rules['json_annotate'] = 'dokumen-annotate/'.$request->name.'.json';
+    //     $rules['sign_first'] = '1';
+
+    //     $pdf = Laporan::find($request->fileId);
+    //     $pdf->update($rules);
+
+    //     return $pdf;
+    // }
+
+    public function savePdf(Request $request){
+        $fileName = pathinfo($request->dokumenPath, PATHINFO_FILENAME);
+        // dd($test);
+        Storage::makeDirectory('dokumen-annotate');
+        $data = json_decode($request->annotateJson, true);
+        // $data = json_encode($request->annotateJson, true);
+        Storage::put('dokumen-annotate/'. $fileName .'.json', json_encode($data));
+
+        $rules['json_annotate'] = 'dokumen-annotate/'. $fileName .'.json';
         $rules['sign_first'] = '1';
 
         $pdf = Laporan::find($request->fileId);
         $pdf->update($rules);
 
-        return $pdf;
+        // return $pdf;
+        return redirect('/dashboard/laporan')->with('success', 'Dokumen Laporan Berhasil ditandatangan!');       
     }
 
     public function previewPdf($id){

@@ -256,7 +256,7 @@
 					fetch(appUrl + '/storage/'  + result.dokumen[0]['json_annotate'])
 								.then(response => response.json())
 								.then(data => {
-									console.log(data); // Process the retrieved JSON data
+									// console.log(data); // Process the retrieved JSON data
 									
 
 									dataAnnotate = data;
@@ -398,8 +398,9 @@
 
 								// Create a variable with a dynamic name
 								window[dynamicVariableName] = variableValue;
-								
+								// console.log(annotate);
 								pdf.loadFromJSON(annotate);
+								// pdf.loadFromJSON("sample_output.js")
 							}
 							
 							

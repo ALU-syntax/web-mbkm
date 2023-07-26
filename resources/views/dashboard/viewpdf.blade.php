@@ -76,7 +76,7 @@
 
 {{-- Modal Sign Pad --}}
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+{{-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg">
 	  <div class="modal-content">
 		<div class="modal-header">
@@ -107,9 +107,10 @@
 		</div>
 	  </div>
 	</div>
-  </div>
+  </div> --}}
 
-  @include('dashboard.signpad')
+
+  {{-- @include('dashboard.signpad') --}}
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
@@ -140,38 +141,9 @@
 	var dokValue = $("#dokumen").val();
 	var dokName = $("#dokumenName").val();
 	var appUrl = '{{ env('APP_URL') }}';
+
+	var dokumen = {!! json_encode($laporan[0]) !!};
 	// var source = window.document.getElementById('pdf-container')[0];
-	var sourceBody = window.document.getElementsByTagName("body")[0];
-
-	async function fetchAnnonate() {
-	try {
-		const response = await fetch('your-api-endpoint');
-		const data = await response.json();
-		
-		// Process the fetched data
-		
-		return data; // Return the fetched data
-		} catch (error) {
-			console.error('Error:', error);
-			throw error; // Throw the error to indicate failure
-		}
-	}
-
-	async function performFetch() {
-		try {
-			const result = await fetchData();
-			
-			// Do something with the fetched data
-			
-			console.log('Fetch completed successfully');
-			// Set the "done" state or trigger the next action
-		} catch (error) {
-			// Handle the error case
-			console.error('Fetch failed:', error);
-			// Set the "done" state or trigger an error handling action
-		}
-	}
-
 
 	function downloadBase64File(base64Data, fileName) {		
 			const linkSource = base64Data;
@@ -181,336 +153,90 @@
 			downloadLink.click();
 	}
 
-	async function getData() {
-  try {
-    const response = await $.ajax({
-      url: 'https://example.com/api/data',
-      method: 'GET',
-      dataType: 'json'
-    });
-
-    // Process the response data
-    console.log(response);
-    return response; // Return the response for further use
-  } catch (error) {
-    console.error('Error:', error);
-    throw error; // Throw the error to indicate failure
-  }
-}
-
-	async function getDataPdf(){
-		try{
-			const response = await $.ajax({
-				url: "{{url('/api/fetch-dokumen')}}",
-				type: "POST",
-				data: {
-				dokumen: dokValue,
-				_token: '{{csrf_token()}}'
-				},
-				dataType: 'json',
-			});
-			return response;
-		}catch(error){
-			console.log('Error: ', error);
-		}
-	}
-
-	$(document).ready(function () {
-
-		getDataPdf();
-		var dataAnnotate;
-
-		function fetchSaveData(page, oldData, newData){
-			if(dataAnnotate != undefined || dataAnnotate != null){
-				var dynamicVariableName = "annotate";
-				var variableValue = dataAnnotate;
-
-				// Create a variable with a dynamic name
-				window[dynamicVariableName] = variableValue;
-				let lastIndex = annotate.pages.length - 1;
-				annotate.pages[page - 1] = newData;
-				annotate.pages[lastIndex] = oldData;
-
-				let dataJson = JSON.stringify(annotate);
-				$('#saveFile').click(function(){
-					pdf.saveToServer('{{url('/dashboard/laporan/save-document')}}', CSRF_TOKEN, dokName, dokValue, dataJson);
-					window.location.href = '/dashboard/laporan';
-				});
-			}
-			
-			// pdf.saveToServer('{{url('/dashboard/laporan/save-document')}}', CSRF_TOKEN, dokName, dokValue, string);
-			
-			
-		}		
-
-		$.ajax({
-			url: "{{url('/api/fetch-dokumen')}}",
-			type: "POST",
-			data: {
-				dokumen: dokValue,
-				_token: '{{csrf_token()}}'
-			},
-			dataType: 'json',
-			success: function (result) {
-				if(result.dokumen[0]['json_annotate'] != null){
-					fetch(appUrl + '/storage/'  + result.dokumen[0]['json_annotate'])
-								.then(response => response.json())
-								.then(data => {
-									console.log(data); // Process the retrieved JSON data
-									
-
-									dataAnnotate = data;
-
-									// Access the dynamically created variable
-									// console.log(window[dynamicVariableName]); // Output: 42
-									// console.log(myVariable);
-									// const jsonString = JSON.stringify(data, null, 4);
-									// const test = JSON.stringify(data);
-									// console.log(JSON.stringify(data, null, 4));
-									// pdf.loadFromJSON(annotate);
-									// pdf.savePdf();
-								})
-								.catch(error => {
-									console.error('Error:', error);
-							});
-				}
-				
-				var basicData;
-				pdf = new PDFAnnotate('pdf-container', appUrl + '/storage/'  + result.dokumen[0]['dokumen_path'], {
+	pdf = new PDFAnnotate('pdf-container', appUrl + '/storage/'  + dokumen.dokumen_path, {
 						onPageUpdated(page, oldData, newData) {
 							console.log(page, oldData, newData);
-
-							if(basicData == undefined){
-								basicData = oldData	
-							}
-							// console.log($('.canvas-container'));
-
-							fetchSaveData(page, basicData, newData);
-							let dataJson;
-
-							if(dataAnnotate == null || dataAnnotate == undefined){
-								pdf.serializePdf(function(string){
-									let json = JSON.parse(string);
-									let lastIndex = json.pages.length - 1;
-									json.pages[page - 1] = newData;
-									json.pages[lastIndex] = oldData;
-
-									 dataJson = JSON.stringify(json);
-									// pdf.saveToServer('{{url('/dashboard/laporan/save-document')}}', CSRF_TOKEN, dokName, dokValue, dataJson);
-									// pdf.saveToServer('{{url('/dashboard/laporan/save-document')}}', CSRF_TOKEN, dokName, dokValue, string);
-								});
-								$('#saveFile').click(function(){
-									pdf.saveToServer('{{url('/dashboard/laporan/save-document')}}', CSRF_TOKEN, dokName, dokValue, dataJson);
-									window.location.href = '/dashboard/laporan';
-								});
-							}
-							
-
-							// $('#saveFile').click(function(){
-								
-							// 	// 
-							// 	// pdf.saveToServer('{{url('/dashboard/laporan/save-document')}}', CSRF_TOKEN, dokName, dokValue);
-							// 	// console.log(pdf.serializePdf());
-							// 	// pdf.saveToServer('{{url('/dashboard/laporan/save-document')}}');
-							// 	// var source = window.document.getElementById('pdf-container');
-							// 	// var imgData = source.toDataURL("image/jpeg", 1.0);
-							// 	// var pdfDoc = new jsPDF();
-
-							// 	// pdfDoc.addImage(imgData, 'JPEG', 0, 0);
-							// 	// pdfDoc.save("download.pdf");
-							// 	// doc.fromHTML(
-							// 	// 	$('.canvas-container'), 15, 15,
-							// 	// 	{width: 170},
-							// 	// 	function(){
-							// 	// 		var blob = doc.output('blob');
-							// 	// 		// var blob = doc.output('datauri');
-							// 	// 		// var blob = doc.output('base64');
-							// 	// 		var formData = new FormData();
-							// 	// 		var blobPDF = new Blob([doc.output('blob')], {type : 'application/pdf'});
-							// 	// 		var blobUrl = URL.createObjectURL(blobPDF);
-							// 	// 		// formData.append('pdf', blob);
-							// 	// 		formData.append('pdf', blobUrl);
-							// 	// 		formData.append('_token', CSRF_TOKEN);
-							// 	// 		formData.append('dokumen', dokValue);
-							// 	// 		formData.append('dokumenName', dokName);
-							// 	// 		// $.ajax({
-							// 	// 		// 	url: "{{url('/dashboard/laporan/save-document')}}",
-							// 	// 		// 	type: "POST",
-							// 	// 		// 	data: formData,
-							// 	// 		// 	processData: false,
-							// 	// 		// 	contentType: false,
-							// 	// 		// 	success: function(data){console.log(data)},
-							// 	// 		// 	error: function(data){console.log(data)}
-							// 	// 		// })
-							// 	// 		console.log('clicked');
-										
-							// 	// 	}
-							// 	// )
-							// });
-							// var doc = new jsPDF();
-							
-							// $('#saveFile').click(function(){
-							// 	var canvas = $('.canvas-container');
-							// 	var imgData = canvas.toDataURL("image/jpeg", 1.0);
-							// 	var pdfDoc = new jsPDF();
-
-							// 	pdfDoc.addImage(imgData, 'JPEG', 0, 0);
-							// 	pdfDoc.save("download.pdf");
-							// 	doc.fromHTML(
-							// 		$('.canvas-container'), 15, 15,
-							// 		{width: 170},
-							// 		function(){
-							// 			var blob = doc.output('blob');
-							// 			// var blob = doc.output('datauri');
-							// 			// var blob = doc.output('base64');
-							// 			var formData = new FormData();
-							// 			var blobPDF = new Blob([doc.output('blob')], {type : 'application/pdf'});
-							// 			var blobUrl = URL.createObjectURL(blobPDF);
-							// 			// formData.append('pdf', blob);
-							// 			formData.append('pdf', blobUrl);
-							// 			formData.append('_token', CSRF_TOKEN);
-							// 			formData.append('dokumen', dokValue);
-							// 			formData.append('dokumenName', dokName);
-							// 			// $.ajax({
-							// 			// 	url: "{{url('/dashboard/laporan/save-document')}}",
-							// 			// 	type: "POST",
-							// 			// 	data: formData,
-							// 			// 	processData: false,
-							// 			// 	contentType: false,
-							// 			// 	success: function(data){console.log(data)},
-							// 			// 	error: function(data){console.log(data)}
-							// 			// })
-							// 			console.log('clicked');
-										
-							// 		}
-							// 	)
-							// });
-							
 							
 						},
 						ready() {
-							// let json;
-							
-							
 							console.log('Plugin initialized successfully');
-							if(dataAnnotate != undefined || dataAnnotate != null){
-								var dynamicVariableName = "annotate";
-								var variableValue = dataAnnotate;
-
-								// Create a variable with a dynamic name
-								window[dynamicVariableName] = variableValue;
-								
-								pdf.loadFromJSON(annotate);
-							}
-							
-							
-							// console.log(result.dokumen[0]['json_annotate']);
-							// console.log(appUrl + '/storage/'  + result.dokumen[0]['json_annotate'])
-							// var json = appUrl + '/storage/'  + result.dokumen[0]['json_annotate'];
-							// console.log(json);
-							// pdf.loadFromJSON(appUrl + '/storage/'  + result.dokumen[0]['json_annotate']);
-							var doc = new jsPDF();
-							
 						},
 						scale: 1.5,
 						pageImageCompression: 'FAST', // FAST, MEDIUM, SLOW(Helps to control the new PDF file size)
 						});
-				// console.log("pdf: " + pdf);
-				// pdf.forEach((element, index) => console.log(element));
-				// for(const element in pdf){
-				// 	console.log("test: " + element);
-				// }
-				// console.log("test: " + pdf.savePdf())
-				
-			}
-		});
 
-		var sign = $('#txt').SignaturePad({
+
+		$('#txt').SignaturePad({
                 allowToSign: true,
                 img64: 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
                 border: '1px solid #c7c8c9',
                 width: '40px',
                 height: '20px',
                 callback: function (data, action) {
-                    console.log(data);
 					downloadBase64File(data, 'SIMBKM-signature.png');					
 					pdf.addImageToCanvas();
                 }
             });
+			var doc = new jsPDF();
+					$('#saveFile').click(function(){
+			doc.fromHTML(
+				$('.canvas-container'), 15, 15,
+				{width: 170},
+				function(){
+					var blob = doc.output('blob');
+					// var blob = doc.output('datauri');
+					// var blob = doc.output('base64');
+					var formData = new FormData();
+					var blobPDF = new Blob([doc.output('blob')], {type : 'application/pdf'});
+					var blobUrl = URL.createObjectURL(blobPDF);
+					// formData.append('pdf', blob);
+					formData.append('pdf', blobUrl);
+					formData.append('_token', CSRF_TOKEN);
+					formData.append('dokumen', dokValue);
+					formData.append('dokumenName', dokName);
+					// $.ajax({
+					// 	url: "{{url('/dashboard/laporan/save-document')}}",
+					// 	type: "POST",
+					// 	data: formData,
+					// 	processData: false,
+					// 	contentType: false,
+					// 	success: function(data){console.log(data)},
+					// 	error: function(data){console.log(data)}
+					// })
+					console.log('clicked');
+					doc.save();
+				}
+			)
+			
+			// console.log(doc);
+			// console.log(source);
+			
+		});
 
-			$('#savepdf').click(function(){
-				$.ajax({
-					url: "{{url('/dashboard/laporan/save-document')}}",
-					type: "POST",
-					data: {
-						_token: '{{csrf_token()}}'
-					},
-					dataType: 'json',
-					success: function(result){
-						console.log(result);
-						console.log(pdf);
-						var input = document.createElement('input');
-						input.name = 'dokumen_name';
-						input.value = pdf;
-					}
-				});
-			});
-    });
-
-	
-	function showSignPad() {
-  	pdf.serializePdf(function (string) {
-    	$('#exampleModal .modal-body ')
-    	//   .first()
-    	//   .text(JSON.stringify(JSON.parse(string), null, 4));
-    	// PR.prettyPrint();
-    	$('#exampleModal').modal('show');
-  });
-
-  
-  
-  function saveFile(){
-	console.log("Terpanggil");
-	var doc = new jsPDF();
-							$('#saveFile').click(function(){
-								doc.fromHTML(
-									$('.canvas-container'), 15, 15,
-									{width: 170},
-									function(){
-										var blob = doc.output('blob');
-										// var blob = doc.output('datauri');
-										// var blob = doc.output('base64');
-										var formData = new FormData();
-										var blobPDF = new Blob([doc.output('blob')], {type : 'application/pdf'});
-										var blobUrl = URL.createObjectURL(blobPDF);
-										// formData.append('pdf', blob);
-										formData.append('pdf', blobUrl);
-										formData.append('_token', CSRF_TOKEN);
-										formData.append('dokumen', dokValue);
-										formData.append('dokumenName', dokName);
-										// $.ajax({
-										// 	url: "{{url('/dashboard/laporan/save-document')}}",
-										// 	type: "POST",
-										// 	data: formData,
-										// 	processData: false,
-										// 	contentType: false,
-										// 	success: function(data){console.log(data)},
-										// 	error: function(data){console.log(data)}
-										// })
-										console.log('clicked');
-										doc.save();
-									}
-								)
-								
-								// console.log(doc);
-								// console.log(source);
-								
-							});
-  }
+			// $('#savepdf').click(function(){
+			// 	$.ajax({
+			// 		url: "{{url('/dashboard/laporan/save-document')}}",
+			// 		type: "POST",
+			// 		data: {
+			// 			_token: '{{csrf_token()}}'
+			// 		},
+			// 		dataType: 'json',
+			// 		success: function(result){
+			// 			console.log(result);
+			// 			console.log(pdf);
+			// 			var input = document.createElement('input');
+			// 			input.name = 'dokumen_name';
+			// 			input.value = pdf;
+			// 		}
+			// 	});
+			// });
 
 
-  
-}
+//   function saveFile(){
+// 	console.log("Terpanggil");
+
+
+//   }
 
 </script>
 </body>

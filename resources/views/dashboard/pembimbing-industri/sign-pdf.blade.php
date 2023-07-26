@@ -227,9 +227,9 @@
 
 				// Create a variable with a dynamic name
 				window[dynamicVariableName] = variableValue;
-				let lastIndex = annotate.pages.length - 1;
+				// let lastIndex = dataAnnotate.pages.length - 1;
 				annotate.pages[page - 1] = newData;
-				annotate.pages[lastIndex] = oldData;
+				// annotate.pages[lastIndex] = oldData;
 
 				let dataJson = JSON.stringify(annotate);
 				$('#saveFile').click(function(){
@@ -285,24 +285,41 @@
 							}
 							// console.log($('.canvas-container'));
 
-							fetchSaveData(page, basicData, newData);
+							// fetchSaveData(page, basicData, newData);
 
-							if(dataAnnotate == null || dataAnnotate == undefined){
-								pdf.serializePdf(function(string){
+							pdf.serializePdf(function(string){
 									let json = JSON.parse(string);
 									let lastIndex = json.pages.length - 1;
 									json.pages[page - 1] = newData;
 									json.pages[lastIndex] = oldData;
 
 									let dataJson = JSON.stringify(json);
+									console.log(dataJson);
 									// pdf.saveToServer('{{url('/dashboard/laporan/save-document')}}', CSRF_TOKEN, dokName, dokValue, dataJson);
 									// pdf.saveToServer('{{url('/dashboard/laporan/save-document')}}', CSRF_TOKEN, dokName, dokValue, string);
+									$('#saveFile').click(function(){
+										// pdf.saveToServer('{{url('/laporan/pi/detail/sign-pdf/save')}}', CSRF_TOKEN, dokName, dokValue, dataJson);
+										// window.location.href = '/laporan/pi';
+									});
 								});
-								$('#saveFile').click(function(){
-									pdf.saveToServer('{{url('/laporan/pi/detail/sign-pdf/save')}}', CSRF_TOKEN, dokName, dokValue, dataJson);
-									window.location.href = '/laporan/pi';
-								});
-							}
+								
+
+							// if(dataAnnotate == null || dataAnnotate == undefined){
+							// 	pdf.serializePdf(function(string){
+							// 		let json = JSON.parse(string);
+							// 		let lastIndex = json.pages.length - 1;
+							// 		json.pages[page - 1] = newData;
+							// 		json.pages[lastIndex] = oldData;
+
+							// 		let dataJson = JSON.stringify(json);
+							// 		// pdf.saveToServer('{{url('/dashboard/laporan/save-document')}}', CSRF_TOKEN, dokName, dokValue, dataJson);
+							// 		// pdf.saveToServer('{{url('/dashboard/laporan/save-document')}}', CSRF_TOKEN, dokName, dokValue, string);
+							// 	});
+							// 	$('#saveFile').click(function(){
+							// 		pdf.saveToServer('{{url('/laporan/pi/detail/sign-pdf/save')}}', CSRF_TOKEN, dokName, dokValue, dataJson);
+							// 		window.location.href = '/laporan/pi';
+							// 	});
+							// }
 							
 
 							// $('#saveFile').click(function(){

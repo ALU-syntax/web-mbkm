@@ -54,7 +54,7 @@ Route::post('/logout', [LoginController::class, 'logout']);
 
 Route::get('/auth/pnj', [LoginSSOController::class, 'redirectToSSOPNJ']);
 Route::get('/dashboard/', [LoginSSOController::class, 'callback']);
-Route::get('/dashboard/index', [DashboardController::class, 'welcome']);
+Route::get('/dashboard/index', [DashboardController::class, 'welcome'])->middleware('auth');
 Route::get('/dashboard/first-create/{sso}', [LoginSSOController::class, 'firstLogin']);
 Route::post('/dashboard/first-create/{id}', [LoginSSOController::class, 'storeFirstLogin']);
 
@@ -101,7 +101,7 @@ Route::get('/dashboard/laporan', [DashboardController::class, 'laporan'])->middl
 Route::get('/dashboard/laporan/{id}', [LaporanController::class, 'index'])->middleware('auth');
 Route::get('/dashboard/laporan/preview/{id}', [LaporanController::class, 'previewPdf'])->middleware('auth');
 Route::post('/dashboard/laporan/{id}', [LaporanController::class, 'update'])->middleware('auth');
-Route::get('/dashobard/laporan/view-pdf/{id}', [LaporanController::class, 'viewPdf'])->middleware('auth');
+Route::get('/dashboard/laporan/view-pdf/{id}', [LaporanController::class, 'viewPdf'])->middleware('auth');
 Route::post('/api/fetch-dokumen', [LaporanController::class, 'fetchDokumen']);
 Route::post('/dashboard/laporan/revisi/{id}', [LaporanController::class, 'revisi'])->middleware('auth');
 // Route::post('/api/save-document', [LaporanController::class, 'savePdf'])->middleware('auth');
@@ -223,6 +223,7 @@ Route::get('/api/fetch-chart-label', [PembimbingAkademikController::class, 'fetc
 Route::get('/test/sign-pad', function(){
     return view('dashboard.signpad');
 });
+
 
 
 
