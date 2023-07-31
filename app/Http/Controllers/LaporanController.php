@@ -26,21 +26,9 @@ class LaporanController extends Controller
     }    
 
     public function viewPdf($id){
-
-        //PERCOBAAN STAGING
-        return view('staging-view-pdf',[
+        return view('dashboard.viewpdf',[
             'laporan' => Laporan::find($id)->get()
         ]);
-
-        //PERCOBAAN
-        // return view('pdf-signature-test',[
-        //     'laporan' => Laporan::find($id)->get()
-        // ]);
-
-        //YANG UTAMA
-        // return view('dashboard.viewpdf',[
-        //     'laporan' => Laporan::find($id)->get()
-        // ]);
     }
 
     public function fetchDokumen(Request $request){

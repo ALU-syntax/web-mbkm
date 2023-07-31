@@ -334,7 +334,7 @@ var PDFAnnotate = function (container_id, url, options = {}) {
         }
       });
     });
-    console.log("---PEMBATAS---");
+    // console.log("---PEMBATAS---");
   };
 
   // PDFAnnotate.prototype.serializePdf = function (callback) {
