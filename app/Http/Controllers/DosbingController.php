@@ -145,14 +145,14 @@ class DosbingController extends Controller
             'title' => 'Laporan',
             'title_page' => 'Laporan / Detail',
             'active' => 'Laporan Dosbing',
-            'laporan' => Laporan::find($id)->with('listMbkm')->get(),
+            'laporan' => Laporan::where('id', $id)->with('listMbkm')->get(),
             'logcomment' => CommentLaporan::all()->where('laporan', $id)
         ]);
     }
 
     public function viewPdf($id){
         return view('dashboard.dosbing.view-pdf',[
-            'laporan' => Laporan::find($id)->get()
+            'laporan' => Laporan::where('id',$id)->get()
         ]);
     }
 
@@ -181,7 +181,7 @@ class DosbingController extends Controller
 
     public function signPdf($id){
         return view('dashboard.dosbing.sign-pdf',[
-            'laporan' => Laporan::find($id)->get()
+            'laporan' => Laporan::where('id',$id)->get()
         ]);
     }
 
@@ -200,7 +200,7 @@ class DosbingController extends Controller
         $pdf->update($rules);
 
         // return $pdf;
-        return redirect('/dashboard/laporan')->with('success', 'Dokumen Laporan Berhasil ditandatangan!');       
+        return redirect('/laporan/dosbing')->with('success', 'Dokumen Laporan Berhasil ditandatangan!');       
     }
 
 }

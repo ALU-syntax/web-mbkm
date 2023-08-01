@@ -129,6 +129,7 @@
               // objects: []
             }
             var data = JSON.parse(string);
+            
             // for(let i = 0; i < data.pages.length; i++ ){
             //   var pagesDefault = data.pages[i];
             //   pagesDefault['backgroundImage'] = pageContent;
@@ -155,6 +156,8 @@
             // Create a variable with a dynamic name
             window[dynamicVariableName] = variableValue;
             inputJson.value = JSON.stringify(annotate);
+            console.log(inputJson.value);
+              
             // let dataJson = JSON.stringify(annotate);
             });
       }
