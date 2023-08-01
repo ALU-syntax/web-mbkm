@@ -23,7 +23,7 @@
               </div>
             </div>
             
-            {{-- <div class="card-body ms-3">
+            <div class="card-body ms-3">
               @foreach($users as $post)
               <div class="row mt-3">
                 <div class="d-flex align-items-center">
@@ -35,13 +35,13 @@
               <div class="row mt-3">
                 <p>{!! $post->body !!}</p>
                 
-              <div class="d-flex"> --}}
-                {{-- <div class="btn btn-info me-2">Share</div>  --}}
-                {{-- <div class="btn btn-info">Comment</div>
+              <div class="d-flex">
+                <div class="btn btn-info me-2">Share</div> 
+                <div class="btn btn-info">Comment</div>
               </div>
             </div>
             <hr class="horizontal dark mt-0">
-              @endforeach --}}
+              @endforeach
 
               
             <div class="card-body ms-3">

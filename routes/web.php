@@ -35,7 +35,7 @@ Route::get('/dashboard/index', [DashboardController::class, 'welcome']);
 
 Route::get('/dashboard/', [LoginController::class, 'callback']);
 
-Route::resource('/dashboard/forums', ForumController::class)->middleware('auth');
+Route::resource('/dashboard/forum', ForumController::class)->middleware('auth');
 // Route::get('/dashboard/forums', [ForumController::class,'page']);
 // Route::get('/forum', [ForumController::class,'page']);
 // Route::get('/page', [ForumController::class,'page'])->middleware('auth');
