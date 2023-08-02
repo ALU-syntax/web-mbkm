@@ -137,6 +137,7 @@
             // }
 
             if(status == "Baru"){
+              let newData = data
               data = JSON.parse(string);
               console.log(data);
               data.pages[data.pages.length - 1] = oldValue;
