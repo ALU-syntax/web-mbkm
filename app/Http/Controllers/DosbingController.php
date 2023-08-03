@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Storage;
 class DosbingController extends Controller
 {
     public function dashboard(){
-        $mbkm = Mbkm::where('dosen_pembimbing', auth()->user()->id)->latest()->get();
+        $mbkm = Mbkm::where('dosen_pembimbing', auth()->user()->id)->get();
         // dd($mbkm);
         $user = '';
 
@@ -133,11 +133,12 @@ class DosbingController extends Controller
     }
 
     public function listLaporan($id){
+        $laporan = Laporan::where('mbkm', $id)->get();
         return view('dashboard.dosbing.list-laporan', [
             'title' => 'Laporan',
             'title_page' => 'Laporan',
             'active' => 'Laporan Dosbing',
-            'laporans' => CommentLaporan::with('dataLaporan')->where('user', $id)->get()
+            'laporans' => CommentLaporan::with('dataLaporan')->where('laporan', $laporan[0]->id)->get()
         ]);
     }
 

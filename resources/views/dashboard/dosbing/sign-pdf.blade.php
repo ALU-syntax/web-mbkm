@@ -29,9 +29,9 @@
 		<button class="btn btn-danger btn-sm" onclick="deleteSelectedObject(event)"><i class="fa fa-trash"></i></button>
 	</div>
 	
-	{{-- <div class="tool">
+	<div class="tool">
 		<button class="btn btn-info btn-sm" onclick="showPdfData()">{}</button>
-	</div> --}}
+	</div>
 
   <div class="tool" id="loadBtn">
 		<button class="btn btn-primary btn-sm" onclick="loadPdfData()">LOAD DATA SIGNATURE</button>
@@ -243,10 +243,11 @@
               inputBgImage.files = fileList;
             }else{
               // data = JSON.parse(string);
-              var dataSync = data.pages[data.pages.length - 1];
+              var dataSync = data.pages[data.pages.length - 2];
               ttdPertama = dataSync;
               ttdPertama['page'] = syncPageBaru;
               data.pages[data.pages.length - 1] = oldValue;
+              console.log(ttdPertama);
             }
             var dynamicVariableName = "annotate";
 				    var variableValue = data;
