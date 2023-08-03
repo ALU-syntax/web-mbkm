@@ -116,7 +116,8 @@ class LaporanController extends Controller
 
     public function previewPdf($id){
         return view('dashboard.preview-pdf',[
-            'laporan' => Laporan::find($id)->get()
+            'laporan' => Laporan::find($id)->get(),
+            'signature' => LogSignaturePdf::where('laporan_id', $id)->get()
         ]);
     }
 

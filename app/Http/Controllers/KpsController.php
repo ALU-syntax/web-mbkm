@@ -84,7 +84,7 @@ class KpsController extends Controller
     }
 
     public function laporan(){
-        $mbkm = Mbkm::where('fakultas', auth()->user()->fakultas_id)->get();
+        $mbkm = Mbkm::where('jurusan', auth()->user()->jurusan_id)->get();
         $user = '';
         if(empty($mbkm)){
             $user = User::where('email', $mbkm[0]->email)->get();
@@ -100,11 +100,12 @@ class KpsController extends Controller
     }
 
     public function listLaporan($id){
+        $laporan = Laporan::where('mbkm', $id)->get();
         return view('dashboard.kps.list-laporan', [
             'title' => 'List Laporan',
             'title_page' => 'Laporan / List Laporan',
             'active' => 'Laporan KPS',
-            'laporans' => CommentLaporan::with('dataLaporan')->where('user', $id)->get()
+            'laporans' => CommentLaporan::with('dataLaporan')->where('laporan', $laporan[0]->id)->get()
         ]);
     }
 

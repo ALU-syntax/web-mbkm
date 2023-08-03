@@ -155,7 +155,8 @@ class DosbingController extends Controller
 
     public function viewPdf($id){
         return view('dashboard.dosbing.view-pdf',[
-            'laporan' => Laporan::where('id',$id)->get()
+            'laporan' => Laporan::where('id',$id)->get(),
+            'signature' => LogSignaturePdf::where('laporan_id', $id)->get()
         ]);
     }
 
@@ -188,24 +189,6 @@ class DosbingController extends Controller
             'signature' => LogSignaturePdf::where('laporan_id', $id)->get()
         ]);
     }
-
-    // public function savePdf(Request $request){
-    //     $fileName = pathinfo($request->dokumenPath, PATHINFO_FILENAME);
-    //     // dd($test);
-    //     Storage::makeDirectory('dokumen-annotate');
-    //     $data = json_decode($request->annotateJson, true);
-    //     // $data = json_encode($request->annotateJson, true);
-    //     Storage::put('dokumen-annotate/'. $fileName .'.json', json_encode($data));
-
-    //     $rules['json_annotate'] = 'dokumen-annotate/'. $fileName .'.json';
-    //     $rules['sign_second'] = '1';
-
-    //     $pdf = Laporan::find($request->fileId);
-    //     $pdf->update($rules);
-
-    //     // return $pdf;
-    //     return redirect('/laporan/dosbing')->with('success', 'Dokumen Laporan Berhasil ditandatangan!');       
-    // }
 
     public function savePdf(Request $request){
         $fileName = pathinfo($request->dokumenPath, PATHINFO_FILENAME);
