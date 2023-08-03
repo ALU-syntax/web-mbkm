@@ -7,8 +7,10 @@ use App\Models\User;
 use App\Models\Laporan;
 use App\Models\Logbook;
 use App\Models\LogLogbook;
+use App\Models\LogSignaturePdf;
 use Illuminate\Http\Request;
 use App\Models\CommentLaporan;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -181,23 +183,59 @@ class DosbingController extends Controller
 
     public function signPdf($id){
         return view('dashboard.dosbing.sign-pdf',[
-            'laporan' => Laporan::where('id',$id)->get()
+            'laporan' => Laporan::where('id',$id)->get(),
+            'signature' => LogSignaturePdf::where('laporan_id', $id)->get()
         ]);
     }
 
+    // public function savePdf(Request $request){
+    //     $fileName = pathinfo($request->dokumenPath, PATHINFO_FILENAME);
+    //     // dd($test);
+    //     Storage::makeDirectory('dokumen-annotate');
+    //     $data = json_decode($request->annotateJson, true);
+    //     // $data = json_encode($request->annotateJson, true);
+    //     Storage::put('dokumen-annotate/'. $fileName .'.json', json_encode($data));
+
+    //     $rules['json_annotate'] = 'dokumen-annotate/'. $fileName .'.json';
+    //     $rules['sign_second'] = '1';
+
+    //     $pdf = Laporan::find($request->fileId);
+    //     $pdf->update($rules);
+
+    //     // return $pdf;
+    //     return redirect('/laporan/dosbing')->with('success', 'Dokumen Laporan Berhasil ditandatangan!');       
+    // }
+
     public function savePdf(Request $request){
         $fileName = pathinfo($request->dokumenPath, PATHINFO_FILENAME);
-        // dd($test);
+        $newFileName = Str::random(10);
+
+        // dd($newFileName);
         Storage::makeDirectory('dokumen-annotate');
-        $data = json_decode($request->annotateJson, true);
-        // $data = json_encode($request->annotateJson, true);
-        Storage::put('dokumen-annotate/'. $fileName .'.json', json_encode($data));
+        Storage::makeDirectory('dokumen-signature');
+        Storage::makeDirectory('dokumen-signature-background');
+        Storage::makeDirectory('dokumen-json-signature-background');
+
+        $dataAnnotate = json_encode($request->annotateJson, true);
+        $dataSignaturePertama = json_encode($request->signature_kedua, true);
+        $dataJsonBackgroundSignature = json_encode($request->bgJson, true);
+        
+        Storage::put('dokumen-annotate/' . $fileName . '.json', json_decode($dataAnnotate));
+        Storage::put('dokumen-signature/' . $newFileName . '_kedua.json', json_decode($dataSignaturePertama));
+        Storage::put('dokumen-json-signature-background/' . $newFileName . '_kedua.json', json_decode($dataJsonBackgroundSignature));
 
         $rules['json_annotate'] = 'dokumen-annotate/'. $fileName .'.json';
         $rules['sign_second'] = '1';
 
+        $rulesSignature['json_sign_kedua'] = 'dokumen-signature/' . $newFileName . '_kedua.json';
+        $rulesSignature['json_background_kedua'] = 'dokumen-json-signature-background/' . $newFileName . '_kedua.json';
+        $rulesSignature['file_background_kedua'] = $request->file('bgImage')->store('dokumen-signature-background');
+
         $pdf = Laporan::find($request->fileId);
         $pdf->update($rules);
+
+        $signatureData = LogSignaturePdf::where('laporan_id', $request->fileId);
+        $signatureData->update($rulesSignature);
 
         // return $pdf;
         return redirect('/laporan/dosbing')->with('success', 'Dokumen Laporan Berhasil ditandatangan!');       

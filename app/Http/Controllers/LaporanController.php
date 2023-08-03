@@ -81,20 +81,6 @@ class LaporanController extends Controller
         return redirect('/dashboard/laporan/'.$id)->with('success', 'Dokumen Laporan berhasil ditambahkan!');
     }
 
-    // public function savePdf(Request $request){
-    //     Storage::makeDirectory('dokumen-annotate');
-    //     $data = json_decode($request->file, true);
-    //     Storage::put('dokumen-annotate/'.$request->name.'.json', json_encode($data));
-
-    //     $rules['json_annotate'] = 'dokumen-annotate/'.$request->name.'.json';
-    //     $rules['sign_first'] = '1';
-
-    //     $pdf = Laporan::find($request->fileId);
-    //     $pdf->update($rules);
-
-    //     return $pdf;
-    // }
-
     public function savePdf(Request $request){
         $fileName = pathinfo($request->dokumenPath, PATHINFO_FILENAME);
 
