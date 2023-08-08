@@ -29,9 +29,9 @@
 		<button class="btn btn-danger btn-sm" onclick="deleteSelectedObject(event)"><i class="fa fa-trash"></i></button>
 	</div>
 	
-	<div class="tool">
+	{{-- <div class="tool">
 		<button class="btn btn-info btn-sm" onclick="showPdfData()">{}</button>
-	</div>
+	</div> --}}
 
   <div class="tool" id="loadBtn">
 		<button class="btn btn-primary btn-sm" onclick="loadPdfData()">LOAD DATA SIGNATURE</button>
@@ -49,6 +49,7 @@
             <input id="signature_keempat" name="signature_keempat" type="text" hidden>
             <input id="bgImage" name="bgImage" type="file" hidden>
             <input id="bgJson" name="bgJson" type="text" hidden>
+            <input id="sign_id" name="sign_id" type="text" hidden>
             <input id="dokumen" name="fileId" type="text" value="{{ $laporan[0]->id }}" hidden>
             <input id="dokumenName" name="dokumenName"  type="text" value="{{ $laporan[0]->dokumen_name }}" hidden>
             <input name="dokumenPath"  type="text" value="{{ $laporan[0]->dokumen_path }}" hidden>
@@ -120,8 +121,7 @@
     var inputSignaturePertama = document.getElementById("signature_keempat");
     var inputBgJson = document.getElementById("bgJson");
     var inputBgImage = document.getElementById("bgImage");
-
-    var annotateFromDb = [];
+    var inputSignId = document.getElementById("sign_id");
 
     var syncDataBaru = "";
     var syncPageBaru = 0;
@@ -191,13 +191,13 @@
       // console.log('DataJsonBg: ', dataBgJsonPertama);
 
       const signKetiga = await fetchDataJson(appUrl + '/storage/' + signature.json_sign_ketiga);
-      console.log('DataSign: ', signKetiga);
+      // console.log('DataSign: ', signKetiga);
 
       const dataBgJsonKetiga = await fetchDataJson(appUrl + '/storage/' + signature.json_background_ketiga);
-      console.log('DataJsonBg: ', dataBgJsonKetiga);
+      // console.log('DataJsonBg: ', dataBgJsonKetiga);
 
       const dataBgBase64Ketiga = await fetchDataText(appUrl + '/storage/' + signature.file_background_ketiga);
-      console.log('DataBase64: ', dataBgBase64Ketiga);
+      // console.log('DataBase64: ', dataBgBase64Ketiga);
 
       // GET DATA ROLE PEMBIMBING AKADEMIK
       var jsonBgKetiga = dataBgJsonKetiga;
@@ -230,23 +230,68 @@
         }
       }
       
-      listPages[signPertama['page'] - 1] = valueSignPertama;
-      if(signKedua['page'] == signKetiga['page']){
-        listPages[signKedua['page'] - 1] = {
+      if(signPertama.page === signKedua.page){
+        if(signPertama.page === signKedua.page && signPertama.page === signKetiga.page){
+          listPages[signPertama.page - 1] = {
+          backgroundImage: valueSignPertama['backgroundImage'],
+          objects: [valueSignKetiga.objects[0], valueSignKetiga.objects[1], valueSignKetiga.objects[2]]
+          }
+        }else if(signPertama.page === signKedua.page && signPertama.page !== signKetiga.page){
+          listPages[signPertama.page - 1 ] = {
             backgroundImage: valueSignKedua['backgroundImage'],
-            objects: [valueSignKedua.objects[0], valueSignKetiga]
+            objects: [valueSignKedua.objects[0], valueSignKedua.objects[1]]
+          }
+          listPages[signKetiga.page - 1] = {
+            backgroundImage:valueSignKetiga['backgroundImage'],
+            objects: [valueSignKetiga.objects[0]]
+          }
         }
-      }else{
-        listPages[signKedua['page'] - 1] = valueSignKedua;
-        listPages[signKetiga['page'] - 1] = valueSignKetiga;
       }
       
+      if(signPertama.page === signKetiga.page){
+        if(signPertama.page === signKetiga.page && signPertama.page !== signKedua.page){
+          listPages[signPertama.page - 1] = {
+            backgroundImage: valueSignPertama['backgroundImage'],
+            objects: [valueSignKetiga.objects[0], valueSignKetiga.objects[1]]
+          }
+          listPages[signKedua.page - 1] = {
+             backgroundImage: valueSignKedua['backgroundImage'],
+             objects: [valueSignKedua.objects[0]]
+          }
+        }else if(signPertama.page === signKetiga.page && signPertama.page === signKedua.page){
+          listPages[signPertama.page - 1] = {
+            backgroundImage: valueSignPertama['backgroundImage'],
+            objects: [valueSignKetiga.objects[0], valueSignKetiga.objects[1], valueSignKetiga.objects[2]]
+          }
+        }
+      }
+
+      if(signKedua.page === signKetiga.page){
+        if(signKedua.page === signKetiga.page && signKedua.page !== signPertama.page){
+          listPages[signKedua.page - 1] = {
+            backgroundImage: valueSignKedua['backgroundImage'],
+            objects: [valueSignKetiga.objects[0], valueSignKetiga.objects[1]] 
+          }
+          listPages[signPertama.page - 1] = {
+            backgroundImage: valueSignPertama['backgroundImage'],
+            objects: [valueSignPertama.objects[0]],
+          }
+        } else if(signKedua.page === signKetiga.page && signKedua.page === signPertama.page){
+          listPages[signKedua.page - 1] = {
+            backgroundImage: valueSignKedua['backgroundImage'],
+            objects: [valueSignKetiga.objects[0], valueSignKetiga.objects[1], valueSignKetiga.objects[2]]
+          }
+        }
+      }
+
+      if(signPertama.page !== signKedua.page && signPertama.page !== signKetiga.page && signKedua.page !== signKetiga.page){
+        listPages[signPertama['page'] - 1] = valueSignPertama.objects[0];
+        listPages[signKedua['page'] - 1] = valueSignKedua.objects[0];
+        listPages[signKetiga['page'] - 1] = valueSignKetiga.objects[0];
+      }
       
-      // console.log(dataSignPertama);
-      console.log(listPages);
-      console.log('---Finish---');
+      // console.log('---Finish---');
       pdf.loadFromJSON(dataSignPertama);
-      // Do more operations with the fetched data
     } catch (error) {
       // Handle errors, if any
     }
@@ -264,7 +309,7 @@
               // version: defaultValue[0].version,
               // objects: []
             }
-            
+            const generateId = Math.random().toString(36).substring(2,7);
             var data = JSON.parse(string);
             var ttdPertama;
             let dataJsonBg = pageContent;
@@ -285,24 +330,37 @@
               inputBgImage.files = fileList;
             }else{
               // data = JSON.parse(string);
-              if(data.pages[data.pages.length - 3].objects !== null ||  data.pages[data.pages.length - 3].objects.length !== 0){
-                var dataSync = data.pages[data.pages.length - 3];
+              if(data.pages[data.pages.length - 4].objects === null ||  data.pages[data.pages.length - 4].objects.length === 0){
+                if(data.pages[data.pages.length - 3].objects === null || data.pages[data.pages.length - 3].objects.length === 0){
+                 if(data.pages[data.pages.length - 2].objects === null || data.pages[data.pages.length - 2].objects.length === 0){
+                  if(data.pages[data.pages.length - 1].objects !== null || data.pages[data.pages.length - 1].objects.length !== 0){
+                    var dataSync = data.pages[data.pages.length - 1];
+                  }
+                 }else{
+                  var dataSync = data.pages[data.pages.length - 2]
+                 }
+                }else{
+                  var dataSync = data.pages[data.pages.length - 3];
+                }
+              }else{
+                var dataSync = data.pages[data.pages.length - 4]
               }
-              // console.log(data.pages[data.pages.length - 3])
-              var dataSync = data.pages[data.pages.length - 2].objects[2];
+              
               ttdPertama = dataSync;
               ttdPertama['page'] = syncPageBaru;
+              ttdPertama['sign_id'] = generateId;
               data.pages[data.pages.length - 1] = oldValue;
             }
             var dynamicVariableName = "annotate";
 				    var variableValue = data;
-
+            
             dataJsonBg['src'] = ""; 
             // Create a variable with a dynamic name
             window[dynamicVariableName] = variableValue;
             inputJson.value = JSON.stringify(annotate);
             inputSignaturePertama.value = JSON.stringify(ttdPertama);
             inputBgJson.value = JSON.stringify(dataJsonBg);
+            inputSignId.value = ttdPertama['sign_id'];
             });
       }
 
@@ -318,7 +376,7 @@
 
     var pdf = new PDFAnnotate('pdf-container', appUrl + '/storage/'  + dokumen.dokumen_path, {
     onPageUpdated(page, oldData, newData) {
-    console.log(page, oldData, newData);
+    // console.log(page, oldData, newData);
     // console.log(oldData['backgroundImage']);
       syncDataBaru = newData;
       syncPageBaru = page;
@@ -397,8 +455,8 @@ function clearPage() {
 
 function showPdfData() {
   pdf.serializePdf(function (string, defaultValue, defaultBg) {
-    console.log(JSON.parse(string));
-    console.log(JSON.parse(defaultBg));
+    // console.log(JSON.parse(string));
+    // console.log(JSON.parse(defaultBg));
     $('#dataModal .modal-body pre')
       .first()
       .text(JSON.stringify(JSON.parse(string), null, 4));

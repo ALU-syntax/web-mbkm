@@ -45,6 +45,7 @@
             <input id="signature_pertama" name="signature_pertama" type="text" hidden>
             <input id="bgImage" name="bgImage" type="file" hidden>
             <input id="bgJson" name="bgJson" type="text" hidden>
+            <input id="sign_id" name="sign_id" type="text" hidden>
             <input id="dokumen" name="fileId" type="text" value="{{ $laporan[0]->id }}" hidden>
             <input id="dokumenName" name="dokumenName"  type="text" value="{{ $laporan[0]->dokumen_name }}" hidden>
             <input name="dokumenPath"  type="text" value="{{ $laporan[0]->dokumen_path }}" hidden>
@@ -115,6 +116,7 @@
     var inputSignaturePertama = document.getElementById("signature_pertama");
     var inputBgJson = document.getElementById("bgJson");
     var inputBgImage = document.getElementById("bgImage");
+    var inputSignId = document.getElementById("sign_id");
 
     var syncDataBaru = "";
     var syncPageBaru = 0;
@@ -140,10 +142,11 @@
               // version: defaultValue[0].version,
               // objects: []
             }
-            
+            const generateId = Math.random().toString(36).substring(2,7);
             var data = JSON.parse(string);
             var ttdPertama;
             let dataJsonBg = pageContent;
+            
 
             if(status == "Baru"){
               // data = JSON.parse(string);
@@ -164,6 +167,8 @@
               var dataSync = data.pages[data.pages.length - 1];
               ttdPertama = dataSync;
               ttdPertama['page'] = syncPageBaru;
+              ttdPertama['sign_id'] = generateId;
+
               data.pages[data.pages.length - 1] = oldValue;
             }
             var dynamicVariableName = "annotate";
@@ -175,6 +180,7 @@
             inputJson.value = JSON.stringify(annotate);
             inputSignaturePertama.value = JSON.stringify(ttdPertama);
             inputBgJson.value = JSON.stringify(dataJsonBg);
+            inputSignId.value = ttdPertama['sign_id'];
             });
       }
 
@@ -195,14 +201,14 @@
     },
     ready() {
         console.log('Plugin initialized successfully');
-		console.log(dokumen.json_annotate);
-		if(dokumen.json_annotate !== null && dokumen.json_annotate !== undefined && dokumen.json_annotate !== ''){
-			fetch(appUrl + '/storage/'  + dokumen.json_annotate)
-			.then(response => response.json())
-			.then(data =>{
-				pdf.loadFromJSON(data);
-			});
-		}
+		// console.log(dokumen.json_annotate);
+		// if(dokumen.json_annotate !== null && dokumen.json_annotate !== undefined && dokumen.json_annotate !== ''){
+		// 	fetch(appUrl + '/storage/'  + dokumen.json_annotate)
+		// 	.then(response => response.json())
+		// 	.then(data =>{
+		// 		pdf.loadFromJSON(data);
+		// 	});
+		// }
     // pdf.loadFromJSON(sampleOutput)
 		
     },

@@ -14,15 +14,19 @@ return new class extends Migration
         Schema::create('log_signature_pdfs', function (Blueprint $table) {
             $table->id();
             $table->string('laporan_id')->unique();
+            $table->string('id_data_sign_pertama')->nullable();
             $table->string('json_sign_pertama')->nullable();
             $table->string('json_background_pertama')->nullable();
             $table->string('file_background_pertama')->nullable();
+            $table->string('id_data_sign_kedua')->nullable();
             $table->string('json_sign_kedua')->nullable();
             $table->string('json_background_kedua')->nullable();
             $table->string('file_background_kedua')->nullable();
+            $table->string('id_data_sign_ketiga')->nullable();
             $table->string('json_sign_ketiga')->nullable();
             $table->string('json_background_ketiga')->nullable();
             $table->string('file_background_ketiga')->nullable();
+            $table->string('id_data_sign_keempat')->nullable();
             $table->string('json_sign_keempat')->nullable();
             $table->string('json_background_keempat')->nullable();
             $table->string('file_background_keempat')->nullable();

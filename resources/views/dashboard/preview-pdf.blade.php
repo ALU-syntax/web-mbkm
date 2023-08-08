@@ -184,7 +184,7 @@
       // console.log('DataAnnonate: ', dataAnnonate);
       
       const signPertama = await fetchDataJson(appUrl + '/storage/' + signature.json_sign_pertama);
-      console.log('DataSign: ', signPertama);
+      // console.log('DataSign: ', signPertama);
       
       const dataBgJsonPertama = await fetchDataJson(appUrl + '/storage/' + signature.json_background_pertama);
       // console.log('DataJsonBg: ', dataBgJsonPertama);
@@ -256,23 +256,314 @@
           backgroundImage: dataDefault.src[i]
         }
       }
-      
-      listPages[signPertama['page'] - 1] = valueSignPertama;
-      if(signKedua['page'] == signKetiga['page']){
-        listPages[signKedua['page'] - 1] = {
+
+      console.log(listPages)
+
+      if(signPertama.page === signKedua.page){
+        console.log("---MASOK1---");
+        if(signPertama.page === signKedua.page && signPertama.page === signKetiga.page && signPertama.page === signKeempat.page){
+          listPages[signPertama.page - 1] = {
+          backgroundImage: valueSignPertama['backgroundImage'],
+          objects: [valueSignKeempat.objects[0], valueSignKeempat.objects[1], valueSignKeempat.objects[2], valueSignKeempat.objects[3]]
+          }
+        }else if(signPertama.page === signKedua.page && signPertama.page === signKetiga.page && signPertama.page !== signKeempat.page){
+          listPages[signPertama.page - 1 ] = {
             backgroundImage: valueSignKedua['backgroundImage'],
-            objects: [valueSignKedua.objects[0], valueSignKetiga, valueSignKeempat]
+            objects: [valueSignKetiga.objects[0], valueSignKetiga.objects[1], valueSignKetiga.objects[2]]
+          }
+          listPages[signKeempat.page - 1] = {
+            backgroundImage: valueSignKeempat['backgroundImage'],
+            objects: [valueSignKeempat.objects[0]]
+          }
+        }else if(signPertama.page === signKedua.page && signPertama.page !== signKetiga.page && signPertama.page === signKeempat.page){
+          listPages[signPertama.page - 1] = {
+            backgroundImage: valueSignKedua['backgroundImage'],
+            objects: [valueSignKeempat.objects[0], valueSignKeempat.objects[1], valueSignKeempat.objects[2]] 
+          }
+          listPages[signKetiga.page - 1] = {
+            backgroundImage: valueSignKetiga['backgroundImage'],
+            objects: [valueSignKetiga.objects[0]]
+          }
+        }else if(signPertama.page === signKedua.page && signPertama.page !== signKetiga.page && signPertama.page !== signKeempat.page){
+          listPages[signPertama.page - 1] = {
+            backgroundImage: valueSignKedua['backgroundImage'],
+            objects: [valueSignKedua.objects[0], valueSignKedua.objects[1]]
+          }
+          if(signKetiga.page === signKeempat.page){
+            listPages[signKeempat.page - 1] = {
+              backgroundImage: valueSignKeempat['backgroundImage'],
+              objects: [valueSignKeempat.objects[0], valueSignKeempat.objects[1]]
+            }  
+          }else{
+            listPages[signKetiga.page - 1] = {
+              backgroundImage: valueSignKetiga['backgroundImage'],
+              objects: [valueSignKetiga.objects[0]]
+            }
+            listPages[signKeempat.page - 1] = {
+              backgroundImage: valueSignKeempat['backgroundImage'],
+              objects: [valueSignKeempat.objects[0]]
+            }
+          }
         }
-      }else{
-        listPages[signKedua['page'] - 1] = valueSignKedua;
-        listPages[signKetiga['page'] - 1] = valueSignKetiga;
-        listPages[signKeempat['page'] - 1] = valueSignKeempat;
       }
       
-      // console.log(dataSignPertama);
-      console.log(listPages);
-      console.log('---Finish---');
+      if(signPertama.page === signKetiga.page){
+        console.log("---MASOK2---");
+        if(signPertama.page === signKetiga.page && signPertama.page === signKedua.page && signPertama.page === signKeempat.page){
+          listPages[signPertama.page - 1] = {
+            backgroundImage: valueSignPertama['backgroundImage'],
+            objects: [valueSignKeempat.objects[0], valueSignKeempat.objects[1], valueSignKeempat.objects[2], valueSignKeempat.objects[3]]
+          }
+        }else if(signPertama.page === signKetiga.page && signPertama.page === signKedua.page && signPertama.page !== signKeempat){
+          listPages[signPertama.page - 1] = {
+            backgroundImage: valueSignPertama['backgroundImage'],
+            objects: [valueSignKetiga.objects[0], valueSignKetiga.objects[1], valueSignKetiga.objects[2]]
+          }
+          listPages[signKeempat.page - 1] = {
+            backgroundImage: valueSignKeempat['backgroundImage'],
+            objects: [valueSignKeempat.objects[0]]
+          }
+        }else if(signPertama.page === signKetiga.page && signPertama.page !== signKedua.page && signPertama.page === signKeempat.page){
+          listPages[signPertama.page - 1] = {
+            backgroundImage: valueSignPertama['backgroundImage'],
+            objects: [valueSignKeempat.objects[0], valueSignKeempat.objects[1], valueSignKeempat.objects[2]]
+          }
+          listPages[signKedua.page - 1] = {
+            backgroundImage: valueSignKedua['backgroundImage'],
+            objects: [valueSignKedua.objects[0]]
+          }
+        }else if(signPertama.page === signKetiga.page && signPertama.page !== signKedua.page && signPertama.page !== signKeempat.page){
+          listPages[signPertama.page - 1] = {
+            backgroundImage: valueSignPertama['backgroundImage'],
+            objects: [valueSignKetiga.objects[0], valueSignKetiga.objects[1]]
+          }
+          if(signKedua.page === signKeempat.page){
+            listPages[signKeempat.page - 1] = {
+              backgroundImage: valueSignKeempat['backgroundImage'],
+              objects: [valueSignKeempat.objects[0], valueSignKeempat.objects[1]]
+            }
+          }else{
+            listPages[signKedua.page - 1] = {
+              backgroundImage: valueSignKedua['backgroundImage'],
+              objects: [valueSignKedua.objects[0]]
+            }
+            listPages[signKeempat.page - 1] ={
+              backgroundImage: valueSignKeempat['backgroundImage'],
+              objects: [valueSignKeempat.objects[0]]
+            }
+          }
+          
+        }
+      }
+
+      if(signPertama.page === signKeempat.page){
+        console.log("---MASOK3---");
+        if(signPertama.page === signKeempat.page && signPertama.page === signKedua.page && signPertama.page === signKetiga.page){
+          listPages[signPertama.page - 1] = {
+            backgroundImage: valueSignPertama['backgroundImage'],
+            objects: [valueSignKeempat.objects[0], valueSignKeempat.objects[1], valueSignKeempat.objects[2], valueSignKeempat.objects[3]]
+          }
+        }else if(signPertama.page === signKeempat.page && signPertama.page === signKedua.page && signPertama.page !== signKetiga.page){
+          listPages[signPertama.page - 1] = {
+            backgroundImage: valueSignPertama['backgroundImage'],
+            objects: [valueSignKeempat.objects[0], valueSignKeempat.objects[1], valueSignKeempat.objects[2]]
+          }
+          listPages[singKetiga.page - 1] ={
+            backgroundImage: valueSignKetiga['backgroundImage'],
+            objects: [valueSignKetiga.objects[0]]
+          }
+        }else if(signPertama.page === signKeempat.page && signPertama.page !== signKedua.page && signPertama.page === signKetiga.page){
+          listPages[signPertama.page - 1] = {
+            backgroundImage: valueSignPertama['backgroundImage'],
+            objects: [valueSignKeempat.objects[0], valueSignKeempat.objects[1], valueSignKeempat.objects[2]]
+          }
+          listPages[signKedua.page - 1] = {
+            backgroundImage: valueSignKedua['backgroundImage'],
+            objects: [valueSignKedua.objects[0]]
+          }
+        }else if(signPertama.page === signKeempat.page && signPertama.page !== signKedua.page && signPertama.page !== signKetiga.page){
+          listPages[signKeempat.page - 1] = {
+            backgoundImage: valueSignKeempat['backgroundImage'],
+            objects: [valueSignKeempat.objects[0], valueSignKeempat.objects[1]]
+          }
+          if(signKedua.page === signKetiga.page){
+            listPages[signKetiga.page - 1] = {
+              backgoundImage: valueSignKetiga['backgroundImage'],
+              objects: [valueSignKetiga.objects[0], valueSignKetiga.objects[1]]
+            }  
+          }else{
+            listPages[signKedua.page - 1] = {
+              backgoundImage: valueSignKedua['backgroundImage'],
+              objects: [valueSignKedua.objects[0]]
+            }
+            listPages[signKetiga.page - 1] = {
+              backgroundImage: valueSignKetiga['backgroundImage'],
+              objects: [valueSignKetiga.objects[0]]
+            }
+          }
+        }
+      }
+
+      if(signKedua.page === signKetiga.page){
+        console.log("---MASOK4---");
+        if(signKedua.page === signKetiga.page && signKedua.page === signPertama.page && signKedua.page === signKeempat.page){
+          listPages[signKedua.page - 1] = {
+            backgroundImage: valueSignKedua['backgroundImage'],
+            objects: [valueSignKeempat.objects[0], valueSignKeempat.objects[1], valueSignKeempat.objects[2], valueSignKeempat.objects[3]] 
+          }
+        } else if(signKedua.page === signKetiga.page && signKedua.page === signPertama.page && signKedua.page !== signKeempat.page){
+          listPages[signKedua.page - 1] = {
+            backgroundImage: valueSignKedua['backgroundImage'],
+            objects: [valueSignKetiga.objects[0], valueSignKetiga.objects[1], valueSignKetiga.objects[2]]
+          }
+          listPages[signKeempat.page - 1] = {
+            backgroundImage: valueSignKeempat['backgroundImage'],
+            objects: [valueSignKeempat.objects[0]]
+          }
+        }else if(signKedua.page === signKetiga.page && signKedua.page !== signPertama.page && signKedua.page === signKeempat.page){
+          listPages[signKedua.page - 1] = {
+            backgroundImage: valueSignKedua['backgroundImage'],
+            objects: [valueSignKeempat.objects[0], valueSignKeempat.objects[1], valueSignKeempat.objects[2]]
+          }
+          listPages[signPertama.page - 1] = {
+            backgroundImage: valueSignPertama['backgroundImage'],
+            objects: [valueSignPertama.objects[0]]
+          }
+        }else if(signKedua.page === signKetiga.page && signKedua.page !== signPertama.page && signKedua.page !== signKeempat.page){
+          listPages[signKedua.page - 1] = {
+            backgroundImage: valueSignKedua['backgroundImage'],
+            objects: [valueSignKetiga.objects[0], valueSignKetiga.objects[1]]
+          }
+          if(signPertama.page === signKeempat.page){
+            listPages[signPertama.page - 1] = {
+              backgoundImage: valueSignPertama['backgroundImage'],
+              objects: [valueSignKeempat.objects[0], valueSignKeempat.objects[1]]
+            }
+          }else{
+            listPages[signPertama.page - 1] = {
+              backgroundImage: valueSignPertama['backgroundImage'],
+              objects: [valueSignPertama.objects[0]]
+            }
+            listPages[signKeempat.page - 1] = {
+              backgroundImage: valueSignKeempat['backgroundImage'],
+              objects: [valueSignKeempat.objects[0]]
+            }
+          }
+          
+        }
+      }
+
+      if(signKedua.page === signKeempat.page){
+        console.log("---MASOK5---");
+        if(signKedua.page === signKeempat.page && signKedua.page === signPertama.page && signKedua.page === signKetiga.page){
+          listPages[signKedua.page - 1] = {
+            backgroundImage: valueSignKedua['backgroundImage'],
+            objects: [valueSignKeempat.objects[0], valueSignKeempat.objects[1], valueSignKeempat.objects[2], valueSignKeempat.objects[3]]
+          }
+        }else if(signKedua.page === signKeempat.page && signKedua.page === signPertama.page && signKedua.page !== signKetiga.page){
+          listPages[signKedua.page - 1] = {
+            backgroundImage: valueSignKedua['backgroundImage'],
+            objects: [valueSignKeempat.objects[0], valueSignKeempat.objects[1], valueSignKeempat.objects[2]]
+          }
+          listPages[signKetiga.page - 1] = {
+            backgoundImage: valueSignKetiga['backgroundImage'],
+            objects: [valueSignKetiga.objects[0]]
+          }
+        }else if(signKedua.page === signKeempat.page && signKedua.page !== signPertama.page && signKedua.page === signKetiga.page){
+          listPages[signKedua.page - 1] = {
+            backgroundImage: valueSignKedua['backgroundImage'],
+            objects: [valueSignKeempat.objects[0], valueSignKeempat.objects[1], valueSignKeempat.objects[2]]
+          }
+          listPages[signPertama.page - 1] = {
+            backgroundImage: valueSignPertama['backgroundImage'],
+            objects: [valueSignPertama.objects[0]]
+          }
+        }else if(signKedua.page === signKeempat.page && signKedua.page !== signPertama.page && signKedua.page !== signKetiga.page){
+          listPages[signKedua.page - 1] = {
+            backgroundImage: valueSignKedua['backgroundImage'],
+            objects: [valueSignKeempat.objects[0], valueSignKeempat.objects[1]]
+          }
+          if(signPertama.page === signKetiga.page){
+            listPages[signPertama.page - 1] = {
+              backgoundImage: valueSignPertama['backgroundImage'],
+              objects: [valueSignKetiga.objects[0], valueSignKetiga.objects[1]]
+            }
+          }else{
+            listPages[signPertama.page - 1] = {
+              backgroundImage: valueSignPertama['backgroundImage'],
+              objects: [valueSignPertama.objects[0]]
+            }
+            listPages[signKetiga.page - 1] = {
+              backgroundImage: valueSignKetiga['backgroundImage'],
+              objects: [valueSignKetiga.objects[0]]
+            }
+          }
+        }
+      }
+
+      if(signKetiga.page === signKeempat.page){
+        console.log("---MASOK6---");
+        if(signKetiga.page === signKeempat.page && signKetiga.page === signPertama.page && signKetiga.page === signKedua.page){
+          console.log("---SUB1---");
+          listPages[signKetiga.page - 1] = {
+            backgroundImage: valueSignKetiga['backgroundImage'],
+            objects: [valueSignKeempat.objects[0], valueSignKeempat.objects[1], valueSignKeempat.objects[2], valueSignKeempat.objects[3]]
+          }
+        }else if(signKetiga.page === signKeempat.page && signKetiga.page === signPertama.page && signKetiga.page !== signKedua.page){
+          console.log("---SUB2---");
+          listPages[signKetiga.page - 1] = {
+            backgroundImage: valueSignKetiga['backgroundImage'],
+            objects: [valueSignKeempat.objects[0], valueSignKeempat.objects[1], valueSignKeempat.objects[2]]
+          }
+          listPages[signKedua.page - 1] = {
+            backgroundImage: valueSignKedua['backgroundImage'],
+            objects: [valueSignKedua.objects[0]]
+          }
+        }else if(signKetiga.page === signKeempat.page && signKetiga.page !== signPertama.page && signKetiga.page === signKedua.page){
+          console.log("---SUB3---");
+          listPages[signKetiga.page - 1] = {
+            backgroundImage: valueSignKetiga['backgroundImage'],
+            objects: [valueSignKeempat.objects[0], valueSignKeempat.objects[1], valueSignKeempat.objects[2]]
+          }
+          listPages[signPertama.page - 1] = valueSignPertama
+        }else if(signKetiga.page === signKeempat.page && signKetiga.page !== signPertama.page && signKetiga.page !== signKedua.page){
+          console.log("---SUB4---");
+          listPages[signKetiga.page - 1] = {
+            backgroundImage: valueSignKetiga['backgroundImage'],
+            objects: [valueSignKeempat.objects[0], valueSignKeempat.objects[1]]
+          }
+          if(signPertama.page === signKedua.page){
+            console.log("---SUB5---");
+            listPages[signPertama.page - 1] = {
+              backgroundImage: valueSignPertama['backgroundImage'],
+              objects: [valueSignKedua.objects[0], valueSignKedua.objects[1]]
+            }
+          }else{
+            console.log("---SUB6---");
+            listPages[signPertama.page - 1] = {
+              backgroundImage: valueSignPertama['backgroundImage'],
+              objects: [valueSignPertama.objects[0]]
+            }
+            listPages[signKedua.page - 1] = {
+              backgroundImage: valueSignKedua['backgroundImage'],
+              objects: [valueSignKedua.objects[0]]
+            }
+          }
+        }
+      }
+
+      if(signPertama.page !== signKedua.page && signKedua.page !== signKetiga.page && signKetiga.page !== signKeempat.page){
+        console.log("---MASOK7---");
+        listPages[signPertama['page'] - 1] = valueSignPertama.objects[0];
+        listPages[signKedua['page'] - 1] = valueSignKedua.objects[0];
+        listPages[signKetiga['page'] - 1] = valueSignKetiga.objects[0];
+        listPages[signKeempat['page'] - 1] = valueSignKeempat.objects[0];
+      }
+      
+      // console.log(valueSignPertama['backgroundImage'])
+      console.log(dataSignPertama)
       pdf.loadFromJSON(dataSignPertama);
+      // console.log(dataSignPertama);
       // Do more operations with the fetched data
     } catch (error) {
       // Handle errors, if any
@@ -342,7 +633,6 @@
     $(this).hide();
   });
   
-
     var pdf = new PDFAnnotate('pdf-container', appUrl + '/storage/'  + dokumen.dokumen_path, {
     onPageUpdated(page, oldData, newData) {
     console.log(page, oldData, newData);

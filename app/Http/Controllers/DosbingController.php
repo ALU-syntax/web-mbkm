@@ -194,7 +194,6 @@ class DosbingController extends Controller
         $fileName = pathinfo($request->dokumenPath, PATHINFO_FILENAME);
         $newFileName = Str::random(10);
 
-        // dd($newFileName);
         Storage::makeDirectory('dokumen-annotate');
         Storage::makeDirectory('dokumen-signature');
         Storage::makeDirectory('dokumen-signature-background');
@@ -203,6 +202,7 @@ class DosbingController extends Controller
         $dataAnnotate = json_encode($request->annotateJson, true);
         $dataSignaturePertama = json_encode($request->signature_kedua, true);
         $dataJsonBackgroundSignature = json_encode($request->bgJson, true);
+        $dataSignId = $request->sign_id;
         
         Storage::put('dokumen-annotate/' . $fileName . '.json', json_decode($dataAnnotate));
         Storage::put('dokumen-signature/' . $newFileName . '_kedua.json', json_decode($dataSignaturePertama));
@@ -211,6 +211,7 @@ class DosbingController extends Controller
         $rules['json_annotate'] = 'dokumen-annotate/'. $fileName .'.json';
         $rules['sign_second'] = '1';
 
+        $rulesSignature['id_data_sign_kedua'] = $dataSignId;
         $rulesSignature['json_sign_kedua'] = 'dokumen-signature/' . $newFileName . '_kedua.json';
         $rulesSignature['json_background_kedua'] = 'dokumen-json-signature-background/' . $newFileName . '_kedua.json';
         $rulesSignature['file_background_kedua'] = $request->file('bgImage')->store('dokumen-signature-background');

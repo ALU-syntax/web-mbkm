@@ -18,8 +18,6 @@ use Laravel\Socialite\Facades\Socialite;
 class LoginSSOController extends Controller
 {
     public function redirectToSSOPNJ(){
-        
-
         return Socialite::driver('pnj')->redirect();
     }
 

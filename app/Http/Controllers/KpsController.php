@@ -43,7 +43,7 @@ class KpsController extends Controller
             'active' => 'Logbook KPS',
             'title_page' => 'Logbook',
             'title' => 'Logbook',
-            'mahasiswa' => Mbkm::where('fakultas', auth()->user()->fakultas_id)->get()
+            'mahasiswa' => Mbkm::where('jurusan', auth()->user()->fakultas_id)->get()
         ]);
     }
 
@@ -131,8 +131,6 @@ class KpsController extends Controller
         $fileName = pathinfo($request->dokumenPath, PATHINFO_FILENAME);
         $newFileName = Str::random(10);
 
-        
-
         Storage::makeDirectory('dokumen-annotate');
         Storage::makeDirectory('dokumen-signature');
         Storage::makeDirectory('dokumen-signature-background');
@@ -141,6 +139,7 @@ class KpsController extends Controller
         $dataAnnotate = json_encode($request->annotateJson, true);
         $dataSignaturePertama = json_encode($request->signature_keempat, true);
         $dataJsonBackgroundSignature = json_encode($request->bgJson, true);
+        $dataSignId = $request->sign_id;
         
         Storage::put('dokumen-annotate/' . $fileName . '.json', json_decode($dataAnnotate));
         Storage::put('dokumen-signature/' . $newFileName . '_keempat.json', json_decode($dataSignaturePertama));
@@ -149,6 +148,7 @@ class KpsController extends Controller
         $rules['json_annotate'] = 'dokumen-annotate/'. $fileName .'.json';
         $rules['sign_fourth'] = '1';
 
+        $rulesSignature['id_data_sign_keempat'] = $dataSignId;
         $rulesSignature['json_sign_keempat'] = 'dokumen-signature/' . $newFileName . '_keempat.json';
         $rulesSignature['json_background_keempat'] = 'dokumen-json-signature-background/' . $newFileName . '_keempat.json';
         $rulesSignature['file_background_keempat'] = $request->file('bgImage')->store('dokumen-signature-background');

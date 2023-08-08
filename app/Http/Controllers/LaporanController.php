@@ -92,6 +92,7 @@ class LaporanController extends Controller
         $dataAnnotate = json_encode($request->annotateJson, true);
         $dataSignaturePertama = json_encode($request->signature_pertama, true);
         $dataJsonBackgroundSignature = json_encode($request->bgJson, true);
+        $dataSignId = $request->sign_id;
         
         Storage::put('dokumen-annotate/' . $fileName . '.json', json_decode($dataAnnotate));
         Storage::put('dokumen-signature/' . $fileName . '_pertama.json', json_decode($dataSignaturePertama));
@@ -100,6 +101,7 @@ class LaporanController extends Controller
         $rules['json_annotate'] = 'dokumen-annotate/'. $fileName .'.json';
         $rules['sign_first'] = '1';
 
+        $rulesSignature['id_data_sign_pertama'] = $dataSignId;
         $rulesSignature['json_sign_pertama'] = 'dokumen-signature/' . $fileName . '_pertama.json';
         $rulesSignature['json_background_pertama'] = 'dokumen-json-signature-background/' . $fileName . '_pertama.json';
         $rulesSignature['file_background_pertama'] = $request->file('bgImage')->store('dokumen-signature-background');

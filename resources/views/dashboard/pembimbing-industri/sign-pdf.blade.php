@@ -29,9 +29,9 @@
 		<button class="btn btn-danger btn-sm" onclick="deleteSelectedObject(event)"><i class="fa fa-trash"></i></button>
 	</div>
 	
-	<div class="tool">
+	{{-- <div class="tool">
 		<button class="btn btn-info btn-sm" onclick="showPdfData()">{}</button>
-	</div>
+	</div> --}}
 
   <div class="tool" id="loadBtn">
 		<button class="btn btn-primary btn-sm" onclick="loadPdfData()">LOAD DATA SIGNATURE</button>
@@ -49,6 +49,7 @@
             <input id="signature_ketiga" name="signature_ketiga" type="text" hidden>
             <input id="bgImage" name="bgImage" type="file" hidden>
             <input id="bgJson" name="bgJson" type="text" hidden>
+            <input id="sign_id" name="sign_id" type="text" hidden>
             <input id="dokumen" name="fileId" type="text" value="{{ $laporan[0]->id }}" hidden>
             <input id="dokumenName" name="dokumenName"  type="text" value="{{ $laporan[0]->dokumen_name }}" hidden>
             <input name="dokumenPath"  type="text" value="{{ $laporan[0]->dokumen_path }}" hidden>
@@ -120,6 +121,7 @@
     var inputSignaturePertama = document.getElementById("signature_ketiga");
     var inputBgJson = document.getElementById("bgJson");
     var inputBgImage = document.getElementById("bgImage");
+    var inputSignId = document.getElementById("sign_id");
 
     var annotateFromDb = [];
 
@@ -210,13 +212,19 @@
           backgroundImage: dataDefault.src[i]
         }
       }
-      
-      listPages[signPertama['page'] - 1] = valueSignPertama;
-      listPages[signKedua['page'] - 1] = valueSignKedua;
+
+      if(signPertama['page'] === signKedua['page']){
+        listPages[signKedua['page'] - 1] = {
+            backgroundImage: valueSignKedua['backgroundImage'],
+            objects: [valueSignKedua.objects[0], valueSignKedua.objects[1]],
+        }
+      }else{
+        listPages[signPertama['page'] - 1] = valueSignPertama;
+        listPages[signKedua['page'] - 1] = valueSignKedua;
+      }
       
       // console.log(dataSignPertama);
       // console.log(listPages);
-      console.log('---Finish---');
       pdf.loadFromJSON(dataSignPertama);
       // Do more operations with the fetched data
     } catch (error) {
@@ -237,9 +245,11 @@
               // objects: []
             }
             
+            const generateId = Math.random().toString(36).substring(2,7);
             var data = JSON.parse(string);
             var ttdPertama;
             let dataJsonBg = pageContent;
+            var dataSync;
 
             if(status == "Baru"){
               // data = JSON.parse(string);
@@ -257,15 +267,23 @@
               inputBgImage.files = fileList;
             }else{
               // data = JSON.parse(string);
-              if(data.pages[data.pages.length - 3].objects !== null ||  data.pages[data.pages.length - 3].objects.length !== 0){
-                var dataSync = data.pages[data.pages.length - 3];
+              if(data.pages[data.pages.length - 3].objects === null ||  data.pages[data.pages.length - 3].objects.length === 0){
+                if(data.pages[data.pages.length - 2].objects === null ||  data.pages[data.pages.length - 2].objects.length === 0){
+                  if(data.pages[data.pages.length - 1].objects !== null || data.pages[data.pages.length - 1].objects.length !== 0){
+                    dataSync = data.pages[data.pages.length - 1];
+                  }
+                }else{
+                  dataSync = data.pages[data.pages.length - 2];
+                }
+              }else{
+                dataSync = data.pages[data.pages.length - 3];
               }
-              // console.log(data.pages[data.pages.length - 3])
-              var dataSync = data.pages[data.pages.length - 2].objects[1];
               
               ttdPertama = dataSync;
               ttdPertama['page'] = syncPageBaru;
+              ttdPertama['sign_id'] = generateId;
               data.pages[data.pages.length - 1] = oldValue;
+              
             }
             var dynamicVariableName = "annotate";
 				    var variableValue = data;
@@ -276,6 +294,7 @@
             inputJson.value = JSON.stringify(annotate);
             inputSignaturePertama.value = JSON.stringify(ttdPertama);
             inputBgJson.value = JSON.stringify(dataJsonBg);
+            inputSignId.value = ttdPertama['sign_id'];
             });
       }
 

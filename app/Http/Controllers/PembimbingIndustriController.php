@@ -159,6 +159,7 @@ class PembimbingIndustriController extends Controller
         $dataAnnotate = json_encode($request->annotateJson, true);
         $dataSignaturePertama = json_encode($request->signature_ketiga, true);
         $dataJsonBackgroundSignature = json_encode($request->bgJson, true);
+        $dataSignId = $request->sign_id;
         
         Storage::put('dokumen-annotate/' . $fileName . '.json', json_decode($dataAnnotate));
         Storage::put('dokumen-signature/' . $newFileName . '_ketiga.json', json_decode($dataSignaturePertama));
@@ -167,6 +168,7 @@ class PembimbingIndustriController extends Controller
         $rules['json_annotate'] = 'dokumen-annotate/'. $fileName .'.json';
         $rules['sign_third'] = '1';
 
+        $rulesSignature['id_data_sign_ketiga'] = $dataSignId;
         $rulesSignature['json_sign_ketiga'] = 'dokumen-signature/' . $newFileName . '_ketiga.json';
         $rulesSignature['json_background_ketiga'] = 'dokumen-json-signature-background/' . $newFileName . '_ketiga.json';
         $rulesSignature['file_background_ketiga'] = $request->file('bgImage')->store('dokumen-signature-background');
