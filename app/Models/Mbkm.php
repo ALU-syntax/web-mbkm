@@ -35,8 +35,6 @@ class Mbkm extends Model
     }
 
     
-
-
     public function dataFakultas(){
         return $this->belongsTo(Fakultas::class, 'fakultas');
     }

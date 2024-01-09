@@ -222,7 +222,7 @@
                   <div class="row mt-5">
                     <div class="col-md-8  d-flex">
                         <label for="dokumen" class="form-label">Post Dokumen</label>
-                        <input class="form-control @error('dokumen') is-invalid @enderror" type="file" id="dokumen" name="dokumen">  
+                        <input class="form-control @error('dokumen') is-invalid @enderror" type="image" id="dokumen" name="dokumen">  
                             @error('dokumen')
                                 <div class="invalid-feedback">
                                    {{ $message }}

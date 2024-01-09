@@ -19,7 +19,7 @@
 
             <div class="card-body">
                 <div>
-                    <canvas id="myChart"></canvas>
+                    <canvas id="myChart" style="width: 600px;height:400px;"></canvas>
                 </div>
                 @if($mahasiswa->count())
                 <div class="table-responsive p-0">

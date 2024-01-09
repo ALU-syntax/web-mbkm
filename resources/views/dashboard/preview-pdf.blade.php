@@ -257,7 +257,10 @@
         }
       }
 
-      console.log(listPages)
+      console.log(valueSignPertama)
+      console.log(valueSignKedua)
+      console.log(valueSignKetiga)
+      console.log(valueSignKeempat)
 
       if(signPertama.page === signKedua.page){
         console.log("---MASOK1---");
@@ -345,11 +348,11 @@
           }else{
             listPages[signKedua.page - 1] = {
               backgroundImage: valueSignKedua['backgroundImage'],
-              objects: [valueSignKedua.objects[0]]
+              objects: [valueSignKedua.objects[1]]
             }
             listPages[signKeempat.page - 1] ={
               backgroundImage: valueSignKeempat['backgroundImage'],
-              objects: [valueSignKeempat.objects[0]]
+              objects: [valueSignKeempat.objects[1]]
             }
           }
           
@@ -525,7 +528,7 @@
             backgroundImage: valueSignKetiga['backgroundImage'],
             objects: [valueSignKeempat.objects[0], valueSignKeempat.objects[1], valueSignKeempat.objects[2]]
           }
-          listPages[signPertama.page - 1] = valueSignPertama
+          listPages[signPertama.page - 1] = valueSignPertama;
         }else if(signKetiga.page === signKeempat.page && signKetiga.page !== signPertama.page && signKetiga.page !== signKedua.page){
           console.log("---SUB4---");
           listPages[signKetiga.page - 1] = {
@@ -552,12 +555,12 @@
         }
       }
 
-      if(signPertama.page !== signKedua.page && signKedua.page !== signKetiga.page && signKetiga.page !== signKeempat.page){
+      if(signPertama.page !== signKedua.page && signPertama.page !== signKetiga.page && signPertama.page !== signKeempat.page && signKedua.page !== signKetiga.page && signKedua.page !== signKeempat.page !== signKetiga.page !== signKeempat.page){
         console.log("---MASOK7---");
-        listPages[signPertama['page'] - 1] = valueSignPertama.objects[0];
-        listPages[signKedua['page'] - 1] = valueSignKedua.objects[0];
-        listPages[signKetiga['page'] - 1] = valueSignKetiga.objects[0];
-        listPages[signKeempat['page'] - 1] = valueSignKeempat.objects[0];
+        listPages[signPertama['page'] - 1] = valueSignPertama;
+        listPages[signKedua['page'] - 1] = valueSignKedua;
+        listPages[signKetiga['page'] - 1] = valueSignKetiga;
+        listPages[signKeempat['page'] - 1] = valueSignKeempat;
       }
       
       // console.log(valueSignPertama['backgroundImage'])
